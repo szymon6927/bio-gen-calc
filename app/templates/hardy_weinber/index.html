@@ -1,0 +1,49 @@
+<!-- app/templates/home/index.html -->
+
+{% extends "base.html" %}
+{% block title %}Hardy Weinber{% endblock %}
+{% block body %}
+<p>{{ title }}</p>
+
+{% for field in form %}
+  {{ field.errors }}
+  {% for message in field.errors %}
+    <div class="alert alert-danger" role="alert">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endfor %}
+
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-danger" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<form class="hardy-weinber-form" action="/hwcalculate" method="post">
+  {{ form.hidden_tag() }}
+  <div class="row">
+    <div class="col">
+      {{ form.he (class_="form-control", placeholder="he") }}
+    </div>
+    <div class="col">
+      {{ form.ho (class_="form-control", placeholder="ho") }}
+    </div>
+    <div class="col">
+      {{ form.rho (class_="form-control", placeholder="rho") }}
+    </div>
+    {{ form.submit(class_="btn btn-primary") }}
+  </div>
+</form>
+
+{% if result %}
+<div class="alert alert-secondary" role="alert">
+  {{ result }}
+</div>
+{% endif %}
+{% endblock %}

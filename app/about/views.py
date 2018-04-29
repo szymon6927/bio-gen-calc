@@ -4,8 +4,8 @@ from flask import render_template
 from . import about
 
 
-@about.route('/')
-def about():
+@about.route('/about')
+def about_page():
     """
     Render the about template on the / route
     """

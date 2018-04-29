@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<!-- app/templates/home/index.html -->
 
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block body %}
+  <p>{{ title }}</p>
+  <p>About project</p>
+{% endblock %}
