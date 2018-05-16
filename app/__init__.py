@@ -22,4 +22,7 @@ def create_app(config_name):
     from .hardy_weinber import hardy_weinber as hardy_weinber
     app.register_blueprint(hardy_weinber)
 
+    from .chi_square import chi_square as chi_square
+    app.register_blueprint(chi_square)
+
     return app

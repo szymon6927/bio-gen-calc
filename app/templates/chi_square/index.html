@@ -1,0 +1,25 @@
+<!-- app/templates/chi_square/index.html -->
+
+{% extends "base.html" %}
+{% block title %}Chi Square{% endblock %}
+{% block body %}
+  <p>{{ title }}</p>
+  <div class="row">
+    <div class="col">
+      <input type="text" class="array-width" placeholder="width">
+    </div>
+    <div class="col">
+      <input type="text" class="array-height" placeholder="height">
+    </div>
+    <div class="col">
+      <button type="submit" class="btn btn-primary generate-array">Generate!</button>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="array-wrapper"></div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/ChiSquareArray.js') }}"></script>
+{% endblock %}
