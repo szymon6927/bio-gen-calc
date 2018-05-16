@@ -28,10 +28,10 @@
   {{ form.hidden_tag() }}
   <div class="row">
     <div class="col">
-      {{ form.he (class_="form-control", placeholder="he") }}
+      {{ form.ho (class_="form-control", placeholder="ho") }}
     </div>
     <div class="col">
-      {{ form.ho (class_="form-control", placeholder="ho") }}
+      {{ form.he (class_="form-control", placeholder="he") }}
     </div>
     <div class="col">
       {{ form.rho (class_="form-control", placeholder="rho") }}
@@ -57,8 +57,14 @@
     <span class="mr-2">he: {{ result.expected_he }}</span>
     <span>rho: {{ result.expected_rho }}</span>
   </p>
+  <p>
+    <span class="mr-2">p: {{ result.p }}</span>
+    <span class="mr-2">q: {{ result.q }}</span>
+    <span class="mr-2">n: {{ result.n }}</span>
+  </p>
   {% if result.yats %}
     <p>Zastosowno porawkę Yats'a</p>
+    <p>Suma chi z poprawką Yats'a: <span>{{ result.yats_sum_chi }}</span></p>
   {% endif %}
   <p>
     <span>Suma chi: {{ result.sum_chi }}</span>

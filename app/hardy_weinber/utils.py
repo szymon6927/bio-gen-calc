@@ -1,6 +1,6 @@
 class HardyWeinberCalculation:
-    cirticial_value_1 = 5.9915
-    cirticial_value_2 = 9.2104
+    cirticial_value_1 = 5.9915  # 0.05
+    cirticial_value_2 = 9.2104  # 0.01
 
     def __init__(self, ho, he, rho, critical_select):
         self.ho = ho
@@ -43,14 +43,17 @@ class HardyWeinberCalculation:
         if self.ho == 0 or self.he == 0 or self.rho == 0:
             self.result["yats"] = True
 
-            chi_e_ho = ((abs(self.ho - self.result["expected_ho"]) - 0.5) ** 2) / self.result["expected_ho"]
-            chi_e_he = ((abs(self.he - self.result["expected_he"]) - 0.5) ** 2) / self.result["expected_he"]
-            chi_rho = ((abs(self.rho - self.result["expected_rho"]) - 0.5) ** 2) / self.result["expected_rho"]
+            yats_chi_e_ho = ((abs(self.ho - self.result["expected_ho"]) - 0.5) ** 2) / self.result["expected_ho"]
+            yats_chi_e_he = ((abs(self.he - self.result["expected_he"]) - 0.5) ** 2) / self.result["expected_he"]
+            yats_chi_rho = ((abs(self.rho - self.result["expected_rho"]) - 0.5) ** 2) / self.result["expected_rho"]
+
+            self.result["yats_sum_chi"] = yats_chi_e_ho + yats_chi_e_he + yats_chi_rho
         else:
             self.result["yats"] = False
-            chi_e_ho = ((self.ho - self.result["expected_ho"]) ** 2) / self.result["expected_ho"]
-            chi_e_he = ((self.he - self.result["expected_he"]) ** 2) / self.result["expected_he"]
-            chi_rho = ((self.rho - self.result["expected_rho"]) ** 2) / self.result["expected_rho"]
+
+        chi_e_ho = ((self.ho - self.result["expected_ho"]) ** 2) / self.result["expected_ho"]
+        chi_e_he = ((self.he - self.result["expected_he"]) ** 2) / self.result["expected_he"]
+        chi_rho = ((self.rho - self.result["expected_rho"]) ** 2) / self.result["expected_rho"]
 
         self.result["sum_chi"] = chi_e_ho + chi_e_he + chi_rho
 
@@ -60,14 +63,16 @@ class HardyWeinberCalculation:
         fis = 1 - (self.he / self.result["expected_he"])
 
         if self.critical_select == "1":
-            if self.result["sum_chi"] < self.cirticial_value_1:
+            if self.result["sum_chi"] < self.cirticial_value_1 or (
+                    self.result["yats"] is True and self.result["yats_sum_chi"] < self.cirticial_value_1):
                 self.result["chi_message"] = "Rozklad zgodny z rozkladem HW przy poziomie istotnoci 0.05"
             else:
                 self.result["chi_message"] = "Brak zgodności z rozkładem HW przy poziomie istotnoci 0.05"
                 self.result["fis"] = fis
 
         if self.critical_select == "2":
-            if self.result["sum_chi"] < self.cirticial_value_2:
+            if self.result["sum_chi"] < self.cirticial_value_2 or (
+                    self.result["yats"] is True and self.result["yats_sum_chi"] < self.cirticial_value_2):
                 self.result["chi_message"] = "Rozklad zgodny z rozkladem HW przy poziomie istotnoci 0.01"
             else:
                 self.result["chi_message"] = "Brak zgodności z rozkładem HW przy poziomie istotnoci 0.01"

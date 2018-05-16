@@ -11,7 +11,7 @@ class HardyWeinberForm(FlaskForm):
     he = IntegerField('he', validators=[InputRequired(message="Podaj he")])
     rho = IntegerField('rho', validators=[InputRequired(message="Podaj rho")])
     critical_select = SelectField(u'Programming Language',
-                                  choices=[('1', '0.01'), ('2', '0.05')],
+                                  choices=[('1', '0.05'), ('2', '0.01')],
                                   validators=[InputRequired(message="Wybierz stopień istoności")])
     submit = SubmitField('Calcuate!')
 
