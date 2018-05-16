@@ -1,15 +1,18 @@
 from flask_wtf import FlaskForm
-from wtforms import FloatField, IntegerField, SubmitField, ValidationError, validators
-from wtforms.validators import DataRequired
+from wtforms import IntegerField, SelectField, SubmitField, ValidationError, validators
+from wtforms.validators import InputRequired
 
 
 class HardyWeinberForm(FlaskForm):
     """
     Form for HardyWeinberForm calculation
     """
-    ho = FloatField('ho', validators=[DataRequired(message="Podaj ho")])
-    he = FloatField('he')
-    rho = FloatField('rho')
+    ho = IntegerField('ho', validators=[InputRequired(message="Podaj ho")])
+    he = IntegerField('he', validators=[InputRequired(message="Podaj he")])
+    rho = IntegerField('rho', validators=[InputRequired(message="Podaj rho")])
+    critical_select = SelectField(u'Programming Language',
+                                  choices=[('1', '0.01'), ('2', '0.05')],
+                                  validators=[InputRequired(message="Wybierz stopień istoności")])
     submit = SubmitField('Calcuate!')
 
     # def validate_ho(self, field):

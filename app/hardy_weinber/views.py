@@ -1,9 +1,9 @@
 # app/home/views.py
 
 from flask import render_template, flash
-from flask import jsonify
 from .forms import HardyWeinberForm
 from . import hardy_weinber
+from .utils import HardyWeinberCalculation
 
 
 @hardy_weinber.route('/hardy_weinber_page')
@@ -18,12 +18,18 @@ def hardy_weinber_page():
 @hardy_weinber.route('/hwcalculate', methods=['GET', 'POST'])
 def hw_calculate():
     form = HardyWeinberForm()
-    print("He = {} !!".format(form.he.data), flush=True)
+    if (form.ho.data == 0 and form.he.data == 0) or (form.he.data == 0 and form.rho.data == 0):
+        flash('Błędna walidacja, conajmniej dwie liczebności równe 0')
+        return render_template('hardy_weinber/index.html', form=form,
+                               title="Hardy-Weinberg equalibration")
+
     if form.validate_on_submit():
         flash('Walidacja ok')
-        return render_template('hardy_weinber/index.html', form=form, result=form.he.data,
+        hw = HardyWeinberCalculation(form.ho.data, form.he.data, form.rho.data, form.critical_select.data)
+        result = hw.get_calculations()
+        return render_template('hardy_weinber/index.html', form=form, result=result,
                                title="Hardy-Weinberg equalibration")
     else:
-        flash('Walidacja bledna')
-        return render_template('hardy_weinber/index.html', form=form, result=form.he.data,
+        flash('Błędna walidacja !')
+        return render_template('hardy_weinber/index.html', form=form,
                                title="Hardy-Weinberg equalibration")

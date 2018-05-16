@@ -6,7 +6,6 @@
 <p>{{ title }}</p>
 
 {% for field in form %}
-  {{ field.errors }}
   {% for message in field.errors %}
     <div class="alert alert-danger" role="alert">
       {{ message }}
@@ -18,7 +17,7 @@
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
-      <div class="alert alert-danger" role="alert">
+      <div class="alert alert-info" role="alert">
         {{ message }}
       </div>
     {% endfor %}
@@ -37,13 +36,42 @@
     <div class="col">
       {{ form.rho (class_="form-control", placeholder="rho") }}
     </div>
+    <div class="col">
+      {{ form.critical_select (class_="form-control", placeholder="select") }}
+    </div>
     {{ form.submit(class_="btn btn-primary") }}
   </div>
 </form>
 
 {% if result %}
-<div class="alert alert-secondary" role="alert">
-  {{ result }}
+<div class="alert alert-success mt-3" role="alert">
+  <p>Wartosci obserwowane: </p>
+  <p>
+    <span class="mr-2">ho: {{ result.given_ho }}</span>
+    <span class="mr-2">he: {{ result.given_he }}</span>
+    <span>rho: {{ result.given_rho }}</span>
+  </p>
+  <p>Wartosci oczekiwane: </p>
+  <p>
+    <span class="mr-2">ho: {{ result.expected_ho }}</span>
+    <span class="mr-2">he: {{ result.expected_he }}</span>
+    <span>rho: {{ result.expected_rho }}</span>
+  </p>
+  {% if result.yats %}
+    <p>Zastosowno porawkę Yats'a</p>
+  {% endif %}
+  <p>
+    <span>Suma chi: {{ result.sum_chi }}</span>
+  </p>
+  <p>
+    {{ result.chi_message }}
+  </p>
+  {% if result.fis %}
+  <p>
+    <span>Wartości fis: {{ result.fis }}</span>
+  </p>
+  {% endif %}
 </div>
 {% endif %}
+
 {% endblock %}
