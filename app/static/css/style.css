@@ -1,0 +1,11 @@
+table .summary {
+    background: #ccc;
+}
+
+table .general-result-wrapper {
+    background: crimson;
+}
+
+.calcuate {
+    display: none;
+}

@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  const chiArray = new ChiSquareArray('.array-wrapper');
   $('.generate-array').click( (e) => {
     console.log("click");
     let width = $('.array-width').val();
@@ -6,7 +7,13 @@ $(document).ready(function () {
 
     console.log(width, height);
 
-    const chiArray = new ChiSquareArray(width, height, '.array-wrapper');
+    chiArray.setWidth(width);
+    chiArray.setHeight(height);
+
     chiArray.draw();
+  });
+
+  $('.calcuate-button').click( () => {
+    chiArray.calacute();
   });
 });
