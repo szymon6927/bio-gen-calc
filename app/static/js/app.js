@@ -15,5 +15,6 @@ $(document).ready(function () {
 
   $('.calcuate-button').click( () => {
     chiArray.calacute();
+    chiArray.sendData();
   });
 });

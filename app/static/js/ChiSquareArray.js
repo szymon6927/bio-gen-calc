@@ -31,7 +31,7 @@ class ChiSquareArray {
   drawTableHead() {
     $(this.container + ' .table thead').append(`<th scope="col">#</th>`);
 
-    for(let i = 0; i < this.width; i++) {
+    for (let i = 0; i < this.width; i++) {
       $(this.container + ' .table thead').append(`<th scope="col">column ${i}</th>`);
     }
 
@@ -113,8 +113,8 @@ class ChiSquareArray {
 
   validateInputs() {
     let valid = true;
-    $('.cell:not(.summary-cell)').each( (index, elem) => {
-      if ( !$(elem).val() ) {
+    $('.cell:not(.summary-cell)').each((index, elem) => {
+      if (!$(elem).val()) {
         console.log("return false");
         valid = false;
         return false;
@@ -125,8 +125,8 @@ class ChiSquareArray {
 
   sumAll(selector) {
     let sum = 0;
-    $(selector).each( function() {
-        sum += Number($(this).val());
+    $(selector).each(function () {
+      sum += Number($(this).val());
     });
     return sum;
   }
@@ -155,5 +155,51 @@ class ChiSquareArray {
     console.log("run calculating");
     this.calculateRowColSum();
     this.calcuateUserInput();
+  }
+
+  buildJSON() {
+    let data = {};
+
+    for (let i = 0; i < this.height; i++) {
+      let rowArray = $(`.line-${i}`).map(function () {
+        return $(this).val();
+      }).get();
+      data[`row-${i}`] = rowArray;
+    }
+
+    for (let i = 0; i < this.height; i++) {
+      let colArray = $(`.column-${i}`).map(function () {
+        return $(this).val();
+      }).get();
+      data[`column-${i}`] = colArray;
+    }
+
+    data["width"] = this.width;
+    data["height"] = this.height;
+
+    let dataJSON = JSON.stringify(data);
+
+    return dataJSON;
+  }
+
+  sendData() {
+    let dataJSON = this.buildJSON();
+    console.log(dataJSON);
+    console.log($.parseJSON(dataJSON))
+    $.ajax({
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      url: "/sendData",
+      data: dataJSON,
+      dataType: "json",
+      success: function (data) {
+        console.log("Succesfull");
+        console.log(data);
+      },
+      error: function (data) {
+        console.log("Something goes wrong!");
+        console.log(data);
+      }
+    })
   }
 }
