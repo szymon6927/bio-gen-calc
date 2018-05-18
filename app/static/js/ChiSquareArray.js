@@ -195,10 +195,24 @@ class ChiSquareArray {
       success: function (data) {
         console.log("Succesfull");
         console.log(data);
+
+        let result = `
+        <div class="alert alert-dark" role="alert">
+          <div>chi2 ${data.data["chi2_standard"]}</div>
+          <div>chi2 with Yats corection ${data.data["chi2_yats"]}</div>
+          <div>coleration ${data.data["corelation_standard"]}</div>
+          <div>coleration with Yats corection ${data.data["corelation_yats"]}</div>
+          <div>degrees of freedom ${data.data["dof"]}</div>
+          <div>p ${data.data["p_standard"]}</div>
+          <div>p with Yats corection ${data.data["p_yats"]}</div>
+        </div>`;
+
+        $('.chi-result').html(result)
       },
       error: function (data) {
         console.log("Something goes wrong!");
         console.log(data);
+        $('.chi-result').html(JSON.stringify(data.data))
       }
     })
   }

@@ -21,7 +21,6 @@ def get_data():
 
     chi = ChiSquareCalculation(data)
     data = chi.chi_square()
-    print(data, flush=True)
 
-    return jsonify({'result': 'test'})
+    return jsonify({'data': data})
 
