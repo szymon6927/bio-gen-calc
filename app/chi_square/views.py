@@ -2,9 +2,7 @@
 
 from flask import render_template, request, jsonify
 from . import chi_square
-from .utils import ChiSquareCalculation
-
-
+from .utils import ChiSquareCalculation, ChiSquareGoodness
 
 
 @chi_square.route('/chi_square_page')
@@ -24,3 +22,12 @@ def get_data():
 
     return jsonify({'data': data})
 
+
+@chi_square.route('/sendDataGoodness', methods=['POST'])
+def get_goodness_data():
+    data = request.get_json()
+
+    chi_goodness = ChiSquareGoodness(data["observed"], data["expected"])
+    result = chi_goodness.chi_square_goodness()
+
+    return jsonify({'data': result})

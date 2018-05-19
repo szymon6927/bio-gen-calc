@@ -3,6 +3,7 @@ import numpy as np
 from scipy.stats import power_divergence
 from scipy.stats.contingency import expected_freq
 from scipy.stats import chi2_contingency
+from scipy.stats import chisquare
 
 
 class ChiSquareCalculation:
@@ -14,7 +15,7 @@ class ChiSquareCalculation:
         all_lists = []
         for i in range(self.data["height"]):
             row = self.data["row-" + str(i)]
-            int_row = list(map(int, row))
+            int_row = list(map(float, row))
             all_lists.append(int_row)
 
         observed = np.array(all_lists)
@@ -60,3 +61,31 @@ class ChiSquareCalculation:
         self.corelation()
 
         return self.result
+
+
+class ChiSquareGoodness:
+    def __init__(self, observed, expected):
+        self.observed = list(map(float, observed))
+        self.expected = list(map(float, expected))
+        self.result_goodness = {}
+
+    def chi_goodness_standard(self):
+        chi2, p = chisquare(self.observed, f_exp=self.expected)
+        self.result_goodness["chi2_standard"] = chi2
+        self.result_goodness["p_standard"] = p
+        self.result_goodness["dof"] = len(self.observed) - 1
+
+    def chi_goodness_yats(self):
+        observed = np.asarray(self.observed)
+        expected = np.asarray(self.expected)
+        observed = observed + 0.5 * np.sign(expected - observed)
+        chi2_yats, p_yats = power_divergence(observed, expected, ddof=0)
+        self.result_goodness["chi2_yats"] = chi2_yats
+        self.result_goodness["p_yats"] = p_yats
+
+    def chi_square_goodness(self):
+        self.chi_goodness_standard()
+        self.chi_goodness_yats()
+        self.result_goodness["sum_observed"] = sum(self.observed)
+        self.result_goodness["sum_expected"] = sum(self.expected)
+        return self.result_goodness
