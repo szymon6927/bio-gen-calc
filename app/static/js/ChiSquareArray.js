@@ -17,8 +17,8 @@ class ChiSquareArray {
 
   createTable() {
     let table = `
-      <table class="table">
-        <thead>
+      <table class="table text-center">
+        <thead class="thead-light">
         </thead>
         <tbody>
         </tbody>
@@ -55,17 +55,17 @@ class ChiSquareArray {
       for (let j = 0; j < this.width + 1; j++) {
 
         if (j === 0) {
-          $(`.row-${i}`).append(`<th scope="row">${i}</th>`)
+          $(`${this.container} .row-${i}`).append(`<th scope="row">${i}</th>`)
         }
 
         if (i === this.height) {
           $('.summary-row').append(`<td class="summary">${this.generateSummaryInput(i, j)}</td>`);
         }
         else if (j === this.width) {
-          $(`.row-${i}`).append(`<td class="summary">${this.generateSummaryInput(i, j)}</td>`);
+          $(`${this.container} .row-${i}`).append(`<td class="summary">${this.generateSummaryInput(i, j)}</td>`);
         }
         else {
-          $(`.row-${i}`).append(`<td>${this.generateInput(i, j)}</td>`);
+          $(`${this.container} .row-${i}`).append(`<td>${this.generateInput(i, j)}</td>`);
         }
 
       }
@@ -87,15 +87,15 @@ class ChiSquareArray {
   }
 
   generateInput(row, col) {
-    return `<input type="text" class="cell col line-${row} column-${col}" name="cell">`;
+    return `<input type="number" class="form-control cell col line-${row} column-${col}" name="cell">`;
   }
 
   generateSummaryInput(row, col) {
     if (row === this.height && col === this.width) {
-      return `<input type="text" class="cell col summary-cell general-result" name="cell" readonly>`;
+      return `<input type="number" class="form-control cell col summary-cell general-result" name="cell" readonly>`;
     }
     else {
-      return `<input type="text" class="cell col summary-cell summary-line-${row} summary-column-${col}" name="cell" readonly>`;
+      return `<input type="number" class="form-control cell col summary-cell summary-line-${row} summary-column-${col}" name="cell" readonly>`;
     }
   }
 
@@ -192,27 +192,40 @@ class ChiSquareArray {
       url: "/sendData",
       data: dataJSON,
       dataType: "json",
-      success: function (data) {
+      success: function (result) {
         console.log("Succesfull");
-        console.log(data);
+        console.log(result.data);
 
-        let result = `
-        <div class="alert alert-dark" role="alert">
-          <div>chi2 ${data.data["chi2_standard"]}</div>
-          <div>chi2 with Yats corection ${data.data["chi2_yats"]}</div>
-          <div>coleration ${data.data["corelation_standard"]}</div>
-          <div>coleration with Yats corection ${data.data["corelation_yats"]}</div>
-          <div>degrees of freedom ${data.data["dof"]}</div>
-          <div>p ${data.data["p_standard"]}</div>
-          <div>p with Yats corection ${data.data["p_yats"]}</div>
-        </div>`;
+        let info = '';
 
-        $('.chi-result').html(result)
+        for (let key in result.data) {
+          if (result.data.hasOwnProperty(key)) {
+            console.log(key + " -> " + result.data[key]);
+            let name = key.replace("_", " ");
+            info += `<div class="col result-score" class="btn btn-success">
+              <span class="result-name">${name} = </span> <input class="result-value" type="text" value="${result.data[key]}" />
+            </div>`
+          }
+        }
+
+        let template = `<div class="card text-center">
+          <div class="card-header">Results:</div>
+          <div class="card-body">
+            <div class="card-text text-left">${info}</div>
+          </div>
+        </div>`
+
+
+        $('.chi-result').html(template)
       },
       error: function (data) {
-        console.log("Something goes wrong!");
         console.log(data);
-        $('.chi-result').html(JSON.stringify(data.data))
+
+        let template = `<div class="alert alert-danger" role="alert">
+          Something goes wrong, Try again!
+        </div>`;
+
+        $('.chi-result').html(template)
       }
     })
   }

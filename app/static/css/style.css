@@ -1,11 +1,68 @@
+body {
+    background: linear-gradient(to right, rgb(33, 147, 176), rgb(109, 213, 237));
+}
+
+.wrapper {
+    background: #fff;
+    box-shadow: 12px 0 15px -4px rgba(0,0,0,.075), -12px 0 8px -4px rgba(0,0,0,.075);
+    padding: 0 15px;
+    border-radius: 5px;
+}
+
+section {
+    padding: 32px 0;
+}
+
 table .summary {
-    background: #ccc;
+    background: #e9ecef;
 }
 
 table .general-result-wrapper {
     background: crimson;
 }
 
+.general-result {
+    background-color: #dc143c !important;
+    color: #fff;
+}
+
 .calcuate {
     display: none;
+}
+
+.calcuate-goodness {
+    display: none;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+table th[scope=row] {
+    background: #e9ecef;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.result-value {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: .25rem;
+    font-weight: bold;
+}
+
+.footer {
+    background: #fff;
+    margin-top: 20px;
+    padding: 16px 0;
+    font-size: 17px;
+    font-weight: 400;
+    box-shadow: inset 0px 5px 10px -5px rgba(50, 50, 50, 0.5);
+}
+
+.footer p {
+    margin-bottom: 0;
 }
