@@ -1,3 +1,24 @@
+function nameConverter(name) {
+  if (name === "chi2_standard") {
+    return "Chi square";
+  }
+  else if (name === "chi2_yats") {
+    return "Yate`s Chi square";
+  }
+  else if (name === "dof") {
+    return "dof";
+  }
+  else if (name === "p_standard") {
+    return "Chi square p-value";
+  }
+  else if (name === "p_yats") {
+    return "Yate`s Chi square p-value";
+  }
+  else {
+    return name;
+  }
+}
+
 class ChiSquareArray {
 
   constructor(container) {
@@ -201,9 +222,8 @@ class ChiSquareArray {
         for (let key in result.data) {
           if (result.data.hasOwnProperty(key)) {
             console.log(key + " -> " + result.data[key]);
-            let name = key.replace("_", " ");
             info += `<div class="row result-score">
-              <span class="col-sm-6 col-xs-12 result-name">${name} = </span> 
+              <span class="col-sm-6 col-xs-12 result-name">${nameConverter(key)} = </span> 
               <input class="col-sm-6 col-xs-12 result-value" type="text" value="${result.data[key]}" />
             </div>`
           }

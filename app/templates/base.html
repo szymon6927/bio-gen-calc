@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="favicon.ico">
+  <!-- Standard Favicon -->
+  <link rel="icon" href="{{ url_for('static', filename='img/favicons/favicon.ico') }}">
+  <!-- For iPhone 4 Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ url_for('static', filename='img/favicons/dna-144.png') }}">
+  <!-- For iPad: -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ url_for('static', filename='img/favicons/dna-72.png') }}">
+  <!-- For iPhone: -->
+  <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='img/favicons/dna-57.png') }}">
 
   <title>{{ title }} | Bio Gen Calc</title>
 

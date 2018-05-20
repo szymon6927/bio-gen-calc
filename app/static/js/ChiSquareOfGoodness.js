@@ -1,3 +1,24 @@
+function nameConverter(name) {
+  if (name === "chi2_standard") {
+    return "Chi square";
+  }
+  else if (name === "chi2_yats") {
+    return "Yate`s Chi square";
+  }
+  else if (name === "dof") {
+    return "dof";
+  }
+  else if (name === "p_standard") {
+    return "Chi square p-value";
+  }
+  else if (name === "p_yats") {
+    return "Yate`s Chi square p-value";
+  }
+  else {
+    return name;
+  }
+}
+
 class ChiSquareOfGoodness {
   constructor(container) {
     this.container = container;
@@ -97,14 +118,12 @@ class ChiSquareOfGoodness {
       dataType: "json",
       success: function (result) {
         let info = '';
-
         for (let key in result.data) {
           if (result.data.hasOwnProperty(key)) {
             console.log(key + " -> " + result.data[key]);
-            if (key !== 'sum_observed' || key !== 'sum_expected') {
-              let name = key.replace("_", " ");
+            if (key !== 'sum_observed' && key !== 'sum_expected') {
               info += `<div class="row result-score">
-                <span class="col-sm-6 col-xs-12 result-name">${name} = </span> 
+                <span class="col-sm-6 col-xs-12 result-name">${nameConverter(key)} = </span> 
                 <input class="col-sm-6 col-xs-12 result-value" type="text" value="${result.data[key]}" />
               </div>`
             }
