@@ -21,15 +21,15 @@ def hw_calculate():
     if (form.ho.data == 0 and form.he.data == 0) or (form.he.data == 0 and form.rho.data == 0):
         flash('Błędna walidacja, conajmniej dwie liczebności równe 0')
         return render_template('hardy_weinber/index.html', form=form,
-                               title="Hardy-Weinberg equalibration")
+                               title="Hardy-Weinberg equilibrium")
 
     if form.validate_on_submit():
-        flash('Walidacja ok')
+        flash('Validation correct!')
         hw = HardyWeinberCalculation(form.ho.data, form.he.data, form.rho.data, form.critical_select.data)
         result = hw.get_calculations()
         return render_template('hardy_weinber/index.html', form=form, result=result,
-                               title="Hardy-Weinberg equalibration")
+                               title="Hardy-Weinberg equilibrium")
     else:
-        flash('Błędna walidacja !')
+        flash('Something goes wrong, try again!')
         return render_template('hardy_weinber/index.html', form=form,
-                               title="Hardy-Weinberg equalibration")
+                               title="Hardy-Weinberg equilibrium")

@@ -65,17 +65,17 @@ class HardyWeinberCalculation:
         if self.critical_select == "1":
             if self.result["sum_chi"] < self.cirticial_value_1 or (
                     self.result["yats"] is True and self.result["yats_sum_chi"] < self.cirticial_value_1):
-                self.result["chi_message"] = "Rozklad zgodny z rozkladem HW przy poziomie istotnoci 0.05"
+                self.result["chi_message"] = "Distribution consistent with Hardy Weinberg's law at the level of significance 0.05"
             else:
-                self.result["chi_message"] = "Brak zgodności z rozkładem HW przy poziomie istotnoci 0.05"
+                self.result["chi_message"] = "Distribution does not consistent with Hardy Weinberg's law at the level of significance 0.05"
                 self.result["fis"] = fis
 
         if self.critical_select == "2":
             if self.result["sum_chi"] < self.cirticial_value_2 or (
                     self.result["yats"] is True and self.result["yats_sum_chi"] < self.cirticial_value_2):
-                self.result["chi_message"] = "Rozklad zgodny z rozkladem HW przy poziomie istotnoci 0.01"
+                self.result["chi_message"] = "Distribution consistent with Hardy Weinberg's law at the level of significance 0.01"
             else:
-                self.result["chi_message"] = "Brak zgodności z rozkładem HW przy poziomie istotnoci 0.01"
+                self.result["chi_message"] = "Distribution does not consistent with Hardy Weinberg's law at the level of significance 0.01"
                 self.result["fis"] = fis
 
     def get_calculations(self):
