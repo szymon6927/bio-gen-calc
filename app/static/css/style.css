@@ -5,7 +5,7 @@ body {
 .wrapper {
     background: #fff;
     box-shadow: 12px 0 15px -4px rgba(0,0,0,.075), -12px 0 8px -4px rgba(0,0,0,.075);
-    padding: 0 15px;
+    padding: 0 15px 24px 15px;
     border-radius: 5px;
 }
 
@@ -52,6 +52,19 @@ table th[scope=row] {
     border: 1px solid #ccc;
     border-radius: .25rem;
     font-weight: bold;
+}
+
+.result-name {
+    line-height: 36px;
+    font-weight: bold;
+}
+
+.result-score {
+    margin-bottom: 10px;
+}
+
+.codominant-wrapper, .dominant-wrapper {
+    display: none;
 }
 
 .footer {

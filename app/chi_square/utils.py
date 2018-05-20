@@ -15,8 +15,8 @@ class ChiSquareCalculation:
         all_lists = []
         for i in range(self.data["height"]):
             row = self.data["row-" + str(i)]
-            int_row = list(map(float, row))
-            all_lists.append(int_row)
+            float_row = list(map(float, row))
+            all_lists.append(float_row)
 
         observed = np.array(all_lists)
         return observed

@@ -25,4 +25,7 @@ def create_app(config_name):
     from .chi_square import chi_square as chi_square
     app.register_blueprint(chi_square)
 
+    from .pic import pic as pic
+    app.register_blueprint(pic)
+
     return app

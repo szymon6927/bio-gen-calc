@@ -202,8 +202,9 @@ class ChiSquareArray {
           if (result.data.hasOwnProperty(key)) {
             console.log(key + " -> " + result.data[key]);
             let name = key.replace("_", " ");
-            info += `<div class="col result-score" class="btn btn-success">
-              <span class="result-name">${name} = </span> <input class="result-value" type="text" value="${result.data[key]}" />
+            info += `<div class="row result-score">
+              <span class="col-sm-6 col-xs-12 result-name">${name} = </span> 
+              <input class="col-sm-6 col-xs-12 result-value" type="text" value="${result.data[key]}" />
             </div>`
           }
         }

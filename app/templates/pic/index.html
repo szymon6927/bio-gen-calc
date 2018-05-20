@@ -1,0 +1,79 @@
+<!-- app/templates/home/index.html -->
+
+{% extends "base.html" %}
+{% block title %}Hardy Weinber{% endblock %}
+{% block body %}
+<div class="wrapper">
+  <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4 text-center">{{ title }}</h1>
+      </div>
+    </div>
+
+  <section class="pic-h">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="form-group">
+          <label for="type-of-marker">Type of marker</label>
+          <select class="form-control" id="type-of-marker">
+            <option>select</option>
+            <option value="dominant">Dominant marker</option>
+            <option value="codominant">Codominant marker</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 markers-options">
+        <div class="codominant-wrapper">
+          <div class="row">
+            <div class="col col-md-3 col-sm-6 col-xs-6">
+              <div class="form-group">
+                <label for="alleles-number">Number of alleles</label>
+                <input id="alleles-number" type="number" class="form-control alleles-number" placeholder="alleles number">
+              </div>
+            </div>
+
+            <div class="col col-md-3 col-sm-6 col-xs-6">
+              <button type="submit" class="btn btn-block btn-primary generate-codominant">Generate!</button>
+            </div>
+
+            <div class="col col-md-3 col-sm-6 col-xs-6">
+              <button type="submit" class="btn btn-block btn-success calcuate-codominant">Calculate!</button>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12">
+              <div class="inputs-wrapper"></div>
+            </div>
+          </div>
+        </div>
+        <div class="dominant-wrapper">
+          <div class="row">
+            <div class="col col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <label for="amplified-marker">Number of amplified marker</label>
+                <input id="amplified-marker" type="number" class="form-control amplified-marker" placeholder="amplified marker">
+              </div>
+            </div>
+
+            <div class="col col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <label for="absecnce-marker">Number of absecnce marker</label>
+                <input id="absecnce-marker" type="number" class="form-control absecnce marker" placeholder="absecnce marker">
+              </div>
+            </div>
+
+            <div class="col col-md-3 col-sm-6 col-xs-6">
+              <button type="submit" class="btn btn-block btn-success calcuate-dominant">Calculate!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/Pic.js') }}"></script>
+{% endblock %}

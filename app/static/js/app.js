@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const chiArray = new ChiSquareArray('.array-wrapper');
+  // const chiArray = new ChiSquareArray('.array-wrapper');
   $('.generate-array').click((e) => {
     console.log("click");
     let width = $('.array-width').val();
@@ -18,7 +18,7 @@ $(document).ready(function () {
     chiArray.sendData();
   });
 
-  const chiArrayGoodness = new ChiSquareOfGoodness('.array-wrapper-goodness');
+  // const chiArrayGoodness = new ChiSquareOfGoodness('.array-wrapper-goodness');
   $('.generate-array-goodness').click(() => {
     let width = $('.goodness-width').val();
     chiArrayGoodness.setWidth(width);
@@ -28,6 +28,24 @@ $(document).ready(function () {
   $('.calcuate-button-goodness').click(() => {
     chiArrayGoodness.sendData();
   });
+
+  const pic = new PicH();
+
+  $('#type-of-marker').change(function () {
+    let markerType = $(this).val();
+    console.log(markerType);
+    pic.setMarkerType(markerType);
+    pic.display();
+  })
+
+  $('.generate-codominant').click(function () {
+    let number = $('.alleles-number').val();
+    pic.generateCodominantInputs(number);
+  });
+
+  $('.calcuate-codominant').click(function () {
+    pic.sendCodominant();
+  })
 });
 
 $(window).bind("load", function () {

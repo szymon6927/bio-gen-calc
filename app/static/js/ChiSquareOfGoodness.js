@@ -10,8 +10,8 @@ class ChiSquareOfGoodness {
 
   createTable() {
     let table = `
-      <table class="table">
-        <thead>
+      <table class="table text-center">
+        <thead class="thead-light">
         </thead>
         <tbody>
           <tr class="row-0">
@@ -61,7 +61,12 @@ class ChiSquareOfGoodness {
   }
 
   generateInput(col, type) {
-    return `<td><input type="text" class="form-control cell col ${type} column-${col}" name="cell"></td>`;
+    if (type === "summary-observed" || type === "summary-expected") {
+      return `<td class="summary"><input type="number" class="form-control cell col ${type} column-${col}" name="cell" readonly></td>`;
+    }
+    else {
+      return `<td><input type="number" class="form-control cell col ${type} column-${col}" name="cell"></td>`;
+    }
   }
 
   buildJSON() {
@@ -90,20 +95,32 @@ class ChiSquareOfGoodness {
       url: "/sendDataGoodness",
       data: dataJSON,
       dataType: "json",
-      success: function (data) {
+      success: function (result) {
+        let info = '';
 
-        let result = `
-        <div class="alert alert-dark" role="alert">
-          <div>chi2 ${data.data["chi2_standard"]}</div>
-          <div>chi2 with Yats corection ${data.data["chi2_yats"]}</div>
-          <div>degrees of freedom ${data.data["dof"]}</div>
-          <div>p ${data.data["p_standard"]}</div>
-          <div>p with Yats corection ${data.data["p_yats"]}</div>
-        </div>`;
+        for (let key in result.data) {
+          if (result.data.hasOwnProperty(key)) {
+            console.log(key + " -> " + result.data[key]);
+            if (key !== 'sum_observed' || key !== 'sum_expected') {
+              let name = key.replace("_", " ");
+              info += `<div class="row result-score">
+                <span class="col-sm-6 col-xs-12 result-name">${name} = </span> 
+                <input class="col-sm-6 col-xs-12 result-value" type="text" value="${result.data[key]}" />
+              </div>`
+            }
+          }
+        }
 
-        $('.chi-goodness-result').html(result)
-        $('.summary-observed').val(data.data["sum_observed"]);
-        $('.summary-expected').val(data.data["sum_expected"]);
+        let template = `<div class="card text-center">
+          <div class="card-header">Results:</div>
+          <div class="card-body">
+            <div class="card-text text-left">${info}</div>
+          </div>
+        </div>`
+
+        $('.chi-goodness-result').html(template)
+        $('.summary-observed').val(result.data["sum_observed"]);
+        $('.summary-expected').val(result.data["sum_expected"]);
       },
       error: function (data) {
         $('.chi-goodness-result').html('Something goes wrong! Try again!')

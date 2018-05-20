@@ -67,7 +67,10 @@
 
       <div class="row">
         <div class="col col-md-4 col-sm-6 col-xs-12">
-          <input type="text" class="form-control goodness-width" placeholder="width">
+          <div class="form-group">
+            <label for="goodness-width">Number of groups</label>
+            <input id="goodness-width" type="number" class="form-control goodness-width" placeholder="number of groups">
+          </div>
         </div>
         <div class="col col-md-4 col-sm-6 col-xs-12">
           <button type="submit" class="btn btn-block btn-primary generate-array-goodness">Generate!</button>
@@ -85,7 +88,7 @@
 
       <div class="row mt-4 mb-3">
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="chi-goodness-result"></div>
+          <div class="col-md-6 offset-md-6 col-sm-12 col-xs-12 chi-goodness-result mt-3 mb-3"></div>
         </div>
       </div>
     </section>
