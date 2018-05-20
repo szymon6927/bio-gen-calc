@@ -4,7 +4,13 @@
 {% block title %}About{% endblock %}
 {% block body %}
   <div class="wrapper">
-    <p>{{ title }}</p>
-    <p>About project</p>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4 text-center">{{ title }}</h1>
+        <p class="text-muted font-weight-bold text-center pt-3 mb-0">
+          About project
+        </p>
+      </div>
+    </div>
   </div>
 {% endblock %}
