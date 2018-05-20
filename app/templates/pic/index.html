@@ -5,10 +5,10 @@
 {% block body %}
 <div class="wrapper">
   <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 text-center">{{ title }}</h1>
-      </div>
+    <div class="container">
+      <h1 class="display-4 text-center">{{ title }}</h1>
     </div>
+  </div>
 
   <section class="pic-h">
     <div class="row">
@@ -28,7 +28,8 @@
             <div class="col col-md-3 col-sm-6 col-xs-6">
               <div class="form-group">
                 <label for="alleles-number">Number of alleles</label>
-                <input id="alleles-number" type="number" class="form-control alleles-number" placeholder="alleles number">
+                <input id="alleles-number" type="number" class="form-control alleles-number"
+                       placeholder="alleles number">
               </div>
             </div>
 
@@ -46,20 +47,26 @@
               <div class="inputs-wrapper"></div>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-8 offset-md-2 col-sm-12 col-xs-12 codominant-result"></div>
+          </div>
         </div>
         <div class="dominant-wrapper">
           <div class="row">
             <div class="col col-md-4 col-sm-4 col-xs-12">
               <div class="form-group">
                 <label for="amplified-marker">Number of amplified marker</label>
-                <input id="amplified-marker" type="number" class="form-control amplified-marker" placeholder="amplified marker">
+                <input id="amplified-marker" type="number" class="form-control amplified-marker"
+                       placeholder="amplified marker">
               </div>
             </div>
 
             <div class="col col-md-4 col-sm-4 col-xs-12">
               <div class="form-group">
                 <label for="absecnce-marker">Number of absecnce marker</label>
-                <input id="absecnce-marker" type="number" class="form-control absecnce marker" placeholder="absecnce marker">
+                <input id="absecnce-marker" type="number" class="form-control absecnce marker"
+                       placeholder="absecnce marker">
               </div>
             </div>
 
@@ -67,6 +74,11 @@
               <button type="submit" class="btn btn-block btn-success calcuate-dominant">Calculate!</button>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-8 offset-md-2 col-sm-12 col-xs-12 dominant-result"></div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -76,4 +88,5 @@
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/Pic.js') }}"></script>
+<script src="{{ url_for('static', filename='js/PicEvents.js') }}"></script>
 {% endblock %}

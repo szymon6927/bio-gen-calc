@@ -46,7 +46,22 @@ class Codominant:
         return pic
 
     def calculate(self):
-        self.result["h"] = self.calcuate_h()
-        self.result["pic"] = self.calcuate_pic()
+        self.result["H"] = self.calcuate_h()
+        self.result["PIC"] = self.calcuate_pic()
         return self.result
 
+
+class Dominant:
+    def __init__(self, data):
+        self.result = {}
+        self.data = data
+
+    def print_data(self):
+        print(self.data, flush=True)
+
+    def calculate(self):
+        fi = float(self.data["amplified_marker"]) / (float(self.data["amplified_marker"]) + float(
+            self.data["absecnce_marker"]))
+        pic = 2 * fi * (1 - fi)
+        self.result["PIC"] = pic
+        return self.result

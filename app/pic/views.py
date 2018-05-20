@@ -1,6 +1,6 @@
 from flask import render_template, request, jsonify
 from . import pic
-from .utils import Codominant
+from .utils import Codominant, Dominant
 
 
 @pic.route('/pic')
@@ -14,8 +14,14 @@ def pic_page():
 @pic.route('/sendCodominant', methods=['POST'])
 def pic_codominant():
     data = request.json
-    print(data, flush=True)
     co_d = Codominant(data)
-    co_d.calcuate_pic()
+    result = co_d.calculate()
+    return jsonify({'data': result})
 
-    return jsonify({'result': data})
+
+@pic.route('/sendDominant', methods=['POST'])
+def pic_dominant():
+    data = request.json
+    do = Dominant(data)
+    result = do.calculate()
+    return jsonify({'data': result})
