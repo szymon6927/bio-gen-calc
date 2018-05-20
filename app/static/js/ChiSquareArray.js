@@ -17,7 +17,7 @@ class ChiSquareArray {
 
   createTable() {
     let table = `
-      <table class="table text-center">
+      <table class="table table-responsive text-center">
         <thead class="thead-light">
         </thead>
         <tbody>

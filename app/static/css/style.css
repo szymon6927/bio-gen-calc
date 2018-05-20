@@ -7,6 +7,7 @@ body {
     box-shadow: 12px 0 15px -4px rgba(0,0,0,.075), -12px 0 8px -4px rgba(0,0,0,.075);
     padding: 0 15px 24px 15px;
     border-radius: 5px;
+    margin-top: -10rem;
 }
 
 section {
@@ -64,16 +65,51 @@ table th[scope=row] {
 }
 
 .codominant-wrapper, .dominant-wrapper {
+    padding-top: 32px;
     display: none;
 }
 
+#particles-js {
+    height: 50vh;
+    background: rgba(0,0,0,.075);
+    box-shadow: inset 0px -5px 10px -3px rgba(50, 50, 50, 0.5)
+}
+
+.wrapper .jumbotron-fluid {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.event-button {
+    margin-top: 30px;
+}
+
+.homepage .title {
+    font-size: 18px;
+}
+
+.homepage .info {
+    padding: 15px;
+}
+
+.homepage .card {
+    box-shadow: 0 0 10px 0 rgba(10, 10, 10, .2);
+    transition: .25s;
+}
+
+.homepage .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 22px 43px rgba(0, 0, 0, 0.15);
+}
+
 .footer {
-    background: #fff;
+    background: #26517F;
+    border-top: 1px solid #fff;
+    color: #fff;
     margin-top: 20px;
     padding: 16px 0;
     font-size: 17px;
     font-weight: 400;
-    box-shadow: inset 0px 5px 10px -5px rgba(50, 50, 50, 0.5);
 }
 
 .footer p {

@@ -3,11 +3,63 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block body %}
-<div class="jumbotron">
-  <div class="container">
-    <h1 class="display-3">Bio calc project</h1>
-    <p>Bio gen calc for Biotechnology</p>
-    <p><a class="btn btn-primary btn-lg" href="/about" role="button">Read more &raquo;</a></p>
+<div class="wrapper">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-3 text-center">Bio gen calc project</h1>
+    </div>
   </div>
+  <section class="homepage">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="info">
+          <div class="title font-weight-bold pb-4">The Gene-Calc is a constantly developed tool dedicated for the needs of
+          calculations related to biological sciences, in particular genetics. The open access tool offers:</div>
+          <div class="content">
+            <ul>
+              <li>study of the genetic equilibrium</li>
+              <li>extended tests from the chi-square family for contingency tables of any size</li>
+              <li>determination of PIC and H values for both codominant and dominant markers</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <hr>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="card mb-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Materials & methods</h5>
+            <a href="{{ url_for('about.about_page') }}" class="btn btn-block btn-primary">Go there!</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="card mb-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Hardy-Weinberg's principle</h5>
+            <a href="{{ url_for('hardy_weinber.hardy_weinber_page') }}" class="btn btn-block btn-primary">Go there!</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center">Chi-Square</h5>
+            <a href="{{ url_for('chi_square.chi_square_page') }}" class="btn btn-block btn-primary">Go there!</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center">Chi-Pic & H</h5>
+            <a href="{{ url_for('pic.pic_page') }}" class="btn btn-block btn-primary">Go there!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 {% endblock %}
