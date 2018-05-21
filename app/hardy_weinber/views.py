@@ -12,14 +12,14 @@ def hardy_weinber_page():
     Render the hardy_weinber template on the / route
     """
     form = HardyWeinberForm()
-    return render_template('hardy_weinber/index.html', form=form, title="Hardy-Weinberg equalibration")
+    return render_template('hardy_weinber/index.html', form=form, title="Hardy-Weinberg equilibrium")
 
 
 @hardy_weinber.route('/hwcalculate', methods=['GET', 'POST'])
 def hw_calculate():
     form = HardyWeinberForm()
     if (form.ho.data == 0 and form.he.data == 0) or (form.he.data == 0 and form.rho.data == 0):
-        flash('Błędna walidacja, conajmniej dwie liczebności równe 0')
+        flash('Incorrect validation, more than two values are equal to 0 !')
         return render_template('hardy_weinber/index.html', form=form,
                                title="Hardy-Weinberg equilibrium")
 

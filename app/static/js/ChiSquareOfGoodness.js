@@ -1,24 +1,3 @@
-function nameConverter(name) {
-  if (name === "chi2_standard") {
-    return "Chi square";
-  }
-  else if (name === "chi2_yats") {
-    return "Yate`s Chi square";
-  }
-  else if (name === "dof") {
-    return "dof";
-  }
-  else if (name === "p_standard") {
-    return "Chi square p-value";
-  }
-  else if (name === "p_yats") {
-    return "Yate`s Chi square p-value";
-  }
-  else {
-    return name;
-  }
-}
-
 class ChiSquareOfGoodness {
   constructor(container) {
     this.container = container;
@@ -55,7 +34,7 @@ class ChiSquareOfGoodness {
         $(this.container + ' .table thead').append(`<th scope="col">Summary</th>`);
       }
       else {
-        $(this.container + ' .table thead').append(`<th scope="col">gp ${i}</th>`);
+        $(this.container + ' .table thead').append(`<th scope="col">Group ${i}</th>`);
       }
     }
   }
@@ -123,7 +102,7 @@ class ChiSquareOfGoodness {
             console.log(key + " -> " + result.data[key]);
             if (key !== 'sum_observed' && key !== 'sum_expected') {
               info += `<div class="row result-score">
-                <span class="col-sm-6 col-xs-12 result-name">${nameConverter(key)} = </span> 
+                <span class="col-sm-6 col-xs-12 result-name">${converterName(key)} = </span> 
                 <input class="col-sm-6 col-xs-12 result-value" type="text" value="${result.data[key]}" />
               </div>`
             }

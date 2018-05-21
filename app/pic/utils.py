@@ -27,7 +27,7 @@ class Codominant:
             freq_sum += alleles_freq[i] ** 2
 
         result = 1 - freq_sum
-        return result
+        return round(result, 3)
 
     def calcuate_pic(self):
         sum_pi = 0
@@ -39,11 +39,14 @@ class Codominant:
         for i in range(self.data["count"] - 1):
             sum_pi += alleles_freq[i] ** 2
 
-        for i in range(1, self.data["count"] - 1):
+        for i in range(1, self.data["count"]):
             sum_pj += alleles_freq[i] ** 2
 
         pic = h - (2 * sum_pi * sum_pj)
-        return pic
+        if pic < 0:
+            return 0
+        else:
+            return round(pic, 4)
 
     def calculate(self):
         self.result["H"] = self.calcuate_h()
@@ -62,6 +65,6 @@ class Dominant:
     def calculate(self):
         fi = float(self.data["amplified_marker"]) / (float(self.data["amplified_marker"]) + float(
             self.data["absecnce_marker"]))
-        pic = 2 * fi * (1 - fi)
+        pic = 1 - (fi ** 2 + ((1 - fi) ** 2))
         self.result["PIC"] = pic
         return self.result

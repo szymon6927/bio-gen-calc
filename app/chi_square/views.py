@@ -10,7 +10,7 @@ def chi_square_page():
     """
     Render the chi_square_page template on the / route
     """
-    return render_template('chi_square/index.html', title="Chi Square equalibration")
+    return render_template('chi_square/index.html', title="Chi-Square tests")
 
 
 @chi_square.route('/sendData', methods=['POST'])
@@ -18,9 +18,9 @@ def get_data():
     data = request.get_json()
 
     chi = ChiSquareCalculation(data)
-    data = chi.chi_square()
+    result = chi.chi_square()
 
-    return jsonify({'data': data})
+    return jsonify({'data': result})
 
 
 @chi_square.route('/sendDataGoodness', methods=['POST'])

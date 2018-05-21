@@ -1,6 +1,7 @@
 # app/__init__.py
 
 # third-party imports
+from datetime import datetime
 from flask import Flask
 from flask import Blueprint
 
@@ -27,5 +28,9 @@ def create_app(config_name):
 
     from .pic import pic as pic
     app.register_blueprint(pic)
+
+    @app.context_processor
+    def inject_now():
+        return {'now': datetime.utcnow()}
 
     return app

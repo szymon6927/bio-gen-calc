@@ -18,7 +18,7 @@
     <section class="chi-independence">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <h2>chi-square tests of independence</h2>
+          <h2>chi-square test of independence</h2>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-6">
           <div class="form-group">
@@ -65,7 +65,7 @@
     <section class="chi-goodness">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <h2 class="mt-3 mb-4">chi-square tests of goodness of fit</h2>
+          <h2 class="mt-3 mb-4">chi-square test of goodness of fit</h2>
         </div>
       </div>
 
@@ -92,7 +92,7 @@
 
       <div class="row mt-4 mb-3">
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="col-md-6 offset-md-6 col-sm-12 col-xs-12 chi-goodness-result mt-3 mb-3"></div>
+          <div class="col-md-8 offset-md-4 col-sm-12 col-xs-12 chi-goodness-result mt-3 mb-3"></div>
         </div>
       </div>
     </section>
@@ -100,6 +100,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ url_for('static', filename='js/NameConverter.js') }}"></script>
 <script src="{{ url_for('static', filename='js/ChiSquareArray.js') }}"></script>
 <script src="{{ url_for('static', filename='js/ChiSquareOfGoodness.js') }}"></script>
 <script src="{{ url_for('static', filename='js/ChiEvents.js') }}"></script>

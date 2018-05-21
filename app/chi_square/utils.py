@@ -41,7 +41,7 @@ class ChiSquareCalculation:
         self.result["p_yats"] = p_yats
 
     def corelation(self):
-        field_sum = self.data["width"] + self.data["height"]
+        field_sum = float(self.data["field_sum"])
         if self.result["dof"] == 1:
             corelation_standard = sqrt(self.result["chi2_standard"] / field_sum)
             corelation_yats = sqrt(self.result["chi2_yats"] / field_sum)
