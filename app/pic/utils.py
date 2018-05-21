@@ -63,8 +63,8 @@ class Dominant:
         print(self.data, flush=True)
 
     def calculate(self):
-        fi = float(self.data["amplified_marker"]) / (float(self.data["amplified_marker"]) + float(
+        fi = int(self.data["amplified_marker"]) / (int(self.data["amplified_marker"]) + int(
             self.data["absecnce_marker"]))
         pic = 1 - (fi ** 2 + ((1 - fi) ** 2))
-        self.result["PIC"] = pic
+        self.result["PIC"] = round(pic, 4)
         return self.result
