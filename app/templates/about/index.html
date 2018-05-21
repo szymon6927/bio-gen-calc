@@ -3,14 +3,182 @@
 {% extends "base.html" %}
 {% block title %}About{% endblock %}
 {% block body %}
-  <div class="wrapper">
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4 text-center">{{ title }}</h1>
-        <p class="text-muted font-weight-bold text-center pt-3 mb-0">
-          About project
-        </p>
-      </div>
+<div class="wrapper">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4 text-center">{{ title }}</h1>
     </div>
   </div>
+  <section class="materials-methods">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <h4 class="mb-2">Hardy–Weinberg equilibrium</h4>
+        <p>Input values in integers form, are used to count "p" and "q" values, by means of Hardy-Weinberg principle,
+          the expected numbers of: homozygous, heterozygous and rare homozygous individuals are obtained.
+          Observed and expected values are compared by the chi-square goodness of fit test.
+        </p>
+        <p>
+          If at the used level of significance, there are statistically important differences, application will count
+          the fixation index - Fis, positive values may means reduction of heterozygosity caused by for example
+          Wahlund effect, inbreed or genetic drift. Excess heterozygotes, caused by e.g.: breeding selection or
+          bottleneck effect could be reasons of negative Fis values.
+        </p>
+        <h4 class="mb-2">Chi square</h4>
+        <p>
+          Chi square test family is a statistical instruments which allows to examine the relation between variables.
+          The chi square tests must be used with assumptions:
+        </p>
+        <ol>
+          <li>test group should be sufficiently large</li>
+          <li>The data should be maximally randomly drawn from a population</li>
+          <li>values in cells are adequate when no more than 20% of the expected values are smaller
+            than five and there are no cells with zero
+          </li>
+        </ol>
+        <br>
+        <p>Independence (Associations) chi square:</p>
+        <p>
+          Research hypothesis: <br>
+          H<sub>0</sub>: There is no association between variables.<br>
+          H<sub>a</sub> : There is an association between variables.
+        </p>
+        <p>The expected values for independence chi square and chi square values are counted following formulas:</p>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <img src="{{ url_for('static', filename='img/formulas/chi_square.png') }}" alt="Chi-square"
+                 class="img-thumbnail"/>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <img src="{{ url_for('static', filename='img/formulas/expected_values.png') }}" alt="Expected values"
+                 class="img-thumbnail"/>
+          </div>
+        </div>
+        <p>
+        <ul>
+          <li>E<sub>ij</sub> = expected frequency for the ith row and jth columm.</li>
+          <li>T<sub>i</sub> = summary in the ith row</li>
+          <li>T<sub>j</sub> = summary in the jth column</li>
+          <li>N = all rows or columns summary</li>
+          <li>O<sub>i</sub> – observed value in cell</li>
+          <li>E<sub>i</sub> – expected values for cell</li>
+          <li>n – a set of all cells</li>
+        </ul>
+        </p>
+        <p>
+          If the values in cell do not fulfill third condition, application will use chi square with Yates's
+          correction for continuity, following formula:
+        </p>
+        <p>
+          <img src="{{ url_for('static', filename='img/formulas/chi_square_yates.png') }}" alt="Chi-square Yates"
+               class="img-thumbnail"/>
+        </p>
+        <p>
+          it is important to note that this correction is adequate for 2x2 contingency tables otherwise more accurate
+          results may be obtained by combining columns or rows.
+          Degrees of freedom are counted by:
+          dof = (r − 1) * (c − 1) <br>
+          r – number of rows <br>
+          c – number of columns
+        </p>
+        <p>Coefficient of contingency are measures of association provide a means of summarizing the size of
+          the association between variables</p>
+        <p>Coefficient of contingency are counted following:</p>
+        <p>for 2x2 (1 dof) tables by means of phi coefficient</p>
+        <img src="{{ url_for('static', filename='img/formulas/fi.jpg') }}" alt="Phi" class="img-thumbnail"/>
+        <p>for tables with dof > 1 using Crammer`s V coefficient</p>
+        <img src="{{ url_for('static', filename='img/formulas/crammer.jpg') }}" alt="V Crammer" class="img-thumbnail"/>
+        <p>Coefficient of contingency range 0.0 - 1.0 value</p>
+        <h4 class="mb-2">Goodness-of-fit chi square</h4>
+        <p>Allows to examine the compliance of the observed and expected variables.</p>
+        <p>Research hypothesis: <br>
+          H<sub>0</sub>: The observed values are equal to theoretical values (expected). <br>
+          H<sub>a</sub> : The observed values are not equal to theoretical values (expected).</p>
+        <p>Degrees of freedom are counted by:</p>
+        <p>dof = k − 1</p>
+        <p>Note.</p>
+        <p>"the total values must be the same for both observed and expected frequencies, expected
+          frequencies less than 1 are not allowed, no more than 20% of expected values are less than 5."</p>
+        <h4 class="mb-2">PIC and H</h4>
+        <p>Heterozygosity (H) is parameter indicating the average frequency of occurrence of heterozygous individuals.
+          PIC as well as Heterozygosity (H) is a measure of polymorphism for a marker locus used in linkage analys.</p>
+        <p>PIC is counted for bi,- or multi,- allelic locus following formula:</p>
+        <img src="{{ url_for('static', filename='img/formulas/pic.png') }}" alt="PIC" class="img-thumbnail"/>
+        <p>P<sub>i</sub> , P<sub>j</sub> are the population frequency of the ith and jth allele (float format), <br>
+          l – number of alleles Heterozygosity (H)</p>
+        <img src="{{ url_for('static', filename='img/formulas/h.png') }}" alt="H" class="img-thumbnail"/>
+        <p>PIC for dominant marker in form of dichotomous variables (1/0), calculated using formulas:</p>
+        <p>PIC = 1− [f<sup>2</sup> + (1− f)<sup>2</sup>]</p>
+        <p>Where fi is frequency of amplified marker (1) and (1 - fi) is frequency of  absence of the marker in study
+          group (0).</p>
+        <p>for codminant marker PIC range 0.0-1.0</p>
+        <p>for dominant marker PIC range 0.0-0.5</p>
+        <h5 class="mb-2">References</h5>
+        <ul>
+          <li class="mb-2">Sa´ndor Nagy, Pe´ter Poczai, Istva´n Cerna´k, Ahmad Mousapour Gorji, Ge´za Hegedus , Ja´nos
+            Taller,
+            (2012): PICcalc: An Online Program to Calculate Polymorphic Information Content for Molecular Genetic
+            Studies, Biochemical Genetics 50:670–672.
+          </li>
+          <li class="mb-2">Yu.V. Chesnokov, A.M. Artemyeva (2015): Bioinformatics and math statistics, Agricultural
+            Biology, 50
+            (5): 571-578.
+          </li>
+          <li class="mb-2">Pilar Soengas, Pablo Velasco, Guillermo Padilla, Amando Ordas, Maria Elena Cartea (2006).
+            Genetic
+            relationships among Brassica napus crops based on SSR markers, HORT SCIENCE 41, 1195–1199.
+          </li>
+          <li class="mb-2">Sorana D. Bolboacă , Lorentz Jäntschi, Adriana F. Sestraş , Radu E. Sestraş and Doru C.
+            Pamfil, (2011):
+            Pearson-Fisher Chi-Square Statistic Revisited, Information, 2, 528-545.
+          </li>
+          <li class="mb-2">Yates, F. (1934) Contingency tables involving small numbers and the χ2 test. Journal of the
+            Royal
+            Statistical Society, Suppl.1, 217–235.
+          </li>
+          <li class="mb-2">Zeynel Dalkılıç , H. Osman Mestav, Gonca Günver-Dalkılıç and Hilmi Kocataş (2011): Genetic
+            diversity of
+            male fig (Ficus carica caprificus L.) genotypes with random amplified polymorphic DNA (RAPD) markers,
+            African Journal of Biotechnology, 10 (4): 519-526.
+          </li>
+          <li class="mb-2">Antony Ugoni, Bruce F. Walker (1995): The Chi square test: an introduction, Chiropractors and
+            Osteopaths
+            Musculo-Skeletal Interest Group. 4. 61-4.
+          </li>
+          <li class="mb-2">Quinnipiac University. Maaning of Pearson’s. Retrieved Jun 20, 2016 from:
+            http://faculty.quinnipiac.edu/libarts/polsci/Statistics.html
+            Yule, G. U. (1912). J. R. Statist. Soc., 75, 76–642.
+          </li>
+          <li class="mb-2">Chi Square Based Measures, from
+            <a href="http://uregina.ca/~gingrich/ch11a.pdf" target="_blank">http://uregina.ca/~gingrich/ch11a.pdf</a>
+          </li>
+          <li class="mb-2">Robin S. Waples (2015): Testing for Hardy–Weinberg Proportions: Have We Lost the Plot ?,
+            Journal of
+            Heredity, 106 (1):1–19.
+          </li>
+          <li class="mb-2">M. Nei, R. K. Chesser (1983): Estimation of fixation indices and gene diversites, Annal of
+            Human Genetics,
+            47, 253-259.
+          </li>
+          <li class="mb-2">R. K. Chesse (1991): Influence of gene flow and breeding tactics on gene diversity within
+            populations.
+            Genetics, 129 (2): 573-583.
+          </li>
+          <li class="mb-2">Roldán-Ruiz, I., van Euwijk, F., Gilliland, T. et al. Theor Appl Genet (2001): A comparative
+            study of
+            molecular and morphological methods of describing relationships between perennial ryegrass (Lolium perenne
+            L.) varieties, Theoretical and Applied Genetics,  103(8): 1138–1150.
+          </li>
+          <li class="mb-2">Carl E. Hildebrand, David C. Torney, and Robert P. Wagner, Informativeness of Polymorphic DNA
+            Markers.
+          </li>
+          <li class="mb-2">J. De Riek · E. Calsyn · I. Everaert · E. Van Bockstaele M. De Loose (2001), AFLP based
+            alternatives for
+            the assessment of Distinctness, Uniformity and Stability of sugar beet varieties, Theor Appl Genet, 103:
+            1254–126.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
 {% endblock %}
