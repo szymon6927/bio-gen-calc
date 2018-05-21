@@ -43,31 +43,31 @@
         <form class="hardy-weinber-form" action="/hwcalculate" method="post">
           {{ form.hidden_tag() }}
           <div class="row">
-            <div class="col col-md-3 col-sm-6 col-xs-12">
+            <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="ho">Homozygotes</label>
                 {{ form.ho (class_="form-control", placeholder="ho") }}
               </div>
             </div>
-            <div class="col col-md-3 col-sm-6 col-xs-12">
+            <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="he">Heterozygotes</label>
                 {{ form.he (class_="form-control", placeholder="he") }}
               </div>
             </div>
-            <div class="col col-md-3 col-sm-6 col-xs-12">
+            <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="rho">Rare homozygotes</label>
                 {{ form.rho (class_="form-control", placeholder="rho") }}
               </div>
             </div>
-            <div class="col col-md-3 col-sm-6 col-xs-12">
+            <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="form-group">
                 <label for="critical_select">Level of significance</label>
                 {{ form.critical_select (class_="form-control", placeholder="select") }}
               </div>
             </div>
-            <div class="col col-md-3 offset-md-9 col-sm-12 col-xs-12">
+            <div class="col-md-3 offset-md-9 col-sm-12 col-xs-12">
               {{ form.submit(class_="btn btn-primary btn-block ") }}
             </div>
           </div>

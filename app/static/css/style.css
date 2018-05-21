@@ -7,7 +7,7 @@ body {
     box-shadow: 12px 0 15px -4px rgba(0,0,0,.075), -12px 0 8px -4px rgba(0,0,0,.075);
     padding: 0 15px 24px 15px;
     border-radius: 5px;
-    margin-top: -12rem;
+    margin-top: -14rem;
 }
 
 section {
@@ -114,4 +114,32 @@ table th[scope=row] {
 
 .footer p {
     margin-bottom: 0;
+}
+
+.footer a {
+    font-weight: bold;
+    color: #fff;
+}
+
+@media (max-width: 991px) {
+    .h1, h1 {
+        font-size: 2.5rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer p {
+        text-align: center !important;
+    }
+    .footer .app-name {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wrapper {
+        margin-top: -10rem;
+    }
 }
