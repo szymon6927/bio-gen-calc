@@ -88,7 +88,8 @@ class ChiSquareOfGoodness {
 
   sendData() {
     let dataJSON = this.buildJSON();
-    console.log(dataJSON)
+    console.log(dataJSON);
+
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
@@ -116,9 +117,16 @@ class ChiSquareOfGoodness {
           </div>
         </div>`
 
-        $('.chi-goodness-result').html(template)
+        if (result.data["sum_observed"] !== result.data["sum_expected"]) {
+          template += `<div class="alert alert-warning mt-3" role="alert">
+            Expected values doesn't equal observed
+          </div>`;
+        }
+
         $('.summary-observed').val(result.data["sum_observed"]);
         $('.summary-expected').val(result.data["sum_expected"]);
+
+        $('.chi-goodness-result').html(template)
       },
       error: function (data) {
         $('.chi-goodness-result').html('Something goes wrong! Try again!')
