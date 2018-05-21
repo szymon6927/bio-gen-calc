@@ -102,6 +102,15 @@ table th[scope=row] {
     box-shadow: 0 22px 43px rgba(0, 0, 0, 0.15);
 }
 
+.navbar {
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #fff;
+}
+
+.navbar-nav li {
+    font-size: 17px;
+}
+
 .footer {
     background: #26517F;
     border-top: 1px solid #fff;
