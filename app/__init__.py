@@ -29,6 +29,9 @@ def create_app(config_name):
     from .pic import pic as pic
     app.register_blueprint(pic)
 
+    from .contact import contact as contact
+    app.register_blueprint(contact)
+
     @app.context_processor
     def inject_now():
         return {'now': datetime.utcnow()}
