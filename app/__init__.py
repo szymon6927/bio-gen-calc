@@ -29,6 +29,9 @@ def create_app(config_name):
     from .pic import pic as pic
     app.register_blueprint(pic)
 
+    from .genetic_distance import genetic_distance as genetic_distance
+    app.register_blueprint(genetic_distance)
+
     from .contact import contact as contact
     app.register_blueprint(contact)
 
