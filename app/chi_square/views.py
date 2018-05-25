@@ -5,7 +5,7 @@ from . import chi_square
 from .utils import ChiSquareCalculation, ChiSquareGoodness
 
 
-@chi_square.route('/chi_square_page')
+@chi_square.route('/chi-square-page')
 def chi_square_page():
     """
     Render the chi_square_page template on the / route

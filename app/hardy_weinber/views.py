@@ -6,7 +6,7 @@ from . import hardy_weinber
 from .utils import HardyWeinberCalculation
 
 
-@hardy_weinber.route('/hardy_weinber_page')
+@hardy_weinber.route('/hardy-weinber-page')
 def hardy_weinber_page():
     """
     Render the hardy_weinber template on the / route
