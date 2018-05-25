@@ -23,8 +23,8 @@ class ChiSquareCalculation:
 
     def chi_square_standard(self):
         chi2, p, dof, ex = chi2_contingency(self.get_observed(), correction=False)
-        self.result["chi2_standard"] = chi2
-        self.result["p_standard"] = p
+        self.result["chi2_standard"] = round(chi2, 5)
+        self.result["p_standard"] = round(p, 5)
         self.result["dof"] = dof
         # self.result["expected"] = ex
 
@@ -37,8 +37,8 @@ class ChiSquareCalculation:
         chi2_yats, p_yats = power_divergence(observed, expected,
                                              ddof=observed.size - 1 - dof, axis=None,
                                              lambda_=None)
-        self.result["chi2_yats"] = chi2_yats
-        self.result["p_yats"] = p_yats
+        self.result["chi2_yats"] = round(chi2_yats, 5)
+        self.result["p_yats"] = round(p_yats, 5)
 
     def corelation(self):
         field_sum = float(self.data["field_sum"])
@@ -51,8 +51,8 @@ class ChiSquareCalculation:
             corelation_standard = sqrt(self.result["chi2_standard"] / field_sum * (m - 1))
             corelation_yats = sqrt(self.result["chi2_yats"] / field_sum * (m - 1))
             self.result["crammer"] = True
-        self.result["corelation_standard"] = corelation_standard
-        self.result["corelation_yats"] = corelation_yats
+        self.result["corelation_standard"] = round(corelation_standard, 5)
+        self.result["corelation_yats"] = round(corelation_yats, 5)
 
     def chi_square(self):
         self.get_observed()
@@ -71,8 +71,8 @@ class ChiSquareGoodness:
 
     def chi_goodness_standard(self):
         chi2, p = chisquare(self.observed, f_exp=self.expected)
-        self.result_goodness["chi2_standard"] = chi2
-        self.result_goodness["p_standard"] = p
+        self.result_goodness["chi2_standard"] = round(chi2, 5)
+        self.result_goodness["p_standard"] = round(p, 5)
         self.result_goodness["dof"] = len(self.observed) - 1
 
     def chi_goodness_yats(self):
@@ -80,8 +80,8 @@ class ChiSquareGoodness:
         expected = np.asarray(self.expected)
         observed = observed + 0.5 * np.sign(expected - observed)
         chi2_yats, p_yats = power_divergence(observed, expected, ddof=0)
-        self.result_goodness["chi2_yats"] = chi2_yats
-        self.result_goodness["p_yats"] = p_yats
+        self.result_goodness["chi2_yats"] = round(chi2_yats, 5)
+        self.result_goodness["p_yats"] = round(p_yats, 5)
 
     def chi_square_goodness(self):
         self.chi_goodness_standard()

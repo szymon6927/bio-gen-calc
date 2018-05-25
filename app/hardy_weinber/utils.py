@@ -22,9 +22,13 @@ class HardyWeinberCalculation:
         p = ((2 * self.ho) + self.he) / n
         q = ((2 * self.rho) + self.he) / n
 
-        self.result["expected_ho"] = (p ** 2) * sum_val
-        self.result["expected_he"] = (2 * p * q) * sum_val
-        self.result["expected_rho"] = (q ** 2) * sum_val
+        expected_ho = (p ** 2) * sum_val
+        expected_he = (2 * p * q) * sum_val
+        expected_rho = (q ** 2) * sum_val
+
+        self.result["expected_ho"] = expected_ho
+        self.result["expected_he"] = round(expected_he, 5)
+        self.result["expected_rho"] = round(expected_rho, 5)
 
     def __calcuate_p_q_n(self):
         n = 2 * (self.ho + self.he + self.rho)
@@ -32,9 +36,9 @@ class HardyWeinberCalculation:
         p = ((2 * self.ho) + self.he) / n
         q = ((2 * self.rho) + self.he) / n
 
-        self.result["n"] = n
-        self.result["p"] = p
-        self.result["q"] = q
+        self.result["n"] = round(n, 5)
+        self.result["p"] = round(p, 5)
+        self.result["q"] = round(q, 5)
 
     def __calcaute_chi(self):
         self.__calcuate_expected()
@@ -47,7 +51,8 @@ class HardyWeinberCalculation:
             yats_chi_e_he = ((abs(self.he - self.result["expected_he"]) - 0.5) ** 2) / self.result["expected_he"]
             yats_chi_rho = ((abs(self.rho - self.result["expected_rho"]) - 0.5) ** 2) / self.result["expected_rho"]
 
-            self.result["yats_sum_chi"] = yats_chi_e_ho + yats_chi_e_he + yats_chi_rho
+            yats_sum_chi = yats_chi_e_ho + yats_chi_e_he + yats_chi_rho
+            self.result["yats_sum_chi"] = round(yats_sum_chi, 5)
         else:
             self.result["yats"] = False
 
@@ -55,7 +60,8 @@ class HardyWeinberCalculation:
         chi_e_he = ((self.he - self.result["expected_he"]) ** 2) / self.result["expected_he"]
         chi_rho = ((self.rho - self.result["expected_rho"]) ** 2) / self.result["expected_rho"]
 
-        self.result["sum_chi"] = chi_e_ho + chi_e_he + chi_rho
+        sum_chi = chi_e_ho + chi_e_he + chi_rho
+        self.result["sum_chi"] = round(sum_chi, 5)
 
     def __expolre_critical_values(self):
         self.__calcaute_chi()
@@ -68,7 +74,7 @@ class HardyWeinberCalculation:
                 self.result["chi_message"] = "Distribution consistent with Hardy Weinberg's law at the level of significance 0.05"
             else:
                 self.result["chi_message"] = "Distribution does not consistent with Hardy Weinberg's law at the level of significance 0.05"
-                self.result["fis"] = fis
+                self.result["fis"] = round(fis, 5)
 
         if self.critical_select == "2":
             if self.result["sum_chi"] < self.cirticial_value_2 or (
@@ -76,7 +82,7 @@ class HardyWeinberCalculation:
                 self.result["chi_message"] = "Distribution consistent with Hardy Weinberg's law at the level of significance 0.01"
             else:
                 self.result["chi_message"] = "Distribution does not consistent with Hardy Weinberg's law at the level of significance 0.01"
-                self.result["fis"] = fis
+                self.result["fis"] = round(fis, 5)
 
     def get_calculations(self):
         self.__set_given_values()

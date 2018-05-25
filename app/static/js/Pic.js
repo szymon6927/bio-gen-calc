@@ -12,6 +12,30 @@ class PicH {
     $(`.${this.markerType}-wrapper`).show();
   }
 
+  validateCodominant() {
+    let valid = true;
+    $('.allele-input').each(function () {
+      let val = $(this).val();
+      if (val == 0) {
+        valid = false;
+        return false;
+      }
+    });
+    return valid;
+  }
+
+  showMessage(valid) {
+    let message = '';
+    if (valid) {
+      message = '<div class="alert alert-success" role="alert">Validation successfull!</div>';
+    }
+    else {
+      message = '<div class="alert alert-danger" role="alert">More than 0 number required</div>';
+    }
+
+    $('.codominant-messages').html(message);
+  }
+
   generateCodominantInputs(count) {
     $('.inputs-wrapper').html('');
     count = parseInt(count);
@@ -51,6 +75,10 @@ class PicH {
   }
 
   sendCodominant() {
+    let valid = this.validateCodominant();
+    console.log(valid);
+    this.showMessage(valid);
+
     let dataJSON = this.buildCodominantJSON();
     console.log(dataJSON);
     $.ajax({
