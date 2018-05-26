@@ -136,6 +136,22 @@ table th[scope=row] {
     cursor: pointer;
 }
 
+.test-table {
+    display: none;
+}
+
+.genetic-distance-table .group.line-0 {
+    border-top: 2px solid #000;
+}
+
+.genetic-distance-table .group-name {
+    border-top: 2px solid #000;
+}
+
+.genetic-distance-table table {
+    margin-top: 16px;
+}
+
 .footer {
     background: #26517F;
     border-top: 1px solid #fff;

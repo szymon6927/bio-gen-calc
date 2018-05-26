@@ -26,7 +26,6 @@ class ChiSquareCalculation:
         self.result["chi2_standard"] = round(chi2, 5)
         self.result["p_standard"] = round(p, 5)
         self.result["dof"] = dof
-        # self.result["expected"] = ex
 
     def chi_square_yats(self):
         observed_list = [self.get_observed()]
