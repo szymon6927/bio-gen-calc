@@ -152,6 +152,14 @@ table th[scope=row] {
     margin-top: 16px;
 }
 
+.genetic-distance-table .cell {
+    width: 7rem;
+}
+
+.calcuate-distance {
+    display: none;
+}
+
 .footer {
     background: #26517F;
     border-top: 1px solid #fff;
