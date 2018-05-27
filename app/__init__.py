@@ -1,8 +1,7 @@
 # app/__init__.py
 
-# third-party imports
 from datetime import datetime
-from flask import Flask
+from flask import Flask, render_template
 from flask import Blueprint
 
 # local imports
@@ -34,6 +33,11 @@ def create_app(config_name):
 
     from .contact import contact as contact
     app.register_blueprint(contact)
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        print(e)
+        return render_template("404.html", title="404 Page not found!")
 
     @app.context_processor
     def inject_now():

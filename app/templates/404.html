@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Hardy Weinber{% endblock %}
+{% block body %}
+<div class="wrapper">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4 text-center font-weight-bold">{{ title }}</h1>
+    </div>
+  </div>
+  <section class="error-404">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 text-center">
+        <p class="font-weight-bold">What you were looking for is just not here.</p>
+        <a class="btn btn-primary" href="{{ url_for('home.homepage') }}">Go to Home Page</a>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
