@@ -17,14 +17,14 @@
       <div class="col-md-3 col-sm-6 col-xs-6">
         <div class="form-group">
           <label for="taxon-number">Number of populations</label>
-          <input id="taxon-number" type="number" class="form-control taxon-number" placeholder="Number of populations">
+          <input id="taxon-number" type="number" min="0" class="form-control taxon-number" placeholder="Number of populations">
         </div>
       </div>
 
       <div class="col-md-3 col-sm-6 col-xs-6">
         <div class="form-group">
           <label for="locus-number">Number of locus</label>
-          <input id="locus-number" type="number" class="form-control locus-number" placeholder="Number of locus">
+          <input id="locus-number" type="number" min="0" class="form-control locus-number" placeholder="Number of locus">
         </div>
       </div>
 
@@ -51,98 +51,10 @@
 
     <div class="row">
       <div class="col-md-12 col-sm-12 genetic-distance-table"></div>
+      <div class="col-md-6 offset-md-3">
+        <button type="submit" class="btn btn-block btn-success calcuate-distance">Calculate!</button>
+      </div>
     </div>
-    <table class="table table-responsive text-center test-table">
-      <thead class="thead-light">
-      <tr>
-        <th rowspan="2">Locus</th>
-        <th rowspan="2">Allel</th>
-      </tr>
-      <tr>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
-        <th>4</th>
-      </tr>
-      </thead>
-
-      <tbody>
-        <th scope="row" rowspan="4">G1</th>
-        <tr>
-          <td>1</td>
-          <td>0.5</td>
-          <td>0.1</td>
-          <td>0.6</td>
-          <td>1.6</td>
-        </tr>
-
-        <tr>
-          <td>2</td>
-          <td>0.5</td>
-          <td>0.1</td>
-          <td>0.6</td>
-          <td>1.6</td>
-        </tr>
-
-        <tr>
-          <td>3</td>
-          <td>0.5</td>
-          <td>0.1</td>
-          <td>0.6</td>
-          <td>1.6</td>
-        </tr>
-
-        <th scope="row" rowspan="4">G1</th>
-        <tr>
-          <td>1</td>
-          <td><input type="number" class="form-control cell col line-0 column-0" name="cell"></td>
-          <td>0.1</td>
-          <td>0.6</td>
-          <td>1.6</td>
-        </tr>
-
-        <tr>
-          <td>2</td>
-          <td>0.5</td>
-          <td>0.1</td>
-          <td>0.6</td>
-          <td>1.6</td>
-        </tr>
-
-        <tr>
-          <td>3</td>
-          <td>0.5</td>
-          <td>0.1</td>
-          <td>0.6</td>
-          <td>1.6</td>
-        </tr>
-
-        <th scope="row" rowspan="4">G1</th>
-        <tr>
-          <td>1</td>
-          <td>0.5</td>
-          <td>0.1</td>
-          <td>0.6</td>
-          <td>1.6</td>
-        </tr>
-
-        <tr>
-          <td>2</td>
-          <td>0.5</td>
-          <td>0.1</td>
-          <td>0.6</td>
-          <td>1.6</td>
-        </tr>
-
-        <tr>
-          <td>3</td>
-          <td>0.5</td>
-          <td>0.1</td>
-          <td>0.6</td>
-          <td>1.6</td>
-        </tr>
-      </tbody>
-    </table>
 
   </section>
 </div>

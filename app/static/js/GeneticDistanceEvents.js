@@ -18,3 +18,8 @@ $(document).on('click', '.generate-table', function () {
   geneticDistance.generateTable();
 });
 
+$('.calcuate-distance').click(function () {
+  // geneticDistance.buildJSON();
+  geneticDistance.sendData();
+})
+

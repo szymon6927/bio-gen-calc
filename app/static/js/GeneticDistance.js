@@ -31,9 +31,9 @@ class GeneticDistance {
     $(wrapper).html('');
     count = parseInt(count);
     for (let i = 0; i < count; i++) {
-      let input = `<div class="form-group">
+      let input = `<div class="form-group number-of-alleles">
         <label for="locus-${i}">number of alleles in locus-${i}</label>
-        <input type="number" class="form-control" id="locus-${i}">
+        <input type="number" min="1" class="form-control" id="locus-${i}">
       </div>`;
 
       $(wrapper).append(input);
@@ -82,7 +82,7 @@ class GeneticDistance {
     $(`.g-${key}.line-${alleleNumber}`).append(`<td>${alleleNumber}</td>`);
     let inputs = '';
     for (let i = 0; i < this.taxonNumber; i++) {
-      inputs += '<td><input type="number" class="form-control cell col" name="cell"></td>';
+      inputs += '<td><input type="number" min="0" max="1" class="form-control cell" name="cell"></td>';
     }
     $(`.g-${key}.line-${alleleNumber}`).append(inputs);
   }
@@ -93,5 +93,49 @@ class GeneticDistance {
     this.drawTableScheme();
     this.drawTableHead();
     this.drawTableBody();
+    $('.calcuate-distance').show();
+  }
+
+  buildJSON() {
+    console.log("JSON building");
+    let data = {};
+    data["taxon_number"] = $('#taxon-number').val();
+    data["locus_number"] = $('#locus-number').val();
+    data["type_of_distance"] = $('#type-of-distance').val();
+
+    for (let i = 0; i < this.locusNumber; i++) {
+      let gObject = {};
+      let numberOfAlleles = $(`#locus-${i}`).val();
+      gObject["nubmer_of_alleles"] = numberOfAlleles;
+
+      for (let j = 0; j < numberOfAlleles; j++) {
+        let gLocus = $(`.g-${i}.line-${j} input`).map(function () {
+          return $(this).val();
+        }).get();
+        gObject[`alleles_${j}`] = gLocus;
+      }
+      data[`g_${i}`] = gObject;
+    }
+
+    return JSON.stringify(data);
+  }
+
+  sendData() {
+    let dataJSON = this.buildJSON();
+    console.log(dataJSON);
+    $.ajax({
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      url: "/sendDataDistance",
+      data: dataJSON,
+      dataType: "json",
+      success: function (result) {
+        console.log("Succesfull");
+        console.log(result.data);
+      },
+      error: function (result) {
+        console.log(result);
+      }
+    })
   }
 }
