@@ -46,7 +46,7 @@ class ChiSquareCalculation:
             corelation_yats = sqrt(self.result["chi2_yats"] / field_sum)
             self.result["yule"] = True
         else:
-            m = max(self.data["width"], self.data["height"])
+            m = min(self.data["width"], self.data["height"])
             corelation_standard = sqrt(self.result["chi2_standard"] / field_sum * (m - 1))
             corelation_yats = sqrt(self.result["chi2_yats"] / field_sum * (m - 1))
             self.result["crammer"] = True
