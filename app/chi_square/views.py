@@ -3,6 +3,7 @@
 from flask import render_template, request, jsonify
 from . import chi_square
 from .utils import ChiSquareCalculation, ChiSquareGoodness
+from .. import detect_domain
 
 
 @chi_square.route('/chi-square-page')
@@ -10,6 +11,7 @@ def chi_square_page():
     """
     Render the chi_square_page template on the / route
     """
+    detect_domain()
     return render_template('chi_square/index.html', title="Chi-Square tests")
 
 

@@ -2,7 +2,7 @@
 
 # third-party imports
 from datetime import datetime
-from flask import Flask
+from flask import Flask, request, redirect
 from flask import Blueprint
 
 # local imports
@@ -40,3 +40,9 @@ def create_app(config_name):
         return {'now': datetime.utcnow()}
 
     return app
+
+
+def detect_domain():
+    if request.headers['Host'] == "gene-calc.herokuapp.com":
+        return redirect("https://gene-calc.pl/")
+
