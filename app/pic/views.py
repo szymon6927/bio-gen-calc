@@ -1,7 +1,6 @@
 from flask import render_template, request, jsonify
 from . import pic
 from .utils import Codominant, Dominant
-from .. import detect_domain
 
 
 @pic.route('/pic')
@@ -9,7 +8,6 @@ def pic_page():
     """
     Render the pic & h template
     """
-    detect_domain()
     return render_template('pic/index.html', title="Polymorphic information content & Heterozygosity")
 
 

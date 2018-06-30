@@ -4,7 +4,6 @@ from flask import render_template, flash
 from .forms import HardyWeinberForm
 from . import hardy_weinber
 from .utils import HardyWeinberCalculation
-from .. import detect_domain
 
 
 @hardy_weinber.route('/hardy-weinber-page')
@@ -12,7 +11,6 @@ def hardy_weinber_page():
     """
     Render the hardy_weinber template on the / route
     """
-    detect_domain()
     form = HardyWeinberForm()
     return render_template('hardy_weinber/index.html', form=form, title="Hardy-Weinberg equilibrium")
 
