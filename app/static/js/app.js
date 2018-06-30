@@ -4,12 +4,6 @@ particlesJS.load('particles-js', '/static/js/assets/particles.json', function ()
 });
 
 $(document).ready(function () {
-
-  var currentUrl = window.location.href;
-  if (currentUrl.includes("herokuapp.com")) {
-    window.location.replace("https://gene-calc.pl/");
-  }
-
   $("#back-top").hide();
   $(function () {
     $(window).scroll(function () {
