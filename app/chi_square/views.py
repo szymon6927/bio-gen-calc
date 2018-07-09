@@ -13,7 +13,7 @@ def chi_square_page():
     return render_template('chi_square/index.html', title="Chi-Square tests")
 
 
-@chi_square.route('/sendData', methods=['POST'])
+@chi_square.route('/chi-square/send-data', methods=['POST'])
 def get_data():
     data = request.get_json()
 
@@ -23,7 +23,7 @@ def get_data():
     return jsonify({'data': result})
 
 
-@chi_square.route('/sendDataGoodness', methods=['POST'])
+@chi_square.route('/chi-square/send-data-goodness', methods=['POST'])
 def get_goodness_data():
     data = request.get_json()
 

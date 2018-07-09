@@ -123,10 +123,11 @@ class GeneticDistance {
   sendData() {
     let dataJSON = this.buildJSON();
     console.log(dataJSON);
+    const path = '/genetic-distance/send-data-distance';
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
-      url: "/sendDataDistance",
+      url: path,
       data: dataJSON,
       dataType: "json",
       success: function (result) {

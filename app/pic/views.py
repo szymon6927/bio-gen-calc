@@ -11,7 +11,7 @@ def pic_page():
     return render_template('pic/index.html', title="Polymorphic information content & Heterozygosity")
 
 
-@pic.route('/sendCodominant', methods=['POST'])
+@pic.route('/pic/send-codominant', methods=['POST'])
 def pic_codominant():
     data = request.json
     co_d = Codominant(data)
@@ -19,7 +19,7 @@ def pic_codominant():
     return jsonify({'data': result})
 
 
-@pic.route('/sendDominant', methods=['POST'])
+@pic.route('/pic/send-dominant', methods=['POST'])
 def pic_dominant():
     data = request.json
     do = Dominant(data)

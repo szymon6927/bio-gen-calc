@@ -8,7 +8,7 @@ def genetic_distance_page():
     return render_template('genetic_distance/index.html', title="Estimation of Genetic Distance")
 
 
-@genetic_distance.route('/sendDataDistance', methods=['POST'])
+@genetic_distance.route('/genetic-distance/send-data-distance', methods=['POST'])
 def get_data():
     data = request.get_json()
     gen_distance = GeneticDistance(data)

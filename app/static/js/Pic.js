@@ -80,11 +80,12 @@ class PicH {
     this.showMessage(valid);
 
     let dataJSON = this.buildCodominantJSON();
+    const path = 'pic/send-codominant';
     console.log(dataJSON);
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
-      url: "/sendCodominant",
+      url: path,
       data: dataJSON,
       dataType: "json",
       success: function (result) {
@@ -128,11 +129,12 @@ class PicH {
 
   sendDominant() {
     let dataJSON = this.buildDominantJSON();
+    const path = '/pic/send-dominant';
     console.log(dataJSON);
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
-      url: "/sendDominant",
+      url: path,
       data: dataJSON,
       dataType: "json",
       success: function (result) {

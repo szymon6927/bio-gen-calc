@@ -185,12 +185,13 @@ class ChiSquareArray {
 
   sendData() {
     let dataJSON = this.buildJSON();
+    const path = '/chi-square/send-data';
     console.log(dataJSON);
     console.log($.parseJSON(dataJSON))
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
-      url: "/sendData",
+      url: path,
       data: dataJSON,
       dataType: "json",
       success: function (result) {

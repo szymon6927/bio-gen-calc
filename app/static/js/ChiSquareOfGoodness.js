@@ -88,12 +88,13 @@ class ChiSquareOfGoodness {
 
   sendData() {
     let dataJSON = this.buildJSON();
+    const path = '/chi-square/send-data-goodness'
     console.log(dataJSON);
 
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
-      url: "/sendDataGoodness",
+      url: path,
       data: dataJSON,
       dataType: "json",
       success: function (result) {
