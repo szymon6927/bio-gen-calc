@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, SelectField, SubmitField, ValidationError, validators
-from flask.ext.wtf.html5 import NumberInput
+from flask_wtf.html5 import NumberInput
+from wtforms import IntegerField, SelectField, SubmitField
+# from flask.ext.wtf.html5 import NumberInput
 from wtforms.validators import InputRequired
 
 

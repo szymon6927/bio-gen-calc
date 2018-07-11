@@ -9,7 +9,7 @@ $('#type-of-marker').change(function () {
 $('.generate-codominant').click(function () {
   let number = $('.alleles-number').val();
   pic.generateCodominantInputs(number);
-  
+
   setTimeout(() => {
     validateNegative()
   },500)
