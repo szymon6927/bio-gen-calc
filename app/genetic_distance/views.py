@@ -12,4 +12,5 @@ def genetic_distance_page():
 def get_data():
     data = request.get_json()
     gen_distance = GeneticDistance(data)
+    gen_distance.calcuate_distances()
     return jsonify({'data': data})

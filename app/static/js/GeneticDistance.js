@@ -82,7 +82,7 @@ class GeneticDistance {
     $(`.g-${key}.line-${alleleNumber}`).append(`<td>${alleleNumber}</td>`);
     let inputs = '';
     for (let i = 0; i < this.taxonNumber; i++) {
-      inputs += '<td><input type="number" min="0" max="1" class="form-control cell" name="cell"></td>';
+      inputs += `<td><input type="number" min="0" max="1" class="form-control column-${i} cell" name="cell"></td>`;
     }
     $(`.g-${key}.line-${alleleNumber}`).append(inputs);
   }
@@ -120,8 +120,27 @@ class GeneticDistance {
     return JSON.stringify(data);
   }
 
+  buildJSON2() {
+    console.log("json building 2")
+    let data = {};
+
+    data["taxon_number"] = $('#taxon-number').val();
+    data["locus_number"] = $('#locus-number').val();
+    data["type_of_distance"] = $('#type-of-distance').val();
+
+    for (let i = 0; i < data["taxon_number"]; i++) {
+      let columnValue = $(`.column-${i}`).map(function () {
+        return parseFloat($(this).val());
+      }).get();
+
+      data[`column_${i}`] = columnValue
+    }
+
+    return JSON.stringify(data);
+  }
+
   sendData() {
-    let dataJSON = this.buildJSON();
+    let dataJSON = this.buildJSON2();
     console.log(dataJSON);
     const path = '/genetic-distance/send-data-distance';
     $.ajax({
