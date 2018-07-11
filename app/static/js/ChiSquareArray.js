@@ -87,7 +87,7 @@ class ChiSquareArray {
   }
 
   generateInput(row, col) {
-    return `<input type="number" class="form-control cell col line-${row} column-${col}" name="cell">`;
+    return `<input type="number" min="0" class="form-control non-negative cell col line-${row} column-${col}" name="cell">`;
   }
 
   generateSummaryInput(row, col) {

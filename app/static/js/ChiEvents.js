@@ -10,6 +10,10 @@ $('.generate-array').click((e) => {
   chiArray.setHeight(height);
 
   chiArray.draw();
+
+  setTimeout(() => {
+    validateNegative()
+  },500)
 });
 
 $('.calcuate-button').click(() => {

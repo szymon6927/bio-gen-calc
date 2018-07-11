@@ -42,7 +42,7 @@ class PicH {
     for (let i = 0; i < count; i++) {
       let input = `<div class="form-group">
         <label for="allele-${i}">allele-${i}</label>
-        <input type="number" class="form-control allele-input" id="allele-${i}">
+        <input type="number" min="0" class="form-control non-negative allele-input" id="allele-${i}">
       </div>`;
 
       $('.inputs-wrapper').append(input);
