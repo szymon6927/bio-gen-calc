@@ -13,4 +13,11 @@ def get_data():
     data = request.get_json()
     gen_distance = GeneticDistance(data)
     gen_distance.calcuate_distances()
-    return jsonify({'data': data})
+    gen_distance.build_matrix()
+
+    return jsonify({
+            'data': {
+                'dendro_base64': gen_distance.render_dendrogram(),
+                'matrix_latex': gen_distance.redner_matrix()
+            }
+            })
