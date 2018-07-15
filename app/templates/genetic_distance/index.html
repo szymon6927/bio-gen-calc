@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Chi Square{% endblock %}
 {% block body %}
+<div class="cover"><div class="loader"></div></div>
 <div class="wrapper">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -56,12 +57,16 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6 col-sm-6">
-        <div class="matrix-wrapper"></div>
-      </div>
-      <div class="col-md-6 col-sm-6">
-        <div class="dendrogram-wrapper"></div>
+    <div class="genetic-distance-results mt-5">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 text-center">
+          <div class="result-desc"><p class="pb-1">Distance matrix: </p></div>
+          <div class="matrix-wrapper"></div>
+        </div>
+        <div class="col-md-6 col-sm-6 text-center">
+          <div class="result-desc"><p class="pb-1">Dendogram: </p></div>
+          <div class="dendrogram-wrapper"></div>
+        </div>
       </div>
     </div>
 

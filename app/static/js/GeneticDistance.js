@@ -151,16 +151,22 @@ class GeneticDistance {
       dataType: "json",
       success: function (res) {
         console.log("Succesfull");
+        $('.genetic-distance-results').show()
         let matrixImg = `<p class="matrix-latex">${res.data.matrix_latex}</p>`;
-        let dendroImg = `<img src="data:image/png;base64,${res.data.dendro_base64}">`;
+        let dendroImg = `<img class="img-fluid" src="data:image/png;base64,${res.data.dendro_base64}">`;
         $('.matrix-wrapper').html(matrixImg)
         $('.dendrogram-wrapper').html(dendroImg)
+
         setTimeout(() => {
-          MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+          MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         },500)
+
+        $('.cover').hide()
+
       },
       error: function (result) {
         console.log(result);
+        $('.cover').hide()
       }
     })
   }

@@ -21,5 +21,6 @@ $(document).on('click', '.generate-table', function () {
 $('.calcuate-distance').click(function () {
   // geneticDistance.buildJSON();
   geneticDistance.sendData();
+  $('.cover').show()
 })
 
