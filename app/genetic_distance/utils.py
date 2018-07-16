@@ -14,10 +14,11 @@ class GeneticDistance:
         self.distances = []  # helper list for building correct matrix
         self.matrix = []
         self.condensed_matrix = []
+        self.column_range = int(self.data["taxon_number"])
 
     def estimate_J(self):
         sum_of_square = {}
-        for i in range(int(self.data["taxon_number"])):
+        for i in range(self.column_range):
             sum_all = sum(j * j for j in self.data["column_" + str(i)]) / int(self.data["locus_number"])
             sum_of_square["j_" + str(i)] = round(sum_all, 5)
 
@@ -25,8 +26,7 @@ class GeneticDistance:
 
     def calcuate_x_y(self):
         sum_product = {}
-        column_range = int(self.data["taxon_number"])
-        pair_combination = list(itertools.combinations(range(column_range), 2))
+        pair_combination = list(itertools.combinations(range(self.column_range), 2))
         for pair in pair_combination:
             product = [a * b for a, b in zip(self.data["column_" + str(pair[0])], self.data["column_" + str(pair[1])])]
 
@@ -36,8 +36,7 @@ class GeneticDistance:
         return sum_product
 
     def calcuate_distances(self):
-        column_range = int(self.data["taxon_number"])
-        pair_combination = list(itertools.combinations(range(column_range), 2))
+        pair_combination = list(itertools.combinations(range(self.column_range), 2))
 
         sum_of_square = self.estimate_J()
         sum_product = self.calcuate_x_y()
@@ -52,20 +51,27 @@ class GeneticDistance:
 
         self.condensed_matrix = self.distances[:]
 
-    def build_matrix(self, end=5):
+    def build_matrix(self, end=None):
+        if end is None:
+            end = self.column_range - 1
+            
         if end == 0:
             self.matrix_conversion()
             return
 
         temp = []
         for i in range(end):
-            temp.append(self.distances[i])
+            try:
+                temp.append(self.distances[i])
+            except IndexError:
+                print("IndexError")
+
             if i == end:
                 break
 
         del self.distances[:end]  # delete first n elem
 
-        zeros_list = [0] * (int(self.data["taxon_number"]) - 1 - len(temp))
+        zeros_list = [0] * (self.column_range - 1 - len(temp))
         zeros_list += temp  # add to zeros_list bcs zeros must be at begining
         self.matrix.append(zeros_list)
         self.build_matrix(end - 1)

@@ -73,7 +73,7 @@
         <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="form-group">
             <label for="goodness-width">Number of groups</label>
-            <input id="goodness-width" type="number" class="form-control goodness-width" placeholder="number of groups">
+            <input id="goodness-width" type="number" class="form-control non-negative goodness-width" placeholder="number of groups">
           </div>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12 event-button">
@@ -97,6 +97,9 @@
       </div>
     </section>
   </div>
+
+  {% include 'utils/modal.html' %}
+
 {% endblock %}
 
 {% block scripts %}

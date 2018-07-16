@@ -1,3 +1,5 @@
+// in future import showModal form './utils'
+
 class PicH {
   constructor() {
     this.markerType = '';
@@ -17,8 +19,7 @@ class PicH {
     $('.allele-input').each(function () {
       let val = $(this).val();
       if (val == 0) {
-        valid = false;
-        return false;
+        return valid = false;
       }
     });
     return valid;
@@ -68,20 +69,25 @@ class PicH {
     let amplifiedMarker = $('#amplified-marker').val();
     let absecnceMarker = $('#absecnce-marker').val();
 
-    data["amplified_marker"] = amplifiedMarker;
-    data["absecnce_marker"] = absecnceMarker;
+    if (amplifiedMarker && absecnceMarker) {
+      data["amplified_marker"] = amplifiedMarker;
+      data["absecnce_marker"] = absecnceMarker;
+    }
+    else {
+      showModal('Fill number of amplified marker or number of absecnce marker')
+      return false
+    }
 
     return JSON.stringify(data);
   }
 
   sendCodominant() {
     let valid = this.validateCodominant();
-    console.log(valid);
     this.showMessage(valid);
 
     let dataJSON = this.buildCodominantJSON();
+
     const path = 'pic/send-codominant';
-    console.log(dataJSON);
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
@@ -129,6 +135,12 @@ class PicH {
 
   sendDominant() {
     let dataJSON = this.buildDominantJSON();
+
+    if (!dataJSON) {
+      // break if all data not filled in inputs
+      return false
+    }
+
     const path = '/pic/send-dominant';
     console.log(dataJSON);
     $.ajax({
@@ -138,14 +150,10 @@ class PicH {
       data: dataJSON,
       dataType: "json",
       success: function (result) {
-        console.log("Successfull!");
-        console.log(result.data);
-
         let info = '';
 
         for (let key in result.data) {
           if (result.data.hasOwnProperty(key)) {
-            console.log(key + " -> " + result.data[key]);
             let name = key.replace("_", " ");
             info += `<div class="row result-score">
               <span class="col-sm-6 col-xs-12 result-name">${name} = </span> 
@@ -168,7 +176,7 @@ class PicH {
         console.log("Something goes wrong, try again!");
 
         let template = `<div class="alert alert-danger" role="alert">
-          Something goes wrong, Try again!
+          Something goes wrong, maybe empty inputs. Try again!
         </div>`;
 
         $('.dominant-result').html(template);

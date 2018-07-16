@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Chi Square{% endblock %}
 {% block body %}
-<div class="cover"><div class="loader"></div></div>
+
+{% include 'utils/loader.html' %}
+
 <div class="wrapper">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -9,11 +11,6 @@
     </div>
   </div>
   <section class="genetic-distance">
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        <h4 class="text-center">Work in progress!</h4>
-      </div>
-    </div>
     <div class="row">
       <div class="col-md-3 col-sm-6 col-xs-6">
         <div class="form-group">
@@ -33,8 +30,7 @@
         <div class="form-group">
           <label for="type-of-distance">Type of distance</label>
           <select class="form-control" id="type-of-distance">
-            <option>select</option>
-            <option value="standard">Standard genetic distance</option>
+            <option value="standard" selected>Standard genetic distance</option>
             <option value="takezaki-nei">Genetic distance (Takezaki, Nei 1983)</option>
           </select>
         </div>
@@ -72,6 +68,9 @@
 
   </section>
 </div>
+
+{% include 'utils/modal.html' %}
+
 {% endblock %}
 
 {% block scripts %}

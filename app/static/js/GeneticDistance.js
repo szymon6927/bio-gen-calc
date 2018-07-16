@@ -20,9 +20,21 @@ class GeneticDistance {
 
   setLocusObject() {
     for (let i = 0; i < this.locusNumber; i++) {
-      this.locusObj[i] = parseInt($(`#locus-${i}`).val());
+      let locusVal = $(`#locus-${i}`).val()
+      this.locusObj[i] = parseInt(locusVal);
     }
-    console.log(this.locusObj);
+  }
+
+
+  validateLocusInputs() {
+    let valid = true;
+    for (let i = 0; i < this.locusNumber; i++) {
+      let locusVal = $(`#locus-${i}`).val()
+      if (!locusVal) {
+        return valid = false;
+      }
+    }
+    return valid
   }
 
   generateAllelesInput(count) {

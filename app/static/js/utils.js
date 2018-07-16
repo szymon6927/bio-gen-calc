@@ -28,6 +28,16 @@ function validateNegative() {
   })
 }
 
+function showModal(message) {
+  let modal = $('#message-modal')
+  modal.modal('show')
+  modal.find('.modal-body p').html(message)
+}
+
+$('#message-modal').modal({
+  show: false
+})
+
 $(document).ready(function () {
   validateNegative()
 })
