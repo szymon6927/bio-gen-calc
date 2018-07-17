@@ -23,14 +23,14 @@
         <div class="col-md-3 col-sm-6 col-xs-6">
           <div class="form-group">
             <label for="array-width">Groups</label>
-            <input id="array-width" type="number" class="form-control array-width" placeholder="width">
+            <input id="array-width" type="number" class="form-control non-negative array-width" min="0" placeholder="width">
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-6">
 
           <div class="form-group">
             <label for="array-height">Rows</label>
-            <input id="array-height" type="number" class="form-control array-height" placeholder="height">
+            <input id="array-height" type="number" class="form-control non-negative array-height" min="0" placeholder="height">
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-6 event-button">
@@ -73,7 +73,7 @@
         <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="form-group">
             <label for="goodness-width">Number of groups</label>
-            <input id="goodness-width" type="number" class="form-control goodness-width" placeholder="number of groups">
+            <input id="goodness-width" type="number" class="form-control non-negative goodness-width" placeholder="number of groups">
           </div>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12 event-button">
@@ -97,6 +97,9 @@
       </div>
     </section>
   </div>
+
+  {% include 'utils/modal.html' %}
+
 {% endblock %}
 
 {% block scripts %}

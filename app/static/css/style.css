@@ -75,6 +75,10 @@ table th[scope=row] {
     box-shadow: inset 0px -5px 10px -3px rgba(50, 50, 50, 0.5)
 }
 
+.form-control {
+    padding: .375rem .25rem;
+}
+
 .wrapper .jumbotron-fluid {
     margin-left: -15px;
     margin-right: -15px;
@@ -111,6 +115,10 @@ table th[scope=row] {
     font-size: 17px;
 }
 
+.nav-link {
+    letter-spacing: -0.05em;
+}
+
 #back-top a {
     display: block;
     content: "";
@@ -136,6 +144,30 @@ table th[scope=row] {
     cursor: pointer;
 }
 
+.test-table {
+    display: none;
+}
+
+.genetic-distance-table .group.line-0 {
+    border-top: 2px solid #000;
+}
+
+.genetic-distance-table .group-name {
+    border-top: 2px solid #000;
+}
+
+.genetic-distance-table table {
+    margin-top: 16px;
+}
+
+.genetic-distance-table .cell {
+    width: 7rem;
+}
+
+.calcuate-distance {
+    display: none;
+}
+
 .footer {
     background: #26517F;
     border-top: 1px solid #fff;
@@ -153,6 +185,96 @@ table th[scope=row] {
 .footer a {
     font-weight: bold;
     color: #fff;
+}
+
+/* LOADER */
+.cover {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: none;
+}
+
+.loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 250px;
+    height: 250px;
+    margin: -125px 0 0 -125px;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    border-top-color: rgba(0, 154, 221, 1);
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    z-index: 1001
+}
+
+.loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    border-top-color: rgba(40, 146, 72, 1);
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite
+}
+
+.loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 5px solid transparent;
+    border-top-color: rgba(255, 255, 255, 1);
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}
+
+.genetic-distance-results {
+    display: none;
+}
+
+.result-desc p {
+    font-size: 19px;
+    font-weight: 500;
+    border-bottom: 1px solid #cacaca;
 }
 
 @media (max-width: 991px) {

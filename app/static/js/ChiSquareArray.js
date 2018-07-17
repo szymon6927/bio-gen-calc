@@ -87,7 +87,7 @@ class ChiSquareArray {
   }
 
   generateInput(row, col) {
-    return `<input type="number" class="form-control cell col line-${row} column-${col}" name="cell">`;
+    return `<input type="number" min="0" class="form-control non-negative cell col line-${row} column-${col}" name="cell">`;
   }
 
   generateSummaryInput(row, col) {
@@ -185,12 +185,13 @@ class ChiSquareArray {
 
   sendData() {
     let dataJSON = this.buildJSON();
+    const path = '/chi-square/send-data';
     console.log(dataJSON);
     console.log($.parseJSON(dataJSON))
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
-      url: "/sendData",
+      url: path,
       data: dataJSON,
       dataType: "json",
       success: function (result) {

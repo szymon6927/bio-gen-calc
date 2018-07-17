@@ -65,7 +65,7 @@ class ChiSquareOfGoodness {
       return `<td class="summary"><input type="number" class="form-control cell col ${type} column-${col}" name="cell" readonly></td>`;
     }
     else {
-      return `<td><input type="number" class="form-control cell col ${type} column-${col}" name="cell"></td>`;
+      return `<td><input type="number" min="0" class="form-control non-negative cell col ${type} column-${col}" name="cell"></td>`;
     }
   }
 
@@ -88,12 +88,13 @@ class ChiSquareOfGoodness {
 
   sendData() {
     let dataJSON = this.buildJSON();
+    const path = '/chi-square/send-data-goodness'
     console.log(dataJSON);
 
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
-      url: "/sendDataGoodness",
+      url: path,
       data: dataJSON,
       dataType: "json",
       success: function (result) {

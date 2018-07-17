@@ -7,6 +7,10 @@
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-3 text-center">Gene Calc</h1>
+      <p class="text-muted font-weight-bold text-center pt-3 mb-0">
+        This application is in beta-version, so if you find a bug or error please let us know
+        <a href="contact@gene-calc.pl">contact@gene-calc.pl</a>
+      </p>
     </div>
   </div>
   <section class="homepage">
@@ -14,7 +18,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="info">
           <div class="title font-weight-bold pb-4">The Gene-Calc is a constantly developed tool dedicated for the needs of
-          calculations related to biological sciences, particularly in genetics. The open access tool offers:</div>
+          calculations related to biological sciences, particularly in field of genetics. The open access tool offers:</div>
           <div class="content">
             <ul>
               <li>study of the genetic equilibrium</li>
@@ -56,6 +60,16 @@
           <div class="card-body">
             <h5 class="card-title text-center">Pic & H</h5>
             <a href="{{ url_for('pic.pic_page') }}" class="btn btn-block btn-primary">Go there!</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 mt-4">
+        <div class="card mb-sm-0 mb-4">
+          <div class="card-body text-center">
+            <h5 class="card-title text-center">Genetic distance</h5>
+            <a href="{{ url_for('genetic_distance.genetic_distance_page') }}" class="btn btn-block btn-primary">
+              Go there!
+            </a>
           </div>
         </div>
       </div>

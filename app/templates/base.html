@@ -14,10 +14,13 @@
   <!-- For iPhone: -->
   <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='img/favicons/dna-57.png') }}">
 
-  <title>{{ title }} | Bio Gen Calc</title>
+  <title>{{ title }} | Gene Calc</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" 
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
 
@@ -65,6 +68,7 @@
         crossorigin="anonymous"></script>
 <script src="{{ url_for('static', filename='js/vendors/particles.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils.js') }}"></script>
 {% block scripts %}
 {% endblock %}
 
