@@ -139,6 +139,7 @@ class GeneticDistance {
     data["taxon_number"] = $('#taxon-number').val();
     data["locus_number"] = $('#locus-number').val();
     data["type_of_distance"] = $('#type-of-distance').val();
+    data["type_of_dendrogram"] = $('#type-of-dendrogram').val();
 
     for (let i = 0; i < data["taxon_number"]; i++) {
       let columnValue = $(`.column-${i}`).map(function () {

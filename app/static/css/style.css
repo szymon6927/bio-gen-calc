@@ -115,6 +115,10 @@ table th[scope=row] {
     font-size: 17px;
 }
 
+.nav-link {
+    letter-spacing: -0.05em;
+}
+
 #back-top a {
     display: block;
     content: "";

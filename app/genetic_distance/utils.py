@@ -89,6 +89,22 @@ class GeneticDistance:
 
         return tuple(nested_lst_of_tuples)
 
+    def detect_dendrogram_type(self):
+        dendro_method = {
+            'upgma': 'average',
+            'wpgma': 'weighted',
+            'upgmc': 'centroid',
+            'wpgmc': 'median',
+            'single-linkage': 'single',
+            'complete-linkage': 'complete'
+        }
+
+        distance = self.data.get("type_of_dendrogram")
+        if distance is None:
+            return dendro_method["upgma"]
+
+        return dendro_method[distance]
+
     def redner_matrix(self):
         """Returns a LaTeX bmatrix
 
@@ -104,15 +120,16 @@ class GeneticDistance:
         return '\n'.join(rv)
 
     def render_dendrogram(self):
-        mathod_linkage = linkage(self.condensed_matrix, 'average')
+        method = linkage(self.condensed_matrix, self.detect_dendrogram_type())
 
-        dendro = dendrogram(mathod_linkage, orientation='left')
+        dendro = dendrogram(method, orientation='left')
 
         figfile = BytesIO()
-        plt.savefig(figfile, format='png')
+        plt.savefig(figfile, format='png', dpi=120)
         figfile.seek(0)  # rewind to beginning of file
         figdata_png = figfile.getvalue()  # extract string (stream of bytes)
         figdata_png = base64.b64encode(figdata_png)
-
         decoded = figdata_png.decode("utf-8")
+        plt.clf()
+
         return decoded
