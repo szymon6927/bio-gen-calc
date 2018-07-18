@@ -140,6 +140,9 @@ class GeneticDistance {
     data["locus_number"] = $('#locus-number').val();
     data["type_of_distance"] = $('#type-of-distance').val();
     data["type_of_dendrogram"] = $('#type-of-dendrogram').val();
+    data["number_of_alleles"] = $('.number-of-alleles input').map(function () {
+      return parseFloat($(this).val());
+    }).get();
 
     for (let i = 0; i < data["taxon_number"]; i++) {
       let columnValue = $(`.column-${i}`).map(function () {
@@ -172,7 +175,7 @@ class GeneticDistance {
 
         setTimeout(() => {
           MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        },500)
+        }, 500)
 
         $('.cover').hide()
 

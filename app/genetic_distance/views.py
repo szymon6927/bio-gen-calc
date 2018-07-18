@@ -1,6 +1,9 @@
 from flask import render_template, request, jsonify
 from . import genetic_distance
-from .utils import GeneticDistance
+# from .utils import GeneticDistance
+from .utils.StandardDistance import StandardDistance
+from .utils.GeometricDistance import GeometricDistance
+from .utils.TakezakiNeiDistance import TakezakiNeiDistance
 
 
 @genetic_distance.route('/genetic-distance')
@@ -11,7 +14,15 @@ def genetic_distance_page():
 @genetic_distance.route('/genetic-distance/send-data-distance', methods=['POST'])
 def get_data():
     data = request.get_json()
-    gen_distance = GeneticDistance(data)
+    distance_choice = data.get("type_of_distance")
+
+    distance_type = {
+        'standard': StandardDistance(data),
+        'geometric': GeometricDistance(data),
+        'takezaki-nei': TakezakiNeiDistance(data)
+    }
+
+    gen_distance = distance_type[distance_choice]
     gen_distance.calcuate_distances()
     gen_distance.build_matrix()
 
