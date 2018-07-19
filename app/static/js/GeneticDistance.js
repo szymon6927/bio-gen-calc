@@ -94,7 +94,7 @@ class GeneticDistance {
     $(`.g-${key}.line-${alleleNumber}`).append(`<td>${alleleNumber}</td>`);
     let inputs = '';
     for (let i = 0; i < this.taxonNumber; i++) {
-      inputs += `<td><input type="number" min="0" max="1" class="form-control column-${i} cell" name="cell"></td>`;
+      inputs += `<td><input type="number" min="0" max="1" step="0.01" class="form-control column-${i} cell non-negative float01" name="cell"><div class="invalid-feedback"></div></td>`;
     }
     $(`.g-${key}.line-${alleleNumber}`).append(inputs);
   }

@@ -30,7 +30,10 @@ $(document).on('click', '.generate-table', function () {
 });
 
 $('.calcuate-distance').click(function () {
-  geneticDistance.sendData();
-  $('.cover').show()
+  const validator = new Validation()
+  if (validator.floatBetween01('.float01')) {
+    geneticDistance.sendData();
+    $('.cover').show()
+  }
 })
 
