@@ -10,14 +10,14 @@ class Validation {
       return true;
   }
 
-  nonNegative(selector) {
+  nonNegative(selector='.non-negative') {
+    let self = this;
     let inputs = document.querySelectorAll(selector);
-
     inputs.forEach(function (element) {
 
       element.addEventListener('keypress', function (e) {
         var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
-        if (!this.keyAllowed(key))
+        if (!self.keyAllowed(key))
           e.preventDefault();
       }, false);
 
@@ -30,43 +30,28 @@ class Validation {
     })
   }
 
-  floatBetween01(selector) {
+  floatBetween01(selector='.float01') {
     let valid = true;
-    let inputs = document.querySelectorAll(selector)
+    let inputs = document.querySelectorAll(selector);
+
+
+    $(selector).removeClass('is-invalid');
+    $('.invalid-feedback').hide();
 
     inputs.forEach(function(element) {
-      let patern =  /^(0(\.[0-9]+)?|0(\.[0-9]+)?)$/
-      let value = element.value
+      let patern =  /^(0(\.[0-9]+)?|1(.0)?)$/;
+      let value = element.value;
       if (!patern.test(value)) {
         valid = false;
         $(element).addClass('is-invalid');
-        $(element).next().text('Value must be between 0.0 - 0.99');
+        $(element).next().show();
       }
-    })
+    });
 
     return valid
   }
 
 }
-// function validateNegative() {
-//   var inputs = document.querySelectorAll(".non-negative");
-
-//   inputs.forEach(function (element) {
-
-//     element.addEventListener('keypress', function (e) {
-//       var key = !isNaN(e.charCode) ? e.charCode : e.keyCode;
-//       if (!keyAllowed(key))
-//         e.preventDefault();
-//     }, false);
-
-//     // Disable pasting of non-numbers
-//     element.addEventListener('paste', function (e) {
-//       var pasteData = e.clipboardData.getData('text/plain');
-//       if (pasteData.match(/[^0-9]/))
-//         e.preventDefault();
-//     }, false);
-//   })
-// }
 
 function showModal(message) {
   let modal = $('#message-modal')
