@@ -1,4 +1,5 @@
 const pic = new PicH();
+const validator = new Validation();
 
 $('#type-of-marker').change(function () {
   let markerType = $(this).val();
@@ -11,7 +12,7 @@ $('.generate-codominant').click(function () {
   pic.generateCodominantInputs(number);
 
   setTimeout(() => {
-    validateNegative()
+    validator.nonNegative()
   },500)
 });
 

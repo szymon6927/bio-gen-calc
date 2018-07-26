@@ -1,3 +1,6 @@
+import itertools
+
+
 class Codominant:
     def __init__(self, data):
         self.result = {}
@@ -32,10 +35,13 @@ class Codominant:
     def calcuate_pic(self):
         pic = 0
         alleles_freq = self.get_alleles_freq()
-        for i in range(0, self.data["count"]):
-            for j in range(0, self.data["count"]):
-                if i != j:
-                    pic += (alleles_freq[i] * alleles_freq[j]) * (1.0 - (alleles_freq[i] * alleles_freq[j]))
+        alleles_list = [i for i in range(0, self.data["count"])]
+        alleles_pairs = list(itertools.permutations(alleles_list, 2))
+        for pair in alleles_pairs:
+            geno_type_i = pair[0]
+            geno_type_j = pair[1]
+            pic += (alleles_freq[geno_type_i] * alleles_freq[geno_type_j]) * (
+                        1.0 - (alleles_freq[geno_type_i] * alleles_freq[geno_type_j]))
 
         return round(pic, 4)
 

@@ -62,7 +62,7 @@ class ChiSquareOfGoodness {
 
   generateInput(col, type) {
     if (type === "summary-observed" || type === "summary-expected") {
-      return `<td class="summary"><input type="number" class="form-control cell col ${type} column-${col}" name="cell" readonly></td>`;
+      return `<td class="summary"><input type="number" class="form-control cell col ${type} column-${col}" name="cell" readonly disabled></td>`;
     }
     else {
       return `<td><input type="number" min="0" class="form-control non-negative cell col ${type} column-${col}" name="cell"></td>`;

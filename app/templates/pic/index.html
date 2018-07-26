@@ -1,7 +1,16 @@
-<!-- app/templates/home/index.html -->
-
 {% extends "base.html" %}
-{% block title %}Hardy Weinber{% endblock %}
+
+{% block title %}Polymorphic Information Content (PIC) and Heterozygosity (H).{% endblock %}
+
+{% block seo_desc %}
+Tool to count PIC and H for dominant or codominant markers in both biallelic or multiallelic locus
+{% endblock %}
+
+{% block seo_keywords %}
+polymorphic information content (PIC) and heterozygosity (H), genetics markers,
+dominant marker, codominant marker, biallelic locus, multiallelic locus
+{% endblock %}
+
 {% block body %}
 <div class="wrapper">
   <div class="jumbotron jumbotron-fluid">
@@ -43,7 +52,7 @@
             </div>
 
             <div class="col-md-3 col-sm-6 col-xs-6 event-button">
-              <button type="submit" class="btn btn-block btn-success calcuate-codominant">Calculate!</button>
+              <button type="submit" class="btn btn-block btn-danger calcuate-codominant">Calculate!</button>
             </div>
 
           </div>
@@ -55,7 +64,7 @@
           </div>
 
           <div class="row">
-            <div class="col-md-8 offset-md-2 col-sm-12 col-xs-12 codominant-result"></div>
+            <div class="col-md-8 offset-md-2 col-sm-12 col-xs-12 codominant-result mt-4"></div>
           </div>
         </div>
         <div class="dominant-wrapper">
@@ -77,12 +86,12 @@
             </div>
 
             <div class="col-md-3 col-sm-6 col-xs-6 event-button">
-              <button type="submit" class="btn btn-block btn-success calcuate-dominant">Calculate!</button>
+              <button type="submit" class="btn btn-block btn-danger calcuate-dominant">Calculate!</button>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-md-8 offset-md-2 col-sm-12 col-xs-12 dominant-result"></div>
+            <div class="col-md-8 offset-md-2 col-sm-12 col-xs-12 dominant-result mt-4"></div>
           </div>
 
         </div>

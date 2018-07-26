@@ -1,3 +1,4 @@
+// validator declared in ChiEvents.js
 const chiArrayGoodness = new ChiSquareOfGoodness('.array-wrapper-goodness');
 $('.generate-array-goodness').click(() => {
   let width = $('.goodness-width').val();
@@ -11,7 +12,7 @@ $('.generate-array-goodness').click(() => {
   chiArrayGoodness.draw();
 
   setTimeout(() => {
-    validateNegative()
+    validator.nonNegative()
   },500)
 });
 

@@ -1,7 +1,15 @@
-<!-- app/templates/home/index.html -->
-
 {% extends "base.html" %}
-{% block title %}Hardy Weinber{% endblock %}
+
+{% block title %}Hardy-Weinberg Equilibrium{% endblock %}
+
+{% block seo_desc %}
+Tool to examine compliance between expected and observed number of genotypes.
+{% endblock %}
+
+{% block seo_keywords %}
+Hardy-Weinberg equilibrium, genetics balance, fixation index (fis)
+{% endblock %}
+
 {% block body %}
 <div class="wrapper">
   <div class="jumbotron jumbotron-fluid">
@@ -67,8 +75,8 @@
                 {{ form.critical_select (class_="form-control", placeholder="select") }}
               </div>
             </div>
-            <div class="col-md-3 offset-md-9 col-sm-12 col-xs-12">
-              {{ form.submit(class_="btn btn-primary btn-block ") }}
+            <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 mt-4">
+              {{ form.submit(class_="btn btn-danger btn-block shadow") }}
             </div>
           </div>
         </form>
@@ -77,7 +85,7 @@
 
     {% if result %}
       <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 mt-3">
+        <div class="col-md-12 col-sm-12 col-xs-12 mt-5">
           <div class="card text-center">
             <div class="card-header">Results:</div>
             <div class="card-body">

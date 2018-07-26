@@ -1,9 +1,16 @@
-<!-- app/templates/chi_square/index.html -->
-
 {% extends "base.html" %}
-{% block title %}Chi Square{% endblock %}
-{% block body %}
 
+{% block title %}Chi-Square Tests{% endblock %}
+
+{% block seo_desc %}
+Independence chi-square and goodness of fit chi-square tests for contingency tables of any size.
+{% endblock %}
+
+{% block seo_keywords %}
+chi-square, Yates's correction for continuity, p-value, coefficient of contingency, degrees of freedom
+{% endblock %}
+
+{% block body %}
   <div class="wrapper">
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
@@ -23,21 +30,21 @@
         <div class="col-md-3 col-sm-6 col-xs-6">
           <div class="form-group">
             <label for="array-width">Groups</label>
-            <input id="array-width" type="number" class="form-control non-negative array-width" min="0" placeholder="width">
+            <input id="array-width" type="number" class="form-control non-negative array-width" min="1" placeholder="width">
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-6">
 
           <div class="form-group">
             <label for="array-height">Rows</label>
-            <input id="array-height" type="number" class="form-control non-negative array-height" min="0" placeholder="height">
+            <input id="array-height" type="number" class="form-control non-negative array-height" min="1" placeholder="height">
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-6 event-button">
           <button type="submit" class="btn btn-block btn-primary generate-array">Generate!</button>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-6 event-button calcuate">
-          <button type="submit" class="btn btn-block btn-success calcuate-button">Calculate!</button>
+          <button type="submit" class="btn btn-block btn-danger calcuate-button">Calculate!</button>
         </div>
       </div>
 
@@ -80,7 +87,7 @@
           <button type="submit" class="btn btn-block btn-primary generate-array-goodness">Generate!</button>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12 event-button calcuate-goodness">
-          <button type="submit" class="btn btn-block btn-success calcuate-button-goodness">Calculate!</button>
+          <button type="submit" class="btn btn-block btn-danger calcuate-button-goodness">Calculate!</button>
         </div>
       </div>
 

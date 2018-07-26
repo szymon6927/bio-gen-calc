@@ -1,4 +1,5 @@
 const chiArray = new ChiSquareArray('.array-wrapper');
+const validator = new Validation();
 $('.generate-array').click((e) => {
   let width = $('.array-width').val();
   let height = $('.array-height').val();
@@ -14,7 +15,7 @@ $('.generate-array').click((e) => {
   chiArray.draw();
 
   setTimeout(() => {
-    validateNegative()
+    validator.nonNegative()
   },500)
 });
 

@@ -92,10 +92,10 @@ class ChiSquareArray {
 
   generateSummaryInput(row, col) {
     if (row === this.height && col === this.width) {
-      return `<input type="number" class="form-control cell col summary-cell general-result" name="cell" readonly>`;
+      return `<input type="number" class="form-control cell col summary-cell general-result" name="cell" readonly disabled>`;
     }
     else {
-      return `<input type="number" class="form-control cell col summary-cell summary-line-${row} summary-column-${col}" name="cell" readonly>`;
+      return `<input type="number" class="form-control cell col summary-cell summary-line-${row} summary-column-${col}" name="cell" readonly disabled>`;
     }
   }
 

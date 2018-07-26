@@ -1,4 +1,5 @@
 body {
+    font-family: 'Lato', sans-serif;
     background: linear-gradient(to right, rgb(33, 147, 176), rgb(109, 213, 237));
 }
 
@@ -294,6 +295,30 @@ table th[scope=row] {
     margin: 3rem 0 7rem 0;
 }
 
+.form-control, .btn {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+.table .form-control {
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+}
+
+.hardy-weinberg .card,
+.pic-h .card,
+.chi-independence .card,
+.chi-goodness .card {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+.jumbotron h1 {
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    font-weight: 400;
+}
+
+.homepage h2 {
+    font-size: 1.4rem;
+}
+
 @media (max-width: 991px) {
     .h1, h1 {
         font-size: 2.5rem !important;
@@ -301,12 +326,16 @@ table th[scope=row] {
 }
 
 @media (max-width: 576px) {
+    .footer {
+        font-size: 12px;
+    }
+
     .footer p {
         text-align: center !important;
     }
 
     .footer .app-name {
-        font-size: 20px;
+        font-size: 14px;
         font-weight: bold;
         margin-bottom: 5px;
     }
