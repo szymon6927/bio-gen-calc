@@ -1,7 +1,7 @@
 const geneticDistance = new GeneticDistance();
-const validator = new Validation()
+const validator = new Validation();
 
-geneticDistance.setContainer('.genetic-distance-table')
+geneticDistance.setContainer('.genetic-distance-table');
 
 $('.alleles-inputs-generate').click(function () {
   let taxonNumber = $('#taxon-number').val();
@@ -40,6 +40,14 @@ $('.calcuate-distance').click(function () {
   if (validator.floatBetween01() && geneticDistance.validateColumnSum()) {
     geneticDistance.sendData();
     $('.cover').show();
+  }
+});
+
+$('#type-of-distance').change(function () {
+  let val = $(this).val();
+  if (val === 'geometric') {
+    $('.genetic-distance').hide();
+    $('.geometric-info').show("slow");
   }
 });
 

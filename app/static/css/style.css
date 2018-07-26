@@ -289,6 +289,11 @@ table th[scope=row] {
     font-weight: bold;
 }
 
+.geometric-info {
+    display: none;
+    margin: 3rem 0 7rem 0;
+}
+
 @media (max-width: 991px) {
     .h1, h1 {
         font-size: 2.5rem !important;
