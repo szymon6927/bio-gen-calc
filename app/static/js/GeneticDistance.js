@@ -178,11 +178,11 @@ class GeneticDistance {
   }
 
   matrixDesc() {
-    let topWidth = $('.mjx-chtml').last().width() + "px"
+    let topWidth = $('.MathJax_CHTML').last().width() + "px"
     let topDesc = `<div class="top-desc" style="width: ${topWidth}; margin: 0 auto;"></div>`;
     $(topDesc).insertAfter('.MathJax_Preview')
 
-    for (let i = 1; i < this.taxonNumber; i++) {
+    for (let i = 0; i < this.taxonNumber - 1; i++) {
       let divWidth = 100 / this.taxonNumber + "%";
       let div = `<div style="display: inline-block; width: ${divWidth}">${i}</div>`;
       $('.top-desc').append(div)
@@ -190,12 +190,12 @@ class GeneticDistance {
 
 
     let fullWidth = $('.matrix-latex').width()
-    let leftPos = (fullWidth / 2) - $('.mjx-chtml').last().width() + 70 + "px"
-    let topPos = $('.matrix-latex').height() - $('.top-desc').height() - $('.mjx-chtml').last().height() + "px"
+    let leftPos = (fullWidth / 2) - $('.MathJax_CHTML').last().width() + 70 + "px"
+    let topPos = $('.matrix-latex').height() - $('.top-desc').height() - $('.MathJax_CHTML').last().height() + "px"
     let leftDesc = `<ul class="left-desc" style="left: ${leftPos}; top: ${topPos}"></ul>`
     $(leftDesc).insertAfter('.top-desc');
 
-    for (let i = 2; i < this.taxonNumber + 1; i++) {
+    for (let i = 1; i < this.taxonNumber; i++) {
       $('.left-desc').append(`<li>${i}</li>`)
     }
 
