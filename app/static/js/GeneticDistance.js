@@ -1,3 +1,5 @@
+// in future import showModal form './utils'
+
 class GeneticDistance {
   constructor() {
     this.container = '';
@@ -35,6 +37,25 @@ class GeneticDistance {
       }
     }
     return valid
+  }
+
+  validateColumnSum() {
+    $('.genetic-distance-table').find('input').removeClass('is-invalid');
+    let totalSum = 1 * this.locusNumber;
+
+    for (let i = 0; i < this.taxonNumber; i++) {
+      let columnValue = $(`.column-${i}`).map(function () {
+          return parseFloat($(this).val());
+        }).get();
+      let columnSum = columnValue.reduce((a, b) => a + b, 0)
+      if (!Number.isInteger(columnSum) && columnSum > totalSum) {
+        $(`.column-${i}`).addClass('is-invalid')
+        showModal(`In column ${i} values are incorrect`)
+        return false;
+      }
+    }
+
+    return true;
   }
 
   generateAllelesInput(count) {
@@ -94,7 +115,8 @@ class GeneticDistance {
     $(`.g-${key}.line-${alleleNumber}`).append(`<td>${alleleNumber}</td>`);
     let inputs = '';
     for (let i = 0; i < this.taxonNumber; i++) {
-      inputs += `<td><input type="number" min="0" max="1" step="0.01" class="form-control column-${i} cell non-negative float01" name="cell"><div class="invalid-feedback"></div></td>`;
+      inputs += `<td><input type="number" min="0" max="1" step="0.01" class="form-control column-${i} 
+      cell non-negative float01" name="cell"><div class="invalid-feedback">Value range 0.0 - 1.0</div></td>`;
     }
     $(`.g-${key}.line-${alleleNumber}`).append(inputs);
   }
@@ -155,6 +177,30 @@ class GeneticDistance {
     return JSON.stringify(data);
   }
 
+  matrixDesc() {
+    let topWidth = $('.mjx-chtml').last().width() + "px"
+    let topDesc = `<div class="top-desc" style="width: ${topWidth}; margin: 0 auto;"></div>`;
+    $(topDesc).insertAfter('.MathJax_Preview')
+
+    for (let i = 1; i < this.taxonNumber; i++) {
+      let divWidth = 100 / this.taxonNumber + "%";
+      let div = `<div style="display: inline-block; width: ${divWidth}">${i}</div>`;
+      $('.top-desc').append(div)
+    }
+
+
+    let fullWidth = $('.matrix-latex').width()
+    let leftPos = (fullWidth / 2) - $('.mjx-chtml').last().width() + 70 + "px"
+    let topPos = $('.matrix-latex').height() - $('.top-desc').height() - $('.mjx-chtml').last().height() + "px"
+    let leftDesc = `<ul class="left-desc" style="left: ${leftPos}; top: ${topPos}"></ul>`
+    $(leftDesc).insertAfter('.top-desc');
+
+    for (let i = 2; i < this.taxonNumber + 1; i++) {
+      $('.left-desc').append(`<li>${i}</li>`)
+    }
+
+  }
+
   sendData() {
     let dataJSON = this.buildJSON2();
     console.log(dataJSON);
@@ -165,7 +211,7 @@ class GeneticDistance {
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (res) {
+      success: (res) => {
         console.log("Succesfull");
         $('.genetic-distance-results').show()
         let matrixImg = `<p class="matrix-latex">${res.data.matrix_latex}</p>`;
@@ -178,9 +224,12 @@ class GeneticDistance {
         }, 500)
 
         $('.cover').hide()
+        setTimeout(() => {
+          this.matrixDesc()
+        },1000)
 
       },
-      error: function (result) {
+      error: (result) => {
         console.log(result);
         $('.cover').hide()
       }
