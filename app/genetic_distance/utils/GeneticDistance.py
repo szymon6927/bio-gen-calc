@@ -8,6 +8,7 @@ if os.environ.get('DISPLAY', '') == '':
 
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.spatial.distance import squareform
 from scipy.cluster.hierarchy import linkage, dendrogram
 from io import BytesIO
 import base64
@@ -81,6 +82,10 @@ class GeneticDistance:
         :a: numpy array
         :returns: LaTeX bmatrix as a string
         """
+
+        # now only for test
+        # self.matrix = squareform(self.condensed_matrix)
+
         if len(self.matrix.shape) > 2:
             raise ValueError('bmatrix can at most display two dimensions')
         lines = str(self.matrix).replace('[', '').replace(']', '').replace('0.', ',').splitlines()
