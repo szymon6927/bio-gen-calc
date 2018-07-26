@@ -1,4 +1,6 @@
 const geneticDistance = new GeneticDistance();
+const validator = new Validation()
+
 geneticDistance.setContainer('.genetic-distance-table')
 
 $('.alleles-inputs-generate').click(function () {
@@ -23,6 +25,10 @@ $(document).on('click', '.generate-table', function () {
   
   if (geneticDistance.validateLocusInputs()) {
     geneticDistance.generateTable();
+
+    setTimeout(() => {
+      validator.nonNegative()
+    },500)
   }
   else {
     showModal('Please, fill all number of alleles inputs!')
@@ -30,8 +36,7 @@ $(document).on('click', '.generate-table', function () {
 });
 
 $('.calcuate-distance').click(function () {
-  const validator = new Validation()
-  if (validator.floatBetween01('.float01')) {
+  if (validator.floatBetween01() && geneticDistance.validateColumnSum()) {
     geneticDistance.sendData();
     $('.cover').show()
   }
