@@ -13,13 +13,17 @@ $('.generate-codominant').click(function () {
 
   setTimeout(() => {
     validator.nonNegative()
-  },500)
+  },500);
+
+  goToByScroll('.inputs-wrapper');
 });
 
 $('.calcuate-codominant').click(function () {
   pic.sendCodominant();
+  goToByScroll('.codominant-result');
 });
 
 $('.calcuate-dominant').click(function () {
   pic.sendDominant();
+  goToByScroll('.dominant-result');
 });

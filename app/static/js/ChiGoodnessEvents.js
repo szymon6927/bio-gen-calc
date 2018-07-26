@@ -4,7 +4,7 @@ $('.generate-array-goodness').click(() => {
   let width = $('.goodness-width').val();
 
   if(!width) {
-    showModal('Fill width input!')
+    showModal('Fill width input!');
     return false
   }
 
@@ -13,9 +13,12 @@ $('.generate-array-goodness').click(() => {
 
   setTimeout(() => {
     validator.nonNegative()
-  },500)
+  },500);
+
+  goToByScroll('.array-wrapper-goodness');
 });
 
 $('.calcuate-button-goodness').click(() => {
   chiArrayGoodness.sendData();
+  goToByScroll('.chi-goodness-result');
 });

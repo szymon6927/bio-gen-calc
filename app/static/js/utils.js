@@ -65,7 +65,7 @@ function goToByScroll(className) {
   }
 
   $('html, body').animate({
-    scrollTop: $(className).offset().top
+    scrollTop: $(className).offset().top - 20
   }, 1200);
 }
 
@@ -76,5 +76,4 @@ $('#message-modal').modal({
 $(document).ready(function () {
   const validator = new Validation();
   validator.nonNegative('.non-negative')
-  // validateNegative()
 });

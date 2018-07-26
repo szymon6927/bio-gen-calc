@@ -5,7 +5,7 @@ $('.generate-array').click((e) => {
   let height = $('.array-height').val();
 
   if (!width || !height) {
-    showModal('Fill width or height!')
+    showModal('Fill width or height!');
     return false
   }
 
@@ -16,10 +16,13 @@ $('.generate-array').click((e) => {
 
   setTimeout(() => {
     validator.nonNegative()
-  },500)
+  },500);
+
+  goToByScroll('.array-wrapper');
 });
 
 $('.calcuate-button').click(() => {
   chiArray.calacute();
   chiArray.sendData();
+  goToByScroll('.chi-result');
 });
