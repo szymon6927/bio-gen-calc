@@ -277,6 +277,18 @@ table th[scope=row] {
     border-bottom: 1px solid #cacaca;
 }
 
+.left-desc {
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+}
+
+.top-desc, .left-desc {
+    font-weight: bold;
+}
+
 @media (max-width: 991px) {
     .h1, h1 {
         font-size: 2.5rem !important;
