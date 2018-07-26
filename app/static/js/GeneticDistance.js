@@ -130,31 +130,31 @@ class GeneticDistance {
     $('.calcuate-distance').show();
   }
 
+  // buildJSON() {
+  //   console.log("JSON building");
+  //   let data = {};
+  //   data["taxon_number"] = $('#taxon-number').val();
+  //   data["locus_number"] = $('#locus-number').val();
+  //   data["type_of_distance"] = $('#type-of-distance').val();
+  //
+  //   for (let i = 0; i < this.locusNumber; i++) {
+  //     let gObject = {};
+  //     let numberOfAlleles = $(`#locus-${i}`).val();
+  //     gObject["nubmer_of_alleles"] = numberOfAlleles;
+  //
+  //     for (let j = 0; j < numberOfAlleles; j++) {
+  //       let gLocus = $(`.g-${i}.line-${j} input`).map(function () {
+  //         return $(this).val();
+  //       }).get();
+  //       gObject[`alleles_${j}`] = gLocus;
+  //     }
+  //     data[`g_${i}`] = gObject;
+  //   }
+  //
+  //   return JSON.stringify(data);
+  // }
+
   buildJSON() {
-    console.log("JSON building");
-    let data = {};
-    data["taxon_number"] = $('#taxon-number').val();
-    data["locus_number"] = $('#locus-number').val();
-    data["type_of_distance"] = $('#type-of-distance').val();
-
-    for (let i = 0; i < this.locusNumber; i++) {
-      let gObject = {};
-      let numberOfAlleles = $(`#locus-${i}`).val();
-      gObject["nubmer_of_alleles"] = numberOfAlleles;
-
-      for (let j = 0; j < numberOfAlleles; j++) {
-        let gLocus = $(`.g-${i}.line-${j} input`).map(function () {
-          return $(this).val();
-        }).get();
-        gObject[`alleles_${j}`] = gLocus;
-      }
-      data[`g_${i}`] = gObject;
-    }
-
-    return JSON.stringify(data);
-  }
-
-  buildJSON2() {
     console.log("json building 2")
     let data = {};
 
@@ -178,21 +178,22 @@ class GeneticDistance {
   }
 
   matrixDesc() {
-    let topWidth = $('.MathJax_CHTML').last().width() + "px"
-    let topDesc = `<div class="top-desc" style="width: ${topWidth}; margin: 0 auto;"></div>`;
-    $(topDesc).insertAfter('.MathJax_Preview')
+    let topWidth = $('.MathJax_CHTML').last().width() + "px";
+    let topDesc = `<div class="top-desc" style="width: ${topWidth}; margin: 0 auto; display: flex;"></div>`;
+    $(topDesc).insertAfter('.MathJax_Preview');
 
     for (let i = 0; i < this.taxonNumber - 1; i++) {
-      let divWidth = 100 / this.taxonNumber + "%";
-      let div = `<div style="display: inline-block; width: ${divWidth}">${i}</div>`;
-      $('.top-desc').append(div)
+      let divWidth = 100 / this.taxonNumber;
+      let widthAsString = divWidth.toFixed(2) + "%";
+      let div = `<div style="padding-left: 5px;; flex: 1 ${widthAsString}">${i}</div>`;
+      $('.top-desc').append(div);
     }
 
 
-    let fullWidth = $('.matrix-latex').width()
-    let leftPos = (fullWidth / 2) - $('.MathJax_CHTML').last().width() + 70 + "px"
-    let topPos = $('.matrix-latex').height() - $('.top-desc').height() - $('.MathJax_CHTML').last().height() + "px"
-    let leftDesc = `<ul class="left-desc" style="left: ${leftPos}; top: ${topPos}"></ul>`
+    let fullWidth = $('.matrix-latex').width();
+    let leftPos = (fullWidth / 2) - $('.MathJax_CHTML').last().width() + 70 + "px";
+    let topPos = $('.matrix-latex').height() - $('.top-desc').height() - $('.MathJax_CHTML').last().height() - 5 + "px";
+    let leftDesc = `<ul class="left-desc" style="left: ${leftPos}; top: ${topPos}"></ul>`;
     $(leftDesc).insertAfter('.top-desc');
 
     for (let i = 1; i < this.taxonNumber; i++) {
@@ -202,7 +203,7 @@ class GeneticDistance {
   }
 
   sendData() {
-    let dataJSON = this.buildJSON2();
+    let dataJSON = this.buildJSON();
     console.log(dataJSON);
     const path = '/genetic-distance/send-data-distance';
     $.ajax({
@@ -213,20 +214,23 @@ class GeneticDistance {
       dataType: "json",
       success: (res) => {
         console.log("Succesfull");
-        $('.genetic-distance-results').show()
+        $('.genetic-distance-results').show();
         let matrixImg = `<p class="matrix-latex">${res.data.matrix_latex}</p>`;
         let dendroImg = `<img class="img-fluid" src="data:image/png;base64,${res.data.dendro_base64}">`;
-        $('.matrix-wrapper').html(matrixImg)
-        $('.dendrogram-wrapper').html(dendroImg)
+        $('.matrix-wrapper').html(matrixImg);
+        $('.dendrogram-wrapper').html(dendroImg);
 
         setTimeout(() => {
           MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        }, 500)
+        }, 500);
 
-        $('.cover').hide()
+        $('.cover').hide();
+
         setTimeout(() => {
           this.matrixDesc()
-        },1000)
+        },1000);
+
+        goToByScroll('.genetic-distance-results');
 
       },
       error: (result) => {

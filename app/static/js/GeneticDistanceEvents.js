@@ -8,9 +8,10 @@ $('.alleles-inputs-generate').click(function () {
   let count = $('#locus-number').val();
   if (taxonNumber && count) {
     geneticDistance.generateAllelesInput(count);
+    goToByScroll('.alleles-wrapper');
   }
   else {
-    showModal('Please, fill all inputs!')
+    showModal('Please, fill all inputs!');
   }
 });
 
@@ -25,20 +26,20 @@ $(document).on('click', '.generate-table', function () {
   
   if (geneticDistance.validateLocusInputs()) {
     geneticDistance.generateTable();
-
+    goToByScroll('.genetic-distance-table');
     setTimeout(() => {
-      validator.nonNegative()
+      validator.nonNegative();
     },500)
   }
   else {
-    showModal('Please, fill all number of alleles inputs!')
+    showModal('Please, fill all number of alleles inputs!');
   }
 });
 
 $('.calcuate-distance').click(function () {
   if (validator.floatBetween01() && geneticDistance.validateColumnSum()) {
     geneticDistance.sendData();
-    $('.cover').show()
+    $('.cover').show();
   }
-})
+});
 

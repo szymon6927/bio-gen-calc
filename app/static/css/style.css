@@ -280,7 +280,7 @@ table th[scope=row] {
 .left-desc {
     float: left;
     margin: 0;
-    padding: 0;
+    padding: 10px 0 0 0;
     list-style: none;
     position: relative;
 }
