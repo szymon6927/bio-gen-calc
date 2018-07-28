@@ -319,6 +319,18 @@ table th[scope=row] {
     font-size: 1.4rem;
 }
 
+.calcuate-codominant, .generate-table {
+    display: none;
+}
+
+.top-desc {
+    margin: 0 auto; display: flex;
+}
+
+.top-desc-item {
+    flex-grow: 1;
+}
+
 @media (max-width: 991px) {
     .h1, h1 {
         font-size: 2.5rem !important;

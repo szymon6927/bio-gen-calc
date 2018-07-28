@@ -71,8 +71,8 @@ class GeneticDistance {
 
       $(wrapper).append(input);
     }
-    let button = `<button type="submit" class="btn btn-block btn-success generate-table">Generate table</button>`;
-    $(wrapper).append(button);
+
+    $('.generate-table').show();
   }
 
   drawTableScheme() {
@@ -179,13 +179,13 @@ class GeneticDistance {
 
   matrixDesc() {
     let topWidth = $('.MathJax_CHTML').last().width() + "px";
-    let topDesc = `<div class="top-desc" style="width: ${topWidth}; margin: 0 auto; display: flex;"></div>`;
+    let topDesc = `<div class="top-desc" style="width: ${topWidth};"></div>`;
     $(topDesc).insertAfter('.MathJax_Preview');
 
     for (let i = 0; i < this.taxonNumber - 1; i++) {
       let divWidth = 100 / this.taxonNumber;
       let widthAsString = divWidth.toFixed(2) + "%";
-      let div = `<div style="padding-left: 5px;; flex: 1 ${widthAsString}">${i}</div>`;
+      let div = `<div class="top-desc-item">${i}</div>`;
       $('.top-desc').append(div);
     }
 

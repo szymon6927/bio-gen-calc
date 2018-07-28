@@ -59,13 +59,38 @@ function showModal(message) {
   modal.find('.modal-body p').html(message)
 }
 
+function positionFooter() {
+  let footerHeight = 0,
+    footerTop = 0,
+    $footer = $(".footer");
+
+  footerHeight = $footer.height();
+  // 20 is as padding height
+  footerTop = ($(window).scrollTop() + $(window).height() - footerHeight - 53) + "px";
+
+  if (($(document.body).height() + footerHeight) < $(window).height()) {
+    $footer.css({
+      position: "absolute",
+      width: "100%"
+    }).animate({
+      top: footerTop
+    })
+  }
+  else {
+    $footer.css({
+      position: "static"
+    })
+  }
+
+}
+
 function goToByScroll(className) {
   if (!className.includes('.')) {
     className = "." + className
   }
 
   $('html, body').animate({
-    scrollTop: $(className).offset().top - 20
+    scrollTop: $(className).offset().top - 80
   }, 1200);
 }
 

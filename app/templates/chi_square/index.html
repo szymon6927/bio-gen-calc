@@ -2,13 +2,11 @@
 
 {% block title %}Chi-Square Tests{% endblock %}
 
-{% block seo_desc %}
-Independence chi-square and goodness of fit chi-square tests for contingency tables of any size.
-{% endblock %}
+{% block seo_desc %}Independence chi-square and goodness of fit
+chi-square tests for contingency tables of any size.{% endblock %}
 
-{% block seo_keywords %}
-chi-square, Yates's correction for continuity, p-value, coefficient of contingency, degrees of freedom
-{% endblock %}
+{% block seo_keywords %}chi-square, Yates's correction for continuity, p-value,
+coefficient of contingency, degrees of freedom{% endblock %}
 
 {% block body %}
   <div class="wrapper">
@@ -27,24 +25,21 @@ chi-square, Yates's correction for continuity, p-value, coefficient of contingen
         <div class="col-md-12 col-sm-12 col-xs-12">
           <h2>chi-square test of independence</h2>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="col-md-4 col-sm-6 col-xs-6">
           <div class="form-group">
             <label for="array-width">Groups</label>
             <input id="array-width" type="number" class="form-control non-negative array-width" min="1" placeholder="width">
           </div>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-6">
+        <div class="col-md-4 col-sm-6 col-xs-6">
 
           <div class="form-group">
             <label for="array-height">Rows</label>
             <input id="array-height" type="number" class="form-control non-negative array-height" min="1" placeholder="height">
           </div>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-6 event-button">
+        <div class="col-md-4 col-sm-6 col-xs-6 event-button">
           <button type="submit" class="btn btn-block btn-primary generate-array">Generate!</button>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-6 event-button calcuate">
-          <button type="submit" class="btn btn-block btn-danger calcuate-button">Calculate!</button>
         </div>
       </div>
 
@@ -57,6 +52,12 @@ chi-square, Yates's correction for continuity, p-value, coefficient of contingen
       <div class="row mt-4">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="array-wrapper"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 event-button mb-3 calcuate">
+            <button type="submit" class="btn btn-block btn-danger calcuate-button">Calculate!</button>
         </div>
       </div>
 
@@ -77,23 +78,26 @@ chi-square, Yates's correction for continuity, p-value, coefficient of contingen
       </div>
 
       <div class="row">
-        <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="form-group">
             <label for="goodness-width">Number of groups</label>
             <input id="goodness-width" type="number" class="form-control non-negative goodness-width" placeholder="number of groups">
           </div>
         </div>
-        <div class="col-md-4 col-sm-6 col-xs-12 event-button">
+        <div class="col-md-6 col-sm-6 col-xs-12 event-button">
           <button type="submit" class="btn btn-block btn-primary generate-array-goodness">Generate!</button>
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-12 event-button calcuate-goodness">
-          <button type="submit" class="btn btn-block btn-danger calcuate-button-goodness">Calculate!</button>
         </div>
       </div>
 
       <div class="row mt-4">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="array-wrapper-goodness"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 event-button calcuate-goodness">
+          <button type="submit" class="btn btn-block btn-danger calcuate-button-goodness">Calculate!</button>
         </div>
       </div>
 

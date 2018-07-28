@@ -5,6 +5,8 @@ $('#type-of-marker').change(function () {
   let markerType = $(this).val();
   pic.setMarkerType(markerType);
   pic.display();
+
+  positionFooter();
 });
 
 $('.generate-codominant').click(function () {
@@ -14,6 +16,8 @@ $('.generate-codominant').click(function () {
   setTimeout(() => {
     validator.nonNegative()
   },500);
+
+  $('.calcuate-codominant').show();
 
   goToByScroll('.inputs-wrapper');
 });

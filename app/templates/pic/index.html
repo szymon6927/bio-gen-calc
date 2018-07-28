@@ -2,14 +2,11 @@
 
 {% block title %}Polymorphic Information Content (PIC) and Heterozygosity (H).{% endblock %}
 
-{% block seo_desc %}
-Tool to count PIC and H for dominant or codominant markers in both biallelic or multiallelic locus
-{% endblock %}
+{% block seo_desc %}Tool to count PIC and H for dominant or codominant markersin both biallelic
+or multiallelic locus{% endblock %}
 
-{% block seo_keywords %}
-polymorphic information content (PIC) and heterozygosity (H), genetics markers,
-dominant marker, codominant marker, biallelic locus, multiallelic locus
-{% endblock %}
+{% block seo_keywords %}polymorphic information content (PIC) and heterozygosity (H), genetics markers,
+dominant marker, codominant marker, biallelic locus, multiallelic locus{% endblock %}
 
 {% block body %}
 <div class="wrapper">
@@ -39,7 +36,7 @@ dominant marker, codominant marker, biallelic locus, multiallelic locus
       <div class="col-md-12 col-sm-12 col-xs-12 markers-options">
         <div class="codominant-wrapper">
           <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="col-md-6 col-sm-6 col-xs-6">
               <div class="form-group">
                 <label for="alleles-number">Number of alleles</label>
                 <input id="alleles-number" type="number" min="0" class="form-control non-negative alleles-number"
@@ -47,19 +44,21 @@ dominant marker, codominant marker, biallelic locus, multiallelic locus
               </div>
             </div>
 
-            <div class="col-md-3 col-sm-6 col-xs-6 event-button">
+            <div class="col-md-6 col-sm-6 col-xs-6 event-button">
               <button type="submit" class="btn btn-block btn-primary generate-codominant">Generate!</button>
             </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-6 event-button">
-              <button type="submit" class="btn btn-block btn-danger calcuate-codominant">Calculate!</button>
-            </div>
-
           </div>
+
           <div class="row">
             <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12">
               <div class="codominant-messages"></div>
               <div class="inputs-wrapper"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 event-button">
+              <button type="submit" class="btn btn-block btn-danger calcuate-codominant">Calculate!</button>
             </div>
           </div>
 
@@ -85,7 +84,7 @@ dominant marker, codominant marker, biallelic locus, multiallelic locus
               </div>
             </div>
 
-            <div class="col-md-3 col-sm-6 col-xs-6 event-button">
+            <div class="col-md-4 col-sm-6 col-xs-6 event-button">
               <button type="submit" class="btn btn-block btn-danger calcuate-dominant">Calculate!</button>
             </div>
           </div>

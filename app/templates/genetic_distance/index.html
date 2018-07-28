@@ -2,13 +2,10 @@
 
 {% block title %}Genetic Distance{% endblock %}
 
-{% block seo_desc %}
-Tool to estimate genetic distance between n-number of populations on the basis of alleles frequencies
-{% endblock %}
+{% block seo_desc %}Tool to estimate genetic distance between n-number
+of populations on the basis of alleles frequencies{% endblock %}
 
-{% block seo_keywords %}
-genetic distance, dendrograms, distance matrix
-{% endblock %}
+{% block seo_keywords %}genetic distance, dendrograms, distance matrix{% endblock %}
 
 {% block body %}
 {% include 'utils/loader.html' %}
@@ -20,21 +17,21 @@ genetic distance, dendrograms, distance matrix
   </div>
   <section class="genetic-distance">
     <div class="row">
-      <div class="col-md-3 offset-md-3 col-sm-6 col-xs-6">
+      <div class="col-lg-3 offset-lg-3 col-md-4 offset-md-2 col-sm-6 col-12">
         <div class="form-group">
           <label for="taxon-number">Number of populations:</label>
           <input id="taxon-number" type="number" min="0" class="form-control taxon-number">
         </div>
       </div>
 
-      <div class="col-md-3 col-sm-6 col-xs-6">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
         <div class="form-group">
           <label for="locus-number">Number of locus:</label>
           <input id="locus-number" type="number" min="0" class="form-control locus-number">
         </div>
       </div>
 
-      <div class="col-md-3 offset-md-3 col-sm-6">
+      <div class="col-lg-3 offset-lg-3 col-md-4 offset-md-2 col-sm-6 col-12">
         <div class="form-group">
           <label for="type-of-distance">Type of distance</label>
           <select class="form-control" id="type-of-distance">
@@ -45,7 +42,7 @@ genetic distance, dendrograms, distance matrix
         </div>
       </div>
 
-      <div class="col-md-3 col-sm-6">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
         <div class="form-group">
           <label for="type-of-dendrogram">Type of dendrogram</label>
           <select class="form-control" id="type-of-dendrogram">
@@ -59,7 +56,7 @@ genetic distance, dendrograms, distance matrix
         </div>
       </div>
 
-      <div class="col-md-6 offset-md-3 col-sm-6 col-xs-6 event-button">
+      <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
         <button type="submit" class="btn btn-block btn-primary alleles-inputs-generate">Generate!</button>
       </div>
 
@@ -69,20 +66,26 @@ genetic distance, dendrograms, distance matrix
       <div class="col-md-6 offset-md-3 col-sm-12 alleles-wrapper mt-4"></div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12 col-sm-12 genetic-distance-table"></div>
-      <div class="col-md-6 offset-md-3">
-        <button type="submit" class="btn btn-block btn-success calcuate-distance">Calculate!</button>
+    <div class="row mt-3">
+      <div class="col-md-6 offset-md-3 col-sm-12">
+        <button type="submit" class="btn btn-block btn-success generate-table mb-3">Generate table</button>
       </div>
     </div>
 
-    <div class="genetic-distance-results">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 genetic-distance-table"></div>
+      <div class="col-md-6 offset-md-3">
+        <button type="submit" class="btn btn-block btn-danger calcuate-distance mt-3">Calculate!</button>
+      </div>
+    </div>
+
+    <div class="genetic-distance-results mt-5">
       <div class="row">
         <div class="col-md-10 offset-md-1 col-sm-12 text-center">
           <div class="result-desc"><p class="pb-1">Distance matrix: </p></div>
           <div class="matrix-wrapper"></div>
         </div>
-        <div class="col-md-10 offset-md-1 col-sm-12 text-center">
+        <div class="col-md-10 offset-md-1 col-sm-12 mt-5 text-center">
           <div class="result-desc"><p class="pb-1">Dendogram: </p></div>
           <div class="dendrogram-wrapper"></div>
         </div>
