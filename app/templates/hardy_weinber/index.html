@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Hardy-Weinberg Equilibrium{% endblock %}
+
+{% block seo_desc %}Tool to examine compliance between expected and observed number of genotypes.{% endblock %}
+
+{% block seo_keywords %}Hardy-Weinberg equilibrium, genetics balance, fixation index (fis){% endblock %}
+
+{% block body %}
+<div class="wrapper">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4 text-center">{{ title }}</h1>
+    </div>
+  </div>
+
+  <section class="hardy-weinberg">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 co-xs-12">
+        <div class="row">
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group">
+              <label for="ho">Homozygotes</label>
+              <input class="form-control non-negative" id="ho" min="0" placeholder="ho" type="number">
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group">
+              <label for="he">Heterozygotes</label>
+              <input class="form-control non-negative" id="he" min="0" placeholder="he" type="number">
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group">
+              <label for="rho">Rare homozygotes</label>
+              <input class="form-control non-negative" id="rho" min="0" placeholder="rho" type="number">
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group">
+              <label for="alfa">Level of significance</label>
+              <input class="form-control non-negative" id="alfa" min="0" step="0.01" placeholder="alfa" type="number">
+            </div>
+          </div>
+          <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 mt-4">
+            <button type="submit" class="btn btn-block btn-danger calcuate-hw">Calcuate!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-8 offset-md-4 col-sm-12 col-xs-12 hw-results mt-5 mb-3">
+        <div class="card text-center">
+          <div class="card-header">Results:</div>
+          <div class="card-body">
+            <div class="card-text text-left"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+{% include 'utils/modal.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+<script src="{{ url_for('static', filename='js/NameConverter.js') }}"></script>
+<script src="{{ url_for('static', filename='js/HardyWeinber.js') }}"></script>
+<script src="{{ url_for('static', filename='js/HardyWeinberEvents.js') }}"></script>
+{% endblock %}
