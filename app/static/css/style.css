@@ -331,6 +331,10 @@ table th[scope=row] {
     flex-grow: 1;
 }
 
+.materials-methods {
+    word-break: break-all;
+}
+
 @media (max-width: 991px) {
     .h1, h1 {
         font-size: 2.5rem !important;
