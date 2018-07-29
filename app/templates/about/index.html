@@ -19,36 +19,37 @@ chi-square, p-value, research hypothesis, coefficient of contingency{% endblock 
     <div class="row">
       <div class="col-md-12 col-sm-12">
         <h4 class="mb-2">Hardy–Weinberg equilibrium</h4>
-        <p>Input values in integers form, are used to count "p" and "q" values, by means of Hardy-Weinberg principle,
-          the expected numbers of: homozygous, heterozygous and rare homozygous individuals are obtained.
-          Observed and expected values are compared by the chi-square goodness of fit test.
+        <p>Input values (number of homozygous, heterozygous and rare homozygous individuals) in integers form, are used
+          to count alleles frequency - "p" and "q" values, by means of Hardy-Weinberg principle the expected numbers
+          of: homozygous, heterozygous and rare homozygous individuals are obtained. Observed and expected values are
+          compared by the chi-square goodness of fit test.
         </p>
         <p>
           If at the used level of significance, there are statistically important differences, application will count
-          the fixation index - Fis, positive values may means reduction of heterozygosity caused by for example
-          Wahlund effect, inbreed or genetic drift. Excess heterozygotes, caused by e.g.: breeding selection or
-          bottleneck effect could be reasons of negative Fis values.
+          the fixation index - Fis, positive values may means reduction of heterozygosity, caused by for example
+          Wahlund effect, inbreed or genetic drift. While negativ Fis value means excess of heterozygotes, caused by for
+          example: breeding selection or bottleneck effect could be reasons of negative Fis values.
         </p>
-        <h4 class="mb-2">Chi square</h4>
+        <h4 class="mb-2">Chi-square tests</h4>
         <p>
-          Chi square test family is a statistical instruments which allows to examine the relation between variables.
-          The chi square tests must be used with assumptions:
+          Chi-square test family is a statistical instruments which allows to examine the relation between variables.
+          The chi-square tests must be used with assumptions:
         </p>
         <ol>
-          <li>test group should be sufficiently large</li>
-          <li>The data should be maximally randomly drawn from a population</li>
-          <li>values in cells are adequate when no more than 20% of the expected values are smaller
-            than five and there are no cells with zero
+          <li>1) test group must be sufficiently large.</li>
+          <li>2) data should be maximally randomly drawn from a population.</li>
+          <li>3) values in cells are adequate only when: (1) no more than 20% of the expected values are smaller
+            than five; (2) there are no cells with zero.
           </li>
         </ol>
         <br>
-        <p>Independence (Associations) chi square:</p>
+        <p>Independence (Associations) chi-square:</p>
         <p>
           Research hypothesis: <br>
           H<sub>0</sub>: There is no association between variables.<br>
           H<sub>a</sub> : There is an association between variables.
         </p>
-        <p>The expected values for independence chi square and chi square values are counted following formulas:</p>
+        <p>The expected values for independence chi-square and chi-square value are counted following formulas:</p>
         <div class="row">
           <div class="col-md-6 col-sm-12">
             <img src="{{ url_for('static', filename='img/formulas/chi_square.png') }}" alt="Chi-square"
@@ -61,64 +62,130 @@ chi-square, p-value, research hypothesis, coefficient of contingency{% endblock 
         </div>
         <p>
         <ul>
-          <li>E<sub>ij</sub> = expected frequency for the ith row and jth columm.</li>
-          <li>T<sub>i</sub> = summary in the ith row</li>
-          <li>T<sub>j</sub> = summary in the jth column</li>
-          <li>N = all rows or columns summary</li>
+          <li>E<sub>ij</sub> = formula to count expected values for the ith row and jth columm.</li>
+          <li>T<sub>i</sub> = sum of values in the ith row</li>
+          <li>T<sub>j</sub> = sum of values in the jth column</li>
+          <li>N = sum of values in all rows or columns</li>
           <li>O<sub>i</sub> – observed value in cell</li>
           <li>E<sub>i</sub> – expected values for cell</li>
           <li>n – a set of all cells</li>
         </ul>
         </p>
         <p>
-          If the values in cell do not fulfill third condition, application will use chi square with Yates's
-          correction for continuity, following formula:
+          If the values in cell do not fulfill third condition (look at chi-square assumptions), we recommend to use
+          chi-square with Yates's correction for continuity, following formula:
         </p>
         <p>
           <img src="{{ url_for('static', filename='img/formulas/chi_square_yates.png') }}" alt="Chi-square Yates"
                class="img-thumbnail"/>
         </p>
         <p>
-          it is important to note that this correction is adequate for 2x2 contingency tables otherwise more accurate
+          it is important to note that this correction is adequate for 2x2 contingency tables, otherwise more accurate
           results may be obtained by combining columns or rows.
           Degrees of freedom are counted by:
           dof = (r − 1) * (c − 1) <br>
           r – number of rows <br>
           c – number of columns
         </p>
-        <p>Coefficient of contingency are measures of association, they provide a means of summarizing the size of
-          the association between variables</p>
+        <p>Coefficient of contingency are measures of association, can be used to estimate the strength
+          of a relationship between variables.</p>
         <p>Coefficient of contingency are counted following:</p>
-        <p>for 2x2 (1 dof) tables by means of phi coefficient</p>
+        <p>for 2x2 (1 dof) tables by means of Phi-coefficient</p>
         <img src="{{ url_for('static', filename='img/formulas/fi.jpg') }}" alt="Phi" class="img-thumbnail"/>
         <p>for tables with dof > 1 using Crammer`s V coefficient</p>
         <img src="{{ url_for('static', filename='img/formulas/crammer.jpg') }}" alt="V Crammer" class="img-thumbnail"/>
-        <p>Coefficient of contingency range 0.0 - 1.0 value</p>
+        <p>Range of Coefficient of contingency value: 0.0 - 1.0. </p>
         <h4 class="mb-2">Goodness-of-fit chi square</h4>
-        <p>Allows to examine the compliance of the observed and expected variables.</p>
+        <p>Allows to examine the compliance of the observed and expected values.</p>
         <p>Research hypothesis: <br>
           H<sub>0</sub>: The observed values are equal to theoretical values (expected). <br>
           H<sub>a</sub> : The observed values are not equal to theoretical values (expected).</p>
         <p>Degrees of freedom are counted by:</p>
         <p>dof = k − 1</p>
         <p>Note.</p>
-        <p>"the total values must be the same for both observed and expected frequencies, expected
-          frequencies less than 1 are not allowed, no more than 20% of expected values are less than 5."</p>
+        <p>"total values must be the same for both observed and expected frequencies, expected
+          frequencies less than 1 are not allowed, no more than 20% of expected values can be less than 5."</p>
         <h4 class="mb-2">PIC and H</h4>
         <p>Heterozygosity (H) is parameter indicating the average frequency of occurrence of heterozygous individuals.
-          PIC as well as Heterozygosity (H) is a measure of polymorphism for a marker locus used in linkage analys.</p>
-        <p>PIC is counted for bi,- or multi,- allelic locus following formula:</p>
+          Polymorphic information content (PIC) as well as Heterozygosity is a measure of polymorphism counted for
+          markers
+          used in linkage analys. </p>
+        <p>PIC & H are counted for bi,- or multi,- allelic locus following formula:</p>
         <img src="{{ url_for('static', filename='img/formulas/pic.png') }}" alt="PIC" class="img-thumbnail"/>
-        <p>P<sub>i</sub> , P<sub>j</sub> are the population frequency of the ith and jth allele (float format), <br>
+        <p>P<sub>i</sub> , P<sub>j</sub> are the frequency of the ith and jth allele (float format), <br>
           l – number of alleles</p>
         <p>Heterozygosity (H)</p>
         <img src="{{ url_for('static', filename='img/formulas/h.png') }}" alt="H" class="img-thumbnail"/>
-        <p>PIC for dominant marker in form of dichotomous variables (1/0), calculated using formulas:</p>
+        <p>PIC for dominant marker (results are in form of dichotomous variables 1/0), can be calculate using
+          formulas:</p>
         <p>PIC = 1− [f<sup>2</sup> + (1− f)<sup>2</sup>]</p>
-        <p>Where fi is frequency of amplified marker (1) and (1 - fi) is frequency of  absence of the marker in study
-          group (0).</p>
-        <p>for codminant marker PIC range 0.0-1.0</p>
-        <p>for dominant marker PIC range 0.0-0.5</p>
+        <p>Where fi is frequency of amplified band (1) and (1 - fi) is frequency of absence of band (0) in study
+          group.</p>
+        <p>for codominant marker range of PIC value: 0.0-1.0</p>
+        <p>for dominant marker range of PIC value: 0.0-0.5
+        </p>
+        <h4 class="mb-2">Genetic distance</h4>
+        <p>Genetic distance is a measure of differences between a pairs of populations, there are couple of methods
+          allowing to estimation differences based on alleles frequency in examined loci, such as:</p>
+        <ol>
+          <li>Standard genetic distance (Nei, 1972).</li>
+          <li>Geometric genetic distance (Nei, 1978).</li>
+          <li>Genetic distance (Nei et al., 1983).</li>
+        </ol>
+
+        <p>1) Standard genetic distance is used to determine the normalized identity between populations by means of
+          formula:
+        </p>
+        <p>2) Geometric genetic distance allows to determine differences between populations when loci differ in rate of
+          codon changes (in this case standard genetic distance may be underestimate). Geometric distance is calculate
+          following formula:
+        </p>
+        <p>3) Genetic distance could be estimate based on short tandem repeats (STR) polymorphism (Nei and Takazaki,
+          1983). This model of genetic distance estimation was considered as more effective than other methods. It is
+          calculated following formula:
+        </p>
+        <ul>
+          <li>D - standard genetic distance</li>
+          <li>D` - geometric genetic distance</li>
+          <li>D<sub>A</sub> - genetic distance based on STR polymorphism</li>
+          <li>j<sub>X</sub>- the sum of allele frequency squares in "i" locus in X population.</li>
+          <li>j<sub>Y</sub>- the sum of allele frequency squares in "i" locus in Y population.</li>
+          <li>j<sub>XY</sub>- the sum of allele frequency product between X and Y population in "i" locus.</li>
+          <li>J<sub>X</sub>-the arithmetic or geometric (J`) mean (depending on the type of distance) the j<sub>X</sub>
+            values for the population pair
+          </li>
+          <li>J<sub>Y</sub>- the arithmetic or geometric (J`) mean (depending on the type of distance) the j<sub>Y</sub>
+            values for the population pair
+          </li>
+          <li>J<sub>XY</sub>- the arithmetic or geometric (J`) mean (depending on the type of distance) the
+            j<sub>XY</sub>
+            values for the population pair
+          </li>
+          <li>X<sub>ij</sub> & Y<sub>ij</sub> frequencies of "i" STR in "j" locus in pair popultaion X,Y</li>
+          <li>r - number of analyzed STR loci</li>
+        </ul>
+
+        <img src="{{ url_for('static', filename='img/formulas/genetic-distance.png') }}" alt="PIC"
+             class="img-thumbnail"/>
+        <img src="{{ url_for('static', filename='img/formulas/standard-distance.png') }}" alt="PIC"
+             class="img-thumbnail"/>
+        <img src="{{ url_for('static', filename='img/formulas/geometric-distance.png') }}" alt="PIC"
+             class="img-thumbnail"/>
+        <img src="{{ url_for('static', filename='img/formulas/takazaki-nei.png') }}" alt="PIC" class="img-thumbnail"/>
+
+
+        <p>The results of genetic distance estimation are presented in the form of distance matrix and dendrogram.
+          The application offers the possibility of selecting several types of methods to construct dendrogram such as:
+          unweighted pair group method with arithmetic mean (UPGMA), weighted pair group method with averaging (WMPGA),
+          Centroid linkage clustering (UPGMC), weighted pair group centroid clustering (WPGMC), single-linkage
+          clustering
+          and Complete-linkage clustering. The construction of dendrograms is performed by the Python library
+          "scipy.cluster.hierarchy.linkage" lib documentation and theorethical information are availbe from:
+          <a target="_blank"
+            href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage">
+            https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage
+          </a>
+        </p>
         <h5 class="mb-2">References</h5>
         <ul>
           <li class="mb-2">Sa´ndor Nagy, Pe´ter Poczai, Istva´n Cerna´k, Ahmad Mousapour Gorji, Ge´za Hegedus , Ja´nos
@@ -131,8 +198,7 @@ chi-square, p-value, research hypothesis, coefficient of contingency{% endblock 
             (5): 571-578.
           </li>
           <li class="mb-2">Pilar Soengas, Pablo Velasco, Guillermo Padilla, Amando Ordas, Maria Elena Cartea (2006).
-            Genetic
-            relationships among Brassica napus crops based on SSR markers, HORT SCIENCE 41, 1195–1199.
+            Genetic relationships among Brassica napus crops based on SSR markers, HORT SCIENCE 41, 1195–1199.
           </li>
           <li class="mb-2">Sorana D. Bolboacă , Lorentz Jäntschi, Adriana F. Sestraş , Radu E. Sestraş and Doru C.
             Pamfil, (2011):
@@ -175,8 +241,25 @@ chi-square, p-value, research hypothesis, coefficient of contingency{% endblock 
             molecular and morphological methods of describing relationships between perennial ryegrass (Lolium perenne
             L.) varieties, Theoretical and Applied Genetics,  103(8): 1138–1150.
           </li>
-          <li class="mb-2">Carl E. Hildebrand, David C. Torney, and Robert P. Wagner, Informativeness of Polymorphic DNA
-            Markers.
+          <li class=mb="2">Nei M.,Tajima F. and Tateno Y. (1983): Accuracy of estimated phylogenetic trees from
+            molecular data. II.
+            Gene frequency data. Journal of Molecular Evolution, 19, 153-170.
+          </li>
+          <li class="mb-2">Carl E. Hildebrand, David C. Torney, and Robert P. Wagner (1992): Informativeness of
+            Polymorphic DNA Markers, Los Alamos Science, 20, 100-102.
+          </li>
+          <li class="mb-2">Li Jin and Ranajit Chakraborty (1994): Estimation of Genetic Distance and Coefficient of Gene
+            Diversity from SingleProbe Multilocus DNA Fingerprinting Data, Molecular Biology and Evolution, 11(1):
+            120-127.
+          </li>
+          <li class="mb-2"> Masatoshi Nei (1978): The Theory of Genetic Distance and Evolution of Human Races, Japan
+            Journal of Human Genetics, 23, 341-369
+          </li>
+          <li class="mb-2">Masatoshi Nei and Naoko Takazaki (1996): The Root of the Phylogenetic Tree of Human
+            Populations, 13(1): 170-177.
+          </li>
+          <li class="mb-2"> Masatoshi Nei (1972): Genetic distance between populations, The American Naturalist 106,
+            283-292.
           </li>
           <li class="mb-2">J. De Riek · E. Calsyn · I. Everaert · E. Van Bockstaele M. De Loose (2001), AFLP based
             alternatives for
