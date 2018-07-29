@@ -2,6 +2,9 @@ function converterName(name) {
   if (name === "chi2_standard") {
     return "Chi square";
   }
+  else if (name === "chi_square") {
+    return "Chi square";
+  }
   else if (name === "chi2_yats") {
     return "Yate`s Chi square";
   }

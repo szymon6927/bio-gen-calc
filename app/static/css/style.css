@@ -319,7 +319,7 @@ table th[scope=row] {
     font-size: 1.4rem;
 }
 
-.calcuate-codominant, .generate-table {
+.calcuate-codominant, .generate-table, .hw-results {
     display: none;
 }
 
