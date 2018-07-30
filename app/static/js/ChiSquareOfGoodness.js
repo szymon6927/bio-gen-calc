@@ -69,28 +69,44 @@ class ChiSquareOfGoodness {
     }
   }
 
+  compareArrSum(observedArr, expectedArr) {
+    let observedSum = observedArr.reduce((a, b) => a + b, 0).toFixed(2);
+    let expectedSum = expectedArr.reduce((a, b) => a + b, 0).toFixed(2);
+
+    $('.summary-observed').val(observedSum);
+    $('.summary-expected').val(expectedSum);
+
+    if (observedSum !== expectedSum) {
+      let info = `<div class="alert alert-warning mt-3" role="alert">Expected values doesn't equal observed</div>`;
+      $('.chi-goodness-info').html(info);
+    }
+    else {
+      $('.chi-goodness-info').html('');
+    }
+  }
+
   buildJSON() {
-    let data = {}
+    let data = {};
     let observedRow = $('.observed').map(function () {
-      return $(this).val();
+      return parseFloat($(this).val());
     }).get();
 
     let expectedRow = $('.expected').map(function () {
-      return $(this).val();
+      return parseFloat($(this).val());
     }).get();
 
     data["observed"] = observedRow;
     data["expected"] = expectedRow;
 
-    let dataJSON = JSON.stringify(data);
-    return dataJSON;
+    this.compareArrSum(observedRow, expectedRow);
+
+    return JSON.stringify(data);
   }
 
   sendData() {
     let dataJSON = this.buildJSON();
-    const path = '/chi-square/send-data-goodness'
-    console.log(dataJSON);
-
+    const path = '/chi-square/send-data-goodness';
+    const render = new RenderHelper('.chi-goodness-result');
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
@@ -98,39 +114,14 @@ class ChiSquareOfGoodness {
       data: dataJSON,
       dataType: "json",
       success: function (result) {
-        let info = '';
-        for (let key in result.data) {
-          if (result.data.hasOwnProperty(key)) {
-            console.log(key + " -> " + result.data[key]);
-            if (key !== 'sum_observed' && key !== 'sum_expected') {
-              info += `<div class="row result-score">
-                <span class="col-sm-6 col-xs-12 result-name">${converterName(key)} = </span> 
-                <input class="col-sm-6 col-xs-12 result-value" type="text" value="${result.data[key]}" />
-              </div>`
-            }
-          }
-        }
+        console.log("Succesfull");
 
-        let template = `<div class="card text-center">
-          <div class="card-header">Results:</div>
-          <div class="card-body">
-            <div class="card-text text-left">${info}</div>
-          </div>
-        </div>`
-
-        if (result.data["sum_observed"] !== result.data["sum_expected"]) {
-          template += `<div class="alert alert-warning mt-3" role="alert">
-            Expected values doesn't equal observed
-          </div>`;
-        }
-
-        $('.summary-observed').val(result.data["sum_observed"]);
-        $('.summary-expected').val(result.data["sum_expected"]);
-
-        $('.chi-goodness-result').html(template)
+        render.successBlock(result);
       },
-      error: function (data) {
-        $('.chi-goodness-result').html('Something goes wrong! Try again!')
+      error: function (result) {
+        console.log("Something goes wrong, try again!", result);
+
+        render.errorBlock();
       }
     })
   }

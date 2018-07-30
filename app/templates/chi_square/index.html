@@ -103,7 +103,8 @@ coefficient of contingency, degrees of freedom{% endblock %}
 
       <div class="row mt-4 mb-3">
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="col-md-8 offset-md-4 col-sm-12 col-xs-12 chi-goodness-result mt-3 mb-3"></div>
+          <div class="col-md-8 offset-md-4 col-sm-12 col-xs-12 chi-goodness-info"></div>
+          <div class="col-md-8 offset-md-4 col-sm-12 col-xs-12 chi-goodness-result"></div>
         </div>
       </div>
     </section>
@@ -115,8 +116,8 @@ coefficient of contingency, degrees of freedom{% endblock %}
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/NameConverter.js') }}"></script>
-<script src="{{ url_for('static', filename='js/ChiSquareArray.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ChiSquare.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ChiSquareEvents.js') }}"></script>
 <script src="{{ url_for('static', filename='js/ChiSquareOfGoodness.js') }}"></script>
-<script src="{{ url_for('static', filename='js/ChiEvents.js') }}"></script>
-<script src="{{ url_for('static', filename='js/ChiGoodnessEvents.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ChiSquareOfGoodnessEvents.js') }}"></script>
 {% endblock %}

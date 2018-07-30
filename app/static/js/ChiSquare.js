@@ -1,4 +1,4 @@
-class ChiSquareArray {
+class ChiSquare {
 
   constructor(container) {
     this.container = container;
@@ -115,9 +115,7 @@ class ChiSquareArray {
     let valid = true;
     $('.cell:not(.summary-cell)').each((index, elem) => {
       if (!$(elem).val()) {
-        console.log("return false");
-        valid = false;
-        return false;
+        return valid = false;
       }
     });
     this.showMessage(valid);
@@ -152,7 +150,6 @@ class ChiSquareArray {
 
   calacute() {
     this.validateInputs();
-    console.log("run calculating");
     this.calculateRowColSum();
     this.calcuateUserInput();
   }
@@ -178,16 +175,13 @@ class ChiSquareArray {
     data["height"] = this.height;
     data["field_sum"] = $('.general-result').val();
 
-    let dataJSON = JSON.stringify(data);
-
-    return dataJSON;
+    return JSON.stringify(data);
   }
 
   sendData() {
     let dataJSON = this.buildJSON();
     const path = '/chi-square/send-data';
-    console.log(dataJSON);
-    console.log($.parseJSON(dataJSON))
+    const render = new RenderHelper('.chi-result');
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
@@ -196,40 +190,13 @@ class ChiSquareArray {
       dataType: "json",
       success: function (result) {
         console.log("Succesfull");
-        console.log(result.data);
 
-        let info = '';
-
-        for (let key in result.data) {
-          if (result.data.hasOwnProperty(key)) {
-            console.log(key + " -> " + result.data[key]);
-            if (key !== 'yule' && key !== 'crammer') {
-              info += `<div class="row result-score">
-                <span class="col-sm-6 col-xs-12 result-name">${converterName(key)} = </span> 
-                <input class="col-sm-6 col-xs-12 result-value" type="text" value="${result.data[key]}" />
-              </div>`
-            }
-          }
-        }
-
-        let template = `<div class="card text-center">
-          <div class="card-header">Results:</div>
-          <div class="card-body">
-            <div class="card-text text-left">${info}</div>
-          </div>
-        </div>`
-
-
-        $('.chi-result').html(template)
+        render.successBlock(result);
       },
-      error: function (data) {
-        console.log(data);
+      error: function (result) {
+        console.log("Something goes wrong, try again!", result);
 
-        let template = `<div class="alert alert-danger" role="alert">
-          Something goes wrong, Try again!
-        </div>`;
-
-        $('.chi-result').html(template)
+        render.errorBlock();
       }
     })
   }

@@ -1,4 +1,4 @@
-const chiArray = new ChiSquareArray('.array-wrapper');
+const chiArray = new ChiSquare('.array-wrapper');
 const validator = new Validation();
 $('.generate-array').click((e) => {
   let width = $('.array-width').val();
