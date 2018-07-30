@@ -1,6 +1,8 @@
 from flask import render_template, request, jsonify
 from . import pic
-from .utils import Codominant, Dominant
+# from .utils import Codominant, Dominant
+from .utils.CodominantCalculation import Codominant
+from .utils.DominantCalculation import Dominant
 
 
 @pic.route('/pic')

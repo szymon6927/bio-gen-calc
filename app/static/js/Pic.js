@@ -87,6 +87,7 @@ class PicH {
 
     let dataJSON = this.buildCodominantJSON();
 
+    const render = new RenderHelper('.codominant-result');
     const path = 'pic/send-codominant';
     $.ajax({
       type: "POST",
@@ -96,39 +97,13 @@ class PicH {
       dataType: "json",
       success: function (result) {
         console.log("Successfull!");
-        console.log(result.data);
 
-        let info = '';
-
-        for (let key in result.data) {
-          if (result.data.hasOwnProperty(key)) {
-            console.log(key + " -> " + result.data[key]);
-            let name = key.replace("_", " ");
-            info += `<div class="row result-score">
-              <span class="col-sm-6 col-xs-12 result-name">${name} = </span> 
-              <input class="col-sm-6 col-xs-12 result-value" type="text" value="${result.data[key]}" />
-            </div>`
-          }
-        }
-
-        let template = `<div class="card text-center">
-          <div class="card-header">Results:</div>
-          <div class="card-body">
-            <div class="card-text text-left">${info}</div>
-          </div>
-        </div>`;
-
-
-        $('.codominant-result').html(template);
+        render.successBlock(result);
       },
       error: function (result) {
-        console.log("Something goes wrong, try again!");
+        console.log("Something goes wrong, try again!", result);
 
-        let template = `<div class="alert alert-danger" role="alert">
-          Something goes wrong, Try again!
-        </div>`;
-
-        $('.codominant-result').html(template);
+        render.errorBlock();
       }
     })
   }
@@ -142,6 +117,7 @@ class PicH {
     }
 
     const path = '/pic/send-dominant';
+    const render = new RenderHelper('.dominant-result');
     console.log(dataJSON);
     $.ajax({
       type: "POST",
@@ -150,36 +126,14 @@ class PicH {
       data: dataJSON,
       dataType: "json",
       success: function (result) {
-        let info = '';
+        console.log("Successfull!");
 
-        for (let key in result.data) {
-          if (result.data.hasOwnProperty(key)) {
-            let name = key.replace("_", " ");
-            info += `<div class="row result-score">
-              <span class="col-sm-6 col-xs-12 result-name">${name} = </span> 
-              <input class="col-sm-6 col-xs-12 result-value" type="text" value="${result.data[key]}" />
-            </div>`
-          }
-        }
-
-        let template = `<div class="card text-center">
-          <div class="card-header">Results:</div>
-          <div class="card-body">
-            <div class="card-text text-left">${info}</div>
-          </div>
-        </div>`;
-
-
-        $('.dominant-result').html(template);
+        render.successBlock(result);
       },
       error: function (result) {
-        console.log("Something goes wrong, try again!");
+        console.log("Something goes wrong, try again!", result);
 
-        let template = `<div class="alert alert-danger" role="alert">
-          Something goes wrong, maybe empty inputs. Try again!
-        </div>`;
-
-        $('.dominant-result').html(template);
+        render.errorBlock();
       }
     })
   }

@@ -1,10 +1,11 @@
 import itertools
+from ...helpers.result_aggregator import add_result
 
 
 class Codominant:
     def __init__(self, data):
-        self.result = {}
         self.data = data
+        self.results = []
 
     def get_alleles_sum(self):
         alleles_list = []
@@ -46,22 +47,6 @@ class Codominant:
         return round(pic, 4)
 
     def calculate(self):
-        self.result["H"] = self.calcuate_h()
-        self.result["PIC"] = self.calcuate_pic()
-        return self.result
-
-
-class Dominant:
-    def __init__(self, data):
-        self.result = {}
-        self.data = data
-
-    def print_data(self):
-        print(self.data, flush=True)
-
-    def calculate(self):
-        fi = int(self.data["amplified_marker"]) / (int(self.data["amplified_marker"]) + int(
-            self.data["absecnce_marker"]))
-        pic = 1 - (fi ** 2 + ((1 - fi) ** 2))
-        self.result["PIC"] = round(pic, 4)
-        return self.result
+        add_result(self, "H", self.calcuate_h())
+        add_result(self, "PIC", self.calcuate_pic())
+        return self.results
