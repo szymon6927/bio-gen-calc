@@ -41,12 +41,12 @@ class ChiSquareCalculation:
         if dof == 1:
             corelation_standard = sqrt(chi2_standard / field_sum)
             corelation_yats = sqrt(chi2_yats / field_sum)
-            add_result(self, "yule", "Yule corection exist")
+            add_result(self, "coefficient of contingency type", "Phi")
         else:
             m = min(self.data["width"], self.data["height"])
             corelation_standard = sqrt(chi2_standard / (field_sum * (m - 1)))
             corelation_yats = sqrt(chi2_yats / (field_sum * (m - 1)))
-            add_result(self, "crammer", "Crammer corection exist")
+            add_result(self, "coefficient of contingency type", "Crammer`s V")
 
         return chi2_standard, p_standard, dof, chi2_yats, p_yats, corelation_standard, corelation_yats
 

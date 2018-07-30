@@ -28,7 +28,7 @@ chi-square, p-value, research hypothesis, coefficient of contingency{% endblock 
           If at the used level of significance, there are statistically important differences, application will count
           the fixation index - Fis, positive values may means reduction of heterozygosity, caused by for example
           Wahlund effect, inbreed or genetic drift. While negativ Fis value means excess of heterozygotes, caused by for
-          example: breeding selection or bottleneck effect could be reasons of negative Fis values.
+          example: breeding selection or bottleneck effect.
         </p>
         <h4 class="mb-2">Chi-square tests</h4>
         <p>
@@ -36,9 +36,9 @@ chi-square, p-value, research hypothesis, coefficient of contingency{% endblock 
           The chi-square tests must be used with assumptions:
         </p>
         <ol>
-          <li>1) test group must be sufficiently large.</li>
-          <li>2) data should be maximally randomly drawn from a population.</li>
-          <li>3) values in cells are adequate only when: (1) no more than 20% of the expected values are smaller
+          <li>test group must be sufficiently large.</li>
+          <li>data should be maximally randomly drawn from a population.</li>
+          <li>values in cells are adequate only when: (1) no more than 20% of the expected values are smaller
             than five; (2) there are no cells with zero.
           </li>
         </ol>
@@ -136,14 +136,19 @@ chi-square, p-value, research hypothesis, coefficient of contingency{% endblock 
         <p>1) Standard genetic distance is used to determine the normalized identity between populations by means of
           formula:
         </p>
+        <img src="{{ url_for('static', filename='img/formulas/genetic-distance.png') }}"
+             class="img-thumbnail"/>
         <p>2) Geometric genetic distance allows to determine differences between populations when loci differ in rate of
           codon changes (in this case standard genetic distance may be underestimate). Geometric distance is calculate
           following formula:
         </p>
+        <img src="{{ url_for('static', filename='img/formulas/geometric-distance.png') }}"
+             class="img-thumbnail"/>
         <p>3) Genetic distance could be estimate based on short tandem repeats (STR) polymorphism (Nei and Takazaki,
           1983). This model of genetic distance estimation was considered as more effective than other methods. It is
           calculated following formula:
         </p>
+        <img src="{{ url_for('static', filename='img/formulas/takazaki-nei.png') }}" class="img-thumbnail"/>
         <ul>
           <li>D - standard genetic distance</li>
           <li>D` - geometric genetic distance</li>
@@ -164,16 +169,6 @@ chi-square, p-value, research hypothesis, coefficient of contingency{% endblock 
           <li>X<sub>ij</sub> & Y<sub>ij</sub> frequencies of "i" STR in "j" locus in pair popultaion X,Y</li>
           <li>r - number of analyzed STR loci</li>
         </ul>
-
-        <img src="{{ url_for('static', filename='img/formulas/genetic-distance.png') }}" alt="PIC"
-             class="img-thumbnail"/>
-        <img src="{{ url_for('static', filename='img/formulas/standard-distance.png') }}" alt="PIC"
-             class="img-thumbnail"/>
-        <img src="{{ url_for('static', filename='img/formulas/geometric-distance.png') }}" alt="PIC"
-             class="img-thumbnail"/>
-        <img src="{{ url_for('static', filename='img/formulas/takazaki-nei.png') }}" alt="PIC" class="img-thumbnail"/>
-
-
         <p>The results of genetic distance estimation are presented in the form of distance matrix and dendrogram.
           The application offers the possibility of selecting several types of methods to construct dendrogram such as:
           unweighted pair group method with arithmetic mean (UPGMA), weighted pair group method with averaging (WMPGA),

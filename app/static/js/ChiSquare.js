@@ -159,14 +159,14 @@ class ChiSquare {
 
     for (let i = 0; i < this.height; i++) {
       let rowArray = $(`.line-${i}`).map(function () {
-        return $(this).val();
+        return parseFloat($(this).val());
       }).get();
       data[`row-${i}`] = rowArray;
     }
 
     for (let i = 0; i < this.height; i++) {
       let colArray = $(`.column-${i}`).map(function () {
-        return $(this).val();
+        return parseFloat($(this).val());
       }).get();
       data[`column-${i}`] = colArray;
     }

@@ -31,13 +31,13 @@ class HardyWeinberCalculation:
         ho, he, rho, e_ho, e_he, e_rho, p, q = self.calcuate_expected_observed()
         chi, pval = chisquare([ho, he, rho], f_exp=[e_ho, e_he, e_rho])
 
-        add_result(self, 'e_ho', round(e_ho, 2))
-        add_result(self, 'e_he', round(e_he, 2))
-        add_result(self, 'e_rho', round(e_rho, 2))
+        add_result(self, 'expected number of homozygotes', round(e_ho, 2))
+        add_result(self, 'expected number of heterozygotes', round(e_he, 2))
+        add_result(self, 'expected number of rare homozygotes', round(e_rho, 2))
         add_result(self, 'p', round(p, 5))
         add_result(self, 'q', round(q, 5))
-        add_result(self, 'p_value', round(pval, 5))
-        add_result(self, 'chi_square', round(chi, 2))
+        add_result(self, 'p-value', round(pval, 5))
+        add_result(self, 'Chi-square value', round(chi, 2))
 
         if pval <= alfa:
             msg = "Distribution does not consistent with Hardy Weinberg's law at the level " \

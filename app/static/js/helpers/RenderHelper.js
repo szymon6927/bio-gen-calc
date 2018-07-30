@@ -14,11 +14,11 @@ class RenderHelper {
       let transform = {
         '<>': 'div', 'class':'row result-score', 'html': [
           {
-            '<>': 'span', 'class': 'col-md-5 col-sm-6 col-12 text-left result-name',
+            '<>': 'span', 'class': 'col-md-6 col-sm-6 col-12 text-left result-name',
             'html': '<div>${name} =</div>',
           },
           {
-            '<>': 'span', 'class': 'col-md-7 col-sm-6 col-12 text-left result-value',
+            '<>': 'span', 'class': 'col-md-6 col-sm-6 col-12 text-left result-value',
             'html': '<div>${value}</div>',
           }
         ]

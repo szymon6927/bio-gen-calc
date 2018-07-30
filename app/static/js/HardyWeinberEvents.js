@@ -29,3 +29,10 @@ $('.calcuate-hw').click(function () {
     goToByScroll('.hw-results');
   }, 300)
 });
+
+$('.form-control').keypress(function (e) {
+  if (e.which == 13) {
+    $('.calcuate-hw').trigger('click');
+    return false;    //<---- Add this line
+  }
+});
