@@ -1,6 +1,5 @@
 from flask import render_template, request, jsonify
 from . import genetic_distance
-# from .utils import GeneticDistance
 from .utils.StandardDistance import StandardDistance
 from .utils.GeometricDistance import GeometricDistance
 from .utils.TakezakiNeiDistance import TakezakiNeiDistance

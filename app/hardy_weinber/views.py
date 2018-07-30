@@ -1,6 +1,6 @@
 from flask import render_template, request, jsonify
 from . import hardy_weinber
-from .utils import HardyWeinberCalculation
+from .utils.HardyWeinberCalculation import HardyWeinberCalculation
 
 
 @hardy_weinber.route('/hardy-weinber-page')
@@ -17,5 +17,4 @@ def get_data():
     hw = HardyWeinberCalculation(data)
 
     result = hw.calcualte()
-
     return jsonify({'data': result})

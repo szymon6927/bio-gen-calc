@@ -43,6 +43,7 @@ class HardyWeinber {
   }
 
   sendData() {
+    const render = new RenderHelper('.hw-results');
     const path = 'hardy-weinber/send-data';
     let dataJSON = this.buildJSON();
     console.log(dataJSON);
@@ -55,32 +56,11 @@ class HardyWeinber {
       dataType: "json",
       success: function (result) {
         console.log("Successfull!");
-
-        let transform = {
-          '<>': 'div', 'class':'row result-score', 'html': [
-            {
-              '<>': 'span', 'class': 'col-sm-6 col-xs-12 text-left result-name',
-              'html': '<div>${name} =</div>',
-            },
-            {
-              '<>': 'span', 'class': 'col-sm-6 col-xs-12 text-left result-value',
-              'html': '<div>${value}</div>',
-            }
-          ]
-        };
-
-        $('.hw-results').show();
-        $('.hw-results .card-body').json2html(result.data, transform);
+        render.successBlock(result);
       },
       error: function (result) {
         console.log("Something goes wrong, try again!", result);
-
-        let template = `<div class="alert alert-danger" role="alert">
-          Something goes wrong, Try again!
-        </div>`;
-
-        $('.hw-results').show();
-        $('.hw-results').html(template);
+        render.errorBlock();
       }
     })
   }

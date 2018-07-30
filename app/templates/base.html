@@ -9,15 +9,17 @@
   <meta name="author" content="Gene Calc - Szymon Miks, Jan Binkowski">
 
   <link rel="icon" href="{{ url_for('static', filename='img/favicons/favicon.ico') }}">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ url_for('static', filename='img/favicons/dna-144.png') }}">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ url_for('static', filename='img/favicons/dna-72.png') }}">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114"
+        href="{{ url_for('static', filename='img/favicons/dna-144.png') }}">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72"
+        href="{{ url_for('static', filename='img/favicons/dna-72.png') }}">
   <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='img/favicons/dna-57.png') }}">
 
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" 
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
         integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
   <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i" rel="stylesheet">
@@ -34,7 +36,11 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119664721-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
     gtag('js', new Date());
 
     gtag('config', 'UA-119664721-1');
@@ -67,10 +73,12 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 <script src="{{ url_for('static', filename='js/vendors/particles.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
 <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
-<script src="{{ url_for('static', filename='js/app.js') }}"></script>
 {% block scripts %}
 {% endblock %}
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
 </body>
 </html>

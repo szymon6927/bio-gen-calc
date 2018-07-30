@@ -50,7 +50,7 @@ table th[scope=row] {
 }
 
 .result-value {
-    padding: 5px;
+    padding: 5px 15px;
     border: 1px solid #ccc;
     border-radius: .25rem;
     font-weight: bold;
@@ -319,7 +319,7 @@ table th[scope=row] {
     font-size: 1.4rem;
 }
 
-.calcuate-codominant, .generate-table, .hw-results {
+.calcuate-codominant, .generate-table {
     display: none;
 }
 

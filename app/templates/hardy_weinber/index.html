@@ -51,14 +51,7 @@
 
 
     <div class="row">
-      <div class="col-md-8 offset-md-4 col-sm-12 col-xs-12 hw-results mt-5 mb-3">
-        <div class="card text-center">
-          <div class="card-header">Results:</div>
-          <div class="card-body">
-            <div class="card-text text-left"></div>
-          </div>
-        </div>
-      </div>
+      <div class="col-md-8 offset-md-4 col-sm-12 col-xs-12 hw-results"></div>
     </div>
 
   </section>
@@ -69,9 +62,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
-<script src="{{ url_for('static', filename='js/NameConverter.js') }}"></script>
+<script src="{{ url_for('static', filename='js/helpers/RenderHelper.js') }}"></script>
 <script src="{{ url_for('static', filename='js/HardyWeinber.js') }}"></script>
 <script src="{{ url_for('static', filename='js/HardyWeinberEvents.js') }}"></script>
 {% endblock %}
