@@ -22,12 +22,12 @@ class CKTextAreaField(fields.TextAreaField):
 
 class PageAdmin(sqla.ModelView):
     form_overrides = dict(text=CKTextAreaField)
-    create_template = 'admin_panel/create.html'
-    edit_template = 'admin_panel/edit.html'
+    create_template = 'admin_overwrite/create.html'
+    edit_template = 'admin_overwrite/edit.html'
 
 
 def run_admin():
-    admin_panel = admin.Admin(name="Gene Calc - Admin Panel", base_template='admin_panel/layout.html', template_mode='bootstrap4')
+    admin_panel = admin.Admin(name="Gene Calc - Admin Panel", base_template='admin_overwrite/layout.html', template_mode='bootstrap4')
     admin_panel.add_view(PageAdmin(Page, db.session))
 
     return admin_panel

@@ -2,11 +2,25 @@ body {
     background: linear-gradient(to right, rgb(33, 147, 176), rgb(109, 213, 237));
 }
 
+#particles-js {
+    height: 50vh;
+    background: rgba(0, 0, 0, .075);
+    box-shadow: inset 0px -5px 10px -3px rgba(50, 50, 50, 0.5)
+}
+
 .wrapper {
     background: #fff;
     box-shadow: 12px 0 15px -4px rgba(0, 0, 0, .075), -12px 0 8px -4px rgba(0, 0, 0, .075);
     padding: 40px 15px 24px 15px;
     border-radius: 5px;
+    margin-top: -15rem;
+    z-index: 999999;
+    position: relative;
+}
+
+.navbar {
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #fff;
 }
 
 .footer {
@@ -26,4 +40,32 @@ body {
 .footer a {
     font-weight: bold;
     color: #fff;
+}
+
+@media (max-width: 991px) {
+    .h1, h1 {
+        font-size: 2.5rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer {
+        font-size: 12px;
+    }
+
+    .footer p {
+        text-align: center !important;
+    }
+
+    .footer .app-name {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wrapper {
+        margin-top: -10rem;
+    }
 }
