@@ -3,15 +3,23 @@
 from datetime import datetime
 from flask import Flask, render_template
 from flask import Blueprint
+from flask_sqlalchemy import SQLAlchemy
+from .admin.admin_config import create_admin_interface
 
 # local imports
 from config import app_config
 
+db = SQLAlchemy()
 
 def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
+
+    db.init_app(app)
+
+    admin = create_admin_interface()
+    admin.init_app(app)
 
     from .home import home as home_blueprint
     app.register_blueprint(home_blueprint)
