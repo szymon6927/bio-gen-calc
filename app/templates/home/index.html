@@ -24,6 +24,9 @@ heterozygosity (h), genetic distance, hardy-weinberg equilibrium, chi-square tes
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="info">
+          {% for t in test %}
+            <div>{{ t.text|safe }}</div>
+          {% endfor %}
           <div class="title font-weight-bold pb-4">The Gene-Calc is a constantly developed tool dedicated for calculations
             related to biological sciences, especially focused in field of genetics. Application offers:</div>
           <div class="content">

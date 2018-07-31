@@ -11,11 +11,9 @@ class DevelopmentConfig(Config):
     """
     Development configurations
     """
-    SECRET_KEY = 'p9Bv<3Eid9%$i01'
-    DATABASE_FILE = 'sample_db.sqlite'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_FILE
-    DEBUG = True
     SQLALCHEMY_ECHO = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    DEBUG = True
 
 
 class ProductionConfig(Config):

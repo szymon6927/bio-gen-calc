@@ -2,24 +2,26 @@
 
 from datetime import datetime
 from flask import Flask, render_template
-from flask import Blueprint
-from flask_sqlalchemy import SQLAlchemy
-from .admin.admin_config import create_admin_interface
+from .database import db
 
 # local imports
 from config import app_config
 
-db = SQLAlchemy()
+from .admin.views import run_admin
+
 
 def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
-    db.init_app(app)
-
-    admin = create_admin_interface()
+    admin = run_admin()
     admin.init_app(app)
+
+    db.init_app(app)
+    with app.test_request_context():
+        db.create_all()
+        print(f'Print after create all', flush=True)
 
     from .home import home as home_blueprint
     app.register_blueprint(home_blueprint)

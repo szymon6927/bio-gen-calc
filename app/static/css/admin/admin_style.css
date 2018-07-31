@@ -1,0 +1,29 @@
+body {
+    background: linear-gradient(to right, rgb(33, 147, 176), rgb(109, 213, 237));
+}
+
+.wrapper {
+    background: #fff;
+    box-shadow: 12px 0 15px -4px rgba(0, 0, 0, .075), -12px 0 8px -4px rgba(0, 0, 0, .075);
+    padding: 40px 15px 24px 15px;
+    border-radius: 5px;
+}
+
+.footer {
+    background: #26517F;
+    border-top: 1px solid #fff;
+    color: #fff;
+    margin-top: 20px;
+    padding: 16px 0;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.footer p {
+    margin-bottom: 0;
+}
+
+.footer a {
+    font-weight: bold;
+    color: #fff;
+}
