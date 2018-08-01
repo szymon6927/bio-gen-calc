@@ -1,13 +1,28 @@
 {% import 'admin/layout.html' as layout with context -%}
 {% extends 'admin/base.html' %}
 
+{% block head_meta %}
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Gene Calc - administration panel">
+  <meta name="keywords" content="gene-calc, gene calc">
+  <meta name="author" content="Gene Calc - Szymon Miks, Jan Binkowski">
+
+  <link rel="icon" href="{{ url_for('static', filename='img/favicons/favicon.ico') }}">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114"
+        href="{{ url_for('static', filename='img/favicons/dna-144.png') }}">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72"
+        href="{{ url_for('static', filename='img/favicons/dna-72.png') }}">
+  <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='img/favicons/dna-57.png') }}">
+{% endblock %}
+
 {% block head_tail %}
     {{ super() }}
     <link href="{{ url_for('static', filename='css/admin/admin_style.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block page_body %}
-    <header class="navbar navbar-expand-lg navbar-dark bg-primary" role="navigation">
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#admin-navbar-collapse">
@@ -28,6 +43,9 @@
         {% block menu_links %}
         <ul class="navbar-nav ml-auto">
           {{ layout.menu_links() }}
+          {% if current_user.is_authenticated %}
+            <a href="/admin/logout/" class="btn btn-danger my-2 my-sm-0">Logout ({{ current_user.login }})</a>
+          {% endif %}
         </ul>
         {% endblock %}
         {% block access_control %}
@@ -47,7 +65,7 @@
         {% block body %}{% endblock %}
       </div>
     </div>
-    <footer class="footer">
+    <footer class="footer bg-dark">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-12 text-left">

@@ -1,11 +1,11 @@
 # app/__init__.py
 
 from datetime import datetime
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from .database import db
-from .admin.models import User
+from .admin.models import User, Page
 
-import flask_login as login
+from flask_login import LoginManager
 from flask_migrate import Migrate
 
 # local imports
@@ -13,12 +13,13 @@ from config import app_config
 
 from .admin.views import run_admin
 
+login_manager = LoginManager()
+
 
 def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
-
 
     admin = run_admin()
     admin.init_app(app)
@@ -28,7 +29,6 @@ def create_app(config_name):
 
     with app.test_request_context():
         db.create_all()
-        print(f'Print after create all', flush=True)
 
     from .home import home as home_blueprint
     app.register_blueprint(home_blueprint)
@@ -51,7 +51,6 @@ def create_app(config_name):
     from .contact import contact as contact
     app.register_blueprint(contact)
 
-    login_manager = login.LoginManager()
     login_manager.init_app(app)
 
     # Create user loader function
@@ -66,6 +65,7 @@ def create_app(config_name):
 
     @app.context_processor
     def inject_now():
-        return {'now': datetime.utcnow()}
+        return {'now': datetime.utcnow(),
+                'module_desc': Page.query.filter_by(breadcrumbs=request.path).first()}
 
     return app

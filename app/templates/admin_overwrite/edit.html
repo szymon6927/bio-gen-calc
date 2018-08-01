@@ -1,6 +1,27 @@
 {% extends 'admin/model/edit.html' %}
 
+{% block navlinks %}
+  <ul class="nav nav-tabs mb-4">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ return_url }}">{{ _gettext('List') }}</a>
+    </li>
+    {%- if admin_view.can_create -%}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ get_url('.create_view', url=return_url) }}">{{ _gettext('Create') }}</a>
+    </li>
+    {%- endif -%}
+    <li class="nav-item">
+        <a class="nav-link active " href="javascript:void(0)">{{ _gettext('Edit') }}</a>
+    </li>
+    {%- if admin_view.can_view_details -%}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ get_url('.details_view', id=request.args.get('id'), url=return_url) }}">{{ _gettext('Details') }}</a>
+    </li>
+    {%- endif -%}
+  </ul>
+  {% endblock %}
+
 {% block tail %}
   {{ super() }}
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.0.1/ckeditor.js"></script>
+  <script src="https://cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
 {% endblock %}

@@ -1,11 +1,11 @@
 body {
-    background: linear-gradient(to right, rgb(33, 147, 176), rgb(109, 213, 237));
+    background: linear-gradient(to right, rgb(30, 60, 114), rgb(42, 82, 152));
 }
 
 #particles-js {
     height: 50vh;
     background: rgba(0, 0, 0, .075);
-    box-shadow: inset 0px -5px 10px -3px rgba(50, 50, 50, 0.5)
+    box-shadow: inset 0px -5px 10px -3px rgba(0, 0, 0, 0.3);
 }
 
 .wrapper {
@@ -14,7 +14,7 @@ body {
     padding: 40px 15px 24px 15px;
     border-radius: 5px;
     margin-top: -15rem;
-    z-index: 999999;
+    z-index: 9999;
     position: relative;
 }
 
@@ -40,6 +40,15 @@ body {
 .footer a {
     font-weight: bold;
     color: #fff;
+}
+
+.admin-sign-in i {
+    font-size: 4rem;
+}
+
+.wrapper .nav-tabs .nav-link {
+    padding: .5rem 3rem;
+    font-size: 19px;
 }
 
 @media (max-width: 991px) {
