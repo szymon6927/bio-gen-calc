@@ -6,3 +6,4 @@ pip-selfcheck.json
 .vscode
 __pycache__
 .idea
+instance
