@@ -1,3 +1,3 @@
 SECRET_KEY = 'p9Bv<3Eid9%$i01'
-DATABASE_FILE = 'sample_db.sqlite'
+DATABASE_FILE = 'sample_db2.sqlite'
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_FILE

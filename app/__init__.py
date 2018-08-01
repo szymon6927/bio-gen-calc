@@ -3,6 +3,10 @@
 from datetime import datetime
 from flask import Flask, render_template
 from .database import db
+from .admin.models import User
+
+import flask_login as login
+from flask_migrate import Migrate
 
 # local imports
 from config import app_config
@@ -15,10 +19,13 @@ def create_app(config_name):
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
+
     admin = run_admin()
     admin.init_app(app)
 
     db.init_app(app)
+    migrate = Migrate(app, db)
+
     with app.test_request_context():
         db.create_all()
         print(f'Print after create all', flush=True)
@@ -43,6 +50,14 @@ def create_app(config_name):
 
     from .contact import contact as contact
     app.register_blueprint(contact)
+
+    login_manager = login.LoginManager()
+    login_manager.init_app(app)
+
+    # Create user loader function
+    @login_manager.user_loader
+    def load_user(user_id):
+        return db.session.query(User).get(user_id)
 
     @app.errorhandler(404)
     def page_not_found(e):

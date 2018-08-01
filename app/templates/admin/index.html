@@ -1,19 +1,39 @@
 {% extends 'admin/master.html' %}
 {% block body %}
 {{ super() }}
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4 text-center">Gene Calc - Admin Panel</h1>
-    <p class="text-muted font-weight-bold text-center pt-3 mb-0">
-      Welcome to Gene Calc administrator panel
-    </p>
-  </div>
-</div>
-<section class="admin-home-page">
-  <div class="row">
-    <div class="col-md-12 col-sm-12 text-center">
-      <p>If you have any problems please contact us  <a href="contact@gene-calc.pl">contact@gene-calc.pl</a></p>
+<div class="row-fluid">
+
+    <div>
+        {% if current_user.is_authenticated %}
+        <h1>Flask-Admin example</h1>
+        <p class="lead">
+            Authentication
+        </p>
+        <p>
+            This example shows how you can use Flask-Login for authentication. It is only intended as a basic demonstration.
+        </p>
+        {% else %}
+        <form method="POST" action="">
+            {{ form.hidden_tag() if form.hidden_tag }}
+            {% for f in form if f.type != 'CSRFTokenField' %}
+            <div>
+            {{ f.label }}
+            {{ f }}
+            {% if f.errors %}
+            <ul>
+                {% for e in f.errors %}
+                <li>{{ e }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            </div>
+            {% endfor %}
+            <button class="btn" type="submit">Submit</button>
+        </form>
+        {{ link | safe }}
+        {% endif %}
     </div>
-  </div>
-</section>
+
+    <a class="btn btn-primary" href="/"><i class="icon-arrow-left icon-white"></i> Back</a>
+</div>
 {% endblock body %}
