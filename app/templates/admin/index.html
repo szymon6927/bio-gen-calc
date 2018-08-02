@@ -12,11 +12,14 @@
     </div>
     <hr>
   </div>
-  <div class="col-md-6 col-sm-12">
+  <div class="col-md-4 col-sm-12">
     <a class="btn btn-primary btn-block" href="/admin/page/"><i class="icon-arrow-left icon-white"></i> Edit pages</a>
   </div>
-  <div class="col-md-6 col-sm-12">
-    <a class="btn btn-primary btn-block btn-danger" href="/"><i class="icon-arrow-left icon-white"></i> Go to home page</a>
+  <div class="col-md-4 col-sm-12">
+    <a class="btn btn-primary btn-block" href="/admin/register"><i class="icon-arrow-left icon-white"></i> Add user</a>
+  </div>
+  <div class="col-md-4 col-sm-12">
+    <a class="btn btn-block btn-danger" href="/"><i class="icon-arrow-left icon-white"></i> Go to home page</a>
   </div>
   {% else %}
   <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12">
@@ -44,6 +47,37 @@
       <button class="btn btn-block btn-primary" type="submit">Login</button>
     </form>
   </div>
+  {% endif %}
+  {% if request.path == '/admin/register/' %}
+    <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12 mt-4">
+      <form class="admin-sign-in mb-4" method="POST" action="">
+        <div class="logo-wrapper text-center">
+          <i class="fas fa-dna"></i>
+        </div>
+        <h1 class="text-center">Register user</h1>
+        <hr class="mb-4">
+        {% for field in form %}
+          {% for message in field.errors %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+          {% endfor %}
+        {% endfor %}
+
+        {{ form.hidden_tag() if form.hidden_tag }}
+        <div class="form-group">
+          {{ form.login.label(class_="text-left") }}
+          {{ form.login(class_="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.email.label(class_="text-left") }}
+          {{ form.email(class_="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.password.label(class_="text-left") }}
+          {{ form.password(class_="form-control") }}
+        </div>
+        <button class="btn btn-block btn-primary" type="submit">Login</button>
+      </form>
+    </div>
   {% endif %}
 </div>
 {% endblock body %}

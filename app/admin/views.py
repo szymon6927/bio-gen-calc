@@ -48,6 +48,16 @@ class LoginForm(form.Form):
         return db.session.query(User).filter_by(login=self.login.data).first()
 
 
+class RegistrationForm(form.Form):
+    login = fields.StringField(validators=[validators.required()])
+    email = fields.StringField()
+    password = fields.PasswordField(validators=[validators.required()])
+
+    def validate_login(self, field):
+        if db.session.query(User).filter_by(login=self.login.data).count() > 0:
+            raise validators.ValidationError('Duplicate username')
+
+
 # Create customized model view class
 class MyModelView(sqla.ModelView):
 
@@ -75,6 +85,27 @@ class MyAdminIndexView(admin.AdminIndexView):
         if login.current_user.is_authenticated:
             return redirect(url_for('.index'))
         self._template_args['form'] = form
+        return super(MyAdminIndexView, self).index()
+
+    @expose('/register/', methods=('GET', 'POST'))
+    def register_view(self):
+        form = RegistrationForm(request.form)
+        if helpers.validate_form_on_submit(form):
+            user = User()
+
+            form.populate_obj(user)
+            # we hash the users password to avoid saving it as plaintext in the db,
+            # remove to use plain text:
+            user.password = generate_password_hash(form.password.data)
+
+            db.session.add(user)
+            db.session.commit()
+
+            login.login_user(user)
+            return redirect(url_for('.index'))
+        link = '<p>Already have an account? <a href="' + url_for('.login_view') + '">Click here to log in.</a></p>'
+        self._template_args['form'] = form
+        self._template_args['link'] = link
         return super(MyAdminIndexView, self).index()
 
     @expose('/logout/')
