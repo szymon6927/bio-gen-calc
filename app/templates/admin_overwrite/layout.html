@@ -35,9 +35,11 @@
       <!-- navbar content -->
       <div class="collapse navbar-collapse" id="admin-navbar-collapse">
         {% block main_menu %}
-        <ul class="navbar-nav">
-          {{ layout.menu() }}
-        </ul>
+          {% if current_user.is_authenticated %}
+          <ul class="navbar-nav">
+            {{ layout.menu() }}
+          </ul>
+          {% endif %}
         {% endblock %}
 
         {% block menu_links %}

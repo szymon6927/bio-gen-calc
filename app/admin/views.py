@@ -103,9 +103,7 @@ class MyAdminIndexView(admin.AdminIndexView):
 
             login.login_user(user)
             return redirect(url_for('.index'))
-        link = '<p>Already have an account? <a href="' + url_for('.login_view') + '">Click here to log in.</a></p>'
         self._template_args['form'] = form
-        self._template_args['link'] = link
         return super(MyAdminIndexView, self).index()
 
     @expose('/logout/')
