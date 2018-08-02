@@ -94,9 +94,7 @@ class MyAdminIndexView(admin.AdminIndexView):
             user = User()
 
             form.populate_obj(user)
-            # we hash the users password to avoid saving it as plaintext in the db,
-            # remove to use plain text:
-            user.password = generate_password_hash(form.password.data)
+            user.password_hash = generate_password_hash(form.password.data)
 
             db.session.add(user)
             db.session.commit()
