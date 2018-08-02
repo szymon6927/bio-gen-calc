@@ -20,7 +20,7 @@ class ProductionConfig(Config):
     """
     Production configurations
     """
-
+    SQLALCHEMY_ECHO = False
     DEBUG = False
 
 
