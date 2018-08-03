@@ -24,4 +24,13 @@
 {% block tail %}
   {{ super() }}
   <script src="https://cdn.ckeditor.com/4.10.0/full/ckeditor.js"></script>
+
+  <script>
+    CKEDITOR.replace( 'desc', {
+      filebrowserImageUploadUrl: '/admin/upload/'
+    });
+    CKEDITOR.replace( 'text', {
+      filebrowserImageUploadUrl: '/admin/upload/'
+    });
+  </script>
 {% endblock %}

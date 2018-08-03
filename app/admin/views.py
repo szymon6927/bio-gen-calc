@@ -1,4 +1,6 @@
-from flask import url_for, redirect, request
+import os
+
+from flask import url_for, redirect, request, jsonify
 
 from wtforms import form, validators, fields, widgets
 
@@ -65,8 +67,19 @@ class MyModelView(sqla.ModelView):
         return login.current_user.is_authenticated
 
 
+def get_static_abs_path():
+    current_dir = os.path.abspath(os.path.dirname(__file__))
+    parent_dir = os.path.dirname(current_dir)
+
+    abs_static_path = os.path.join(parent_dir, 'static', 'uploads')
+    static_path = os.path.join('/', 'static', 'uploads')
+    return {'abs_static_path': abs_static_path, 'static_path': static_path}
+
+
 # Create customized index view class that handles login & registration
 class MyAdminIndexView(admin.AdminIndexView):
+    paths = get_static_abs_path()
+    UPLOADED_PATH = paths.get('abs_static_path')
 
     @expose('/')
     def index(self):
@@ -109,6 +122,19 @@ class MyAdminIndexView(admin.AdminIndexView):
         login.logout_user()
         return redirect(url_for('.index'))
 
+    @expose('/upload/', methods=['POST'])
+    def upload(self):
+        f = request.files.get('upload')
+        extension = f.filename.split('.')[1].lower()
+        if extension not in ['jpg', 'gif', 'png', 'jpeg']:
+            return jsonify(uploaded=0, error={'message': 'Image only!'})
+
+        f.save(os.path.join(self.UPLOADED_PATH, f.filename))
+
+        url = os.path.join(self.paths.get('static_path'), f.filename)
+        response = {"uploaded": 1, "fileName": f.filename, "url": url}
+        return jsonify(response)
+
 
 class PageAdmin(sqla.ModelView):
     form_overrides = dict(text=CKTextAreaField, desc=CKTextAreaField)
@@ -119,6 +145,7 @@ class PageAdmin(sqla.ModelView):
 def run_admin():
     admin_panel = admin.Admin(name="Gene Calc - Admin Panel", index_view=MyAdminIndexView(),
                               base_template='admin_overwrite/layout.html', template_mode='bootstrap4')
+
     admin_panel.add_view(MyModelView(User, db.session))
     admin_panel.add_view(PageAdmin(Page, db.session))
 
