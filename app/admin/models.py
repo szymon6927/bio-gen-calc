@@ -12,6 +12,7 @@ class Page(db.Model):
     seo_desc = db.Column(db.String(180))
     seo_keywords = db.Column(db.String(200))
     text = db.Column(db.UnicodeText)
+    desc = db.Column(db.UnicodeText)
 
     def __unicode__(self):
         return self.name

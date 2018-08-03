@@ -111,7 +111,7 @@ class MyAdminIndexView(admin.AdminIndexView):
 
 
 class PageAdmin(sqla.ModelView):
-    form_overrides = dict(text=CKTextAreaField)
+    form_overrides = dict(text=CKTextAreaField, desc=CKTextAreaField)
     create_template = 'admin_overwrite/create.html'
     edit_template = 'admin_overwrite/edit.html'
 
