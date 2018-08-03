@@ -1,0 +1,12 @@
+{% if module_desc.text %}
+  <div class="card text-white bg-info mb-5 shadow-lg">
+    <div class="card-header">
+      <span class="info-icon"><i class="fas fa-info-circle"></i></span>
+      <span class="card-title mb-0">Info:</span>
+    </div>
+    <div class="card-body">
+      {{ module_desc.text|safe }}
+    </div>
+  </div>
+  <hr class="mb-4">
+{% endif %}

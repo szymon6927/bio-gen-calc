@@ -1,0 +1,14 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    {% if module_desc.name %}
+      <h1 class="display-4 text-center">{{ module_desc.name }}</h1>
+    {% else %}
+      <h1 class="display-4 text-center">{{ title }}</h1>
+    {% endif %}
+
+    {% if module_desc.desc %}
+      <div class="text-muted text-center mt-3">{{ module_desc.desc|safe }}</div>
+    {% endif %}
+  </div>
+</div>
+
