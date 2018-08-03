@@ -1,20 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Gene-calc - contact{% endblock %}
-
-{% block seo_desc %}Gene-calc, application created
-by students form Poland, Szymon Miks, Jan Binkowski{% endblock %}
-
-{% block seo_keywords %}bioinformatic tool, bioinformatic, science,
-hw, pic, chi-square, genetic distance{% endblock %}
+{% block title %}{{ module_desc.seo_title }}{% endblock %}
+{% block seo_desc %}{{ module_desc.seo_desc }}{% endblock %}
+{% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
 
 {% block body %}
 <div class="wrapper">
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4 text-center">{{ title }}</h1>
-    </div>
-  </div>
+  {% include 'utils/module_top_block.html' %}
+
   <section class="contact-us">
     <div class="row">
       <div class="col-md-12 col-sm-12">

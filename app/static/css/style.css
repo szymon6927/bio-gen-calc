@@ -9,10 +9,12 @@ body {
     padding: 0 15px 24px 15px;
     border-radius: 5px;
     margin-top: -14rem;
+    z-index: 999;
+    position: relative;
 }
 
 section {
-    padding: 32px 0;
+    padding: 16px 0;
 }
 
 table .summary {
@@ -333,6 +335,15 @@ table th[scope=row] {
 
 .materials-methods {
     word-break: break-all;
+}
+
+.card-header .card-title {
+    font-size: 22px;
+    padding-left: 5px;
+}
+
+.card-header .info-icon {
+    font-size: 22px;
 }
 
 @media (max-width: 991px) {

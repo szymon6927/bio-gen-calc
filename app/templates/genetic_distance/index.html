@@ -1,20 +1,16 @@
 {% extends "base.html" %}
 
-{% block title %}Genetic Distance{% endblock %}
-
-{% block seo_desc %}Tool to estimate genetic distance between n-number
-of populations on the basis of alleles frequencies{% endblock %}
-
-{% block seo_keywords %}genetic distance, dendrograms, distance matrix{% endblock %}
+{% block title %}{{ module_desc.seo_title }}{% endblock %}
+{% block seo_desc %}{{ module_desc.seo_desc }}{% endblock %}
+{% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
 
 {% block body %}
 {% include 'utils/loader.html' %}
 <div class="wrapper">
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4 text-center">{{ title }}</h1>
-    </div>
-  </div>
+  {% include 'utils/module_top_block.html' %}
+
+  {% include 'utils/info_block.html' %}
+
   <section class="genetic-distance">
     <div class="row">
       <div class="col-lg-3 offset-lg-3 col-md-4 offset-md-2 col-sm-6 col-12">

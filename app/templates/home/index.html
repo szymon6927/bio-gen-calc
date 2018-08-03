@@ -1,90 +1,37 @@
 {% extends "base.html" %}
 
-{% block title %}Gene-Calc – Bioinformatic Tool{% endblock %}
-
-{% block seo_desc %}Gene-Calc allows to calculate commonly used parameters,
-tests and formulas applied in biological science such as: chi-square, polymorphic information content,
-heterozygosity, genetic distance or Hardy-Weinberg equilibrium.{% endblock %}
-
-{% block seo_keywords %}bioinformatic tool, polymorphic information content (pic),
-heterozygosity (h), genetic distance, hardy-weinberg equilibrium, chi-square tests{% endblock %}
+{% block title %}{{ module_desc.seo_title }}{% endblock %}
+{% block seo_desc %}{{ module_desc.seo_desc }}{% endblock %}
+{% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
 
 {% block body %}
 <div class="wrapper">
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4 text-center">Gene Calc - {{title}}</h1>
-      <p class="text-muted font-weight-bold text-center pt-3 mb-0">
-        This application is in beta-version, it is possible that some calculations could be inaccurate, so if you find any bug or error please let us know
-        <a href="contact@gene-calc.pl">contact@gene-calc.pl</a>
-      </p>
-    </div>
-  </div>
+  {% include 'utils/module_top_block.html' %}
+
   <section class="homepage">
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="info">
-          {% if module_desc %}
-            <div>{{ module_desc.text|safe }}</div>
+          {% if module_desc.text %}
+            <div class="content">{{ module_desc.text|safe }}</div>
           {% endif %}
-          <div class="title font-weight-bold pb-4">The Gene-Calc is a constantly developed tool dedicated for calculations
-            related to biological sciences, especially focused in field of genetics. Application offers:</div>
-          <div class="content">
-            <ul>
-              <li>testing of compliance with the Hardy-Weinberg model</li>
-              <li>tests from the chi-square family with coefficients of correlation, for contingency tables of any size</li>
-              <li>determination of Polymorphic Information Content (PIC) and Heterozygosity (H) values for both codominant
-                and dominant markers</li>
-              <li>estimate genetic distance</li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <hr>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="card mb-sm-5 mb-4">
-          <div class="card-body">
-            <h2 class="card-title text-center">Materials & methods</h2>
-            <a href="{{ url_for('about.about_page') }}" class="btn btn-block btn-primary">Go there!</a>
+      {% for page in pages %}
+        {% if not loop.first %}
+          <div class="{% if loop.last %} col-md-12{% else %} col-md-6{% endif %} col-sm-6 col-xs-12">
+            <div class="card mb-sm-5 mb-4">
+              <div class="card-body">
+                <h2 class="card-title text-center">{{ page.name }}</h2>
+                <a href="{{ page.breadcrumbs }}" class="btn btn-block btn-primary">Go there!</a>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="card mb-sm-5 mb-4">
-          <div class="card-body">
-            <h2 class="card-title text-center">Hardy-Weinberg's principle</h2>
-            <a href="{{ url_for('hardy_weinber.hardy_weinber_page') }}" class="btn btn-block btn-primary">Go there!</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="card mb-sm-0 mb-4">
-          <div class="card-body">
-            <h2 class="card-title text-center">Chi-Square</h2>
-            <a href="{{ url_for('chi_square.chi_square_page') }}" class="btn btn-block btn-primary">Go there!</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="card mb-sm-0 mb-4">
-          <div class="card-body">
-            <h2 class="card-title text-center">Pic & H</h2>
-            <a href="{{ url_for('pic.pic_page') }}" class="btn btn-block btn-primary">Go there!</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12 col-sm-12 col-xs-12 mt-4">
-        <div class="card mb-sm-0 mb-4">
-          <div class="card-body text-center">
-            <h2 class="card-title text-center">Genetic distance</h2>
-            <a href="{{ url_for('genetic_distance.genetic_distance_page') }}" class="btn btn-block btn-primary">
-              Go there!
-            </a>
-          </div>
-        </div>
-      </div>
+        {% endif %}
+      {% endfor %}
     </div>
   </section>
 </div>

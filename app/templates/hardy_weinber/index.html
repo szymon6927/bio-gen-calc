@@ -1,18 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Hardy-Weinberg Equilibrium{% endblock %}
-
-{% block seo_desc %}Tool to examine compliance between expected and observed number of genotypes.{% endblock %}
-
-{% block seo_keywords %}Hardy-Weinberg equilibrium, genetics balance, fixation index (fis){% endblock %}
+{% block title %}{{ module_desc.seo_title }}{% endblock %}
+{% block seo_desc %}{{ module_desc.seo_desc }}{% endblock %}
+{% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
 
 {% block body %}
 <div class="wrapper">
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4 text-center">{{ title }}</h1>
-    </div>
-  </div>
+  {% include 'utils/module_top_block.html' %}
+
+  {% include 'utils/info_block.html' %}
 
   <section class="hardy-weinberg">
     <div class="row">
@@ -39,7 +35,8 @@
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="form-group">
               <label for="alfa">Level of significance</label>
-              <input class="form-control non-negative" id="alfa" min="0" step="0.01" placeholder="alfa e.g. 0.05" type="number">
+              <input class="form-control non-negative" id="alfa" min="0" step="0.01" placeholder="alfa e.g. 0.05"
+                     type="number">
             </div>
           </div>
           <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 mt-4">
