@@ -8,7 +8,7 @@ class Page(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Unicode(64))
     breadcrumbs = db.Column(db.String(220))
-    seo_tile = db.Column(db.String(85))
+    seo_title = db.Column(db.String(85))
     seo_desc = db.Column(db.String(180))
     seo_keywords = db.Column(db.String(200))
     text = db.Column(db.UnicodeText)
