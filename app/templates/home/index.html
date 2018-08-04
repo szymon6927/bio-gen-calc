@@ -22,7 +22,7 @@
       <hr>
       {% for page in pages %}
         {% if not loop.first %}
-          <div class="{% if loop.last %} col-md-12{% else %} col-md-6{% endif %} col-sm-6 col-xs-12">
+          <div class="col-md-6 col-sm-6 col">
             <div class="card mb-sm-5 mb-4">
               <div class="card-body">
                 <h2 class="card-title text-center">{{ page.name }}</h2>

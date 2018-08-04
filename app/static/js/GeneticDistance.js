@@ -178,7 +178,7 @@ class GeneticDistance {
   }
 
   matrixDesc() {
-    let topWidth = $('.MathJax_CHTML').last().width() + "px";
+    let topWidth = $('.MathJax_SVG').last().width() + "px";
     let topDesc = `<div class="top-desc" style="width: ${topWidth};"></div>`;
     $(topDesc).insertAfter('.MathJax_Preview');
 
@@ -228,7 +228,7 @@ class GeneticDistance {
 
         setTimeout(() => {
           this.matrixDesc()
-        },1000);
+        },1500);
 
         goToByScroll('.genetic-distance-results');
 

@@ -1,3 +1,4 @@
+from flask import abort
 import itertools
 from ...helpers.result_aggregator import add_result
 
@@ -15,14 +16,23 @@ class Codominant:
         return sum(alleles_list)
 
     def get_alleles_freq(self):
+        control_sum = 0
         p = {}
         alleles_sum = self.get_alleles_sum()
 
         for i in range(self.data["count"]):
-            alleles = int(self.data["allele-" + str(i)])
-            p[i] = alleles / alleles_sum
+            alleles = self.data["allele-" + str(i)]
+            if isinstance(alleles, float):
+                p[i] = alleles
+            else:
+                p[i] = alleles / alleles_sum
 
-        return p
+            control_sum += p[i]
+
+        if control_sum == 1:
+            return p
+        else:
+            abort(400)
 
     def calcuate_h(self):
         freq_sum = 0

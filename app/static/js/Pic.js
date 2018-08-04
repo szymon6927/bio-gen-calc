@@ -55,7 +55,7 @@ class PicH {
     let count = $('.allele-input').length;
 
     for (let i = 0; i < count; i++) {
-      data[`allele-${i}`] = $(`#allele-${i}`).val();
+      data[`allele-${i}`] = Number($(`#allele-${i}`).val());
     }
 
     data["count"] = count;
@@ -70,8 +70,8 @@ class PicH {
     let absecnceMarker = $('#absecnce-marker').val();
 
     if (amplifiedMarker && absecnceMarker) {
-      data["amplified_marker"] = amplifiedMarker;
-      data["absecnce_marker"] = absecnceMarker;
+      data["amplified_marker"] = Number(amplifiedMarker);
+      data["absecnce_marker"] = Number(absecnceMarker);
     }
     else {
       showModal('Fill number of amplified marker or number of absecnce marker')

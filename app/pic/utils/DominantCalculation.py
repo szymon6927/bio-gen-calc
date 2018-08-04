@@ -7,8 +7,13 @@ class Dominant:
         self.results = []
 
     def calculate(self):
-        fi = int(self.data["amplified_marker"]) / (int(self.data["amplified_marker"]) + int(
-            self.data["absecnce_marker"]))
+        # check if type is float change math formula
+        if isinstance(self.data["amplified_marker"], float):
+            fi = self.data["amplified_marker"]
+        else:
+            fi = int(self.data["amplified_marker"]) / (int(self.data["amplified_marker"]) + int(
+                self.data["absecnce_marker"]))
+
         pic = 1 - (fi ** 2 + ((1 - fi) ** 2))
 
         add_result(self, "PIC", round(pic, 4))
