@@ -28,9 +28,15 @@ class RenderHelper {
       $(this.container + ' .card-body').json2html(result.data, transform);
   }
 
-  errorBlock() {
+  errorBlock(request) {
+    let errMsg = '';
+    if (request && request.status == 409) {
+      errMsg = `<div>Error message: ${request.responseText}</div>`;
+    }
+
     let template = `<div class="alert alert-danger mt-4 mb-3" role="alert">
-      Something goes wrong, Try again!
+      <div>Something goes wrong, Try again!</div>
+      ${errMsg}
     </div>`;
 
     $(this.container).html(template);

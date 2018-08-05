@@ -1,4 +1,4 @@
-from flask import abort
+from flask import abort, Response
 import itertools
 from ...helpers.result_aggregator import add_result
 
@@ -32,7 +32,7 @@ class Codominant:
         if control_sum == 1:
             return p
         else:
-            abort(400)
+            abort(Response('Mixed type of input values', 409))
 
     def calcuate_h(self):
         freq_sum = 0

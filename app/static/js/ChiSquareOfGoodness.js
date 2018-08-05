@@ -121,7 +121,7 @@ class ChiSquareOfGoodness {
       error: function (result) {
         console.log("Something goes wrong, try again!", result);
 
-        render.errorBlock();
+        render.errorBlock(result);
       }
     })
   }
