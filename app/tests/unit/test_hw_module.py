@@ -1,5 +1,5 @@
-from ..helpers.tests_helper import find_value_by_name
-from ..hardy_weinber.utils.HardyWeinberCalculation import HardyWeinberCalculation
+from ...helpers.tests_helper import find_value_by_name
+from ...hardy_weinber.utils.HardyWeinberCalculation import HardyWeinberCalculation
 
 
 def test_hw_basic():

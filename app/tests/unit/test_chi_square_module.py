@@ -1,5 +1,5 @@
-from ..helpers.tests_helper import find_value_by_name
-from ..chi_square.utils.ChiSquareCalculation import ChiSquareCalculation
+from ...helpers.tests_helper import find_value_by_name
+from ...chi_square.utils.ChiSquareCalculation import ChiSquareCalculation
 
 
 def test_chi_sqaure_basic():
