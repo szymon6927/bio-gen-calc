@@ -1,3 +1,4 @@
+from ..helpers.tests_helper import find_value_by_name
 from ..hardy_weinber.utils.HardyWeinberCalculation import HardyWeinberCalculation
 
 
@@ -11,10 +12,23 @@ def test_hw_basic():
     hw = HardyWeinberCalculation(data)
     results = hw.calcualte()
 
-    expected_results = [3.36, 4.28, 1.36, 0.61111, 0.38889, 0.66931, 0.8,
-                        "Distribution consistent with Hardy Weinberg's law at the level of significance: 0.05"]
+    expected_results = [
+        {'name': "expected number of homozygotes", 'value': 3.36},
+        {'name': "expected number of heterozygotes", 'value': 4.28},
+        {'name': "expected number of rare homozygotes", 'value': 1.36},
+        {'name': "p", 'value': 0.61111},
+        {'name': "q", 'value': 0.38889},
+        {'name': "p-value", 'value': 0.66931},
+        {'name': "Chi-square value", 'value': 0.8},
+        {'name': "status", 'value': "Distribution consistent with Hardy Weinberg's law at the level of significance: 0.05"}
+    ]
 
     for i, result in enumerate(results):
-        assert result.get("value") == expected_results[i]
+        name = result.get('name')
+        value = result.get('value')
+        
+        expected_value = find_value_by_name(expected_results, name)
+
+        assert expected_value == value
 
 

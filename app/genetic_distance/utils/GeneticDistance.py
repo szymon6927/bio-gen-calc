@@ -22,6 +22,9 @@ class GeneticDistance:
         self.condensed_matrix = []
         self.column_range = int(self.data["taxon_number"])
 
+    def get_condensed_matrix(self):
+        return self.condensed_matrix
+
     def build_matrix(self, end=None):
         if end is None:
             end = self.column_range - 1
@@ -95,6 +98,7 @@ class GeneticDistance:
         return '\n'.join(rv)
 
     def render_dendrogram(self):
+        print(f'condensed_matrix: {self.condensed_matrix}', flush=True)
         method = linkage(self.condensed_matrix, self.detect_dendrogram_type())
 
         dendro = dendrogram(method, orientation='left')
