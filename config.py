@@ -25,7 +25,15 @@ class ProductionConfig(Config):
     DEBUG = False
 
 
+class TestingConfig(Config):
+    """
+    Testing configurations
+    """
+    TESTING = True
+
+
 app_config = {
     'development': DevelopmentConfig,
-    'production': ProductionConfig
+    'production': ProductionConfig,
+    'testing': TestingConfig
 }
