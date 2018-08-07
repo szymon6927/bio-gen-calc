@@ -1,4 +1,4 @@
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, abort, Response
 from . import hardy_weinber
 from .utils.HardyWeinberCalculation import HardyWeinberCalculation
 
@@ -13,8 +13,11 @@ def hardy_weinber_page():
 
 @hardy_weinber.route('/hardy-weinber/send-data', methods=['POST'])
 def get_data():
-    data = request.get_json()
-    hw = HardyWeinberCalculation(data)
+    try:
+        data = request.get_json()
+        hw = HardyWeinberCalculation(data)
 
-    result = hw.calcualte()
-    return jsonify({'data': result})
+        result = hw.calcualte()
+        return jsonify({'data': result})
+    except Exception as e:
+        abort(Response(str(e), 409))

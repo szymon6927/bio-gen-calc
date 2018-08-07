@@ -1,6 +1,6 @@
 # app/chi_square/views.py
 
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, abort, Response
 from . import chi_square
 from .utils.ChiSquareCalculation import ChiSquareCalculation
 from .utils.ChiSquareGoodness import ChiSquareGoodness
@@ -16,19 +16,25 @@ def chi_square_page():
 
 @chi_square.route('/chi-square/send-data', methods=['POST'])
 def get_data():
-    data = request.get_json()
+    try:
+        data = request.get_json()
 
-    chi = ChiSquareCalculation(data)
-    result = chi.calculate()
+        chi = ChiSquareCalculation(data)
+        result = chi.calculate()
 
-    return jsonify({'data': result})
+        return jsonify({'data': result})
+    except Exception as e:
+        abort(Response(str(e), 409))
 
 
 @chi_square.route('/chi-square/send-data-goodness', methods=['POST'])
 def get_goodness_data():
-    data = request.get_json()
+    try:
+        data = request.get_json()
 
-    chi_goodness = ChiSquareGoodness(data["observed"], data["expected"])
-    result = chi_goodness.calculate()
+        chi_goodness = ChiSquareGoodness(data["observed"], data["expected"])
+        result = chi_goodness.calculate()
 
-    return jsonify({'data': result})
+        return jsonify({'data': result})
+    except Exception as e:
+        abort(Response(str(e), 409))

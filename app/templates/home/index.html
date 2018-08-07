@@ -10,7 +10,7 @@
 
   <section class="homepage">
     <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-12 col-sm-12">
         <div class="info">
           {% if module_desc.text %}
             <div class="content">{{ module_desc.text|safe }}</div>
@@ -22,7 +22,7 @@
       <hr>
       {% for page in pages %}
         {% if not loop.first %}
-          <div class="col-md-6 col-sm-6 col">
+          <div class="col-md-6 col-sm-6 col-12">
             <div class="card mb-sm-5 mb-4">
               <div class="card-body">
                 <h2 class="card-title text-center">{{ page.name }}</h2>

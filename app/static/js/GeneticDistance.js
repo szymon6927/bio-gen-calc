@@ -45,8 +45,8 @@ class GeneticDistance {
 
     for (let i = 0; i < this.taxonNumber; i++) {
       let columnValue = $(`.column-${i}`).map(function () {
-          return parseFloat($(this).val());
-        }).get();
+        return parseFloat($(this).val());
+      }).get();
       let columnSum = columnValue.reduce((a, b) => a + b, 0)
       if (!Number.isInteger(columnSum) && columnSum > totalSum) {
         $(`.column-${i}`).addClass('is-invalid')
@@ -97,8 +97,6 @@ class GeneticDistance {
   drawTableBody() {
     for (let key in this.locusObj) {
       if (this.locusObj.hasOwnProperty(key)) {
-        console.log(key + " -> " + this.locusObj[key]);
-
         let tr = `<tr class="group-name"><th scope="row" rowspan="${this.locusObj[key] + 1}">G-${key}</th></tr>`;
         $(`${this.container} tbody`).append(tr);
 
@@ -130,38 +128,14 @@ class GeneticDistance {
     $('.calcuate-distance').show();
   }
 
-  // buildJSON() {
-  //   console.log("JSON building");
-  //   let data = {};
-  //   data["taxon_number"] = $('#taxon-number').val();
-  //   data["locus_number"] = $('#locus-number').val();
-  //   data["type_of_distance"] = $('#type-of-distance').val();
-  //
-  //   for (let i = 0; i < this.locusNumber; i++) {
-  //     let gObject = {};
-  //     let numberOfAlleles = $(`#locus-${i}`).val();
-  //     gObject["nubmer_of_alleles"] = numberOfAlleles;
-  //
-  //     for (let j = 0; j < numberOfAlleles; j++) {
-  //       let gLocus = $(`.g-${i}.line-${j} input`).map(function () {
-  //         return $(this).val();
-  //       }).get();
-  //       gObject[`alleles_${j}`] = gLocus;
-  //     }
-  //     data[`g_${i}`] = gObject;
-  //   }
-  //
-  //   return JSON.stringify(data);
-  // }
-
   buildJSON() {
-    console.log("json building 2")
     let data = {};
 
     data["taxon_number"] = $('#taxon-number').val();
     data["locus_number"] = $('#locus-number').val();
     data["type_of_distance"] = $('#type-of-distance').val();
     data["type_of_dendrogram"] = $('#type-of-dendrogram').val();
+
     data["number_of_alleles"] = $('.number-of-alleles input').map(function () {
       return parseFloat($(this).val());
     }).get();
@@ -183,8 +157,6 @@ class GeneticDistance {
     $(topDesc).insertAfter('.MathJax_Preview');
 
     for (let i = 0; i < this.taxonNumber - 1; i++) {
-      let divWidth = 100 / this.taxonNumber;
-      let widthAsString = divWidth.toFixed(2) + "%";
       let div = `<div class="top-desc-item">${i}</div>`;
       $('.top-desc').append(div);
     }
@@ -204,8 +176,8 @@ class GeneticDistance {
 
   sendData() {
     let dataJSON = this.buildJSON();
-    console.log(dataJSON);
     const path = '/genetic-distance/send-data-distance';
+    const render = new RenderHelper('.genetic-distance-results');
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
@@ -228,14 +200,16 @@ class GeneticDistance {
 
         setTimeout(() => {
           this.matrixDesc()
-        },1500);
+        }, 1500);
 
         goToByScroll('.genetic-distance-results');
 
       },
-      error: (result) => {
-        console.log(result);
-        $('.cover').hide()
+      error: (request) => {
+        $('.cover').hide();
+        console.log("Something goes wrong, try again!", request);
+
+        render.errorBlock(request);
       }
     })
   }

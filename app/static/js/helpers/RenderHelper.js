@@ -31,7 +31,7 @@ class RenderHelper {
   errorBlock(request) {
     let errMsg = '';
     if (request && request.status === 409) {
-      errMsg = `<div>Error message: ${request.responseText}</div>`;
+      errMsg = `<div><strong>Error message:</strong> ${request.responseText}</div>`;
     }
 
     let template = `<div class="alert alert-danger mt-4 mb-3" role="alert">

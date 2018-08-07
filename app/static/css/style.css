@@ -80,6 +80,7 @@ table th[scope=row] {
 
 .form-control {
     padding: .375rem .25rem;
+    min-width: 85px;
 }
 
 .wrapper .jumbotron-fluid {
@@ -139,7 +140,7 @@ table th[scope=row] {
     right: 20px;
     margin-bottom: 0;
     bottom: 20px;
-    z-index: 100;
+    z-index: 999;
     background-color: #008bd0 !important;
 }
 

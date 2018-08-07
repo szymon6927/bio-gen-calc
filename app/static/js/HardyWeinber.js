@@ -58,9 +58,9 @@ class HardyWeinber {
         console.log("Successfull!");
         render.successBlock(result);
       },
-      error: function (result) {
-        console.log("Something goes wrong, try again!", result);
-        render.errorBlock();
+      error: function (request) {
+        console.log("Something goes wrong, try again!", request);
+        render.errorBlock(request);
       }
     })
   }

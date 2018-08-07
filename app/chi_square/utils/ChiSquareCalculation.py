@@ -1,3 +1,4 @@
+from flask import abort, Response
 from math import sqrt
 import numpy as np
 from scipy.stats import power_divergence
@@ -52,7 +53,6 @@ class ChiSquareCalculation:
 
     def calculate(self):
         chi2_standard, p_standard, dof, chi2_yats, p_yats, corelation_standard, corelation_yats = self.corelation()
-
         add_result(self, "dof", dof)
         add_result(self, "chi2_standard", round(chi2_standard, 5))
         add_result(self, "p_standard", round(p_standard, 5))
@@ -62,3 +62,5 @@ class ChiSquareCalculation:
         add_result(self, "corelation_yats", round(corelation_yats, 5))
 
         return self.results
+
+
