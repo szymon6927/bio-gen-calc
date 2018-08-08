@@ -30,26 +30,7 @@ def create_app(config_name):
     with app.test_request_context():
         db.create_all()
 
-    from .home import home as home_blueprint
-    app.register_blueprint(home_blueprint)
-
-    from .about import about as about_blueprint
-    app.register_blueprint(about_blueprint)
-
-    from .hardy_weinber import hardy_weinber as hardy_weinber
-    app.register_blueprint(hardy_weinber)
-
-    from .chi_square import chi_square as chi_square
-    app.register_blueprint(chi_square)
-
-    from .pic import pic as pic
-    app.register_blueprint(pic)
-
-    from .genetic_distance import genetic_distance as genetic_distance
-    app.register_blueprint(genetic_distance)
-
-    from .contact import contact as contact
-    app.register_blueprint(contact)
+    register_blueprints(app)
 
     login_manager.init_app(app)
 
@@ -69,3 +50,21 @@ def create_app(config_name):
                 'module_desc': Page.query.filter_by(breadcrumbs=request.path).first()}
 
     return app
+
+
+def register_blueprints(app):
+    from .home import home as home_blueprint
+    from .about import about as about_blueprint
+    from .hardy_weinber import hardy_weinber as hardy_weinber
+    from .chi_square import chi_square as chi_square
+    from .pic import pic as pic
+    from .genetic_distance import genetic_distance as genetic_distance
+    from .contact import contact as contact
+
+    app.register_blueprint(home_blueprint)
+    app.register_blueprint(about_blueprint)
+    app.register_blueprint(hardy_weinber)
+    app.register_blueprint(chi_square)
+    app.register_blueprint(pic)
+    app.register_blueprint(genetic_distance)
+    app.register_blueprint(contact)
