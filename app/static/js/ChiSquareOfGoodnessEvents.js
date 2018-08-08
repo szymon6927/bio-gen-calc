@@ -22,3 +22,19 @@ $('.calcuate-button-goodness').click(() => {
   chiArrayGoodness.sendData();
   goToByScroll('.chi-goodness-result');
 });
+
+const chiSquareGoodenssSection = $('.chi-goodness');
+
+$(document).on('keypress', '.goodness-width', function (e) {
+  if (e.which == 13) {
+    chiSquareGoodenssSection.find('.generate-array-goodness').trigger('click');
+    return false;
+  }
+});
+
+$(document).on('keypress', '.chi-goodness .table .form-control', function (e) {
+  if (e.which == 13) {
+    chiSquareGoodenssSection.find('.calcuate-button-goodness').trigger('click');
+    return false;
+  }
+});

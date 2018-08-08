@@ -33,3 +33,28 @@ $('.calcuate-dominant').click(function () {
   pic.sendDominant();
   goToByScroll('.dominant-result');
 });
+
+$(document).on('keypress', '.amplified-marker, .absecnce-marker', function (e) {
+  if (e.which == 13) {
+    $('.calcuate-dominant').trigger('click');
+    return false;
+  }
+});
+
+$(document).on('keypress', '.alleles-number', function (e) {
+  if (e.which == 13) {
+    $('.generate-codominant').trigger('click');
+    $('.allele-input').first().focus();
+    return false;
+  }
+});
+
+$(document).on('keypress', '.allele-input', function (e) {
+  if (e.which == 13) {
+    $('.calcuate-codominant').trigger('click');
+    return false;
+  }
+});
+
+
+
