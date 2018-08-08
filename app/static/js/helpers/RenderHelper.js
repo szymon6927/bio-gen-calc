@@ -30,7 +30,7 @@ class RenderHelper {
 
   errorBlock(request) {
     let errMsg = '';
-    if (request && request.status === 409) {
+    if (request && (request.status === 409 || request.status === 400)) {
       errMsg = `<div><strong>Error message:</strong> ${request.responseText}</div>`;
     }
 

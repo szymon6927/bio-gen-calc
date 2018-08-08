@@ -23,8 +23,10 @@ def get_data():
         result = chi.calculate()
 
         return jsonify({'data': result})
+    except TypeError:
+        abort(Response("Please check type of input data", 409))
     except Exception as e:
-        abort(Response(str(e), 409))
+        abort(Response(str(e), 400))
 
 
 @chi_square.route('/chi-square/send-data-goodness', methods=['POST'])
@@ -36,5 +38,7 @@ def get_goodness_data():
         result = chi_goodness.calculate()
 
         return jsonify({'data': result})
+    except TypeError:
+        abort(Response("Please check type of input data", 409))
     except Exception as e:
-        abort(Response(str(e), 409))
+        abort(Response(str(e), 400))

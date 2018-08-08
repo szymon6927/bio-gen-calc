@@ -20,8 +20,10 @@ def pic_codominant():
         co_d = Codominant(data)
         result = co_d.calculate()
         return jsonify({'data': result})
+    except TypeError:
+        abort(Response("Please check type of input data", 409))
     except Exception as e:
-        abort(Response(str(e), 409))
+        abort(Response(str(e), 400))
 
 
 @pic.route('/pic/send-dominant', methods=['POST'])
@@ -31,5 +33,7 @@ def pic_dominant():
         do = Dominant(data)
         result = do.calculate()
         return jsonify({'data': result})
+    except TypeError:
+        abort(Response("Please check type of input data", 409))
     except Exception as e:
-        abort(Response(str(e), 409))
+        abort(Response(str(e), 400))

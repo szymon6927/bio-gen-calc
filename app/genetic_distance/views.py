@@ -32,6 +32,8 @@ def get_data():
                 'matrix_latex': gen_distance.redner_matrix()
             }
         })
+    except TypeError:
+        abort(Response("Please check type of input data", 409))
     except Exception as e:
-        abort(Response(str(e), 409))
+        abort(Response(str(e), 400))
 
