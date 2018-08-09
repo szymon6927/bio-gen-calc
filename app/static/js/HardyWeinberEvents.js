@@ -36,3 +36,30 @@ $('.form-control').keypress(function (e) {
     return false;    //<---- Add this line
   }
 });
+
+$(document).on('click', '.render-to-pdf', function () {
+  console.log("render pdf");
+  let container = $('.hardy-weinberg').html();
+
+  let data = {};
+  data['content'] = container;
+
+  data = JSON.stringify(data);
+
+  const path = 'http://127.0.0.1:5000/generate-pdf';
+  $.ajax({
+    type: "POST",
+    contentType: "application/json; charset=utf-8",
+    url: path,
+    data: data,
+    success: function (result) {
+      console.log(result);
+      setTimeout(() => {
+        console.log("SSSSS")
+      }, 1500);
+    },
+    error: function (request) {
+      console.log("Error druring render", request);
+    }
+  });
+});

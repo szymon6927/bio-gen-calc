@@ -2,7 +2,7 @@
 
 from datetime import datetime
 import pdfkit
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, abort, Response
 from .database import db
 from .admin.models import User, Page
 
@@ -40,16 +40,24 @@ def create_app(config_name):
     def load_user(user_id):
         return db.session.query(User).get(user_id)
 
-    @app.route('/generate-pdf', methods=['GET'])
+    @app.route('/generate-pdf', methods=['POST'])
     def generate_pdf():
-        template = render_template('utils/pdf_template.html')
-        pdf = pdfkit.from_string(template, False)
+        try:
+            print(f'generate_pdf', flush=True)
+            data = request.get_json()
+            print(f'request_data: {data}', flush=True)
 
-        response = make_response(pdf)
-        response.headers['Content-Type'] = 'application/pdf'
-        response.headers['Content-Disposition'] = 'inline; filename=example.pdf'
+            template = render_template('utils/pdf_template.html', content=data['content'])
+            pdf = pdfkit.from_string(template, False)
 
-        return response
+            response = make_response(pdf)
+            response.headers['Content-Type'] = 'application/pdf'
+            response.headers['Content-Disposition'] = 'attachment; filename=example.pdf'
+            response.mimetype = 'application/pdf'
+            return response
+        except Exception as e:
+            print(f'Exception: {e}', flush=True)
+            abort(Response(str(e)), 400)
 
     @app.errorhandler(404)
     def page_not_found(e):
