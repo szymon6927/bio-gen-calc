@@ -196,13 +196,12 @@ class GeneticDistance {
           MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }, 500);
 
-        $('.cover').hide();
 
         setTimeout(() => {
           this.matrixDesc()
-        }, 1500);
-
-        goToByScroll('.genetic-distance-results');
+          $('.cover').hide();
+          goToByScroll('.genetic-distance-results');
+        }, 2000);
 
       },
       error: (request) => {

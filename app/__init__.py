@@ -46,8 +46,10 @@ def create_app(config_name):
 
     @app.context_processor
     def inject_now():
-        return {'now': datetime.utcnow(),
-                'module_desc': Page.query.filter_by(breadcrumbs=request.path).first()}
+        return {
+            'now': datetime.utcnow(),
+            'module_desc': Page.query.filter_by(breadcrumbs=request.path).first(),
+        }
 
     return app
 
