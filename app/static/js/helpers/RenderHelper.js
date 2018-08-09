@@ -24,8 +24,11 @@ class RenderHelper {
         ]
       };
 
+      let pdfRender = `<div class="btn render-to-pdf"><a href="/generate-pdf">Save results to pdf</a></div>`;
+
       $(this.container).html(template);
       $(this.container + ' .card-body').json2html(result.data, transform);
+      $(this.container + ' .card-body').append(pdfRender);
   }
 
   errorBlock(request) {

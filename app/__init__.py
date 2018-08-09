@@ -1,7 +1,8 @@
 # app/__init__.py
 
 from datetime import datetime
-from flask import Flask, render_template, request
+import pdfkit
+from flask import Flask, render_template, request, make_response
 from .database import db
 from .admin.models import User, Page
 
@@ -38,6 +39,17 @@ def create_app(config_name):
     @login_manager.user_loader
     def load_user(user_id):
         return db.session.query(User).get(user_id)
+
+    @app.route('/generate-pdf', methods=['GET'])
+    def generate_pdf():
+        template = render_template('utils/pdf_template.html')
+        pdf = pdfkit.from_string(template, False)
+
+        response = make_response(pdf)
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'inline; filename=example.pdf'
+
+        return response
 
     @app.errorhandler(404)
     def page_not_found(e):
