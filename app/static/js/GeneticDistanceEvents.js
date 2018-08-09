@@ -51,3 +51,29 @@ $('#type-of-distance').change(function () {
   }
 });
 
+$(document).on('keypress', '.taxon-number, .locus-number, #type-of-distance, #type-of-dendrogram', function (e) {
+  if (e.which == 13) {
+    $('.alleles-inputs-generate').trigger('click');
+    $('.number-of-alleles input').first().focus();
+    return false;
+  }
+});
+
+$(document).on('keypress', '.number-of-alleles input', function (e) {
+  if (e.which == 13) {
+    $('.generate-table').trigger('click');
+    $('.table .cell').first().focus();
+    return false;
+  }
+});
+
+$(document).on('keypress', '.table .form-control', function (e) {
+  if (e.which == 13) {
+    $('.calcuate-distance').trigger('click');
+    return false;
+  }
+});
+
+
+
+

@@ -28,6 +28,7 @@ const chiSquareGoodenssSection = $('.chi-goodness');
 $(document).on('keypress', '.goodness-width', function (e) {
   if (e.which == 13) {
     chiSquareGoodenssSection.find('.generate-array-goodness').trigger('click');
+    chiSquareGoodenssSection.find('.cell').first().focus();
     return false;
   }
 });

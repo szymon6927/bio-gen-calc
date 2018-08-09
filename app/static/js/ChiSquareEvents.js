@@ -33,6 +33,7 @@ const chiSquareSection = $('.chi-independence');
 $(document).on('keypress', '.array-width, .array-height', function (e) {
   if (e.which == 13) {
     chiSquareSection.find('.generate-array').trigger('click');
+    chiSquareSection.find('.cell').first().focus();
     return false;
   }
 });
