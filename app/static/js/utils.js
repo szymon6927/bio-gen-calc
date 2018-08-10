@@ -98,6 +98,7 @@ $('#message-modal').modal({
   show: false
 });
 
+
 $(document).ready(function () {
   const validator = new Validation();
   validator.nonNegative('.non-negative')
