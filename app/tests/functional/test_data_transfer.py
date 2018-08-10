@@ -79,3 +79,12 @@ def test_pic_codominant_communiction(test_client):
     assert response.status_code == 200
 
 
+def test_generate_pdf(test_client):
+    data = dict()
+    data["content"] = "<h1>TEST</h1>"
+
+    response = test_client.post('/generate-pdf', data=json.dumps(data), content_type='application/json')
+    assert response.status_code == 200
+    assert response.mimetype == 'application/pdf'
+
+

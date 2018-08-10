@@ -44,7 +44,6 @@ def create_app(config_name):
     @app.route('/generate-pdf', methods=['POST'])
     def generate_pdf():
         try:
-            print(f'generate_pdf', flush=True)
             data = request.get_json()
 
             template = render_template('utils/pdf_template.html', content=data['content'])
@@ -52,14 +51,16 @@ def create_app(config_name):
                    'app/static/css/style.css',
                    'app/static/css/pdf-style.css'
                    ]
-            pdf = base64.b64encode(pdfkit.from_string(template, False, css=css))
+            try:
+                pdf = base64.b64encode(pdfkit.from_string(template, False, css=css))
+            except FileNotFoundError:
+                pdf = base64.b64encode(pdfkit.from_string(template, False))
 
             response = make_response(pdf)
             response.headers['Content-Type'] = 'application/pdf'
             response.mimetype = 'application/pdf'
             return response, 200
         except Exception as e:
-            print(f'Exception: {e}', flush=True)
             abort(Response(str(e)), 400)
 
     @app.errorhandler(404)
