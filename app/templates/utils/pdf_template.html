@@ -1,10 +1,36 @@
-  <style>
-    .pdf-wrapper {
-      background: #fafafa;
-    }
-  </style>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="pdfkit-page-size" content="Legal"/>
+  <meta name="pdfkit-orientation" content="Portrait"/>
+  <title>Gene Calc - PDF results</title>
+  <meta name="author" content="Gene Calc - Szymon Miks, Jan Binkowski">
+</head>
+<body>
+<div class="main-container">
 
-  <div class="pdf-wrapper">
-    <h1>test</h1>
+  <div class="container">
+    <p class="text-left">Generated form <a href="https://gene-calc.pl/" target="_blank">https://gene-calc.pl/</a></p>
     {{ content|safe }}
   </div>
+
+  <footer class="footer mt-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 text-left">
+          <p class="app-name"><a href="https://gene-calc.pl/">Gene Calc</a>, Copyright © All Rights Reserved</p>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 text-right">
+          <p>
+            Authors: <a href="mailto:miks.szymon@gmail.com">Szymon Miks</a> &amp;
+            <a href="mailto:jan.binkowski96@gmail.com">Jan Bińkowski</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
