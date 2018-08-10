@@ -48,11 +48,14 @@ def create_app(config_name):
             data = request.get_json()
 
             template = render_template('utils/pdf_template.html', content=data['content'])
-            pdf = base64.b64encode(pdfkit.from_string(template, False))
+            css = ['app/static/css/vendors/bootstrap.min.css',
+                   'app/static/css/style.css',
+                   'app/static/css/pdf-style.css'
+                   ]
+            pdf = base64.b64encode(pdfkit.from_string(template, False, css=css))
 
             response = make_response(pdf)
             response.headers['Content-Type'] = 'application/pdf'
-            response.headers['Content-Disposition'] = 'attachment; filename=example.pdf'
             response.mimetype = 'application/pdf'
             return response, 200
         except Exception as e:
