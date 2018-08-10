@@ -3,6 +3,10 @@ const validator = new Validation();
 
 $('#type-of-marker').change(function () {
   let markerType = $(this).val();
+
+  $('#type-of-marker option').removeAttr('selected');
+  $(`#type-of-marker option[value='${markerType}']`).attr("selected","selected");
+
   pic.setMarkerType(markerType);
   pic.display();
 
