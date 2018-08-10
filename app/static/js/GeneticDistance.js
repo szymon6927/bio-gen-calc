@@ -174,6 +174,19 @@ class GeneticDistance {
 
   }
 
+  renderPDFButton() {
+    let pdfRender = `<div class="btn btn-secondary render-to-pdf">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Save results to pdf</span>
+                    </div>`;
+
+    let date = moment().format('DD/MM/YYYY-hh:mm');
+    let downloadButton = `<a id='download-link' download='results-${date}.pdf' style="display:none;" /> `;
+
+    $('.genetic-distance-results').append(pdfRender);
+    $('.genetic-distance-results').append(downloadButton);
+  }
+
   sendData() {
     let dataJSON = this.buildJSON();
     const path = '/genetic-distance/send-data-distance';
@@ -196,13 +209,13 @@ class GeneticDistance {
           MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }, 500);
 
-
         setTimeout(() => {
-          this.matrixDesc()
+          this.matrixDesc();
           $('.cover').hide();
           goToByScroll('.genetic-distance-results');
         }, 2000);
 
+        this.renderPDFButton()
       },
       error: (request) => {
         $('.cover').hide();

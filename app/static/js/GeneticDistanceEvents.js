@@ -51,6 +51,13 @@ $('#type-of-distance').change(function () {
   }
 });
 
+$('.genetic-distance select').change(function () {
+  let value = $(this).val();
+
+  $('.genetic-distance select option').removeAttr('selected');
+  $(`.genetic-distance select option[value='${value}']`).attr("selected","selected");
+});
+
 $(document).on('keypress', '.taxon-number, .locus-number, #type-of-distance, #type-of-dendrogram', function (e) {
   if (e.which == 13) {
     $('.alleles-inputs-generate').trigger('click');
