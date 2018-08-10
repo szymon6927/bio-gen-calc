@@ -26,7 +26,7 @@ class RenderHelper {
 
       let pdfRender = `<div class="btn btn-secondary mt-3 render-to-pdf">
                           <i class="fas fa-file-pdf"></i>
-                          <span>Save results to pdf</span>
+                          <span>Save as PDF</span>
                       </div>`;
 
       let date = moment().format('DD/MM/YYYY-hh:mm');
