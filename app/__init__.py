@@ -5,6 +5,7 @@ import pdfkit
 from flask import Flask, render_template, request, make_response, abort, Response
 from .database import db
 from .admin.models import User, Page
+import base64
 
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -45,16 +46,15 @@ def create_app(config_name):
         try:
             print(f'generate_pdf', flush=True)
             data = request.get_json()
-            print(f'request_data: {data}', flush=True)
 
             template = render_template('utils/pdf_template.html', content=data['content'])
-            pdf = pdfkit.from_string(template, False)
+            pdf = base64.b64encode(pdfkit.from_string(template, False))
 
             response = make_response(pdf)
             response.headers['Content-Type'] = 'application/pdf'
             response.headers['Content-Disposition'] = 'attachment; filename=example.pdf'
             response.mimetype = 'application/pdf'
-            return response
+            return response, 200
         except Exception as e:
             print(f'Exception: {e}', flush=True)
             abort(Response(str(e)), 400)
