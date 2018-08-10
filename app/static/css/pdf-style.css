@@ -1,0 +1,28 @@
+.render-to-pdf, .btn-danger, .btn-primary, .messages, .alert, .matrix-wrapper, .btn-success {
+    display: none !important;
+}
+
+.main-container {
+    background-color: #fafafa;
+    padding-top: 30px;
+    border: 1px solid #222;
+}
+
+.row {
+    margin-top: 0 !important;
+}
+
+.card {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.genetic-distance-table .table-responsive {
+    overflow-x: initial !important;
+    background: #fff !important;
+    z-index: 9999 !important;
+}
+
+table, tr, td, th, tbody, thead, tfoot {
+    page-break-inside: avoid !important;
+}

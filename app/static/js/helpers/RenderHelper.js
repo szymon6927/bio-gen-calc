@@ -14,21 +14,28 @@ class RenderHelper {
       let transform = {
         '<>': 'div', 'class':'row result-score', 'html': [
           {
-            '<>': 'span', 'class': 'col-md-6 col-sm-6 col-12 text-left result-name',
+            '<>': 'div', 'class': 'col-md-6 col-sm-6 col-12 text-left result-name',
             'html': '<div>${name} =</div>',
           },
           {
-            '<>': 'span', 'class': 'col-md-6 col-sm-6 col-12 text-left result-value',
+            '<>': 'div', 'class': 'col-md-6 col-sm-6 col-12 text-left result-value',
             'html': '<div>${value}</div>',
           }
         ]
       };
 
-      let pdfRender = `<div class="btn render-to-pdf">Save results to pdf</div>`;
+      let pdfRender = `<div class="btn btn-secondary mt-3 render-to-pdf">
+                          <i class="fas fa-file-pdf"></i>
+                          <span>Save results to pdf</span>
+                      </div>`;
+
+      let date = moment().format('DD/MM/YYYY-hh:mm');
+      let downloadButton = `<a id='download-link' download='results-${date}.pdf' style="display:none;" /> `;
 
       $(this.container).html(template);
       $(this.container + ' .card-body').json2html(result.data, transform);
       $(this.container + ' .card-body').append(pdfRender);
+      $(this.container + ' .card-body').append(downloadButton);
   }
 
   errorBlock(request) {
