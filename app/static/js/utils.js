@@ -98,8 +98,46 @@ $('#message-modal').modal({
   show: false
 });
 
+function particleButtonsEffect() {
+  const buttons = document.querySelectorAll('.btn-block');
+
+  let particlesOpts = {
+    duration: 500,
+    easing: 'easeOutQuad',
+    speed: .1,
+    particlesAmountCoefficient: 10,
+    oscillationCoefficient: 80
+  };
+
+  buttons.forEach((btn, index) => {
+    const particles = new Particles(btn, particlesOpts);
+
+    let buttonVisible = true;
+    btn.addEventListener('click', () => {
+      if (!particles.isAnimating() && buttonVisible) {
+        particles.disintegrate();
+        buttonVisible = !buttonVisible;
+      }
+
+      setTimeout(() => {
+        if (!particles.isAnimating() && !buttonVisible) {
+          particles.integrate({
+            duration: 300,
+            easing: 'easeOutSine'
+          });
+          buttonVisible = !buttonVisible;
+        }
+
+      }, 2000);
+    });
+
+  });
+}
+
 
 $(document).ready(function () {
   const validator = new Validation();
-  validator.nonNegative('.non-negative')
+  validator.nonNegative('.non-negative');
+
+  particleButtonsEffect();
 });
