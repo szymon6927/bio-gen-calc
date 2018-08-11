@@ -175,16 +175,15 @@ class GeneticDistance {
   }
 
   renderPDFButton() {
+    let date = moment().format('DD/MM/YYYY-hh:mm');
+
     let pdfRender = `<div class="btn btn-secondary render-to-pdf">
                         <i class="fas fa-file-pdf"></i>
                         <span>Save results to pdf</span>
-                    </div>`;
+                    </div>
+                    <a id="download-link" download="results-${date}.pdf" style="display:none;" />`;
 
-    let date = moment().format('DD/MM/YYYY-hh:mm');
-    let downloadButton = `<a id='download-link' download='results-${date}.pdf' style="display:none;" /> `;
-
-    $('.genetic-distance-results').append(pdfRender);
-    $('.genetic-distance-results').append(downloadButton);
+    $('.pdf-wrapper').html(pdfRender);
   }
 
   sendData() {
@@ -220,7 +219,6 @@ class GeneticDistance {
       error: (request) => {
         $('.cover').hide();
         console.log("Something goes wrong, try again!", request);
-
         render.errorBlock(request);
       }
     })
