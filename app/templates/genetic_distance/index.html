@@ -116,6 +116,6 @@
 
 {% block scripts %}
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-AMS_SVG' async></script>
-<script src="{{ url_for('static', filename='js/GeneticDistance.js') }}"></script>
-<script src="{{ url_for('static', filename='js/GeneticDistanceEvents.js') }}"></script>
+<script src="{{ url_for('static', filename='js/GeneticDistance.js') }}?ver={{ css_js_ver }}"></script>
+<script src="{{ url_for('static', filename='js/GeneticDistanceEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}

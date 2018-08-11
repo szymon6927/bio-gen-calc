@@ -73,6 +73,7 @@ def create_app(config_name):
         return {
             'now': datetime.utcnow(),
             'module_desc': Page.query.filter_by(breadcrumbs=request.path).first(),
+            'css_js_ver': 1.05
         }
 
     return app

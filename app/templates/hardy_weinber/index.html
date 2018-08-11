@@ -59,6 +59,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/HardyWeinber.js') }}"></script>
-<script src="{{ url_for('static', filename='js/HardyWeinberEvents.js') }}"></script>
+<script src="{{ url_for('static', filename='js/HardyWeinber.js') }}?ver={{ css_js_ver }}"></script>
+<script src="{{ url_for('static', filename='js/HardyWeinberEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}

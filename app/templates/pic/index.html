@@ -98,6 +98,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/Pic.js') }}"></script>
-<script src="{{ url_for('static', filename='js/PicEvents.js') }}"></script>
+<script src="{{ url_for('static', filename='js/Pic.js') }}?ver={{ css_js_ver }}"></script>
+<script src="{{ url_for('static', filename='js/PicEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}

@@ -108,8 +108,8 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/ChiSquare.js') }}"></script>
-<script src="{{ url_for('static', filename='js/ChiSquareEvents.js') }}"></script>
-<script src="{{ url_for('static', filename='js/ChiSquareOfGoodness.js') }}"></script>
-<script src="{{ url_for('static', filename='js/ChiSquareOfGoodnessEvents.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ChiSquare.js') }}?ver={{ css_js_ver }}"></script>
+<script src="{{ url_for('static', filename='js/ChiSquareEvents.js') }}?ver={{ css_js_ver }}"></script>
+<script src="{{ url_for('static', filename='js/ChiSquareOfGoodness.js') }}?ver={{ css_js_ver }}"></script>
+<script src="{{ url_for('static', filename='js/ChiSquareOfGoodnessEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}
