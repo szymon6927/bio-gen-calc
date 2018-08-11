@@ -19,7 +19,9 @@ def test_hw_basic():
         {'name': "p", 'value': 0.61111},
         {'name': "q", 'value': 0.38889},
         {'name': "p-value", 'value': 0.66931},
-        {'name': "Chi-square value", 'value': 0.8},
+        {'name': "Chi-square value", 'value': 0.803},
+        {'name': "Yate`s chi-square value", 'value': 0.16133},
+        {'name': "Yate`s p-value", 'value': 0.9225},
         {'name': "status", 'value': "Distribution consistent with Hardy Weinberg's law at the level of significance: 0.05"}
     ]
 

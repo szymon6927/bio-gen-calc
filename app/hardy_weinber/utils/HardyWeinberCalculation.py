@@ -1,4 +1,6 @@
+import numpy as np
 from scipy.stats import chisquare
+from scipy.stats import power_divergence
 from ...helpers.result_aggregator import add_result
 
 
@@ -26,6 +28,16 @@ class HardyWeinberCalculation:
 
         return ho, he, rho, e_ho, e_he, e_rho, p, q
 
+    def calcualte_yates_correction(self):
+        ho, he, rho, e_ho, e_he, e_rho, p, q = self.calcuate_expected_observed()
+
+        observed = np.asarray([ho, he, rho])
+        expected = np.asarray([e_ho, e_he, e_rho])
+        dof = 2
+        observed = observed + 0.5 * np.sign(expected - observed)
+
+        return power_divergence(observed, expected, ddof=observed.size - 1 - dof, axis=None, lambda_=None)
+
     def calcualte(self):
         alfa = self.data["alfa"]
         ho, he, rho, e_ho, e_he, e_rho, p, q = self.calcuate_expected_observed()
@@ -37,7 +49,16 @@ class HardyWeinberCalculation:
         add_result(self, 'p', round(p, 5))
         add_result(self, 'q', round(q, 5))
         add_result(self, 'p-value', round(pval, 5))
-        add_result(self, 'Chi-square value', round(chi, 2))
+        add_result(self, 'Chi-square value', round(chi, 5))
+
+        if ho < 5 or he < 5 or rho < 5:
+            chi_yates, pval_yates = self.calcualte_yates_correction()
+
+            add_result(self, 'Yate`s chi-square value', round(chi_yates, 5))
+            add_result(self, 'Yate`s p-value', round(pval_yates, 5))
+
+            # set pval to pval_yates for next if statement ~JANO
+            pval = pval_yates
 
         if pval <= alfa:
             msg = "Distribution does not consistent with Hardy Weinberg's law at the level " \
