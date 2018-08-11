@@ -38,3 +38,8 @@ def test_contact_page(test_client):
     response = test_client.get('/contact')
     assert response.status_code == 200
     assert b'Contact Us' in response.data
+
+def test_contact_page(test_client):
+    response = test_client.get('/donors')
+    assert response.status_code == 200
+    assert b'Our donors' in response.data

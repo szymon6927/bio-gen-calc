@@ -86,6 +86,7 @@ def register_blueprints(app):
     from .pic import pic as pic
     from .genetic_distance import genetic_distance as genetic_distance
     from .contact import contact as contact
+    from .donors import donors
 
     app.register_blueprint(home_blueprint)
     app.register_blueprint(about_blueprint)
@@ -94,3 +95,4 @@ def register_blueprints(app):
     app.register_blueprint(pic)
     app.register_blueprint(genetic_distance)
     app.register_blueprint(contact)
+    app.register_blueprint(donors)

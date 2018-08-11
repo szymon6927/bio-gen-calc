@@ -1,5 +1,3 @@
-# app/chi_square/views.py
-
 from flask import render_template, request, jsonify, abort, Response
 from . import chi_square
 from .utils.ChiSquareCalculation import ChiSquareCalculation

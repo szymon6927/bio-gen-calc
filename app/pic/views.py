@@ -1,6 +1,5 @@
 from flask import render_template, request, jsonify, abort, Response
 from . import pic
-# from .utils import Codominant, Dominant
 from .utils.CodominantCalculation import Codominant
 from .utils.DominantCalculation import Dominant
 
