@@ -34,6 +34,8 @@ def get_data():
         })
     except TypeError:
         abort(Response("Please check type of input data", 409))
+    except ValueError:
+        abort(Response("The quantity or quality of the data is inappropriate!", 409))
     except Exception as e:
         abort(Response(str(e), 400))
 
