@@ -128,7 +128,7 @@ function particleButtonsEffect() {
           buttonVisible = !buttonVisible;
         }
 
-      }, 2000);
+      }, 2300);
     });
 
   });
