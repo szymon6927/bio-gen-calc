@@ -98,7 +98,6 @@ class GeneticDistance:
         return '\n'.join(rv)
 
     def render_dendrogram(self):
-        print(f'condensed_matrix: {self.condensed_matrix}', flush=True)
         method = linkage(self.condensed_matrix, self.detect_dendrogram_type())
 
         dendro = dendrogram(method, orientation='left')
