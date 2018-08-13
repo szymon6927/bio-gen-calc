@@ -27,7 +27,6 @@ class GeneticDistance {
     }
   }
 
-
   validateLocusInputs() {
     let valid = true;
     for (let i = 0; i < this.locusNumber; i++) {
@@ -47,10 +46,10 @@ class GeneticDistance {
       let columnValue = $(`.column-${i}`).map(function () {
         return parseFloat($(this).val());
       }).get();
-      let columnSum = columnValue.reduce((a, b) => a + b, 0)
+      let columnSum = columnValue.reduce((a, b) => a + b, 0);
       if (!Number.isInteger(columnSum) && columnSum > totalSum) {
-        $(`.column-${i}`).addClass('is-invalid')
-        showModal(`In column ${i} values are incorrect`)
+        $(`.column-${i}`).addClass('is-invalid');
+        showModal(`In column ${i} values are incorrect`);
         return false;
       }
     }
@@ -188,6 +187,7 @@ class GeneticDistance {
 
   sendData() {
     let dataJSON = this.buildJSON();
+    console.log("dataJSON: ", dataJSON);
     const path = '/genetic-distance/send-data-distance';
     const render = new RenderHelper('.genetic-distance-results');
     $.ajax({

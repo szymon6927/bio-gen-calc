@@ -139,5 +139,5 @@ $(document).ready(function () {
   const validator = new Validation();
   validator.nonNegative('.non-negative');
 
-  particleButtonsEffect();
+  // particleButtonsEffect();
 });
