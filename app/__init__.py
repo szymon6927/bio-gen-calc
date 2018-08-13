@@ -7,6 +7,7 @@ from .database import db
 from .admin.models import User, Page
 import base64
 
+from flask_htmlmin import HTMLMIN
 from flask_login import LoginManager
 from flask_migrate import Migrate
 
@@ -22,6 +23,8 @@ def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
+
+    HTMLMIN(app)
 
     admin = run_admin()
     admin.init_app(app)
