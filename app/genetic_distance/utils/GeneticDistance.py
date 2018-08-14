@@ -8,7 +8,7 @@ if os.environ.get('DISPLAY', '') == '':
 
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.spatial.distance import squareform
+import itertools
 from scipy.cluster.hierarchy import linkage, dendrogram
 from io import BytesIO
 import base64
@@ -21,6 +21,13 @@ class GeneticDistance:
         self.matrix = []
         self.condensed_matrix = []
         self.column_range = int(self.data["taxon_number"])
+
+    def get_pair_combination(self, size):
+        """
+        :param size:
+        :return: list of 2-length tuples of combination from size
+        """
+        return list(itertools.combinations(range(size), 2))
 
     def get_condensed_matrix(self):
         return self.condensed_matrix

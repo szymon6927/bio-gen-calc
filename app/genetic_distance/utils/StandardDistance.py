@@ -1,5 +1,4 @@
 from .GeneticDistance import GeneticDistance
-import itertools
 from math import sqrt, log
 
 
@@ -17,7 +16,7 @@ class StandardDistance(GeneticDistance):
 
     def calcuate_x_y(self):
         sum_product = {}
-        pair_combination = list(itertools.combinations(range(self.column_range), 2))
+        pair_combination = self.get_pair_combination(self.column_range)
         for pair in pair_combination:
             product = [a * b for a, b in zip(self.data["column_" + str(pair[0])], self.data["column_" + str(pair[1])])]
 
@@ -27,7 +26,7 @@ class StandardDistance(GeneticDistance):
         return sum_product
 
     def calcuate_distances(self):
-        pair_combination = list(itertools.combinations(range(self.column_range), 2))
+        pair_combination = self.get_pair_combination(self.column_range)
 
         sum_of_square = self.estimate_j()
         sum_product = self.calcuate_x_y()

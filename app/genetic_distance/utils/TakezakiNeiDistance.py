@@ -1,5 +1,4 @@
 from .GeneticDistance import GeneticDistance
-import itertools
 from math import sqrt
 
 
@@ -9,7 +8,7 @@ class TakezakiNeiDistance(GeneticDistance):
 
     def calcuate_x_y(self):
         sum_product = {}
-        pair_combination = list(itertools.combinations(range(self.column_range), 2))
+        pair_combination = self.get_pair_combination(self.column_range)
         for pair in pair_combination:
             product = [sqrt(a * b) for a, b in zip(self.data["column_" + str(pair[0])], self.data["column_" + str(pair[1])])]
 
@@ -19,7 +18,7 @@ class TakezakiNeiDistance(GeneticDistance):
         return sum_product
 
     def calcuate_distances(self):
-        pair_combination = list(itertools.combinations(range(self.column_range), 2))
+        pair_combination = self.get_pair_combination(self.column_range)
         sum_product = self.calcuate_x_y()
 
         for pair in pair_combination:

@@ -43,14 +43,6 @@ $('.calcuate-distance').click(function () {
   }
 });
 
-// $('#type-of-distance').change(function () {
-//   let val = $(this).val();
-//   if (val === 'geometric') {
-//     $('.genetic-distance').hide();
-//     $('.geometric-info').show("slow");
-//   }
-// });
-
 $('.genetic-distance select').change(function () {
   let value = $(this).val();
 
