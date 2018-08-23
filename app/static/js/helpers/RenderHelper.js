@@ -15,7 +15,7 @@ class RenderHelper {
       '<>': 'div', 'class': 'row result-score', 'html': [
         {
           '<>': 'div', 'class': 'col-md-6 col-sm-6 col-12 text-left result-name',
-          'html': '<div>${name} =</div>',
+          'html': '<div>${name} <span class="equal-char">=</span></div>',
         },
         {
           '<>': 'div', 'class': 'col-md-6 col-sm-6 col-12 text-left result-value',
