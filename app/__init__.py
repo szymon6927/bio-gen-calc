@@ -89,6 +89,7 @@ def register_blueprints(app):
     from .chi_square import chi_square as chi_square
     from .pic import pic as pic
     from .genetic_distance import genetic_distance as genetic_distance
+    from .sequences_analysis_tools import sequences_analysis_tools as sequences_analysis_tools
     from .contact import contact as contact
     from .donors import donors
 
@@ -98,5 +99,6 @@ def register_blueprints(app):
     app.register_blueprint(chi_square)
     app.register_blueprint(pic)
     app.register_blueprint(genetic_distance)
+    app.register_blueprint(sequences_analysis_tools)
     app.register_blueprint(contact)
     app.register_blueprint(donors)

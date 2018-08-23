@@ -26,7 +26,22 @@
         <a class="nav-link" href="{{ url_for('pic.pic_page') }}">Pic & H</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('genetic_distance.genetic_distance_page') }}">Estimation of Genetic Distance</a>
+        <a class="nav-link" href="{{ url_for('genetic_distance.genetic_distance_page') }}">Estimation of Genetic
+          Distance</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="drop-down" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          Sequences Analysis Tools
+        </a>
+        <div class="dropdown-menu" aria-labelledby="drop-down">
+          <a class="dropdown-item" href="{{ url_for('sequences_analysis_tools.dot_plot_page') }}">Dot plot</a>
+          <a class="dropdown-item" href="{{ url_for('sequences_analysis_tools.consensus_sequence_page') }}">
+            Tool to obtain consensus sequence
+          </a>
+          <a class="dropdown-item" href="{{ url_for('sequences_analysis_tools.sequences_tools_page') }}">Additionally
+            Tools</a>
+        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ url_for('contact.contact_page') }}">Contact Us</a>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ module_desc.seo_title }}{% endblock %}
+{% block seo_desc %}{{ module_desc.seo_desc }}{% endblock %}
+{% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+  {% include 'utils/module_top_block.html' %}
+
+  {% include 'utils/info_block.html' %}
+
+  <section class="consensus-sequence">
+    <div class="row">
+    </div>
+  </section>
+</div>
+
+{% include 'utils/modal.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
