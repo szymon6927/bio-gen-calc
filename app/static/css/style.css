@@ -413,6 +413,14 @@ table th[scope=row] {
     line-height: 15px;
 }
 
+.raw-sequences, .upload-sequences, .sequences-form-genebank {
+    display: none;
+}
+
+.raw-sequences, .upload-sequences, .sequences-form-genebank {
+    width: 100%;
+}
+
 @media (max-width: 1150px) {
     .navbar-nav li {
         font-size: 14px;

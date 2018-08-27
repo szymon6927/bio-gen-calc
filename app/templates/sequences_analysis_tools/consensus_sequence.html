@@ -12,6 +12,68 @@
 
   <section class="consensus-sequence">
     <div class="row">
+      <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-12">
+        <div class="form-group">
+          <label for="type-of-data">Type of data:</label>
+          <select class="form-control" id="type-of-data">
+            <option>---</option>
+            <option value="raw-sequences">Raw Sequences in FASTA format</option>
+            <option value="upload-sequences">Upload Sequences in FASTA format</option>
+            <option value="sequences-form-genebank">Sequences form GeneBank</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="raw-sequences">
+        <div class="col-md-12 col-sm-12">
+          <div class="form-group">
+            <label for="fast-seq">Insert <strong>FASTA</strong> sequence:</label>
+            <textarea class="form-control" id="fast-seq" rows="10"></textarea>
+          </div>
+        </div>
+
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
+          <button type="submit" class="btn btn-block btn-danger consensus-sequence-calculate">Calculate!</button>
+        </div>
+      </div>
+
+      <div class="upload-sequences">
+        <div class="col-md-12 col-sm-12">
+          <div class="form-group">
+            <label for="seq-file-upload">Upload Sequences File</label>
+            <input type="file" class="form-control-file" id="seq-file-upload">
+          </div>
+        </div>
+
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
+          <button type="submit" class="btn btn-block btn-danger consensus-sequence-calculate">Calculate!</button>
+        </div>
+      </div>
+
+      <div class="sequences-form-genebank">
+        <div class="col-md-12 col-sm-12">
+          <div class="form-group">
+            <label for="type-of-sequence">Type of sequence:</label>
+            <select class="form-control" id="type-of-sequence">
+              <option value="nucleotide" selected>Amino acid sequences</option>
+              <option value="protein">Nucleotide sequences</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12">
+          <div class="form-group">
+            <label for="gene-bank-seq">Insert <strong>GeneBank</strong> sequences id:</label>
+            <textarea class="form-control" id="gene-bank-seq" rows="5" placeholder="Eg.&#10;first id&#10;second id"></textarea>
+          </div>
+        </div>
+
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
+          <button type="submit" class="btn btn-block btn-danger consensus-sequence-calculate">Calculate!</button>
+        </div>
+      </div>
     </div>
   </section>
 </div>
@@ -21,4 +83,8 @@
 {% endblock %}
 
 {% block scripts %}
+<script
+  src="{{ url_for('static', filename='js/sequences_analysis_tools/ConsensusSequence.js') }}?ver={{ css_js_ver }}"></script>
+<script
+  src="{{ url_for('static', filename='js/sequences_analysis_tools/ConsensusSequenceEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}
