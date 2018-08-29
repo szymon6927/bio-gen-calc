@@ -35,4 +35,33 @@ class ConsensusSequence {
       }
     })
   }
+
+  sendSeqFile() {
+    $('.cover').show();
+    const path = '/sequences-analysis-tools/consensus-sequence/send-seq-file';
+    const file = new FormData($('#seq-upload-form')[0]);
+    console.log(file);
+    $.ajax({
+      type: "POST",
+      url: path,
+      data: file,
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function (result) {
+        console.log("Succesfull");
+
+        let downloadLink = document.getElementById('download-link');
+        downloadLink.href = 'data:text/plain;base64,' + result;
+
+        downloadLink.click();
+
+        $('.cover').hide();
+      },
+      error: function (request) {
+        console.log("Something goes wrong, try again!", request);
+        $('.cover').hide();
+      }
+    });
+  }
 }

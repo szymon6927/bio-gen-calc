@@ -14,3 +14,7 @@ $('#type-of-data').change(function () {
 $('.consensus-sequence-calculate.raw-seq').click(function () {
   consensusSeq.sendRawSeq()
 });
+
+$('.consensus-sequence-calculate.file-seq').click(function (e) {
+  consensusSeq.sendSeqFile()
+});

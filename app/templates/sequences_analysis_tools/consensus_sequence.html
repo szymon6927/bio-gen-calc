@@ -35,20 +35,24 @@
         </div>
 
         <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
-          <button type="submit" class="btn btn-block btn-danger consensus-sequence-calculate raw-seq">Calculate!</button>
+          <button type="submit" class="btn btn-block btn-danger consensus-sequence-calculate raw-seq">Calculate!
+          </button>
         </div>
       </div>
 
       <div class="upload-sequences">
         <div class="col-md-12 col-sm-12">
-          <div class="form-group">
-            <label for="seq-file-upload">Upload Sequences File</label>
-            <input type="file" class="form-control-file" id="seq-file-upload">
-          </div>
+          <form id="seq-upload-form" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="seq-file">Upload file with <strong>.fasta</strong> extension</label>
+              <input type="file" name="file" class="form-control-file" id="seq-file">
+            </div>
+          </form>
         </div>
 
         <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
-          <button type="submit" class="btn btn-block btn-danger consensus-sequence-calculate file-seq">Calculate!</button>
+          <button type="submit" class="btn btn-block btn-danger consensus-sequence-calculate file-seq">Calculate!
+          </button>
         </div>
       </div>
 
@@ -66,12 +70,14 @@
         <div class="col-md-12 col-sm-12">
           <div class="form-group">
             <label for="gene-bank-seq">Insert <strong>GeneBank</strong> sequences id:</label>
-            <textarea class="form-control" id="gene-bank-seq" rows="5" placeholder="Eg.&#10;first id&#10;second id"></textarea>
+            <textarea class="form-control" id="gene-bank-seq" rows="5"
+                      placeholder="Eg.&#10;first id&#10;second id"></textarea>
           </div>
         </div>
 
         <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
-          <button type="submit" class="btn btn-block btn-danger consensus-sequence-calculate genebank-seq">Calculate!</button>
+          <button type="submit" class="btn btn-block btn-danger consensus-sequence-calculate genebank-seq">Calculate!
+          </button>
         </div>
       </div>
     </div>
@@ -79,6 +85,11 @@
     <div class="row">
       <div class="col-md-12 col-sm-12">
         <div class="raw-seq-results"></div>
+      </div>
+      <div class="col-md-12 col-sm-12">
+        <div class="file-seq-results">
+          <a id='download-link' download='consensus-sequence.fasta' style="display:none;" />
+        </div>
       </div>
     </div>
   </section>

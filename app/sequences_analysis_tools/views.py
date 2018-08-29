@@ -1,8 +1,12 @@
-from flask import render_template, request, jsonify, abort, Response
+import base64
+from flask import render_template, request, jsonify, abort, Response, make_response
+from werkzeug.utils import secure_filename
 from . import sequences_analysis_tools
 
 from .utils.SequencesTools import SequencesTools
 from .utils.ConsensusSequence import ConsensusSequence
+
+from ..helpers.file_helper import allowed_file
 
 
 @sequences_analysis_tools.route('/sequences-analysis-tools/dot-plot')
@@ -24,6 +28,31 @@ def get_raw_seq_data():
         return jsonify({'data': result})
     except Exception as e:
         abort(Response(str(e), 400))
+
+
+@sequences_analysis_tools.route('/sequences-analysis-tools/consensus-sequence/send-seq-file', methods=['POST'])
+def get_seq_file_data():
+    if 'file' not in request.files:
+        abort(Response('No file part', 400))
+
+    file = request.files['file']
+
+    if file.filename == '':
+        abort(Response('No selected file', 400))
+
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+
+        data = dict()
+        data['sequences'] = file.read()
+
+        consensus_seq = ConsensusSequence(data)
+        result = consensus_seq.file_seq()
+
+        response = make_response(base64.b64encode(result.encode()))
+        response.headers['Content-Type'] = 'text/plain'
+        response.mimetype = 'text/plain'
+        return response, 200
 
 
 @sequences_analysis_tools.route('/sequences-analysis-tools/sequences-tools')

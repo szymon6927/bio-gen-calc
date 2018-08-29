@@ -1,6 +1,3 @@
-import uuid
-import os
-
 from Bio import AlignIO
 from Bio.Align.Applications import MuscleCommandline
 from io import StringIO
@@ -30,3 +27,18 @@ class ConsensusSequence:
         remove_temp_file(filename)
 
         return self.results
+
+    def file_seq(self):
+        filename = create_seq_file(self.data['sequences'])
+
+        muscle = MuscleCommandline(input=filename)
+        stdout, stderr = muscle()
+        align = AlignIO.read(StringIO(stdout), "fasta")
+
+        summary_align = AlignInfo.SummaryInfo(align)
+        consensus = summary_align.gap_consensus(threshold=0.55, ambiguous='N')
+
+        remove_temp_file(filename)
+
+        return str(consensus)
+
