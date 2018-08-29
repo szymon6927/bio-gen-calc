@@ -25,3 +25,4 @@ def name_converter(name):
         return "Chi-square correlation"
     else:
         return name
+
