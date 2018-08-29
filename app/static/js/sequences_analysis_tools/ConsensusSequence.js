@@ -38,6 +38,7 @@ class ConsensusSequence {
 
   sendSeqFile() {
     $('.cover').show();
+    const render = new RenderHelper('.file-seq-results');
     const path = '/sequences-analysis-tools/consensus-sequence/send-seq-file';
     const file = new FormData($('#seq-upload-form')[0]);
     console.log(file);
@@ -51,6 +52,8 @@ class ConsensusSequence {
       success: function (result) {
         console.log("Succesfull");
 
+        $('.file-seq-results').html('<a id="download-link" download="consensus-sequence.fasta" style="display:none;"></a>');
+
         let downloadLink = document.getElementById('download-link');
         downloadLink.href = 'data:text/plain;base64,' + result;
 
@@ -60,6 +63,7 @@ class ConsensusSequence {
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);
+        render.errorBlock(request);
         $('.cover').hide();
       }
     });

@@ -1,5 +1,5 @@
 const moduleSections = '.raw-sequences, .upload-sequences, .sequences-form-genebank';
-const moduleResultsSection = '.raw-seq-results';
+const moduleResultsSection = '.raw-seq-results, .file-seq-results';
 
 const consensusSeq = new ConsensusSequence()
 

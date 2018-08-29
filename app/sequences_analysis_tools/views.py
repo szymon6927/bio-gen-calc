@@ -53,6 +53,8 @@ def get_seq_file_data():
         response.headers['Content-Type'] = 'text/plain'
         response.mimetype = 'text/plain'
         return response, 200
+    else:
+        abort(Response('Illegal file extension', 400))
 
 
 @sequences_analysis_tools.route('/sequences-analysis-tools/sequences-tools')

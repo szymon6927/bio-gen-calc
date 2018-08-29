@@ -421,6 +421,17 @@ table th[scope=row] {
     width: 100%;
 }
 
+.upload-file-info {
+    height: 37px;
+    line-height: 40px;
+    display: inline-block;
+    width: 75%;
+    border: 1px solid #cacaca;
+    padding-left: 10px;
+    border-radius: 5px;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
 @media (max-width: 1150px) {
     .navbar-nav li {
         font-size: 14px;

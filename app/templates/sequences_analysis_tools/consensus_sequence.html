@@ -41,11 +41,17 @@
       </div>
 
       <div class="upload-sequences">
-        <div class="col-md-12 col-sm-12">
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
           <form id="seq-upload-form" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-              <label for="seq-file">Upload file with <strong>.fasta</strong> extension</label>
-              <input type="file" name="file" class="form-control-file" id="seq-file">
+            <div class="upload-wrapper mt-5 mb-5">
+              <div class="form-group">
+                <label class="btn btn-primary btn-block" for="seq-file">
+                  <input type="file" name="file" class="form-control-file" id="seq-file" hidden
+                         onchange="$('.upload-file-name').val(this.files[0].name)">
+                  Click to upload file with <strong>.fasta</strong> extension
+                </label>
+                <input type="text" class="form-control upload-file-name" />
+              </div>
             </div>
           </form>
         </div>
@@ -87,9 +93,7 @@
         <div class="raw-seq-results"></div>
       </div>
       <div class="col-md-12 col-sm-12">
-        <div class="file-seq-results">
-          <a id='download-link' download='consensus-sequence.fasta' style="display:none;" />
-        </div>
+        <div class="file-seq-results"></div>
       </div>
     </div>
   </section>
