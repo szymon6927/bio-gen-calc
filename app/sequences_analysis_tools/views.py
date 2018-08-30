@@ -57,6 +57,21 @@ def get_seq_file_data():
         abort(Response('Illegal file extension', 400))
 
 
+@sequences_analysis_tools.route('/sequences-analysis-tools/consensus-sequence/send-genebank-file', methods=['POST'])
+def get_seq_genebank():
+    try:
+        data = request.get_json()
+        consensus_seq = ConsensusSequence(data)
+        result = consensus_seq.genebank_seq()
+
+        response = make_response(base64.b64encode(result.encode()))
+        response.headers['Content-Type'] = 'text/plain'
+        response.mimetype = 'text/plain'
+        return response, 200
+    except Exception as e:
+        abort(Response(str(e), 400))
+
+
 @sequences_analysis_tools.route('/sequences-analysis-tools/sequences-tools')
 def sequences_tools_page():
     return render_template('sequences_analysis_tools/sequences_tools.html', title="Sequences Tools")
