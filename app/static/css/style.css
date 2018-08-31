@@ -432,6 +432,29 @@ table th[scope=row] {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
 }
 
+.alignment-wrapper {
+    padding: 0 15px;
+    background: #fafafa;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+.alignment-wrapper .title {
+    line-height: 36px;
+    font-weight: bold;
+}
+
+.alignment {
+    display: inline;
+    float: left;
+    text-align: left;
+    overflow-x: scroll;
+}
+
+.dotplot-img {
+    margin: 0 auto;
+}
+
 @media (max-width: 1150px) {
     .navbar-nav li {
         font-size: 14px;
@@ -442,6 +465,7 @@ table th[scope=row] {
     .h1, h1 {
         font-size: 2.5rem !important;
     }
+
     .navbar-nav li {
         font-size: 16px;
     }

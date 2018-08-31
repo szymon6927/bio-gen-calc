@@ -5,6 +5,7 @@ from . import sequences_analysis_tools
 
 from .utils.SequencesTools import SequencesTools
 from .utils.ConsensusSequence import ConsensusSequence
+from .utils.DotPlot import DotPlot
 
 from ..helpers.file_helper import allowed_file
 
@@ -12,6 +13,34 @@ from ..helpers.file_helper import allowed_file
 @sequences_analysis_tools.route('/sequences-analysis-tools/dot-plot')
 def dot_plot_page():
     return render_template('sequences_analysis_tools/dot_plot.html', title="Dot plot")
+
+
+@sequences_analysis_tools.route('/sequences-analysis-tools/dot-plot/send-raw-seq', methods=['POST'])
+def dot_plot_raw_seq():
+    try:
+        data = request.get_json()
+        dot_plot = DotPlot(data)
+        result = dot_plot.raw_sequence()
+
+        print(f'alignment: {dot_plot.get_alignments()}', flush=True)
+
+        return jsonify({'data': result,
+                        'dotplot_base64': dot_plot.get_dot_plot_image(),
+                        'alignment': dot_plot.get_alignments()})
+    except Exception as e:
+        print(e, flush=True)
+        abort(Response(str(e), 400))
+
+
+@sequences_analysis_tools.route('/sequences-analysis-tools/dot-plot/send-genebank-ids', methods=['POST'])
+def dot_plot_genebank_ids():
+    try:
+        data = request.get_json()
+        dot_plot = DotPlot(data)
+        result = dot_plot.genebank_seq()
+        return jsonify({'data': result})
+    except Exception as e:
+        abort(Response(str(e), 400))
 
 
 @sequences_analysis_tools.route('/sequences-analysis-tools/consensus-sequence')

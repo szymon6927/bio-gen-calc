@@ -72,4 +72,3 @@ class ConsensusSequence:
         remove_temp_file(filename)
 
         return f'>consensus sequence {len(consensus)} bp\n' + str(consensus)
-
