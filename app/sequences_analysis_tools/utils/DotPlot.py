@@ -10,6 +10,10 @@ class DotPlot:
         self.data = data
         self.results = []
 
+    def remove_newlines(self):
+        self.data['seq-content-1'] = self.data['seq-content-1'].replace('\n', '')
+        self.data['seq-content-2'] = self.data['seq-content-2'].replace('\n', '')
+
     def get_coverage(self):
         coverage_list = []
 
@@ -22,19 +26,9 @@ class DotPlot:
         return round(min(coverage_list), 1)
 
     def get_alignments(self):
-        seq_1 = str(self.data['seq-content-1'])
-        seq_2 = str(self.data['seq-content-2'])
+        alignments = pairwise2.align.globalxx(self.data['seq-content-1'], self.data['seq-content-2'])
 
-        alignments = pairwise2.align.globalxx(seq_1.rstrip(), seq_2.rstrip())
-
-        formated_alignments = []
-        for item in alignments[0]:
-            if isinstance(item, str):
-                formated_alignments.append(item.replace('\n', ''))
-            else:
-                formated_alignments.append(item)
-
-        string_alignment = pairwise2.format_alignment(*formated_alignments)
+        string_alignment = pairwise2.format_alignment(*alignments[0])
 
         return string_alignment
 
@@ -106,10 +100,12 @@ class DotPlot:
         return decoded
 
     def raw_sequence(self):
+        self.remove_newlines()
+
         seq_name_1 = self.data['seq-name-1']
         seq_name_2 = self.data['seq-name-2']
-        seq_content_1 = self.data['seq-content-1']
-        seq_content_2 = self.data['seq-content-2']
+        seq_content_1 = str(self.data['seq-content-1']).rstrip()
+        seq_content_2 = str(self.data['seq-content-2']).rstrip()
 
         alignment = self.get_alignments()
 
