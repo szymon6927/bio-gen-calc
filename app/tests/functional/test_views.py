@@ -7,7 +7,7 @@ def test_home_page(test_client):
 def test_about_page(test_client):
     response = test_client.get('/about')
     assert response.status_code == 200
-    assert b'Theoretical Introduction to Calculation' in response.data
+    assert b'Materials' in response.data
 
 
 def test_hw_page(test_client):
