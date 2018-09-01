@@ -4,6 +4,26 @@
 {% block seo_desc %}{{ module_desc.seo_desc }}{% endblock %}
 {% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
 
+{% block seo_social %}
+<!-- Google / Search Engine Tags -->
+<meta itemprop="name" content="{{ module_desc.seo_title }}">
+<meta itemprop="description" content="{{ module_desc.seo_desc }}">
+<meta itemprop="image" content="{{ url_for('static', filename='img/gene-social.jpg') }}">
+
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="{{ request.base_url }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ module_desc.seo_title }}">
+<meta property="og:description" content="{{ module_desc.seo_desc }}">
+<meta property="og:image" content="{{ url_for('static', filename='img/gene-social.jpg') }}">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ module_desc.seo_title }}">
+<meta name="twitter:description" content="{{ module_desc.seo_desc }}">
+<meta name="twitter:image" content="{{ url_for('static', filename='img/gene-social.jpg') }}">
+{% endblock %}
+
 {% block body %}
 <div class="wrapper">
   {% include 'utils/module_top_block.html' %}
