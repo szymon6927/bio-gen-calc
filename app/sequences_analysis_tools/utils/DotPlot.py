@@ -104,8 +104,8 @@ class DotPlot:
 
         seq_name_1 = self.data['seq-name-1']
         seq_name_2 = self.data['seq-name-2']
-        seq_content_1 = str(self.data['seq-content-1']).rstrip()
-        seq_content_2 = str(self.data['seq-content-2']).rstrip()
+        seq_content_1 = self.data['seq-content-1']
+        seq_content_2 = self.data['seq-content-2']
 
         alignment = self.get_alignments()
 
@@ -118,9 +118,9 @@ class DotPlot:
         average_identifity = self.get_average_identifity(ident)
         frag_identifity = self.get_frag_identifity(ident)
 
-        add_result(self, "Coverage", coverage)
-        add_result(self, "Average identity", average_identifity)
-        add_result(self, "Fragmental identity", frag_identifity)
+        add_result(self, "Coverage [%]", coverage)
+        add_result(self, "Average identity [%]", average_identifity)
+        add_result(self, "Fragmental identity [%]", frag_identifity)
 
         return self.results
 
@@ -149,8 +149,8 @@ class DotPlot:
         average_identifity = self.get_average_identifity(ident)
         frag_identifity = self.get_frag_identifity(ident)
 
-        add_result(self, "Coverage", coverage)
-        add_result(self, "Average identity", average_identifity)
-        add_result(self, "Fragmental identity", frag_identifity)
+        add_result(self, "Coverage [%]", coverage)
+        add_result(self, "Average identity [%]", average_identifity)
+        add_result(self, "Fragmental identity [%]", frag_identifity)
 
         return self.results
