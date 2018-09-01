@@ -9,6 +9,7 @@
   <meta name="author" content="Gene Calc - Szymon Miks, Jan Binkowski">
 
   {% block seo_social %}
+    {% include "utils/seo_social.html" with context %}
   {% endblock %}
 
   <link rel="icon" href="{{ url_for('static', filename='img/favicons/favicon.ico') }}">

@@ -1,0 +1,17 @@
+<!-- Google / Search Engine Tags -->
+<meta itemprop="name" content="{{ module_desc.seo_title }}">
+<meta itemprop="description" content="{{ module_desc.seo_desc }}">
+<meta itemprop="image" content="{{ url_for('static', filename='img/gene-social.jpg', _external=True) }}">
+
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="{{ request.base_url }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ module_desc.seo_title }}">
+<meta property="og:description" content="{{ module_desc.seo_desc }}">
+<meta property="og:image" content="{{ url_for('static', filename='img/gene-social.jpg', _external=True) }}">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ module_desc.seo_title }}">
+<meta name="twitter:description" content="{{ module_desc.seo_desc }}">
+<meta name="twitter:image" content="{{ url_for('static', filename='img/gene-social.jpg', _external=True) }}">
