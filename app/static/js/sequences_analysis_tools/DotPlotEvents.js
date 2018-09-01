@@ -14,9 +14,22 @@ $('#type-of-data').change(function () {
 
 $('.dot-plot-raw-calculate').click(function () {
   dotPlot.sendRawSeq();
-  goToByScroll('.raw-seq-results')
 });
 
 $('.dot-plot-genebank-calculate').click(function () {
   dotPlot.sendSeqGeneBank();
+});
+
+$('.raw-sequences .form-control').keypress(function (e) {
+  if (e.which == 13) {
+    $('.dot-plot-raw-calculate').trigger('click');
+    return false;
+  }
+});
+
+$('.sequences-form-genebank .form-control').keypress(function (e) {
+  if (e.which == 13) {
+    $('.dot-plot-genebank-calculate').trigger('click');
+    return false;
+  }
 });

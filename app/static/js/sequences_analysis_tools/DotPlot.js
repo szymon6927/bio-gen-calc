@@ -5,8 +5,8 @@ class DotPlot {
     const secondID = $('#genebank-seq-2').val();
 
     const data = {};
-    data['seq-1'] = firstID;
-    data['seq-2'] = secondID;
+    data['seq-name-1'] = firstID;
+    data['seq-name-2'] = secondID;
 
     return JSON.stringify(data);
   }
@@ -52,6 +52,8 @@ class DotPlot {
         alignment.insertAfter(lastDivResult);
 
         $('.cover').hide();
+
+        goToByScroll('.raw-seq-results')
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);
@@ -76,11 +78,26 @@ class DotPlot {
       data: dataJSON,
       dataType: "json",
       success: function (result) {
-        console.log("Succesfull");
+        console.log("Succesfull", result);
+        render.successBlock(result);
 
-        render.successBlock();
+        const lastDivResult = $('.genebank-seq-results .result-score').last();
+
+        const alignment = $(`<div class="row result-score alignment-wrapper">
+                              <div class="title">Alignment:</div>
+                              <pre class="alignment">${result.alignment}</pre>
+                            </div>`);
+
+        const dotPlotImg = $(`<div class="row result-score">
+                                <img class="img-fluid dotplot-img" src="data:image/png;base64,${result.dotplot_base64}">
+                              </div>`);
+
+        dotPlotImg.insertAfter(lastDivResult);
+        alignment.insertAfter(lastDivResult);
 
         $('.cover').hide();
+
+        goToByScroll('.genebank-seq-results');
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);

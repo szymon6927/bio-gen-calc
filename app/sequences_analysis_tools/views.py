@@ -21,14 +21,10 @@ def dot_plot_raw_seq():
         data = request.get_json()
         dot_plot = DotPlot(data)
         result = dot_plot.raw_sequence()
-
-        print(f'alignment: {dot_plot.get_alignments()}', flush=True)
-
         return jsonify({'data': result,
                         'dotplot_base64': dot_plot.get_dot_plot_image(),
                         'alignment': dot_plot.get_alignments()})
     except Exception as e:
-        print(e, flush=True)
         abort(Response(str(e), 400))
 
 
@@ -38,7 +34,9 @@ def dot_plot_genebank_ids():
         data = request.get_json()
         dot_plot = DotPlot(data)
         result = dot_plot.genebank_seq()
-        return jsonify({'data': result})
+        return jsonify({'data': result,
+                        'dotplot_base64': dot_plot.get_dot_plot_image(),
+                        'alignment': dot_plot.get_alignments()})
     except Exception as e:
         abort(Response(str(e), 400))
 
