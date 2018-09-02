@@ -10,6 +10,7 @@ import base64
 from flask_htmlmin import HTMLMIN
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_compress import Compress
 
 # local imports
 from config import app_config
@@ -24,6 +25,7 @@ def create_app(config_name):
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
+    Compress(app)
     HTMLMIN(app)
 
     admin = run_admin()

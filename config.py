@@ -21,6 +21,9 @@ class ProductionConfig(Config):
     """
     Production configurations
     """
+    COMPRESS_MIMETYPES = ['text/html', 'text/css', 'text/xml', 'application/json', 'application/javascript']
+    COMPRESS_LEVEL = 6
+    COMPRESS_MIN_SIZE = 500
     SQLALCHEMY_ECHO = False
     DEBUG = False
     MINIFY_PAGE = True
