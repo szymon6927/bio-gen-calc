@@ -32,7 +32,7 @@ class Codominant:
         if control_sum == 1:
             return p
         else:
-            abort(Response('Mixed type of input values', 409))
+            raise ValueError("Mixed type of input values")
 
     def calcuate_h(self):
         freq_sum = 0
