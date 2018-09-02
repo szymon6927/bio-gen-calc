@@ -21,8 +21,8 @@ class ConsensusSequence:
         summary_align = AlignInfo.SummaryInfo(align)
         consensus = summary_align.gap_consensus(threshold=0.55, ambiguous='N')
 
-        add_result(self, 'Consenus sequecne', str(consensus))
-        add_result(self, 'Sequence length', len(consensus))
+        add_result(self, "Consenus sequence", str(consensus))
+        add_result(self, "Sequence length", len(consensus))
 
         remove_temp_file(filename)
 

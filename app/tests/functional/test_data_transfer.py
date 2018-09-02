@@ -88,3 +88,64 @@ def test_generate_pdf(test_client):
     assert response.mimetype == 'application/pdf'
 
 
+def test_dotplot_raw_seq_communiction(test_client):
+    data = dict()
+    data['seq-name-1'] = "xxx"
+    data['seq-content-1'] = "CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGATGAGACCGTGGAATAAACGATCGAGTG"
+    data['seq-name-2'] = "yyy"
+    data['seq-content-2'] = "AATCTGGAGGACCTGTGGTAACTCAGCTCGTCGTGGCACTGCTTTTGTCGTGACCCTGCTTTGTTGTTGG"
+
+    response = test_client.post('/sequences-analysis-tools/dot-plot/send-raw-seq',
+                                data=json.dumps(data), content_type='application/json')
+
+    assert response.status_code == 200
+
+
+def test_dotplot_genebank_seq_communiction(test_client):
+    data = dict()
+    data['seq-name-1'] = "2765658"
+    data['seq-name-2'] = "2765657"
+
+    response = test_client.post('/sequences-analysis-tools/dot-plot/send-genebank-ids',
+                                data=json.dumps(data), content_type='application/json')
+
+    assert response.status_code == 200
+
+
+def test_consensus_sequence_raw_seq_communiction(test_client):
+    data = dict()
+    data['sequences'] = """>gi|2765658
+    CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGATGAGACCGTGGAATAAACGATCGAGTG
+    AATCCGGAGGACCGGTGTACTCAGCTCACCGGGGGCATTGCTCCCGTGGTGACCCTGATTTGTTGTTGGG"""
+
+    response = test_client.post('/sequences-analysis-tools/consensus-sequence/send-raw-seq',
+                                data=json.dumps(data), content_type='application/json')
+
+    assert response.status_code == 200
+
+
+def test_sequences_tools_complement_communiction(test_client):
+    data = dict()
+    data['type'] = "complement"
+    data['sequences'] = """>2765658
+CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGATGAGACCGTGGAATAAACGATCGAGTG
+AATCCGGAGGACCGGTGTACTCAGCTCACCGGGGGCATTGCTCCCGTGGTGACCCTGATTTGTTGTTGGG
+CCGCCTCGGGAGCGTCCATGGCGGGTTTGAACCTCTAGCCCGGCGCAGTTTGGGCGCCAAGCCATATGAA
+AGCATCACCGGCGAATGGCATTGTCTTCCCCAAAACCCGGAGCGGCGGCGTGCTGTCGCGTGCCCAATGA
+
+
+>2765657
+CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGTTGAGACAACAGAATATATGATCGAGTG
+AATCTGGAGGACCTGTGGTAACTCAGCTCGTCGTGGCACTGCTTTTGTCGTGACCCTGCTTTGTTGTTGG
+GCCTCCTCAAGAGCTTTCATGGCAGGTTTGAACTTTAGTACGGTGCAGTTTGCGCCAAGTCATATAAAGC
+
+
+>2765656
+CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGTTGAGACAGCAGAACATACGATCGAGTG
+AATCCGGAGGACCCGTGGTTACACGGCTCACCGTGGCTTTGCTCTCGTGGTGAACCCGGTTTGCGACCGG
+GCCGCCTCGGGAACTTTCATGGCGGGTTTGAACGTCTAGCGCGGCGCAGTTTGCGCCAAGTCATATGGAG"""
+
+    response = test_client.post('/sequences-analysis-tools/sequences-tools/send-data',
+                                data=json.dumps(data), content_type='application/json')
+
+    assert response.status_code == 200

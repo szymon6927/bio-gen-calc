@@ -44,3 +44,21 @@ def test_donors_page(test_client):
     response = test_client.get('/donors')
     assert response.status_code == 200
     assert b'Our donors' in response.data
+
+
+def test_dotplot_page(test_client):
+    response = test_client.get('/sequences-analysis-tools/dot-plot')
+    assert response.status_code == 200
+    assert b'Dot plot' in response.data
+
+
+def test_consensus_sequence_page(test_client):
+    response = test_client.get('/sequences-analysis-tools/consensus-sequence')
+    assert response.status_code == 200
+    assert b'Consensus Sequence' in response.data
+
+
+def test_sequences_tools_page(test_client):
+    response = test_client.get('/sequences-analysis-tools/sequences-tools')
+    assert response.status_code == 200
+    assert b'Sequences Tools' in response.data
