@@ -78,8 +78,13 @@ def create_app(config_name):
         return {
             'now': datetime.utcnow(),
             'module_desc': Page.query.filter_by(breadcrumbs=request.path).first(),
-            'css_js_ver': 1.07
+            'css_js_ver': 1.08
         }
+
+    @app.after_request
+    def add_header(response):
+        response.cache_control.max_age = 31536000
+        return response
 
     return app
 

@@ -46,7 +46,7 @@ class GeneticDistance {
       let columnValue = $(`.column-${i}`).map(function () {
         return parseFloat($(this).val());
       }).get();
-      let columnSum = columnValue.reduce((a, b) => a + b, 0);
+      let columnSum = Number(columnValue.reduce((a, b) => a + b).toFixed(2));
       if (!Number.isInteger(columnSum) && columnSum > totalSum) {
         $(`.column-${i}`).addClass('is-invalid');
         showModal(`In column ${i} values are incorrect`);
