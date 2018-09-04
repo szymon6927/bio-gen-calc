@@ -40,14 +40,16 @@ class GeneticDistance {
 
   validateColumnSum() {
     $('.genetic-distance-table').find('input').removeClass('is-invalid');
-    let totalSum = 1 * this.locusNumber;
+    const possibleResults = [...Array(this.locusNumber + 1).keys()];
 
     for (let i = 0; i < this.taxonNumber; i++) {
       let columnValue = $(`.column-${i}`).map(function () {
         return parseFloat($(this).val());
       }).get();
+
       let columnSum = Number(columnValue.reduce((a, b) => a + b).toFixed(2));
-      if (!Number.isInteger(columnSum) && columnSum > totalSum) {
+
+      if (!possibleResults.includes(columnSum)) {
         $(`.column-${i}`).addClass('is-invalid');
         showModal(`In column ${i} values are incorrect`);
         return false;
@@ -189,16 +191,20 @@ class GeneticDistance {
     let dataJSON = this.buildJSON();
     console.log("dataJSON: ", dataJSON);
     const path = '/genetic-distance/send-data-distance';
-    const render = new RenderHelper('.genetic-distance-results');
+    const render = new RenderHelper('.genetic-distance-results .error');
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
       url: path,
       data: dataJSON,
       dataType: "json",
+      cache: false,
       success: (res) => {
         console.log("Succesfull");
+        $('.genetic-distance-results .error').hide();
         $('.genetic-distance-results').show();
+        $('.genetic-distance-results .success').show();
+
         let matrixImg = `<p class="matrix-latex">${res.data.matrix_latex}</p>`;
         let dendroImg = `<img class="img-fluid" src="data:image/png;base64,${res.data.dendro_base64}">`;
         $('.matrix-wrapper').html(matrixImg);
@@ -218,6 +224,7 @@ class GeneticDistance {
       },
       error: (request) => {
         $('.cover').hide();
+        $('.genetic-distance-results .row.success').hide();
         console.log("Something goes wrong, try again!", request);
         render.errorBlock(request);
       }
