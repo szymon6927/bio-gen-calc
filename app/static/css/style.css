@@ -455,6 +455,12 @@ table th[scope=row] {
     margin: 0 auto;
 }
 
+@media (min-width: 1200px and max-width: 1330px) {
+    .navbar-nav li {
+        font-size: 14px;
+    }
+}
+
 @media (max-width: 1150px) {
     .navbar-nav li {
         font-size: 14px;

@@ -2,7 +2,7 @@
 
 from datetime import datetime
 import pdfkit
-from flask import Flask, render_template, request, make_response, abort, Response
+from flask import Flask, render_template, request, make_response, abort, Response, send_from_directory
 from .database import db
 from .admin.models import User, Page
 import base64
@@ -45,6 +45,11 @@ def create_app(config_name):
     @login_manager.user_loader
     def load_user(user_id):
         return db.session.query(User).get(user_id)
+
+    @app.route('/robots.txt')
+    @app.route('/sitemap.xml')
+    def serve_static_seo_files():
+        return send_from_directory(app.static_folder, request.path[1:])
 
     @app.route('/generate-pdf', methods=['POST'])
     def generate_pdf():

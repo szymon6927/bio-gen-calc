@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>https://gene-calc.pl/</loc>
+  <lastmod>2018-10-01T12:56:47+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://gene-calc.pl/about</loc>
+  <lastmod>2018-10-01T12:56:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gene-calc.pl/hardy-weinber-page</loc>
+  <lastmod>2018-10-01T12:56:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gene-calc.pl/chi-square-page</loc>
+  <lastmod>2018-10-01T12:56:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gene-calc.pl/pic</loc>
+  <lastmod>2018-10-01T12:56:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gene-calc.pl/genetic-distance</loc>
+  <lastmod>2018-10-01T12:56:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gene-calc.pl/sequences-analysis-tools/dot-plot</loc>
+  <lastmod>2018-10-01T12:56:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gene-calc.pl/sequences-analysis-tools/consensus-sequence</loc>
+  <lastmod>2018-10-01T12:56:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gene-calc.pl/sequences-analysis-tools/sequences-tools</loc>
+  <lastmod>2018-10-01T12:56:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gene-calc.pl/contact</loc>
+  <lastmod>2018-10-01T12:56:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://gene-calc.pl/donors</loc>
+  <lastmod>2018-10-01T12:56:47+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>
