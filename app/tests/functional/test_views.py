@@ -62,3 +62,12 @@ def test_sequences_tools_page(test_client):
     response = test_client.get('/sequences-analysis-tools/sequences-tools')
     assert response.status_code == 200
     assert b'Sequences Tools' in response.data
+
+def test_robots_page(test_client):
+    response = test_client.get('/robots.txt')
+    assert response.status_code == 200
+    assert b'User-Agent: *' in response.data
+
+def test_sitemap_page(test_client):
+    response = test_client.get('/sitemap.xml')
+    assert response.status_code == 200
