@@ -8,6 +8,10 @@ $('#type-of-data').change(function () {
   $(moduleResultsSection).empty();
 
   let type = $(this).val();
+  
+  $('.consensus-sequence select option').removeAttr('selected');
+  $(`.consensus-sequence select option[value='${type}']`).attr("selected","selected");
+
   $(`.${type}`).show();
 });
 

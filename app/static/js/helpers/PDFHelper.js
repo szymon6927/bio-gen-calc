@@ -1,21 +1,21 @@
 function renderPDF() {
   $('.cover').show();
 
-  let container = $('.wrapper');
+  const container = document.querySelector('.wrapper');
+  const inputs = container.querySelectorAll('input');
+  const textareas = container.querySelectorAll('textarea');
 
-  // set value atribute for pdf redner
-  container.find('input').each((index, elem) => {
-    let inputValue = $(elem).val();
-    $(elem).attr('value', inputValue)
+  inputs.forEach((elem) => {
+    elem.setAttribute('value', elem.value);
   });
 
-  container.find('input').each((index, elem) => {
-    let inputValue = $(elem).val();
-    $(elem).attr('value', inputValue)
-  });
+  textareas.forEach((elem) => {
+    elem.innerHTML = elem.value;
+    elem.style.height = `${elem.scrollHeight}px`;
+  })
 
   let data = {};
-  data['content'] = container.html();
+  data['content'] = container.innerHTML;
 
   const path = '/generate-pdf';
   $.ajax({

@@ -8,6 +8,10 @@ $('#type-of-data').change(function () {
   $(moduleResultsSection).empty();
 
   let type = $(this).val();
+  
+  $('.dot-plot select option').removeAttr('selected');
+  $(`.dot-plot select option[value='${type}']`).attr("selected","selected");
+
   $(`.${type}`).show();
 });
 

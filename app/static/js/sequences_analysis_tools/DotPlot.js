@@ -26,7 +26,7 @@ class DotPlot {
     const dataJSON = this.buildJSONfromRawSeq();
     console.log(dataJSON);
     const path = '/sequences-analysis-tools/dot-plot/send-raw-seq';
-    const render = new RenderHelper('.raw-seq-results');
+    const render = new RenderHelper('.dotplot-raw-seq-results');
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
@@ -37,7 +37,7 @@ class DotPlot {
         console.log("Succesfull", result);
         render.successBlock(result);
 
-        const lastDivResult = $('.raw-seq-results .result-score').last();
+        const lastDivResult = $('.dotplot-raw-seq-results .result-score').last();
 
         const alignment = $(`<div class="row result-score alignment-wrapper">
                               <div class="title">Alignment:</div>
@@ -53,7 +53,7 @@ class DotPlot {
 
         $('.cover').hide();
 
-        goToByScroll('.raw-seq-results')
+        goToByScroll('.dotplot-raw-seq-results')
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);

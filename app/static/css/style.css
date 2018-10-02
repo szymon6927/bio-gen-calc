@@ -395,21 +395,26 @@ table th[scope=row] {
     outline: none;
 }
 
-.sequences-tools-results .result-name {
+.sequences-tools-results .result-name, 
+.raw-seq-results .result-name {
     max-width: 100%;
 }
 
-.sequences-tools-results .result-value {
+.sequences-tools-results .result-value, 
+.raw-seq-results .result-value {
     min-width: 100%;
     border: none;
 }
 
-.sequences-tools-results .equal-char {
+.sequences-tools-results .equal-char, 
+.raw-seq-results .equal-char {
     display: none;
 }
 
 .sequences-tools-results .result-name div,
-.sequences-tools-results .result-value div {
+.sequences-tools-results .result-value div,
+.raw-seq-results .result-name div,
+.raw-seq-results .result-value div {
     line-height: 15px;
 }
 
@@ -455,7 +460,7 @@ table th[scope=row] {
     margin: 0 auto;
 }
 
-@media (min-width: 1200px and max-width: 1330px) {
+@media (min-width: 1200px) and (max-width: 1330px) {
     .navbar-nav li {
         font-size: 14px;
     }
