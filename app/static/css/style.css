@@ -350,7 +350,7 @@ table th[scope=row] {
 
 .card-body a {
     color: #fff;
-    font-weight: 400;
+    /* font-weight: 400; */
 }
 
 .card-body a:hover {
@@ -459,6 +459,15 @@ table th[scope=row] {
 .dotplot-img {
     margin: 0 auto;
 }
+
+.cookieinfo {
+    border-top: 1px solid #ccc;
+}
+
+.cookieinfo a {
+    font-weight: bold;
+}
+
 
 @media (min-width: 1200px) and (max-width: 1330px) {
     .navbar-nav li {
