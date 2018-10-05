@@ -13,6 +13,38 @@
       <div class="col-md-12 col-sm-12">
         {{ module_desc.text|safe }}
       </div>
+      <div class="col-md-8 offset-md-2 col-sm-12 col-12">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-success" role="alert">{{ message|safe }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% for field in form.errors %}
+          {% for error in form.errors[field] %}
+            <div class="alert alert-danger" role="alert">{{ error }}</div>
+          {% endfor %}
+        {% endfor %}
+
+        <form action="{{ url_for('contact.contact_page') }}" method="POST">
+          {{ form.hidden_tag() }}
+          <div class="form-group">
+            {{ form.name.label }}
+            {{ form.name(class_="form-control", placeholder="your name") }}
+          </div>
+          <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email(class_="form-control", placeholder="your e-mail") }}
+          </div>
+          <div class="form-group">
+            {{ form.message.label }}
+            {{ form.message(class_="form-control", rows=6, placeholder="your message") }}
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Send</button>
+        </form>
+      </div>
     </div>
   </section>
 </div>
