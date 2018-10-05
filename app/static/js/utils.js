@@ -135,9 +135,7 @@ function particleButtonsEffect() {
 }
 
 function selectActiveMenuItem() {
-  console.log("selectActiveMenuItem");
   const url = window.location.pathname;
-  console.log("url", url);
   $('.nav-item a').removeClass('active');
   $(`a[href="${url}"]`).addClass('active')
 }
