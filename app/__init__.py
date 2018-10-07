@@ -96,6 +96,7 @@ def create_app(config_name):
 
 def register_blueprints(app):
     from .home import home as home_blueprint
+    from .materials_and_methods import materials_and_methods as materials_and_methods_blueprint
     from .about import about as about_blueprint
     from .hardy_weinber import hardy_weinber as hardy_weinber
     from .chi_square import chi_square as chi_square
@@ -106,6 +107,7 @@ def register_blueprints(app):
     from .donors import donors
 
     app.register_blueprint(home_blueprint)
+    app.register_blueprint(materials_and_methods_blueprint)
     app.register_blueprint(about_blueprint)
     app.register_blueprint(hardy_weinber)
     app.register_blueprint(chi_square)

@@ -7,5 +7,5 @@ def about_page():
     """
     Render the about template on the / route
     """
-    return render_template('about/index.html', title="Materials & methods")
+    return render_template('about/index.html', title="About Us")
 

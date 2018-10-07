@@ -7,6 +7,7 @@ class Page(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Unicode(64))
+    is_active = db.Column(db.Boolean(), default=True, unique=False)
     breadcrumbs = db.Column(db.String(220))
     seo_title = db.Column(db.String(85))
     seo_desc = db.Column(db.String(180))
