@@ -6,6 +6,9 @@ class Config(object):
     Common configurations
     """
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    MAIL_SERVER = "mail26.mydevil.net"
+    MAIL_PORT = 465
+    MAIL_USE_SSL = True
 
 
 class DevelopmentConfig(Config):

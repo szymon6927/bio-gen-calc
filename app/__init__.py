@@ -11,6 +11,7 @@ from flask_htmlmin import HTMLMIN
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_compress import Compress
+from flask_mail import Mail
 
 # local imports
 from config import app_config
