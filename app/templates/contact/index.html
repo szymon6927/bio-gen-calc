@@ -30,10 +30,10 @@
             </div>
             <button type="submit" class="btn btn-primary btn-block">Send</button>
 
-            {% with messages = get_flashed_messages() %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
-                {% for message in messages %}
-                  <div class="alert alert-success mt-3" role="alert">{{ message|safe }}</div>
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} mt-3" role="alert">{{ message|safe }}</div>
                 {% endfor %}
               {% endif %}
             {% endwith %}
@@ -44,6 +44,11 @@
               {% endfor %}
             {% endfor %}
           </form>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-12 col-sm-12">
+          <iframe src="https://www.google.com/maps/d/u/0/embed?mid=11VbpuHdCFrILx2hnEgyPIz6iyF5F6LDI" width="100%" height="580" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
       </div>
     </section>

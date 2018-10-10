@@ -3,6 +3,7 @@ from . import contact
 from flask_mail import Mail, Message
 from .forms import ContactForm
 
+import smtplib
 
 @contact.route('/contact', methods=['GET', 'POST'])
 def contact_page():
@@ -12,9 +13,18 @@ def contact_page():
         mail = Mail(app)
 
         msg = Message("Test message", sender=("Gene-Calc Team", "contact@gene-calc.pl"), recipients=[form.email.data])
-        mail.send(msg)
+        try:
+            mail.send(msg)
+            flash(f'Thanks <strong>{form.name.data}</strong> for your message.', 'success')
+        except smtplib.SMTPAuthenticationError as e:
+            flash(f'SMTPAuthenticationError, {e}', 'danger')
+        except smtplib.SMTPServerDisconnected as e:
+            flash(f'SMTPServerDisconnected, {e}', 'danger')
+        except smtplib.SMTPException as e:
+            flash(f'SMTPException, {e}', 'danger')
+        except OSError as e:
+            flash(f'OSError {e}', 'danger')
 
-        flash(f'Thanks <strong>{form.name.data}</strong> for your message.')
         return redirect(url_for('contact.contact_page'))
     
     return render_template('contact/index.html', title="Contact Us", form=form)
