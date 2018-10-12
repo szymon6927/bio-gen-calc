@@ -7,6 +7,7 @@ if os.environ.get('DISPLAY', '') == '':
     mpl.use('Agg')
 
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import itertools
 from scipy.cluster.hierarchy import linkage, dendrogram
@@ -96,13 +97,19 @@ class GeneticDistance:
         # now only for test
         # self.matrix = squareform(self.condensed_matrix)
 
-        if len(self.matrix.shape) > 2:
-            raise ValueError('bmatrix can at most display two dimensions')
-        lines = str(self.matrix).replace('[', '').replace(']', '').replace('0.', ',').splitlines()
-        rv = [r'\begin{bmatrix}']
-        rv += ['  ' + ' & '.join(l.split()) + r'\\' for l in lines]
-        rv += [r'\end{bmatrix}']
-        return '\n'.join(rv)
+        index = [i for i in range(0, self.column_range - 1)]
+        columns = [i for i in range(1, self.column_range)]
+
+        result = pd.DataFrame(data=self.matrix, index=index, columns=columns)
+
+        # if len(self.matrix.shape) > 2:
+        #     raise ValueError('bmatrix can at most display two dimensions')
+        # lines = str(self.matrix).replace('[', '').replace(']', '').replace('0.', ',').splitlines()
+        # rv = [r'\begin{bmatrix}']
+        # rv += ['  ' + ' & '.join(l.split()) + r'\\' for l in lines]
+        # rv += [r'\end{bmatrix}']
+        # return '\n'.join(rv)
+        return result.to_html()
 
     def render_dendrogram(self):
         method = linkage(self.condensed_matrix, self.detect_dendrogram_type())
