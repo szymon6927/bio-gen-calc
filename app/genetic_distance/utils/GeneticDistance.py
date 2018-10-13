@@ -11,6 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import itertools
 from scipy.cluster.hierarchy import linkage, dendrogram
+from scipy.spatial.distance import squareform
 from io import BytesIO
 import base64
 
@@ -95,12 +96,13 @@ class GeneticDistance:
         """
 
         # now only for test
-        # self.matrix = squareform(self.condensed_matrix)
+        self.matrix = squareform(self.condensed_matrix)
+        print(self.matrix, flush=True)
 
-        index = [i for i in range(0, self.column_range - 1)]
-        columns = [i for i in range(1, self.column_range)]
+        index = [i for i in range(0, self.column_range + 1)]
+        columns = [i for i in range(0, self.column_range + 1)]
 
-        result = pd.DataFrame(data=self.matrix, index=index, columns=columns)
+        result = pd.DataFrame(data=self.matrix)
 
         # if len(self.matrix.shape) > 2:
         #     raise ValueError('bmatrix can at most display two dimensions')

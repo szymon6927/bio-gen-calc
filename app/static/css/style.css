@@ -477,8 +477,30 @@ table th[scope=row] {
     margin: 0 auto;
 }
 
+.dataframe {
+    border: none;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+}
+
 .dataframe th, .dataframe td {
     padding: 5px 10px;
+}
+
+.dataframe tr th {
+    background: #e9ecef;
+}
+
+.dataframe thead th {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.dataframe tbody th {
+    border-right: 1px solid #dee2e6;
+}
+
+.newsletter-form {
+    border-bottom: 1px solid #fff;
+    padding: 1rem 0;
 }
 
 @media (min-width: 1331px) and (max-width: 1400px) {
@@ -506,6 +528,12 @@ table th[scope=row] {
 
     .navbar-nav li {
         font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dataframe th, .dataframe td {
+        font-size: 12px;
     }
 }
 

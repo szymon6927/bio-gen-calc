@@ -210,9 +210,9 @@ class GeneticDistance {
         $('.matrix-wrapper').html(res.data.matrix_latex);
         $('.dendrogram-wrapper').html(dendroImg);
 
-        setTimeout(() => {
-          MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        }, 500);
+        // setTimeout(() => {
+        //   MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        // }, 500);
 
         setTimeout(() => {
           // this.matrixDesc();

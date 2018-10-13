@@ -1,9 +1,10 @@
 <p id="back-top"><a href="/" title="Przejdź do góry strony">Przejdź do góry strony</a></p>
 <footer class="footer">
   <div class="container">
+    {% include 'utils/newsletter_form.html' %}
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-12 text-left">
-        <p class="app-name"><a href="/">Gene Calc</a>, Copyright © {{ now.year }} All Rights Reserved</span></p>
+        <p class="app-name"><a href="/">Gene Calc</a>, Copyright © {{ now.year }} All Rights Reserved</p>
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12 text-right">
         <p>
