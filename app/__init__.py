@@ -83,7 +83,7 @@ def create_app(config_name):
         return {
             'now': datetime.utcnow(),
             'module_desc': Page.query.filter_by(breadcrumbs=request.path).first(),
-            'css_js_ver': 1.08
+            'css_js_ver': 1.09
         }
 
     @app.after_request
