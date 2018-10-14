@@ -22,14 +22,18 @@
       <hr>
       {% for page in pages %}
         {% if not loop.first %}
-          <div class="col-md-6 col-sm-6 col-12">
-            <div class="card mb-sm-5 mb-4">
-              <div class="card-body">
-                <h2 class="card-title text-center">{{ page.name }}</h2>
-                <a href="{{ page.breadcrumbs }}" class="btn btn-block btn-primary">Go there!</a>
-              </div>
+        <div class="{% if loop.last and loop.length % 2 != 0 %}
+                      col-md-12 col-sm-12
+                    {% else %}
+                      col-md-6 col-sm-6
+                    {% endif %} col-12">
+          <div class="card mb-sm-5 mb-4">
+            <div class="card-body">
+              <h2 class="card-title text-center">{{ page.name }}</h2>
+              <a href="{{ page.breadcrumbs }}" class="btn btn-block btn-primary">Go there!</a>
             </div>
           </div>
+        </div>
         {% endif %}
       {% endfor %}
     </div>
