@@ -11,7 +11,6 @@ from flask_htmlmin import HTMLMIN
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_compress import Compress
-from flask_mail import Mail
 
 # local imports
 from config import app_config
@@ -106,6 +105,7 @@ def register_blueprints(app):
     from .sequences_analysis_tools import sequences_analysis_tools as sequences_analysis_tools
     from .contact import contact as contact
     from .donors import donors
+    from .newsletter import newsletter
 
     app.register_blueprint(home_blueprint)
     app.register_blueprint(materials_and_methods_blueprint)
@@ -117,3 +117,4 @@ def register_blueprints(app):
     app.register_blueprint(sequences_analysis_tools)
     app.register_blueprint(contact)
     app.register_blueprint(donors)
+    app.register_blueprint(newsletter)

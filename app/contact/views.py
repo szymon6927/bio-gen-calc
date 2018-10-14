@@ -5,6 +5,7 @@ from .forms import ContactForm
 
 import smtplib
 
+
 @contact.route('/contact', methods=['GET', 'POST'])
 def contact_page():
     form = ContactForm()
