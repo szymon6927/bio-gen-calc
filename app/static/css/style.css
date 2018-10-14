@@ -503,6 +503,10 @@ table th[scope=row] {
     padding: 1rem 0;
 }
 
+.mailchimp-policy {
+    font-size: 11px;
+}
+
 @media (min-width: 1331px) and (max-width: 1400px) {
     .navbar-nav li {
         font-size: 15px;

@@ -47,6 +47,17 @@
 
     gtag('config', 'UA-119664721-1');
   </script>
+
+  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js"
+          data-dojo-config="usePlainJson: true, isDebug: false"></script>
+  <script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function (L) {
+    L.start({
+      "baseUrl": "mc.us19.list-manage.com",
+      "uuid": "abfa265f15bc0ad16f6dc6068",
+      "lid": "e29fcc6d76",
+      "uniqueMethods": true
+    })
+  })</script>
 </head>
 
 <body>
@@ -66,9 +77,9 @@
 {% include 'footer.html' %}
 
 <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
         crossorigin="anonymous"></script>
@@ -76,15 +87,15 @@
 <script src="{{ url_for('static', filename='js/vendors/particles.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/vendors/moment.min.js') }}"></script>
 <script type="text/javascript" id="cookieinfo"
-  src="//cookieinfoscript.com/js/cookieinfo.min.js"
-  data-close-text="Got it!"
-  data-divlinkbg="#247bff"
-  data-link="#000"
-  data-divlink="#fff"
-  data-font-family="Lato, sans-serif"
-  data-cookie="cookie-accept"
-  data-link="#fff"
-  data-bg="#fafafa">
+        src="//cookieinfoscript.com/js/cookieinfo.min.js"
+        data-close-text="Got it!"
+        data-divlinkbg="#247bff"
+        data-link="#000"
+        data-divlink="#fff"
+        data-font-family="Lato, sans-serif"
+        data-cookie="cookie-accept"
+        data-link="#fff"
+        data-bg="#fafafa">
 </script>
 
 <!-- <script src="{{ url_for('static', filename='js/vendors/anime.min.js') }}"></script> -->
