@@ -32,7 +32,8 @@
               <input type="checkbox" class="form-check-input" id="private-policy" required>
               <label class="form-check-label" for="private-policy">
                 I agree to have my personal data processed within the scope necessary for the keep 
-                the highest quality of service. I have read and understood the data privacy policy.
+                the highest quality of service. I have read and understood the data 
+                <a href="{{ url_for('privacy_policy.privacy_policy_page') }}">privacy policy</a>.
               </label>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Send</button>

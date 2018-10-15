@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ module_desc.seo_title }}{% endblock %}
+{% block seo_desc %}{{ module_desc.seo_desc }}{% endblock %}
+{% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+  {% include 'utils/module_top_block.html' %}
+
+  <section class="privacy-policy">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        {{ module_desc.text|safe }}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
