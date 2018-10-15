@@ -511,6 +511,20 @@ table th[scope=row] {
     font-size: 11px;
 }
 
+.person {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.person img {
+    width: 50%;
+}
+
+.profile-desc {
+    text-align: left;
+}
+
 @media (min-width: 1331px) and (max-width: 1400px) {
     .navbar-nav li {
         font-size: 15px;
