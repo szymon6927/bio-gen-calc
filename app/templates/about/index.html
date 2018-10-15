@@ -5,72 +5,101 @@
 {% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
 
 {% block body %}
-<div class="wrapper">
-  {% include 'utils/module_top_block.html' %}
+  <div class="wrapper">
+    {% include 'utils/module_top_block.html' %}
 
-  <section class="about">
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        {{ module_desc.text|safe }}
+    <section class="about">
+      <div class="row">
+        <div class="col-md-8 offset-md-2 col-sm-8 offset-sm-2 text-center">
+          <img class="logo" src="/static/img/logo.svg">
+        </div>
+        <div class="col-md-12 col-sm-12">
+          {{ module_desc.text|safe }}
+        </div>
       </div>
-    </div>
-    <div class="row pb-4">
-      <div class="col-md-12 col-sm-12">
-        <h3 class="text-center mb-3">Our team</h3>
-        <hr>
-      </div>
-      <div class="col-md-6 col-sm-12">
-        <div class="person shadow-lg mb-4 mt-2">
-          <img src="static/img/profiles/mx2.jpg" class="rounded-circle img-fluid shadow">
-          <div class="pt-4 text-center">
-            <h5 class="title">
-              <span class="d-block mb-1">Szymon Miks</span>
-              <small class="h6 text-muted">Developer</small>
-            </h5>
-            <div class="mt-3">
-              <a href="#" class="btn btn-secondary rounded-circle">
-                <i class="fab fa-github"></i>
-              </a>
-              <a href="#" class="btn btn-secondary rounded-circle">
-                <i class="fab fa-facebook"></i>
-              </a>
-              <a href="#" class="btn btn-secondary rounded-circle">
-                  <i class="fab fa-linkedin"></i>
-              </a>
-            </div>
-          </div>
-          <div class="profile-desc mt-3">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor aliquam orci tincidunt posuere. Praesent molestie tincidunt urna, sit amet mollis augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum condimentum ipsum augue, sit amet pulvinar sapien lacinia eu. Aliquam efficitur tristique dolor a fermentum. Maecenas sed ultrices ex. Suspendisse sagittis in enim ut placerat. Nam a nisi elementum, dapibus mi at, suscipit arcu.</p>
+      <div class="row pb-5">
+        <div class="col-md-12 col-sm-12">
+          <h3 class="text-center mb-3">Source code</h3>
+          <hr>
+        </div>
+        <div class="col-md-8 offset-md-2 col-sm-12 mt-3">
+          <div class="text-center shadow pb-3 pt-3">
+            <a href="https://github.com/szymon6927/bio-gen-calc" target="_blank">
+              <span class="btn btn-secondary rounded-circle"><i class="fab fa-github"></i></span>
+              <span class="font-weight-bold text-muted pl-2">Visit our project on github</span>
+            </a>
           </div>
         </div>
       </div>
-
-      <div class="col-md-6 col-sm-12">
-        <div class="person shadow-lg mb-4 mt-2">
-          <img src="static/img/profiles/profile.svg" class="rounded-circle img-fluid shadow">
-          <div class="pt-4 text-center">
-            <h5 class="title">
-              <span class="d-block mb-1">Jan Bińkowski</span>
-              <small class="h6 text-muted">Researcher</small>
-            </h5>
-            <div class="mt-3">
-              <a href="#" class="btn btn-secondary rounded-circle">
-                <i class="fab fa-github"></i>
-              </a>
-              <a href="#" class="btn btn-secondary rounded-circle">
-                <i class="fab fa-facebook"></i>
-              </a>
-              <a href="#" class="btn btn-secondary rounded-circle">
+      <div class="row pb-4">
+        <div class="col-md-12 col-sm-12">
+          <h3 class="text-center mb-3">Our team</h3>
+          <hr>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="person shadow-lg mb-4 mt-2">
+            <img src="static/img/profiles/mx2.jpg" class="rounded-circle img-fluid shadow">
+            <div class="pt-4 text-center">
+              <h5 class="title">
+                <span class="d-block mb-1">Szymon Miks</span>
+                <small class="h6 text-muted">Developer</small>
+              </h5>
+              <div class="mt-3">
+                <a href="https://github.com/szymon6927/" target="_blank" class="btn btn-secondary rounded-circle">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.facebook.com/szymon.miks" target="_blank" class="btn btn-secondary rounded-circle">
+                  <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/szymon-miks/" target="_blank"
+                   class="btn btn-secondary rounded-circle">
                   <i class="fab fa-linkedin"></i>
-              </a>
+                </a>
+              </div>
+            </div>
+            <div class="profile-desc mt-3">
+              <p>I'm a studying <strong>Computer Science</strong> at
+                <strong>University of Technology in Gdańsk, Poland</strong>. Nowadays I'm living and
+                work in Lębork, Poland. I love <strong>Python</strong>,
+                and all of things related with <strong>web application developments</strong>.
+                More information about me you can find at my personal website
+                <a class="font-weight-bold" href="https://szymonmiks.pl/">szymonmiks.pl</a></p>
             </div>
           </div>
-          <div class="person-desc mt-3">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor aliquam orci tincidunt posuere. Praesent molestie tincidunt urna, sit amet mollis augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum condimentum ipsum augue, sit amet pulvinar sapien lacinia eu. Aliquam efficitur tristique dolor a fermentum. Maecenas sed ultrices ex. Suspendisse sagittis in enim ut placerat. Nam a nisi elementum, dapibus mi at, suscipit arcu.</p>
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+          <div class="person shadow-lg mb-4 mt-2">
+            <img src="static/img/profiles/profile.svg" class="rounded-circle img-fluid shadow">
+            <div class="pt-4 text-center">
+              <h5 class="title">
+                <span class="d-block mb-1">Jan Bińkowski</span>
+                <small class="h6 text-muted">Researcher</small>
+              </h5>
+              <div class="mt-3">
+                <a href="https://github.com/Janbinkowski96" target="_blank" class="btn btn-secondary rounded-circle">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100010063354913" target="_blank"
+                   class="btn btn-secondary rounded-circle">
+                  <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/jan-bi%C5%84kowski-a16b99141/" target="_blank"
+                   class="btn btn-secondary rounded-circle">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+              </div>
+            </div>
+            <div class="person-desc mt-3">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor aliquam orci tincidunt posuere.
+                Praesent molestie tincidunt urna, sit amet mollis augue. Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit. Vestibulum condimentum ipsum augue, sit amet pulvinar sapien lacinia eu. Aliquam
+                efficitur tristique dolor a fermentum. Maecenas sed ultrices ex. Suspendisse sagittis in enim ut
+                placerat. Nam a nisi elementum, dapibus mi at, suscipit arcu.</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-</div>
+    </section>
+  </div>
 {% endblock %}
