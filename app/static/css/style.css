@@ -525,6 +525,13 @@ table th[scope=row] {
     text-align: left;
 }
 
+.logo {
+    width: 50%;
+    text-align: center;
+    border-radius: 15px;
+    background: #fff;
+}
+
 @media (min-width: 1331px) and (max-width: 1400px) {
     .navbar-nav li {
         font-size: 15px;
@@ -534,6 +541,16 @@ table th[scope=row] {
 @media (min-width: 1200px) and (max-width: 1330px) {
     .navbar-nav li {
         font-size: 14px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .materials-methods img {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        max-width: 100%;
     }
 }
 
@@ -578,5 +595,11 @@ table th[scope=row] {
 @media (max-width: 480px) {
     .wrapper {
         margin-top: -10rem;
+    }
+    .mailchimp-policy {
+        margin-top: 10px;
+    }
+    .logo {
+        width: 100%;
     }
 }
