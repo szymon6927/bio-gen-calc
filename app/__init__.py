@@ -83,7 +83,7 @@ def create_app(config_name):
         return {
             'now': datetime.utcnow(),
             'module_desc': Page.query.filter_by(breadcrumbs=request.path).first(),
-            'css_js_ver': 1.09
+            'css_js_ver': 1.10
         }
 
     @app.after_request
@@ -106,6 +106,7 @@ def register_blueprints(app):
     from .contact import contact as contact
     from .donors import donors
     from .newsletter import newsletter
+    from .privacy_policy import privacy_policy
 
     app.register_blueprint(home_blueprint)
     app.register_blueprint(materials_and_methods_blueprint)
@@ -118,3 +119,4 @@ def register_blueprints(app):
     app.register_blueprint(contact)
     app.register_blueprint(donors)
     app.register_blueprint(newsletter)
+    app.register_blueprint(privacy_policy)

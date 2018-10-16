@@ -1,4 +1,3 @@
-from flask import abort, Response
 import itertools
 from ...helpers.result_aggregator import add_result
 
@@ -32,7 +31,7 @@ class Codominant:
         if control_sum == 1:
             return p
         else:
-            raise ValueError("Mixed type of input values")
+            raise ValueError("Mixed type of input values or sum of alleles frequencies not equal to 0")
 
     def calcuate_h(self):
         freq_sum = 0

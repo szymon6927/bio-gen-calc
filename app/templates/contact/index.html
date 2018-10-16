@@ -28,6 +28,14 @@
               {{ form.message.label }}
               {{ form.message(class_="form-control", rows=6, placeholder="your message") }}
             </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="private-policy" required>
+              <label class="form-check-label" for="private-policy">
+                I agree to have my personal data processed within the scope necessary for the keep 
+                the highest quality of service. I have read and understood the data 
+                <a href="{{ url_for('privacy_policy.privacy_policy_page') }}">privacy policy</a>.
+              </label>
+            </div>
             <button type="submit" class="btn btn-primary btn-block">Send</button>
 
             {% with messages = get_flashed_messages(with_categories=true) %}
