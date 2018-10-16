@@ -15,7 +15,7 @@ def pic_page():
 @pic.route('/pic/send-codominant', methods=['POST'])
 def pic_codominant():
     try:
-        data = request.json
+        data = request.get_json()
         co_d = Codominant(data)
         result = co_d.calculate()
         return jsonify({'data': result})
@@ -28,7 +28,7 @@ def pic_codominant():
 @pic.route('/pic/send-dominant', methods=['POST'])
 def pic_dominant():
     try:
-        data = request.json
+        data = request.get_json()
         do = Dominant(data)
         result = do.calculate()
         return jsonify({'data': result})
