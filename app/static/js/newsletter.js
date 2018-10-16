@@ -1,7 +1,7 @@
 function renderSuccessMessage(msg) {
   const elem = $('.form-messages');
-  const template = `<div class="alert alert-success text-center" role="alert">
-                      ${msg}
+  const template = `<div class="alert alert-success text-center mt-2 mb-2" role="alert">
+                      <span>${msg}</span>
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -11,8 +11,8 @@ function renderSuccessMessage(msg) {
 
 function renderErrorMessage(msg) {
   const elem = $('.form-messages');
-  const template = `<div class="alert alert-danger text-center" role="alert">
-                      ${msg}
+  const template = `<div class="alert alert-danger text-center mt-2 mb-2" role="alert">
+                      <span>${msg}</span>
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
