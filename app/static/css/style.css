@@ -479,7 +479,7 @@ table th[scope=row] {
 
 .dataframe {
     border: none;
-    box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
 }
 
 .dataframe th, .dataframe td {
@@ -507,6 +507,31 @@ table th[scope=row] {
     font-size: 11px;
 }
 
+.form-check-label {
+    font-size: 11px;
+}
+
+.person {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.person img {
+    width: 50%;
+}
+
+.profile-desc {
+    text-align: left;
+}
+
+.logo {
+    width: 50%;
+    text-align: center;
+    border-radius: 15px;
+    background: #fff;
+}
+
 @media (min-width: 1331px) and (max-width: 1400px) {
     .navbar-nav li {
         font-size: 15px;
@@ -516,6 +541,16 @@ table th[scope=row] {
 @media (min-width: 1200px) and (max-width: 1330px) {
     .navbar-nav li {
         font-size: 14px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .materials-methods img {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        max-width: 100%;
     }
 }
 
@@ -539,6 +574,10 @@ table th[scope=row] {
     .dataframe th, .dataframe td {
         font-size: 12px;
     }
+
+    #PopupSignupForm_0 {
+        display: none !important;
+    }
 }
 
 @media (max-width: 576px) {
@@ -560,5 +599,13 @@ table th[scope=row] {
 @media (max-width: 480px) {
     .wrapper {
         margin-top: -10rem;
+    }
+
+    .mailchimp-policy {
+        margin-top: 10px;
+    }
+
+    .logo {
+        width: 100%;
     }
 }

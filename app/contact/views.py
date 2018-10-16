@@ -13,7 +13,10 @@ def contact_page():
         app = Flask(__name__)
         mail = Mail(app)
 
-        msg = Message("Test message", sender=("Gene-Calc Team", "contact@gene-calc.pl"), recipients=[form.email.data])
+        msg = Message("Message from gene-calc.pl contact page",
+                      sender=("Gene-Calc Team - contact", "contact@gene-calc.pl"),
+                      recipients=[form.email.data])
+        msg.body = form.message.data
         try:
             mail.send(msg)
             flash(f'Thanks <strong>{form.name.data}</strong> for your message.', 'success')
@@ -27,6 +30,5 @@ def contact_page():
             flash(f'OSError {e}', 'danger')
 
         return redirect(url_for('contact.contact_page'))
-    
-    return render_template('contact/index.html', title="Contact Us", form=form)
 
+    return render_template('contact/index.html', title="Contact Us", form=form)
