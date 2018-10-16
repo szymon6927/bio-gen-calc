@@ -479,7 +479,7 @@ table th[scope=row] {
 
 .dataframe {
     border: none;
-    box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
 }
 
 .dataframe th, .dataframe td {
@@ -574,6 +574,10 @@ table th[scope=row] {
     .dataframe th, .dataframe td {
         font-size: 12px;
     }
+
+    #PopupSignupForm_0 {
+        display: none !important;
+    }
 }
 
 @media (max-width: 576px) {
@@ -596,9 +600,11 @@ table th[scope=row] {
     .wrapper {
         margin-top: -10rem;
     }
+
     .mailchimp-policy {
         margin-top: 10px;
     }
+
     .logo {
         width: 100%;
     }
