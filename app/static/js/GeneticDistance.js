@@ -152,29 +152,6 @@ class GeneticDistance {
     return JSON.stringify(data);
   }
 
-  // matrixDesc() {
-  //   let topWidth = $('.MathJax_SVG').last().width() + "px";
-  //   let topDesc = `<div class="top-desc" style="width: ${topWidth};"></div>`;
-  //   $(topDesc).insertAfter('.MathJax_Preview');
-
-  //   for (let i = 0; i < this.taxonNumber - 1; i++) {
-  //     let div = `<div class="top-desc-item">${i}</div>`;
-  //     $('.top-desc').append(div);
-  //   }
-
-
-  //   let fullWidth = $('.matrix-latex').width();
-  //   let leftPos = (fullWidth / 2) - $('.MathJax_CHTML').last().width() + 70 + "px";
-  //   let topPos = $('.matrix-latex').height() - $('.top-desc').height() - $('.MathJax_CHTML').last().height() - 5 + "px";
-  //   let leftDesc = `<ul class="left-desc" style="left: ${leftPos}; top: ${topPos}"></ul>`;
-  //   $(leftDesc).insertAfter('.top-desc');
-
-  //   for (let i = 1; i < this.taxonNumber; i++) {
-  //     $('.left-desc').append(`<li>${i}</li>`)
-  //   }
-
-  // }
-
   renderPDFButton() {
     let date = moment().format('DD/MM/YYYY-hh:mm');
 
@@ -205,14 +182,9 @@ class GeneticDistance {
         $('.genetic-distance-results').show();
         $('.genetic-distance-results .success').show();
 
-        // let matrixImg = `<p class="matrix-latex">${res.data.matrix_latex}</p>`;
         let dendroImg = `<img class="img-fluid" src="data:image/png;base64,${res.data.dendro_base64}">`;
         $('.matrix-wrapper').html(res.data.matrix_latex);
         $('.dendrogram-wrapper').html(dendroImg);
-
-        // setTimeout(() => {
-        //   MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        // }, 500);
 
         setTimeout(() => {
           // this.matrixDesc();
