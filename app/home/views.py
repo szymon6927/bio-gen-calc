@@ -1,6 +1,6 @@
 from flask import render_template
 from . import home
-from ..admin.models import Page
+from ..models.Admin import Page
 
 
 @home.route('/')

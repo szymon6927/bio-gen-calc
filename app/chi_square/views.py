@@ -3,6 +3,9 @@ from . import chi_square
 from .utils.ChiSquareCalculation import ChiSquareCalculation
 from .utils.ChiSquareGoodness import ChiSquareGoodness
 
+from ..helpers.db_helper import add_calculation
+from ..helpers.constants import CHI_SQUARE
+
 
 @chi_square.route('/chi-square-page')
 def chi_square_page():
@@ -16,9 +19,12 @@ def chi_square_page():
 def get_data():
     try:
         data = request.get_json()
-
+        
         chi = ChiSquareCalculation(data)
         result = chi.calculate()
+
+        print(f'CONSTANTS: {CHI_SQUARE}', flush=True)
+        add_calculation(module_name=CHI_SQUARE, user_data=data, result=result, ip_address=request.remote_addr)
 
         return jsonify({'data': result})
     except TypeError:
