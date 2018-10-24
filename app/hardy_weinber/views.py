@@ -2,6 +2,9 @@ from flask import render_template, request, jsonify, abort, Response
 from . import hardy_weinber
 from .utils.HardyWeinberCalculation import HardyWeinberCalculation
 
+from ..helpers.db_helper import add_calculation
+from ..helpers.constants import HARDY_WEINBERG
+
 
 @hardy_weinber.route('/hardy-weinber-page')
 def hardy_weinber_page():
@@ -18,6 +21,9 @@ def get_data():
         hw = HardyWeinberCalculation(data)
 
         result = hw.calcualte()
+
+        add_calculation(module_name=HARDY_WEINBERG, user_data=data, result=result, ip_address=request.remote_addr)
+
         return jsonify({'data': result})
     except TypeError:
         abort(Response("Please check type of input data", 409))

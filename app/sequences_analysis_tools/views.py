@@ -9,6 +9,9 @@ from .utils.DotPlot import DotPlot
 
 from ..helpers.file_helper import allowed_file
 
+from ..helpers.db_helper import add_calculation
+from ..helpers.constants import DOT_PLOT_RAW_SEQ, DOT_PLOT_GENEBANK_IDS
+
 
 @sequences_analysis_tools.route('/sequences-analysis-tools/dot-plot')
 def dot_plot_page():
@@ -21,6 +24,9 @@ def dot_plot_raw_seq():
         data = request.get_json()
         dot_plot = DotPlot(data)
         result = dot_plot.raw_sequence()
+
+        add_calculation(module_name=DOT_PLOT_RAW_SEQ, user_data=data, result=result, ip_address=request.remote_addr)
+
         return jsonify({'data': result,
                         'dotplot_base64': dot_plot.get_dot_plot_image(),
                         'alignment': dot_plot.get_alignments()})
@@ -34,6 +40,10 @@ def dot_plot_genebank_ids():
         data = request.get_json()
         dot_plot = DotPlot(data)
         result = dot_plot.genebank_seq()
+
+        add_calculation(module_name=DOT_PLOT_GENEBANK_IDS,
+                        user_data=data, result=result, ip_address=request.remote_addr)
+
         return jsonify({'data': result,
                         'dotplot_base64': dot_plot.get_dot_plot_image(),
                         'alignment': dot_plot.get_alignments()})
@@ -51,6 +61,7 @@ def get_raw_seq_data():
     try:
         data = request.get_json()
         consensus_seq = ConsensusSequence(data)
+        # TODO add calculation for ConsensusSequence
         result = consensus_seq.raw_sequence()
         return jsonify({'data': result})
     except Exception as e:
@@ -74,6 +85,7 @@ def get_seq_file_data():
         data['sequences'] = file.read()
 
         consensus_seq = ConsensusSequence(data)
+        # TODO add calculation for ConsensusSequence
         result = consensus_seq.file_seq()
 
         response = make_response(base64.b64encode(result.encode()))
@@ -89,6 +101,7 @@ def get_seq_genebank():
     try:
         data = request.get_json()
         consensus_seq = ConsensusSequence(data)
+        # TODO add calculation for ConsensusSequence
         result = consensus_seq.genebank_seq()
 
         response = make_response(base64.b64encode(result.encode()))
@@ -109,6 +122,7 @@ def get_sequences_data():
     try:
         data = request.get_json()
         seq_tools = SequencesTools(data)
+        # TODO add calculation for SequencesTools
         result = seq_tools.calculate()
         return jsonify({'data': result})
     except Exception as e:

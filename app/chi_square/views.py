@@ -4,7 +4,7 @@ from .utils.ChiSquareCalculation import ChiSquareCalculation
 from .utils.ChiSquareGoodness import ChiSquareGoodness
 
 from ..helpers.db_helper import add_calculation
-from ..helpers.constants import CHI_SQUARE
+from ..helpers.constants import CHI_SQUARE, CHI_SQUARE_GOODNESS
 
 
 @chi_square.route('/chi-square-page')
@@ -23,12 +23,11 @@ def get_data():
         chi = ChiSquareCalculation(data)
         result = chi.calculate()
 
-        print(f'CONSTANTS: {CHI_SQUARE}', flush=True)
         add_calculation(module_name=CHI_SQUARE, user_data=data, result=result, ip_address=request.remote_addr)
 
         return jsonify({'data': result})
-    except TypeError:
-        abort(Response("Please check type of input data", 409))
+    except TypeError as e:
+        abort(Response(f'Please check type of input data, {str(e)}', 409))
     except Exception as e:
         abort(Response(str(e), 400))
 
@@ -41,8 +40,10 @@ def get_goodness_data():
         chi_goodness = ChiSquareGoodness(data["observed"], data["expected"])
         result = chi_goodness.calculate()
 
+        add_calculation(module_name=CHI_SQUARE_GOODNESS, user_data=data, result=result, ip_address=request.remote_addr)
+
         return jsonify({'data': result})
-    except TypeError:
-        abort(Response("Please check type of input data", 409))
+    except TypeError as e:
+        abort(Response(f'Please check type of input data, {str(e)}', 409))
     except Exception as e:
         abort(Response(str(e), 400))
