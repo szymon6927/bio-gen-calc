@@ -23,12 +23,11 @@ def get_data():
         chi = ChiSquareCalculation(data)
         result = chi.calculate()
 
-        print(f'CONSTANTS: {CHI_SQUARE}', flush=True)
         add_calculation(module_name=CHI_SQUARE, user_data=data, result=result, ip_address=request.remote_addr)
 
         return jsonify({'data': result})
-    except TypeError:
-        abort(Response("Please check type of input data", 409))
+    except TypeError as e:
+        abort(Response(f'Please check type of input data {str(e)}', 409))
     except Exception as e:
         abort(Response(str(e), 400))
 
