@@ -197,6 +197,7 @@ class GeneticDistance {
       error: (request) => {
         $('.cover').hide();
         $('.genetic-distance-results .row.success').hide();
+        $('.genetic-distance-results').show();
         console.log("Something goes wrong, try again!", request);
         render.errorBlock(request);
       }

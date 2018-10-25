@@ -129,11 +129,11 @@ class DotPlot:
 
         with Entrez.efetch(db="nucleotide", rettype="gb", retmode="text", id=self.data['seq-name-1']) as handle:
             seq_record = SeqIO.read(handle, "gb")
-            self.data['seq-content-1'] = seq_record.seq
+            self.data['seq-content-1'] = str(seq_record.seq)
 
         with Entrez.efetch(db="nucleotide", rettype="gb", retmode="text", id=self.data['seq-name-2']) as handle:
             seq_record = SeqIO.read(handle, "gb")
-            self.data['seq-content-2'] = seq_record.seq
+            self.data['seq-content-2'] = str(seq_record.seq)
 
         seq_name_1 = self.data['seq-name-1']
         seq_name_2 = self.data['seq-name-2']

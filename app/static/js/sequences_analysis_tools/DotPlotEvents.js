@@ -1,5 +1,5 @@
 const moduleSections = '.raw-sequences, .sequences-form-genebank';
-const moduleResultsSection = '.raw-seq-results, .genebank-seq-results';
+const moduleResultsSection = '.dotplot-raw-seq-results, .genebank-seq-results';
 
 const dotPlot = new DotPlot();
 
