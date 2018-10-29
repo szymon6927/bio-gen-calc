@@ -10,7 +10,7 @@ import flask_login as login
 from flask_admin import BaseView, helpers, expose
 
 from ..database import db
-from .models import Page, User
+from ..models.Admin import Page, User
 
 from flask_admin.contrib import sqla
 

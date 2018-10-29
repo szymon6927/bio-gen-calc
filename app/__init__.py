@@ -4,7 +4,7 @@ from datetime import datetime
 import pdfkit
 from flask import Flask, render_template, request, make_response, abort, Response, send_from_directory
 from .database import db
-from .admin.models import User, Page
+from .models.Admin import User, Page
 import base64
 
 from flask_htmlmin import HTMLMIN

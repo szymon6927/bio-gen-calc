@@ -9,6 +9,9 @@ from .utils.DotPlot import DotPlot
 
 from ..helpers.file_helper import allowed_file
 
+from ..helpers.db_helper import add_calculation
+from ..helpers.constants import DOT_PLOT_RAW_SEQ, DOT_PLOT_GENEBANK_IDS, CONSENSUS_SEQUENCE_RAW_SEQ, CONSENSUS_SEQUENCE_FILE_SEQ, CONSENSUS_SEQUENCE_GENE_BANK, SEQUENCES_TOOLS
+
 
 @sequences_analysis_tools.route('/sequences-analysis-tools/dot-plot')
 def dot_plot_page():
@@ -21,6 +24,9 @@ def dot_plot_raw_seq():
         data = request.get_json()
         dot_plot = DotPlot(data)
         result = dot_plot.raw_sequence()
+
+        add_calculation(module_name=DOT_PLOT_RAW_SEQ, user_data=data, result=result, ip_address=request.remote_addr)
+
         return jsonify({'data': result,
                         'dotplot_base64': dot_plot.get_dot_plot_image(),
                         'alignment': dot_plot.get_alignments()})
@@ -34,6 +40,10 @@ def dot_plot_genebank_ids():
         data = request.get_json()
         dot_plot = DotPlot(data)
         result = dot_plot.genebank_seq()
+
+        add_calculation(module_name=DOT_PLOT_GENEBANK_IDS,
+                        user_data=data, result=result, ip_address=request.remote_addr)
+
         return jsonify({'data': result,
                         'dotplot_base64': dot_plot.get_dot_plot_image(),
                         'alignment': dot_plot.get_alignments()})
@@ -52,6 +62,10 @@ def get_raw_seq_data():
         data = request.get_json()
         consensus_seq = ConsensusSequence(data)
         result = consensus_seq.raw_sequence()
+        
+        add_calculation(module_name=CONSENSUS_SEQUENCE_RAW_SEQ,
+                        user_data=data, result=result, ip_address=request.remote_addr)
+
         return jsonify({'data': result})
     except Exception as e:
         abort(Response(str(e), 400))
@@ -71,10 +85,12 @@ def get_seq_file_data():
         filename = secure_filename(file.filename)
 
         data = dict()
-        data['sequences'] = file.read()
-
+        data['sequences'] = file.read().decode()
         consensus_seq = ConsensusSequence(data)
         result = consensus_seq.file_seq()
+
+        add_calculation(module_name=CONSENSUS_SEQUENCE_FILE_SEQ,
+                        user_data=data, result=result, ip_address=request.remote_addr)
 
         response = make_response(base64.b64encode(result.encode()))
         response.headers['Content-Type'] = 'text/plain'
@@ -90,6 +106,9 @@ def get_seq_genebank():
         data = request.get_json()
         consensus_seq = ConsensusSequence(data)
         result = consensus_seq.genebank_seq()
+
+        add_calculation(module_name=CONSENSUS_SEQUENCE_GENE_BANK,
+                        user_data=data, result=result, ip_address=request.remote_addr)
 
         response = make_response(base64.b64encode(result.encode()))
         response.headers['Content-Type'] = 'text/plain'
@@ -110,6 +129,10 @@ def get_sequences_data():
         data = request.get_json()
         seq_tools = SequencesTools(data)
         result = seq_tools.calculate()
+
+        add_calculation(module_name=SEQUENCES_TOOLS,
+                        user_data=data, result=result, ip_address=request.remote_addr)
+
         return jsonify({'data': result})
     except Exception as e:
         abort(Response(str(e), 400))

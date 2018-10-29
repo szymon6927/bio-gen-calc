@@ -4,6 +4,9 @@ from .utils.StandardDistance import StandardDistance
 from .utils.GeometricDistance import GeometricDistance
 from .utils.TakezakiNeiDistance import TakezakiNeiDistance
 
+from ..helpers.db_helper import add_calculation
+from ..helpers.constants import GENETIC_DISTANCE
+
 
 @genetic_distance.route('/genetic-distance')
 def genetic_distance_page():
@@ -26,16 +29,19 @@ def get_data():
         gen_distance.calcuate_distances()
         gen_distance.build_matrix()
 
+        add_calculation(module_name=f'{GENETIC_DISTANCE}_{distance_choice}',
+                        user_data=data, result=gen_distance.get_matrix().tolist(), ip_address=request.remote_addr)
+
         return jsonify({
             'data': {
                 'dendro_base64': gen_distance.render_dendrogram(),
                 'matrix_latex': gen_distance.redner_matrix()
             }
         })
-    except TypeError:
-        abort(Response("Please check type of input data", 409))
-    except ValueError:
-        abort(Response("The quantity or quality of the data is inappropriate!", 409))
+    except TypeError as e:
+        abort(Response(f'Please check type of input data. {str(e)}', 409))
+    except ValueError as e:
+        abort(Response(f'The quantity or quality of the data is inappropriate! {str(e)}', 409))
     except Exception as e:
         abort(Response(str(e), 400))
 
