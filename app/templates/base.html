@@ -27,7 +27,6 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,900" rel="stylesheet">
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?ver={{ css_js_ver }}"/>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/dark-style.css') }}?ver={{ css_js_ver }}"/>
 
   <script>
     var currentUrl = window.location.href;
@@ -121,6 +120,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
 <script src="{{ url_for('static', filename='js/utils.js') }}?ver={{ css_js_ver }}"></script>
+<script src="{{ url_for('static', filename='js/helpers/dark-mode.js') }}?ver={{ css_js_ver }}"></script>
 <script src="{{ url_for('static', filename='js/helpers/RenderHelper.js') }}?ver={{ css_js_ver }}"></script>
 <script src="{{ url_for('static', filename='js/helpers/PDFHelper.js') }}?ver={{ css_js_ver }}"></script>
 <script src="{{ url_for('static', filename='js/newsletter.js') }}?ver={{ css_js_ver }}"></script>

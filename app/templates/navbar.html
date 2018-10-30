@@ -3,12 +3,12 @@
     <i class="fas fa-dna"></i>
     <span>Gene Calc</span>
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-genecalc"
+          aria-controls="navbar-genecalc" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+  <div class="collapse navbar-collapse" id="navbar-genecalc">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="{{ url_for('home.homepage') }}">Home</a>
@@ -55,5 +55,17 @@
         <a class="nav-link" href="{{ url_for('contact.contact_page') }}">Contact Us</a>
       </li>
     </ul>
+    <div class="darkmode-switcher">
+      <span class="sun-icon">
+          <i class="fas fa-sun"></i>
+      </span>
+
+      <input type="checkbox" id="switch" />
+      <label for="switch">Toggle</label>
+
+      <span class="moon-icon">
+          <i class="far fa-moon"></i>
+      </span>
+    </div>
   </div>
 </nav>

@@ -117,3 +117,31 @@ table th[scope=row] {
     text-decoration: none;
     background-color: #595c5e;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #294f94;
+    border-color: #294f94;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.alignment-wrapper {
+    background: #393839;
+}
+
+.alignment {
+    color: #fff;
+}
+
+.about .logo {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+a {
+    color: #cacaca;
+}
+
+a:hover {
+    color: #fff;
+}
