@@ -1,3 +1,5 @@
+"use strict";
+
 class ChiSquareOfGoodness {
   constructor(container) {
     this.container = container;

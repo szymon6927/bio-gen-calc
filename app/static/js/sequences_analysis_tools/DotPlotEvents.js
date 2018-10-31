@@ -1,3 +1,5 @@
+"use strict";
+
 const moduleSections = '.raw-sequences, .sequences-form-genebank';
 const moduleResultsSection = '.dotplot-raw-seq-results, .genebank-seq-results';
 

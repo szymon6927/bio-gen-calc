@@ -1,3 +1,5 @@
+"use strict";
+
 class RenderHelper {
   constructor(container) {
     this.container = container;

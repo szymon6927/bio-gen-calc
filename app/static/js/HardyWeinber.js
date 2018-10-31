@@ -1,3 +1,5 @@
+"use strict";
+
 class HardyWeinber {
   constructor() {
     this.ho = 0;

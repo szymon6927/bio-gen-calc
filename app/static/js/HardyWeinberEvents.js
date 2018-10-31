@@ -1,3 +1,5 @@
+"use strict";
+
 const hw = new HardyWeinber();
 
 $('.calcuate-hw').click(function () {

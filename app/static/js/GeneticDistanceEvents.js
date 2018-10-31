@@ -1,3 +1,5 @@
+"use strict";
+
 const geneticDistance = new GeneticDistance();
 const validator = new Validation();
 

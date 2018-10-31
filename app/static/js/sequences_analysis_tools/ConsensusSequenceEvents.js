@@ -1,3 +1,5 @@
+"use strict";
+
 const moduleSections = '.raw-sequences, .upload-sequences, .sequences-form-genebank';
 const moduleResultsSection = '.raw-seq-results, .file-seq-results, .file-seq-genebank-results';
 

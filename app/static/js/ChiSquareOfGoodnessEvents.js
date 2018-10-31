@@ -1,3 +1,5 @@
+"use strict";
+
 // validator declared in ChiEvents.js
 const chiArrayGoodness = new ChiSquareOfGoodness('.array-wrapper-goodness');
 $('.generate-array-goodness').click(() => {

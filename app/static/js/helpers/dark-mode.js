@@ -1,3 +1,5 @@
+"use strict";
+
 function darkModeSwitcher() {
   const toggler = document.querySelector('#switch');
 

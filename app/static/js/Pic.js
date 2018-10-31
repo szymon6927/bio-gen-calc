@@ -1,3 +1,5 @@
+"use strict";
+
 // in future import showModal form './utils'
 
 class PicH {

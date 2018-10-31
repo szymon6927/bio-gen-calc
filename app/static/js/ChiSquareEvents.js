@@ -1,3 +1,5 @@
+"use strict";
+
 const chiArray = new ChiSquare('.array-wrapper');
 const validator = new Validation();
 

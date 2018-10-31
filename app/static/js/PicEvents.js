@@ -1,3 +1,5 @@
+"use strict";
+
 const pic = new PicH();
 const validator = new Validation();
 

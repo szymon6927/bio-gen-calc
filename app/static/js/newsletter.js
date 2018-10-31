@@ -1,3 +1,5 @@
+"use strict";
+
 function renderSuccessMessage(msg) {
   const elem = $('.form-messages');
   const template = `<div class="alert alert-success text-center mt-2 mb-2" role="alert">

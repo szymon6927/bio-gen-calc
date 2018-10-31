@@ -1,3 +1,5 @@
+"use strict";
+
 class Validation {
 
   keyAllowed(key) {
