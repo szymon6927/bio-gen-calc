@@ -5,6 +5,7 @@ class Config(object):
     """
     Common configurations
     """
+    MAX_CONTENT_LENGTH = 4 * 1024 * 1024
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     MAIL_SERVER = "mail26.mydevil.net"
     MAIL_PORT = 465
