@@ -1,3 +1,28 @@
+<div class="nav-utility container-fluid">
+  <div class="nav-info float-left">
+    <div class="company-name">
+      <span><i class="fas fa-map-marker-alt"></i></span>
+      <span><a href="{{ url_for('about.about_page') }}">Gene Calc - Szymon Miks, Jan Bińkowski</a></span>
+    </div>
+    <div class="company-email">
+      <span><i class="far fa-envelope"></i></span>
+      <span><a href="mailto:contact@gene-calc.pl">contact@gene-calc.pl</a></span>
+    </div>
+  </div>
+  <div class="darkmode-switcher float-right">
+    <span class="sun-icon">
+        <i class="fas fa-sun"></i>
+    </span>
+
+    <input type="checkbox" id="switch" />
+    <label for="switch">Toggle</label>
+
+    <span class="moon-icon">
+        <i class="far fa-moon"></i>
+    </span>
+  </div>
+</div>
+
 <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-primary mb-4">
   <a class="navbar-brand" href="{{ url_for('home.homepage') }}">
     <i class="fas fa-dna"></i>
@@ -55,17 +80,5 @@
         <a class="nav-link" href="{{ url_for('contact.contact_page') }}">Contact Us</a>
       </li>
     </ul>
-    <div class="darkmode-switcher">
-      <span class="sun-icon">
-          <i class="fas fa-sun"></i>
-      </span>
-
-      <input type="checkbox" id="switch" />
-      <label for="switch">Toggle</label>
-
-      <span class="moon-icon">
-          <i class="far fa-moon"></i>
-      </span>
-    </div>
   </div>
 </nav>
