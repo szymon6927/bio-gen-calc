@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>User Panel - Gene Calc</title>
+  <meta name="description" content="user panel for gene calc calculation">
+  <meta name="keywords" content="gene calc, user panel, login, register, calculation">
+  <meta name="author" content="User Panel Gene Calc - Szymon Miks, Jan Binkowski">
+
+  <link rel="icon" href="{{ url_for('static', filename='img/favicons/favicon.ico') }}">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114"
+        href="{{ url_for('static', filename='img/favicons/dna-144.png') }}">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72"
+        href="{{ url_for('static', filename='img/favicons/dna-72.png') }}">
+  <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='img/favicons/dna-57.png') }}">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/vendors/bootstrap.min.css') }}"/>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,900" rel="stylesheet">
+
+  <link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+</head>
+
+<body>
+{% include "userpanel/topbar.html" %}
+
+<div class="container-fluid">
+  <div class="row">
+
+    {% include "userpanel/sidebar.html" %}
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="userpanel-container bg-light shadow mt-4">
+        {% block userpanel_body %}{% endblock %}
+      </div>
+    </main>
+  </div>
+</div>
+
+{#{% include 'userpanel/footer.html' %}#}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+
+<script src="{{ url_for('static', filename='js/vendors/bootstrap.min.js') }}"></script>
+
+</body>
+</html>

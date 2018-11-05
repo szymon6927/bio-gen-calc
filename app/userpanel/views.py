@@ -3,18 +3,19 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
 from sqlalchemy import and_
 from . import userpanel
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, CustomerEditForm
 from ..database import db
 from ..models.Userpanel import Customer
-
+from ..helpers.no_cache import nocache
 
 
 @userpanel.route('/login', methods=['GET', 'POST'])
+@nocache
 def login():
     form = LoginForm()
     if current_user.is_authenticated:
         return redirect(url_for('userpanel.dashboard'))
-        
+
     if form.validate_on_submit():
         customer = Customer.query.filter_by(login=form.login.data).first()
         if customer:
@@ -24,16 +25,19 @@ def login():
 
         flash("Invalid username or password", 'danger')
 
-    return render_template('userpanel/login.html', title="Login", form=form)
+    return render_template('userpanel/login.html', title="Login to your account", form=form)
 
 
 @userpanel.route('/logout')
 @login_required
+@nocache
 def logout():
     logout_user()
     return redirect(url_for('home.homepage'))
 
+
 @userpanel.route('/register', methods=['GET', 'POST'])
+@nocache
 def register():
     form = RegisterForm()
 
@@ -45,16 +49,55 @@ def register():
             return redirect(url_for('userpanel.register'))
         else:
             hashed_password = generate_password_hash(form.password.data, method='sha256')
-            new_customer = Customer(first_name=form.first_name.data, last_name=form.last_name.data, login=form.login.data, email=form.email.data, password=hashed_password)
+            new_customer = Customer(first_name=form.first_name.data, last_name=form.last_name.data,
+                                    login=form.login.data, email=form.email.data, password=hashed_password)
             db.session.add(new_customer)
             db.session.commit()
 
         return redirect(url_for('userpanel.dashboard'))
 
-    return render_template('userpanel/register.html', title="Register", form=form)
+    return render_template('userpanel/register.html', title="Register for an account", form=form)
 
 
-@userpanel.route('/dashboard', methods=['GET'])
+@userpanel.route('/userpanel/', methods=['GET'], strict_slashes=False)
 @login_required
+@nocache
+def userpanel_view():
+    return redirect(url_for('userpanel.dashboard'))
+
+
+@userpanel.route('/userpanel/dashboard', methods=['GET'])
+@login_required
+@nocache
 def dashboard():
     return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login)
+
+
+@userpanel.route('/userpanel/editprofile', methods=['GET', 'POST'])
+@login_required
+@nocache
+def edit_profile():
+    customer_id = current_user.id
+
+    profile = Customer.query.get_or_404(customer_id)
+    form = CustomerEditForm(obj=profile)
+
+    if form.validate_on_submit():
+        profile.first_name = form.first_name.data
+        profile.last_name = form.last_name.data
+
+        db.session.add(profile)
+        db.session.commit()
+
+        flash(f'You have successfully edited the profile.', 'success')
+
+        return redirect(url_for('userpanel.edit_profile'))
+
+    return render_template('userpanel/edit_profile.html', form=form)
+
+
+@userpanel.route('/userpanel/calculations')
+@login_required
+@nocache
+def calculations():
+    return render_template('userpanel/calculations.html')

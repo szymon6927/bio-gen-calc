@@ -15,7 +15,8 @@
     <div class="userpanel">
       <div class="btn btn-outline-secondary btn-sm">
         <i class="fas fa-user text-white"></i>
-        <a class="text-white" href="{{ url_for('userpanel.login') }}">User panel ({{ current_user.login }})</a>
+        <a class="text-white" href="{{ url_for('userpanel.login') }}">
+          User panel {% if current_user.is_authenticated %}({{ current_user.login }}){% endif %}</a>
       </div>
     </div>
 

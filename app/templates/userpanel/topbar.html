@@ -1,0 +1,17 @@
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand" href="{{ url_for('userpanel.dashboard') }}">
+    <i class="fas fa-dna"></i>
+    <span>Gene Calc - User Panel</span>
+  </a>
+
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="btn btn-outline-light mr-3" href="{{ url_for('home.homepage') }}">
+      <i class="fas fa-undo"></i>
+      <span>Back to app</span>
+    </a>
+    <a class="btn btn-outline-light" href="{{ url_for('userpanel.logout') }}">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Log out</span>
+    </a>
+  </nav>
+</nav>
