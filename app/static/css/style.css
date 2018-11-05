@@ -129,8 +129,8 @@ table th[scope=row] {
 .nav-utility {
     position: fixed;
     top: 0;
-    height: 40px;
-    line-height: 40px;
+    height: 45px;
+    line-height: 45px;
     width: 100%;
     background: #26507f;
     border-bottom: 1px solid #fff;
@@ -310,7 +310,7 @@ table th[scope=row] {
 /* DARKMODE SWITCHER */
 .darkmode-switcher {
     vertical-align: middle;
-    display: flex;
+    display: inline-flex;
 }
 
 #switch {
@@ -329,7 +329,7 @@ table th[scope=row] {
     border-radius: 100px;
     position: relative;
     margin-bottom: 0;
-    top: 6px;
+    top: 8px;
 }
 
 .darkmode-switcher label:after {
@@ -361,6 +361,11 @@ table th[scope=row] {
     font-size: 16px;
 }
 /* END DARKMODE SWITCHER */
+
+.userpanel {
+    display: inline-flex;
+    margin-right: 1.2rem;
+}
 
 .sun-icon {
     color: #fff;

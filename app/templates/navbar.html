@@ -9,17 +9,28 @@
       <span><a href="mailto:contact@gene-calc.pl">contact@gene-calc.pl</a></span>
     </div>
   </div>
-  <div class="darkmode-switcher float-right">
-    <span class="sun-icon">
-        <i class="fas fa-sun"></i>
-    </span>
 
-    <input type="checkbox" id="switch" />
-    <label for="switch">Toggle</label>
 
-    <span class="moon-icon">
-        <i class="far fa-moon"></i>
-    </span>
+  <div class="nav-tools float-right">
+    <div class="userpanel">
+      <div class="btn btn-outline-secondary btn-sm">
+        <i class="fas fa-user text-white"></i>
+        <a class="text-white" href="{{ url_for('userpanel.login') }}">User panel</a>
+      </div>
+    </div>
+
+    <div class="darkmode-switcher">
+      <span class="sun-icon">
+          <i class="fas fa-sun"></i>
+      </span>
+  
+      <input type="checkbox" id="switch" />
+      <label for="switch">Toggle</label>
+  
+      <span class="moon-icon">
+          <i class="far fa-moon"></i>
+      </span>
+    </div>
   </div>
 </div>
 

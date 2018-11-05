@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <div class="wrapper">
+    {% include 'utils/module_top_block.html' %}
+  
+    <section class="register">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-12">
+          {{ module_desc.text|safe }}
+        </div>
+
+        <div class="col-md-6 offset-md-3 col-sm-12 col-12">
+          <form class="register-form" action="{{ url_for('userpanel.register') }}" method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+              {{ form.first_name.label }}
+              {{ form.first_name(class_="form-control", placeholder="first name") }}
+            </div>
+
+            <div class="form-group">
+              {{ form.last_name.label }}
+              {{ form.last_name(class_="form-control", placeholder="last name") }}
+            </div>
+
+            <div class="form-group">
+              {{ form.login.label }}
+              {{ form.login(class_="form-control", placeholder="login") }}
+            </div>
+
+            <div class="form-group">
+              {{ form.email.label }}
+              {{ form.email(class_="form-control", placeholder="e-mail") }}
+            </div>
+
+            <div class="form-group">
+              {{ form.password.label }}
+              {{ form.password(class_="form-control", placeholder="password") }}
+            </div>
+
+            <div class="form-group">
+              {{ form.password_confirm.label }}
+              {{ form.password_confirm(class_="form-control", placeholder="confirm password") }}
+            </div>
+        
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+      
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} mt-3" role="alert">{{ message|safe }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+    
+            {% for field in form.errors %}
+              {% for error in form.errors[field] %}
+                <div class="alert alert-danger mt-3" role="alert">{{ error }}</div>
+              {% endfor %}
+            {% endfor %}
+
+            <p class="text-muted small mb-2 mt-3">Inputs with * are required</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}
