@@ -5,6 +5,7 @@ import pdfkit
 from flask import Flask, render_template, request, make_response, abort, Response, send_from_directory
 from .database import db
 from .models.Admin import User, Page
+from .models.Userpanel import Customer
 import base64
 
 from flask_htmlmin import HTMLMIN
@@ -40,11 +41,15 @@ def create_app(config_name):
     register_blueprints(app)
 
     login_manager.init_app(app)
+    login_manager.login_view = 'userpanel.login'
 
-    # Create user loader function
     @login_manager.user_loader
     def load_user(user_id):
         return db.session.query(User).get(user_id)
+
+    @login_manager.user_loader
+    def load_customer(customer_id):
+        return Customer.query.get(int(customer_id))
 
     @app.route('/robots.txt')
     @app.route('/sitemap.xml')

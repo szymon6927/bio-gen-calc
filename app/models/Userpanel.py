@@ -1,8 +1,9 @@
+from flask_login import UserMixin
 from ..database import db
 import datetime
 
 
-class Customer(db.Model):
+class Customer(UserMixin, db.Model):
     __tablename__ = 'customers'
 
     id = db.Column(db.Integer, primary_key=True)
