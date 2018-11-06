@@ -9,6 +9,7 @@ class Customer(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(120), nullable=True)
     last_name = db.Column(db.String(120), nullable=True)
+    profile_pic = db.Column(db.String(20), nullable=False, default='profile.svg')
     login = db.Column(db.String(25), unique=True)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(80))

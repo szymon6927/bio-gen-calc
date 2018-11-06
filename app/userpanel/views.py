@@ -7,6 +7,7 @@ from .forms import LoginForm, RegisterForm, CustomerEditForm
 from ..database import db
 from ..models.Userpanel import Customer
 from ..helpers.no_cache import nocache
+from ..helpers.file_helper import save_picture
 
 
 @userpanel.route('/login', methods=['GET', 'POST'])
@@ -83,17 +84,23 @@ def edit_profile():
     form = CustomerEditForm(obj=profile)
 
     if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            profile.profile_pic = picture_file
+
         profile.first_name = form.first_name.data
         profile.last_name = form.last_name.data
 
         db.session.add(profile)
         db.session.commit()
 
-        flash(f'You have successfully edited the profile.', 'success')
+        flash('You have successfully edited the profile.', 'success')
 
         return redirect(url_for('userpanel.edit_profile'))
 
-    return render_template('userpanel/edit_profile.html', form=form)
+    profile_pic = url_for('static', filename='uploads/profile_pics/' + current_user.profile_pic)
+
+    return render_template('userpanel/edit_profile.html', form=form, profile_pic=profile_pic)
 
 
 @userpanel.route('/userpanel/calculations')

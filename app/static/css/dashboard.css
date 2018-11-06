@@ -88,3 +88,8 @@
 .userpanel-container {
     padding: 35px 15px;
 }
+
+.profile-pic {
+    width: 125px;
+    height: 125px;
+}
