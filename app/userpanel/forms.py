@@ -8,7 +8,7 @@ from ..models.Userpanel import Customer
 
 
 class LoginForm(FlaskForm):
-    login = StringField('Login:', validators=[DataRequired(), Length(min=4, max=15)])
+    login_or_email = StringField('Login or e-mail:', validators=[DataRequired(), Length(min=4, max=150)])
     password = PasswordField('Password:', validators=[DataRequired(), Length(min=8, max=80)])
     remember = BooleanField('Remember me')
 
@@ -35,9 +35,9 @@ class RegisterForm(FlaskForm):
 
 
 class CustomerEditForm(FlaskForm):
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
-    first_name = StringField('First name:')
-    last_name = StringField('Last name:')
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
+    first_name = StringField('First name:', validators=[DataRequired()])
+    last_name = StringField('Last name:', validators=[DataRequired()])
     login = StringField('Login*')
     email = EmailField('Email*')
 

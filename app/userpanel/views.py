@@ -1,7 +1,7 @@
 from flask import render_template, redirect, flash, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 from . import userpanel
 from .forms import LoginForm, RegisterForm, CustomerEditForm
 from ..database import db
@@ -18,7 +18,7 @@ def login():
         return redirect(url_for('userpanel.dashboard'))
 
     if form.validate_on_submit():
-        customer = Customer.query.filter_by(login=form.login.data).first()
+        customer = Customer.query.filter(or_(Customer.login == form.login_or_email.data, Customer.email == form.login_or_email.data)).first()
         if customer:
             if check_password_hash(customer.password, form.password.data):
                 login_user(customer, remember=form.remember.data)

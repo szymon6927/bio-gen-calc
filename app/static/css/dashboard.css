@@ -90,6 +90,105 @@
 }
 
 .profile-pic {
-    width: 125px;
-    height: 125px;
+    width: 250px;
+    height: 250px;
+}
+
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+
+#overlay.active {
+    display: block;
+}
+
+.hamburger {
+    padding: 10px 0;
+    cursor: pointer;
+    z-index: 9;
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin: 0 0 0 auto;
+}
+
+.hamburger div {
+    width: 100%;
+    height: 5px;
+    background-color: #222;
+    margin: 5px 0;
+}
+
+.hamburger.active {
+    position: relative;
+}
+
+.hamburger.active div:nth-child(1) {
+    display: none;
+}
+
+.hamburger.active div:nth-child(2) {
+    transform: rotate(45deg);
+    position: relative;
+    top: 5px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+}
+
+.hamburger.active div:nth-child(3) {
+    transform: rotate(135deg);
+    top: -5px;
+    position: relative;
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+}
+
+.hamburger.active div {
+    background-color: #fff;
+}
+
+.sidebar.active {
+    display: block;
+    width: 250px;
+    transition: 0.25s;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -ms-transition: 0.25s;
+    -o-transition: 0.25s;
+}
+
+@media (max-width: 1200px) {
+    .sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 0.75rem;
+    }
+
+    .nav-utils a, .nav-utils span {
+        font-size: 10px;
+        letter-spacing: -0.01em;
+    }
+
+    .nav-utils a {
+        padding: 5px;
+    }
 }

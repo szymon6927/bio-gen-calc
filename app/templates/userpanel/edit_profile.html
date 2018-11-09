@@ -2,54 +2,72 @@
 {% block userpanel_body %}
   <h1>Edit profile</h1>
 
-  <img src="{{ profile_pic }}" class="profile-pic" />
-
-  <form class="login-form" action="{{ url_for('userpanel.edit_profile') }}" method="POST" enctype="multipart/form-data">
+  <form class="edit-profile" action="{{ url_for('userpanel.edit_profile') }}" method="POST" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
 
-    <div class="form-group">
-        {{ form.picture.label() }}
-        {{ form.picture(class="form-control-file") }}
-        {% if form.picture.errors %}
-            {% for error in form.picture.errors %}
+    <div class="row">
+      <div class="col-md-4 col-sm-6 mt-4 text-center">
+        <img src="{{ profile_pic }}" class="profile-pic rounded-circle" />
+  
+        <div class="form-group">
+            {{ form.picture.label() }}
+            {{ form.picture(class="form-control-file") }}
+
+            {% if form.picture.errors %}
+              {% for error in form.picture.errors %}
+                <span class="text-danger">{{ error }}</span></br>
+              {% endfor %}
+            {% endif %}
+        </div>
+      </div>
+  
+      <div class="col-md-8 col-sm-6">
+        <div class="form-group">
+          {{ form.first_name.label }}
+          {{ form.first_name(class_="form-control") }}
+
+          {% if form.first_name.errors %}
+            {% for error in form.first_name.errors %}
                 <span class="text-danger">{{ error }}</span></br>
             {% endfor %}
-        {% endif %}
+          {% endif %}
+        </div>
+        <div class="form-group">
+          {{ form.last_name.label }}
+          {{ form.last_name(class_="form-control") }}
+
+          {% if form.last_name.errors %}
+            {% for error in form.last_name.errors %}
+                <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+    
+        <div class="form-group">
+          {{ form.login.label }}
+          {{ form.login(class_="form-control", disabled=True) }}
+
+          {% if form.login.errors %}
+            {% for error in form.login.errors %}
+                <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+    
+        <div class="form-group">
+          {{ form.email.label }}
+          {{ form.email(class_="form-control", disabled=True) }}
+
+          {% if form.email.errors %}
+            {% for error in form.email.errors %}
+                <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      {{ form.first_name.label }}
-      {{ form.first_name(class_="form-control", placeholder="login") }}
-    </div>
-    <div class="form-group">
-      {{ form.last_name.label }}
-      {{ form.last_name(class_="form-control", placeholder="login") }}
-    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
 
-    <div class="form-group">
-      {{ form.login.label }}
-      {{ form.login(class_="form-control", placeholder="login", disabled=True) }}
-    </div>
-
-    <div class="form-group">
-      {{ form.email.label }}
-      {{ form.email(class_="form-control", placeholder="login", disabled=True) }}
-    </div>
-
-    <button type="submit" class="btn btn-primary btn-block">Edit</button>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <div class="alert alert-{{ category }} mt-3" role="alert">{{ message|safe }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-
-    {% for field in form.errors %}
-      {% for error in form.errors[field] %}
-        <div class="alert alert-danger mt-3" role="alert">{{ error }}</div>
-      {% endfor %}
-    {% endfor %}
   </form>
 {% endblock %}

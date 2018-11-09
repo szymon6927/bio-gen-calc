@@ -14,8 +14,8 @@
             <form class="login-form" action="{{ url_for('userpanel.login') }}" method="POST">
               {{ form.hidden_tag() }}
               <div class="form-group">
-                {{ form.login.label }}
-                {{ form.login(class_="form-control", placeholder="login") }}
+                {{ form.login_or_email.label }}
+                {{ form.login_or_email(class_="form-control", placeholder="login or email") }}
               </div>
               <div class="form-group">
                 {{ form.password.label }}
