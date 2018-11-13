@@ -1,4 +1,7 @@
 {% extends 'userpanel/base.html' %}
 {% block userpanel_body %}
   <h1>Yours calculations</h1>
+  {% for calc in calculations %}
+    <p>{{ calc.module_name }}</p>
+  {% endfor %}
 {% endblock %}

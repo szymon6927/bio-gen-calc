@@ -5,7 +5,7 @@ from sqlalchemy import and_, or_
 from . import userpanel
 from .forms import LoginForm, RegisterForm, CustomerEditForm
 from ..database import db
-from ..models.Userpanel import Customer
+from ..models.Userpanel import Customer, CustomerCalculation
 from ..helpers.no_cache import nocache
 from ..helpers.file_helper import save_picture
 
@@ -104,4 +104,6 @@ def edit_profile():
 @login_required
 @nocache
 def calculations():
-    return render_template('userpanel/calculations.html')
+    calculations = CustomerCalculation.query.all()
+    print("calculations", calculations)
+    return render_template('userpanel/calculations.html', calculations=calculations)

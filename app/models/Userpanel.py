@@ -25,6 +25,7 @@ class CustomerCalculation(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'), nullable=False)
+    title = db.Column(db.String(150), nullable=True)
     module_name = db.Column(db.String(120), nullable=True)
     customer_input = db.Column(db.Text, nullable=True)
     result = db.Column(db.Text, nullable=True)

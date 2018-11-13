@@ -76,4 +76,29 @@ class HardyWeinber {
       }
     })
   }
+
+  saveCalculation() {
+    let calculation = {};
+    calculation['customer_id'] = $('.customer-id').val();
+    calculation['module_name'] = "Hardy Weinberg"
+    calculation['title'] = $('.calculation-title').val();
+    calculation['customer_input'] = this.buildJSON();
+    calculation['result'] = this.getResult();
+
+    const path = "/send-calculation";
+    $.ajax({
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      url: path,
+      data: JSON.stringify(calculation),
+      dataType: "json",
+      success: (result) => {
+        console.log("Successfull!");
+        console.log(result)
+      },
+      error: function (request) {
+        console.log("Something goes wrong, try again!", request);
+      }
+    })
+  }
 }

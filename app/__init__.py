@@ -112,6 +112,7 @@ def register_blueprints(app):
     from .donors import donors
     from .newsletter import newsletter
     from .userpanel import userpanel
+    from .customer_calculation import customer_calculation
     from .privacy_policy import privacy_policy
 
     app.register_blueprint(home_blueprint)
@@ -126,4 +127,5 @@ def register_blueprints(app):
     app.register_blueprint(donors)
     app.register_blueprint(newsletter)
     app.register_blueprint(userpanel)
+    app.register_blueprint(customer_calculation)
     app.register_blueprint(privacy_policy)

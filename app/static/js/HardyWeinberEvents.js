@@ -41,10 +41,5 @@ $('.form-control').keypress(function (e) {
 
 $('.save-calculation-form').submit(function(e) {
   e.preventDefault();
-  const customerID = $('.customer-id').val();
-  const title = $('.calculation-title').val();
-  const customerInput = hw.buildJSON();
-  const results = hw.getResult();
-
-  console.log(customerID, title, customerInput, results);
+  hw.saveCalculation();
 });
