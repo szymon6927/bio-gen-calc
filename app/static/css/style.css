@@ -652,6 +652,10 @@ table th[scope=row] {
     margin-top: 15px;
 }
 
+.save-calculations {
+    display: none;
+}
+
 @media (min-width: 1331px) and (max-width: 1400px) {
     .navbar-nav li {
         font-size: 15px;

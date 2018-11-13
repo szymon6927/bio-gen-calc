@@ -40,6 +40,8 @@ class CustomerEditForm(FlaskForm):
     last_name = StringField('Last name:', validators=[DataRequired()])
     login = StringField('Login*')
     email = EmailField('Email*')
+    password = PasswordField('New password', validators=[Length(min=8, max=80), EqualTo('password_confirm', message='Passwords must match')])
+    password_confirm = PasswordField('Confirm new password')
 
     def validate_login(self, login):
         if login.data != current_user.login:
@@ -52,3 +54,9 @@ class CustomerEditForm(FlaskForm):
             customer = Customer.query.filter_by(email=email.data).first()
             if customer:
                 raise ValidationError('You can not change profile email.')
+
+    def validate_password(self, password):
+        lower_name = self.first_name.data.lower() 
+    
+        if lower_name in password.data:
+            raise ValidationError('Password contain your first name, please change this.')

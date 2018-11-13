@@ -64,6 +64,28 @@
             {% endfor %}
           {% endif %}
         </div>
+
+        <div class="form-group">
+          {{ form.password.label }}
+          {{ form.password(class_="form-control") }}
+
+          {% if form.password.errors %}
+            {% for error in form.password.errors %}
+                <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          {{ form.password_confirm.label }}
+          {{ form.password_confirm(class_="form-control") }}
+
+          {% if form.password_confirm.errors %}
+            {% for error in form.password_confirm.errors %}
+                <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
       </div>
     </div>
 

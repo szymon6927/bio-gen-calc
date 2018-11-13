@@ -6,6 +6,7 @@ class HardyWeinber {
     this.he = 0;
     this.rho = 0;
     this.alpha = 0;
+    this.result = Object;
   }
 
   setHo(ho) {
@@ -22,6 +23,14 @@ class HardyWeinber {
 
   setAlpha(alpha) {
     this.alpha = parseFloat(alpha);
+  }
+
+  setResult(result) {
+    this.result = result;
+  }
+
+  getResult() {
+    return this.result;
   }
 
   isInt(value) {
@@ -56,9 +65,10 @@ class HardyWeinber {
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (result) {
+      success: (result) => {
         console.log("Successfull!");
         render.successBlock(result);
+        this.setResult(result);
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);

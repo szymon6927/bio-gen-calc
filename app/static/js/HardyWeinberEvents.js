@@ -35,6 +35,16 @@ $('.calcuate-hw').click(function () {
 $('.form-control').keypress(function (e) {
   if (e.which == 13) {
     $('.calcuate-hw').trigger('click');
-    return false;    //<---- Add this line
+    return false;
   }
+});
+
+$('.save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  const customerID = $('.customer-id').val();
+  const title = $('.calculation-title').val();
+  const customerInput = hw.buildJSON();
+  const results = hw.getResult();
+
+  console.log(customerID, title, customerInput, results);
 });

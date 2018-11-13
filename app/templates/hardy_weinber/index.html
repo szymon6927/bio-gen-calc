@@ -48,9 +48,33 @@
 
 
     <div class="row">
-      <div class="col-xl-8 offset-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12 hw-results"></div>
-    </div>
+      <div class="col-xl-8 offset-xl-4 col-lg-12 col-md-12 col-sm-12 hw-results"></div>
 
+      {% if current_user.is_authenticated %}
+        <div class="col-xl-8 offset-xl-2 col-lg-12 col-md-12 col-sm-12 text-center save-calculations mt-5">
+          <p><span class="font-weight-bold">{{ current_user.login }}</span> do you want to save your calculation?</p>
+          <form class="row save-calculation-form">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <input type="hidden" class="customer-id" value="{{ current_user.id }}" />
+                <input class="form-control" class="calculation-title" type="text" placeholder="Add calculation title" required>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <button type="submit" class="btn btn-block btn-warning text-white save">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      {% else %}
+        <div class="save-calculations">
+          <p>Please log in if you want to save your calculation <a href="{{ url_for('userpanel.login') }}"></a></p>
+        </div>
+      {% endif %}
+
+    </div>
   </section>
 </div>
 

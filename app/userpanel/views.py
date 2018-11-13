@@ -43,17 +43,11 @@ def register():
     form = RegisterForm()
 
     if form.validate_on_submit():
-        customer = Customer.query.filter(and_(Customer.login == form.login.data, Customer.email == form.email.data))
-
-        if customer:
-            flash("User with this login and email already exist", 'danger')
-            return redirect(url_for('userpanel.register'))
-        else:
-            hashed_password = generate_password_hash(form.password.data, method='sha256')
-            new_customer = Customer(first_name=form.first_name.data, last_name=form.last_name.data,
-                                    login=form.login.data, email=form.email.data, password=hashed_password)
-            db.session.add(new_customer)
-            db.session.commit()
+        hashed_password = generate_password_hash(form.password.data, method='sha256')
+        new_customer = Customer(first_name=form.first_name.data, last_name=form.last_name.data,
+                                login=form.login.data, email=form.email.data, password=hashed_password)
+        db.session.add(new_customer)
+        db.session.commit()
 
         return redirect(url_for('userpanel.dashboard'))
 
@@ -87,6 +81,9 @@ def edit_profile():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
             profile.profile_pic = picture_file
+
+        if form.password.data:
+            profile.password = generate_password_hash(form.password.data, method='sha256')
 
         profile.first_name = form.first_name.data
         profile.last_name = form.last_name.data
