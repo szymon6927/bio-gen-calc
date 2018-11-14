@@ -36,6 +36,7 @@
       {% include 'userpanel/menu-icon.html' %}
 
       {% include 'userpanel/messages.html' %}
+      
       <div class="userpanel-container bg-light shadow mt-4">
         {% block userpanel_body %}{% endblock %}
       </div>
@@ -47,16 +48,18 @@
 
 {#{% include 'userpanel/footer.html' %}#}
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
 
 <script src="{{ url_for('static', filename='js/vendors/bootstrap.min.js') }}"></script>
 
 <script src="{{ url_for('static', filename='js/userpanel.js') }}"></script>
+
+{% block userpanel_scripts %}{% endblock %}
 
 </body>
 </html>

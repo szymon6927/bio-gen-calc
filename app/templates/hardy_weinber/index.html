@@ -50,7 +50,9 @@
     <div class="row">
       <div class="col-xl-8 offset-xl-4 col-lg-12 col-md-12 col-sm-12 hw-results"></div>
       
-      {% include 'utils/save_calculation.html' %}
+      {% with module_name="Hardy-Weinberg equilibrium" %}
+          {% include 'utils/save_calculation.html' %}
+        {% endwith %}
     </div>
   </section>
 </div>
@@ -60,6 +62,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/HardyWeinber.js') }}?ver={{ css_js_ver }}"></script>
-<script src="{{ url_for('static', filename='js/HardyWeinberEvents.js') }}?ver={{ css_js_ver }}"></script>
+<script src="{{ url_for('static', filename='js/hardy_weinberg/HardyWeinber.js') }}?ver={{ css_js_ver }}"></script>
+<script src="{{ url_for('static', filename='js/hardy_weinberg/HardyWeinberEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}

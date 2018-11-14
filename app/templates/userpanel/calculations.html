@@ -1,7 +1,20 @@
 {% extends 'userpanel/base.html' %}
+
 {% block userpanel_body %}
-  <h1>Yours calculations</h1>
-  {% for calc in calculations %}
-    <p>{{ calc.module_name }}</p>
-  {% endfor %}
+  <h1 class="mb-3">Yours calculations</h1>
+  <div class="calculations-wrapper">
+    <div class="row">
+      {% for calc in calculations %}
+        <div class="col-md-12 col-sm-12">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">Title: {% if calc.title %}{{ calc.title }}{% else%}Calculation - {{ calc.id }}{% endif %}</h5>
+              <p class="card-text">Module name: {{ calc.module_name }}</p>
+              <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}" class="btn btn-primary">Show details</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}

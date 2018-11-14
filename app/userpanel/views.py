@@ -10,7 +10,7 @@ from ..helpers.no_cache import nocache
 from ..helpers.file_helper import save_picture
 
 
-@userpanel.route('/login', methods=['GET', 'POST'])
+@userpanel.route('/userpanel/login', methods=['GET', 'POST'])
 @nocache
 def login():
     form = LoginForm()
@@ -29,7 +29,7 @@ def login():
     return render_template('userpanel/login.html', title="Login to your account", form=form)
 
 
-@userpanel.route('/logout')
+@userpanel.route('/userpanel/logout')
 @login_required
 @nocache
 def logout():
@@ -37,7 +37,7 @@ def logout():
     return redirect(url_for('home.homepage'))
 
 
-@userpanel.route('/register', methods=['GET', 'POST'])
+@userpanel.route('/userpanel/register', methods=['GET', 'POST'])
 @nocache
 def register():
     form = RegisterForm()
@@ -48,6 +48,8 @@ def register():
                                 login=form.login.data, email=form.email.data, password=hashed_password)
         db.session.add(new_customer)
         db.session.commit()
+
+        login_user(new_customer)
 
         return redirect(url_for('userpanel.dashboard'))
 
@@ -104,6 +106,15 @@ def edit_profile():
 @login_required
 @nocache
 def calculations():
-    calculations = CustomerCalculation.query.all()
-    print("calculations", calculations)
+    calculations = CustomerCalculation.query.filter_by(customer_id=current_user.id)
     return render_template('userpanel/calculations.html', calculations=calculations)
+
+
+@userpanel.route('/userpanel/calculations/<int:calculation_id>')
+@login_required
+@nocache
+def calculation_detail(calculation_id):
+    print(calculation_id)
+    calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
+    
+    return render_template('userpanel/calculation-detail.html', calculation=calculation)

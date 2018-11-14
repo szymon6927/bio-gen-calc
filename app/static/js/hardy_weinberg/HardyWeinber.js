@@ -78,9 +78,12 @@ class HardyWeinber {
   }
 
   saveCalculation() {
+    $('.cover').show();
+    const render = new RenderHelper('.save-calculation-form .messages');
+
     let calculation = {};
     calculation['customer_id'] = $('.customer-id').val();
-    calculation['module_name'] = "Hardy Weinberg"
+    calculation['module_name'] = $('.module-name').val();
     calculation['title'] = $('.calculation-title').val();
     calculation['customer_input'] = this.buildJSON();
     calculation['result'] = this.getResult();
@@ -94,10 +97,13 @@ class HardyWeinber {
       dataType: "json",
       success: (result) => {
         console.log("Successfull!");
-        console.log(result)
+        render.successBlock(result);
+        $('.cover').hide();
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);
+        render.errorBlock(request);
+        $('.cover').hide();
       }
     })
   }
