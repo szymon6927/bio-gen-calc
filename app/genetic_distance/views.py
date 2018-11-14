@@ -35,7 +35,7 @@ def get_data():
         return jsonify({
             'data': {
                 'dendro_base64': gen_distance.render_dendrogram(),
-                'matrix_latex': gen_distance.redner_matrix()
+                'matrix': gen_distance.redner_matrix()
             }
         })
     except TypeError as e:

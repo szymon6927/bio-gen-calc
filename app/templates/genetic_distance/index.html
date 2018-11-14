@@ -5,100 +5,106 @@
 {% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
 
 {% block body %}
-<div class="wrapper">
-  {% include 'utils/module_top_block.html' %}
+  <div class="wrapper">
+    {% include 'utils/module_top_block.html' %}
 
-  {% include 'utils/info_block.html' %}
+    {% include 'utils/info_block.html' %}
 
-  <section class="genetic-distance">
-    <div class="row">
-      <div class="col-lg-3 offset-lg-3 col-md-4 offset-md-2 col-sm-6 col-12">
-        <div class="form-group">
-          <label for="taxon-number">Number of populations:</label>
-          <input id="taxon-number" type="number" min="0" class="form-control taxon-number">
+    <section class="genetic-distance">
+      <div class="row">
+        <div class="col-lg-3 offset-lg-3 col-md-4 offset-md-2 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="taxon-number">Number of populations:</label>
+            <input id="taxon-number" type="number" min="0" class="form-control taxon-number">
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="locus-number">Number of loci:</label>
+            <input id="locus-number" type="number" min="0" class="form-control locus-number">
+          </div>
+        </div>
+
+        <div class="col-lg-3 offset-lg-3 col-md-4 offset-md-2 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="type-of-distance">Type of distance</label>
+            <select class="form-control" id="type-of-distance">
+              <option value="standard" selected>Standard genetic distance</option>
+              <option value="geometric">Geometric genetic distance</option>
+              <option value="takezaki-nei">Genetic distance for STR (Takezaki, Nei 1983)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="type-of-dendrogram">Type of dendrogram</label>
+            <select class="form-control" id="type-of-dendrogram">
+              <option value="upgma" selected>UPGMA</option>
+              <option value="wpgma">WPGMA</option>
+              <option value="upgmc">UPGMC</option>
+              <option value="wpgmc">WPGMC</option>
+              <option value="single-linkage">Single Linkage Clustering</option>
+              <option value="complete-linkage">Complete Linkage Clustering</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
+          <button type="submit" class="btn btn-block btn-primary alleles-inputs-generate">Generate!</button>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-12 alleles-wrapper mt-4"></div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-6 offset-md-3 col-sm-12">
+          <button type="submit" class="btn btn-block btn-success generate-table mb-3">Generate table</button>
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-        <div class="form-group">
-          <label for="locus-number">Number of loci:</label>
-          <input id="locus-number" type="number" min="0" class="form-control locus-number">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 genetic-distance-table"></div>
+        <div class="col-md-6 offset-md-3">
+          <button type="submit" class="btn btn-block btn-danger calcuate-distance mt-3">Calculate!</button>
         </div>
       </div>
 
-      <div class="col-lg-3 offset-lg-3 col-md-4 offset-md-2 col-sm-6 col-12">
-        <div class="form-group">
-          <label for="type-of-distance">Type of distance</label>
-          <select class="form-control" id="type-of-distance">
-            <option value="standard" selected>Standard genetic distance</option>
-            <option value="geometric">Geometric genetic distance</option>
-            <option value="takezaki-nei">Genetic distance for STR (Takezaki, Nei 1983)</option>
-          </select>
+      <div class="genetic-distance-results mt-5">
+        <div class="row success">
+          <div class="col-md-10 offset-md-1 col-sm-12 text-center">
+            <div class="result-desc"><p class="pb-1">Distance matrix: </p></div>
+            <div class="matrix-wrapper"></div>
+          </div>
+          <div class="col-md-10 offset-md-1 col-sm-12 mt-5 text-center">
+            <div class="result-desc"><p class="pb-1">Dendogram: </p></div>
+            <div class="dendrogram-wrapper"></div>
+          </div>
         </div>
+        <div class="error"></div>
+
+        {% with module_name="genetic distance" %}
+          {% include 'utils/save_calculation.html' %}
+        {% endwith %}
       </div>
 
-      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-        <div class="form-group">
-          <label for="type-of-dendrogram">Type of dendrogram</label>
-          <select class="form-control" id="type-of-dendrogram">
-            <option value="upgma" selected>UPGMA</option>
-            <option value="wpgma">WPGMA</option>
-            <option value="upgmc">UPGMC</option>
-            <option value="wpgmc">WPGMC</option>
-            <option value="single-linkage">Single Linkage Clustering</option>
-            <option value="complete-linkage">Complete Linkage Clustering</option>
-          </select>
-        </div>
-      </div>
+      <div class="pdf-wrapper"></div>
 
-      <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
-        <button type="submit" class="btn btn-block btn-primary alleles-inputs-generate">Generate!</button>
-      </div>
+    </section>
+  </div>
 
-    </div>
-
-    <div class="row">
-      <div class="col-md-6 offset-md-3 col-sm-12 alleles-wrapper mt-4"></div>
-    </div>
-
-    <div class="row mt-3">
-      <div class="col-md-6 offset-md-3 col-sm-12">
-        <button type="submit" class="btn btn-block btn-success generate-table mb-3">Generate table</button>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12 col-sm-12 genetic-distance-table"></div>
-      <div class="col-md-6 offset-md-3">
-        <button type="submit" class="btn btn-block btn-danger calcuate-distance mt-3">Calculate!</button>
-      </div>
-    </div>
-
-    <div class="genetic-distance-results mt-5">
-      <div class="row success">
-        <div class="col-md-10 offset-md-1 col-sm-12 text-center">
-          <div class="result-desc"><p class="pb-1">Distance matrix: </p></div>
-          <div class="matrix-wrapper"></div>
-        </div>
-        <div class="col-md-10 offset-md-1 col-sm-12 mt-5 text-center">
-          <div class="result-desc"><p class="pb-1">Dendogram: </p></div>
-          <div class="dendrogram-wrapper"></div>
-        </div>
-      </div>
-      <div class="error"></div>
-    </div>
-
-    <div class="pdf-wrapper"></div>
-
-  </section>
-</div>
-
-{% include 'utils/modal.html' %}
+  {% include 'utils/modal.html' %}
 
 {% endblock %}
 
 {% block scripts %}
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-AMS_SVG' async></script>
-<script src="{{ url_for('static', filename='js/GeneticDistance.js') }}?ver={{ css_js_ver }}"></script>
-<script src="{{ url_for('static', filename='js/GeneticDistanceEvents.js') }}?ver={{ css_js_ver }}"></script>
+  <script src="{{ url_for('static', filename='js/helpers/AppModule.js') }}?ver={{ css_js_ver }}"></script>
+  <script
+    src="{{ url_for('static', filename='js/genetic_distance/GeneticDistance.js') }}?ver={{ css_js_ver }}"></script>
+  <script
+    src="{{ url_for('static', filename='js/genetic_distance/GeneticDistanceEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}

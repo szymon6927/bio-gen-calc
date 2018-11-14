@@ -3,11 +3,12 @@
 const geneticDistance = new GeneticDistance();
 const validator = new Validation();
 
-geneticDistance.setContainer('.genetic-distance-table');
+geneticDistance.setTableContainer('.genetic-distance-table');
 
 $('.alleles-inputs-generate').click(function () {
   let taxonNumber = $('#taxon-number').val();
   let count = $('#locus-number').val();
+
   if (taxonNumber && count) {
     geneticDistance.generateAllelesInput(count);
     goToByScroll('.alleles-wrapper');
@@ -45,11 +46,17 @@ $('.calcuate-distance').click(function () {
   }
 });
 
+$('.genetic-distance .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  geneticDistance.setContainer('.genetic-distance');
+  geneticDistance.saveCalculation();
+});
+
 $('.genetic-distance select').change(function () {
   let value = $(this).val();
 
   $('.genetic-distance select option').removeAttr('selected');
-  $(`.genetic-distance select option[value='${value}']`).attr("selected","selected");
+  $(`.genetic-distance select option[value='${value}']`).attr("selected", "selected");
 });
 
 $(document).on('keypress', '.taxon-number, .locus-number, #type-of-distance, #type-of-dendrogram', function (e) {

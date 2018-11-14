@@ -2,16 +2,17 @@
 
 // in future import showModal form './utils'
 
-class GeneticDistance {
+class GeneticDistance extends AppModule {
   constructor() {
-    this.container = '';
+    super();
+    this.tableContainer = '';
     this.taxonNumber = 0;
     this.locusNumber = 0;
     this.locusObj = {};
   }
 
-  setContainer(container) {
-    this.container = container;
+  setTableContainer(container) {
+    this.tableContainer = container;
   }
 
   setLocusNumber(count) {
@@ -84,16 +85,16 @@ class GeneticDistance {
       <tbody></tbody>
       </table>`;
 
-    $(this.container).append(table);
+    $(this.tableContainer).append(table);
   }
 
   drawTableHead() {
     let tableHead = `<tr><th rowspan="2">Locus</th><th rowspan="2">Allel</th></tr><tr class="taxon-head-count"></tr>`;
 
-    $(`${this.container} thead`).append(tableHead);
+    $(`${this.tableContainer} thead`).append(tableHead);
 
     for (let i = 0; i < this.taxonNumber; i++) {
-      $(`${this.container} .taxon-head-count`).append(`<th>${i}</th>`);
+      $(`${this.tableContainer} .taxon-head-count`).append(`<th>${i}</th>`);
     }
   }
 
@@ -101,11 +102,11 @@ class GeneticDistance {
     for (let key in this.locusObj) {
       if (this.locusObj.hasOwnProperty(key)) {
         let tr = `<tr class="group-name"><th scope="row" rowspan="${this.locusObj[key] + 1}">G-${key}</th></tr>`;
-        $(`${this.container} tbody`).append(tr);
+        $(`${this.tableContainer} tbody`).append(tr);
 
         for (let i = 0; i < this.locusObj[key]; i++) {
           let line = `<tr class="group g-${key} line-${i}"></tr>`;
-          $(`${this.container} tbody`).append(line);
+          $(`${this.tableContainer} tbody`).append(line);
           this.drawInputs(key, i);
         }
       }
@@ -124,7 +125,7 @@ class GeneticDistance {
 
 
   generateTable() {
-    $(`${this.container}`).html('');
+    $(`${this.tableContainer}`).html('');
     this.drawTableScheme();
     this.drawTableHead();
     this.drawTableBody();
@@ -168,7 +169,7 @@ class GeneticDistance {
 
   sendData() {
     let dataJSON = this.buildJSON();
-    console.log("dataJSON: ", dataJSON);
+
     const path = '/genetic-distance/send-data-distance';
     const render = new RenderHelper('.genetic-distance-results .error');
     $.ajax({
@@ -181,20 +182,22 @@ class GeneticDistance {
       success: (res) => {
         console.log("Succesfull");
         $('.genetic-distance-results .error').hide();
-        $('.genetic-distance-results').show();
+        $('.genetic-distance-results, .save-calculations').show();
         $('.genetic-distance-results .success').show();
 
         let dendroImg = `<img class="img-fluid" src="data:image/png;base64,${res.data.dendro_base64}">`;
-        $('.matrix-wrapper').html(res.data.matrix_latex);
+
+        $('.matrix-wrapper').html(res.data.matrix);
         $('.dendrogram-wrapper').html(dendroImg);
 
         setTimeout(() => {
-          // this.matrixDesc();
           $('.cover').hide();
           goToByScroll('.genetic-distance-results');
         }, 2000);
 
-        this.renderPDFButton()
+        this.renderPDFButton();
+
+        this.extendObjectToSave({'customer_input': dataJSON, 'matrix': res.data.matrix, 'dendrogram': dendroImg})
       },
       error: (request) => {
         $('.cover').hide();
