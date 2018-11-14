@@ -1,7 +1,34 @@
 {% extends 'userpanel/base.html' %}
 
 {% block userpanel_body %}
-  <h1 class="mb-3">Yours calculations</h1>
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+        <h1 class="mb-3">Yours calculations</h1>
+    </div>
+
+    <div class="col-md-6 col-sm-12 text-right">
+      <form class="form-inline mt-2 mb-2 float-right" action="{{ url_for('userpanel.calculations') }}" method="GET">
+
+        <label class="mr-2" for="order_by">Order by</label>
+        <select class="custom-select mr-2" name="order_by" id="order_by">
+          <option value="" selected>---</option>
+          <option value="created_at">Create date</option>
+          <option value="title">Title</option>
+          <option value="module_name">Module name</option>
+        </select>
+  
+        <label class="mr-2" for="sort_by">Sort by</label>
+        <select class="custom-select mr-2" name="sort_by" id="sort_by">
+          <option value="" selected>---</option>
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary">Sort</button>
+      </form>
+    </div>
+  </div>
+  
   <div class="calculations-wrapper">
     <div class="row">
       {% for calc in calculations %}
@@ -9,7 +36,10 @@
           <div class="card mb-4">
             <div class="card-body">
               <h5 class="card-title">Title: {% if calc.title %}{{ calc.title }}{% else%}Calculation - {{ calc.id }}{% endif %}</h5>
-              <p class="card-text">Module name: {{ calc.module_name }}</p>
+              <div class="card-content">
+                <p class="mb-1">Module name: <strong>{{ calc.module_name }}</strong></p>
+                <p class="small">Created at: {{ calc.created_at }}</p>
+              </div>
               <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}" class="btn btn-primary">Show details</a>
             </div>
           </div>

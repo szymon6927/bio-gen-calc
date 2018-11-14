@@ -97,7 +97,7 @@ class HardyWeinber {
       dataType: "json",
       success: (result) => {
         console.log("Successfull!");
-        render.successBlock(result);
+        render.successSaveCalculationBlock(result);
         $('.cover').hide();
       },
       error: function (request) {

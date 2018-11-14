@@ -60,6 +60,12 @@ class RenderHelper {
     $(this.container).html(template);
   }
 
+  successSaveCalculationBlock(result) {
+    let template = `<div class="alert alert-success shadow" role="alert">${result.info}</div>`;
+
+    $(this.container).html(template);
+  }
+
   calculationBlock() {
     let saveCalculationBlock = $(this.container).next();
 

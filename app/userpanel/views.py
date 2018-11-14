@@ -1,7 +1,7 @@
-from flask import render_template, redirect, flash, url_for
+from flask import render_template, redirect, flash, url_for, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
-from sqlalchemy import and_, or_
+from sqlalchemy import and_, or_, desc, asc
 from . import userpanel
 from .forms import LoginForm, RegisterForm, CustomerEditForm
 from ..database import db
@@ -102,11 +102,22 @@ def edit_profile():
     return render_template('userpanel/edit_profile.html', form=form, profile_pic=profile_pic)
 
 
-@userpanel.route('/userpanel/calculations')
+@userpanel.route('/userpanel/calculations', methods=['GET'])
 @login_required
 @nocache
 def calculations():
-    calculations = CustomerCalculation.query.filter_by(customer_id=current_user.id)
+    order_by = request.args.get('order_by')
+    sort_by = request.args.get('sort_by')
+
+    if order_by:
+        column_name = order_by
+        if sort_by == "desc":
+            calculations = CustomerCalculation.query.filter_by(customer_id=current_user.id).order_by(desc(column_name))
+        elif sort_by == "asc":
+            calculations = CustomerCalculation.query.filter_by(customer_id=current_user.id).order_by(asc(column_name))
+    else:
+        calculations = CustomerCalculation.query.filter_by(customer_id=current_user.id).order_by(desc(CustomerCalculation.created_at))
+
     return render_template('userpanel/calculations.html', calculations=calculations)
 
 
