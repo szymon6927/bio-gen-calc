@@ -3,8 +3,11 @@
 {% block userpanel_body %}
   <h1>Calculation details</h1>
   <hr>
-  <p>{{ calculation.title }}</p>
+  <h3>Title: {{ calculation.title }}</h3>
+  <h5>Module name: {{ calculation.module_name }}</h5>
+
   <p>{{ calculation.customer_input }}</p>
+  
 
   <p>{{ calculation.result }}</p>
 
@@ -15,22 +18,22 @@
 
 {% block userpanel_scripts %}
 <script>
-var transform = {'<>':'li','html':[
-    {'<>':'span','html':'${name} = ${value}'}
-]};
-
-var data = {{ calculation.result|tojson|safe }}
-
-$('.results').json2html(data, transform);
-</script>
-
-<script>
-  var transform = {'<>':'li','html':[
+function displayResults() {
+  let transform = {'<>':'li','html':[
       {'<>':'span','html':'${name} = ${value}'}
   ]};
-  
-  var data = {{ calculation.customer_input|tojson|safe }}
-  
-  $('.user-input').json2html(data, transform);
+
+  let data = {{ calculation.result|tojson|safe }}
+
+  $('.results').json2html(data, transform);
+}
+
+function displayUserInput() {
+
+}
+
+$(document).ready(function() {
+  displayResults();
+});
 </script>
 {% endblock %}
