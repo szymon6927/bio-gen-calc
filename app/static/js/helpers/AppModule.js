@@ -6,7 +6,6 @@ class AppModule {
   }
 
   setResult(result) {
-    console.log("setResult", result);
     this.result = result;
   }
 
@@ -19,7 +18,7 @@ class AppModule {
   }
 
   getContainer() {
-    return $(`${this.container}`);
+    return this.container;
   }
 
   isEmpty(obj) {
@@ -27,7 +26,7 @@ class AppModule {
   }
 
   createObjectToSave() {
-    const container = this.getContainer();
+    const container = $(this.getContainer());
 
     const calculationForm = container.find('.save-calculation-form');
 
@@ -49,7 +48,7 @@ class AppModule {
 
   saveCalculation() {
     $('.cover').show();
-    const render = new RenderHelper('.save-calculation-form .messages');
+    const render = new RenderHelper(`${this.getContainer()} .save-calculation-form .messages`);
     const calculation = this.createObjectToSave();
 
     const path = "/send-calculation";

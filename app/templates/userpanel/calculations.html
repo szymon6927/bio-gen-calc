@@ -38,8 +38,11 @@
         <div class="col-md-12 col-sm-12">
           <div class="card mb-4">
             <div class="card-body">
-              <h5 class="card-title">Title:
-                {% if calc.title %}{{ calc.title }}{% else %}Calculation - {{ calc.id }}{% endif %}</h5>
+              <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}">
+                <h5 class="card-title">
+                  Title: {% if calc.title %}{{ calc.title }}{% else %}Calculation - {{ calc.id }}{% endif %}
+                </h5>
+              </a>
               <div class="card-content">
                 <p class="mb-1">Module name: <strong>{{ calc.module_name }}</strong></p>
                 <p class="small">Created at: {{ calc.created_at }}</p>
@@ -47,7 +50,8 @@
               <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}" class="btn btn-primary">
                 Show details</a>
 
-              <a href="{{ url_for('userpanel.calculation_delete', calculation_id=calc.id) }}" class="btn btn-danger float-right">
+              <a href="{{ url_for('userpanel.calculation_delete', calculation_id=calc.id) }}"
+                 class="btn btn-danger float-right">
                 Delete
               </a>
             </div>

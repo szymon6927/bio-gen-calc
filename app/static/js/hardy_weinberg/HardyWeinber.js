@@ -54,7 +54,6 @@ class HardyWeinber extends AppModule {
     const render = new RenderHelper('.hw-results');
     const path = 'hardy-weinber/send-data';
     let dataJSON = this.buildJSON();
-    console.log(dataJSON);
 
     $.ajax({
       type: "POST",
@@ -67,7 +66,7 @@ class HardyWeinber extends AppModule {
         render.successBlock(result);
 
         this.setResult(result);
-        this.extendObjectToSave({'customer_input': this.buildJSON()})
+        this.extendObjectToSave({'customer_input': dataJSON})
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);

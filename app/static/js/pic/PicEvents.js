@@ -40,6 +40,18 @@ $('.calcuate-dominant').click(function () {
   goToByScroll('.dominant-result');
 });
 
+$('.codominant-wrapper .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  pic.setContainer('.codominant-wrapper');
+  pic.saveCalculation();
+});
+
+$('.dominant-wrapper .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  pic.setContainer('.dominant-wrapper');
+  pic.saveCalculation();
+});
+
 $(document).on('keypress', '.amplified-marker, .absecnce-marker', function (e) {
   if (e.which == 13) {
     $('.calcuate-dominant').trigger('click');

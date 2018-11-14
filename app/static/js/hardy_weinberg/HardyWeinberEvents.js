@@ -39,7 +39,8 @@ $('.form-control').keypress(function (e) {
   }
 });
 
-$('.save-calculation-form').submit(function(e) {
+$('.hardy-weinberg .save-calculation-form').submit(function(e) {
   e.preventDefault();
+  hw.setContainer('.hardy-weinberg');
   hw.saveCalculation();
 });

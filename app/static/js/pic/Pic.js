@@ -2,8 +2,9 @@
 
 // in future import showModal form './utils'
 
-class PicH {
+class PicH extends AppModule {
   constructor() {
+    super();
     this.markerType = '';
   }
 
@@ -97,10 +98,13 @@ class PicH {
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (result) {
+      success: (result) => {
         console.log("Successfull!");
 
         render.successBlock(result);
+
+        this.setResult(result);
+        this.extendObjectToSave({'customer_input': dataJSON})
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);
@@ -127,10 +131,13 @@ class PicH {
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (result) {
+      success: (result) => {
         console.log("Successfull!");
 
         render.successBlock(result);
+
+        this.setResult(result);
+        this.extendObjectToSave({'customer_input': dataJSON})
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);
