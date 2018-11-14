@@ -120,7 +120,7 @@ class PicH {
 
     const path = '/pic/send-dominant';
     const render = new RenderHelper('.dominant-result');
-    console.log(dataJSON);
+
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",

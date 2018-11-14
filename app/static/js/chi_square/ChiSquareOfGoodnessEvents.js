@@ -25,6 +25,12 @@ $('.calcuate-button-goodness').click(() => {
   goToByScroll('.chi-goodness-result');
 });
 
+$('.chi-goodness .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  chiArrayGoodness.setContainer('.chi-goodness');
+  chiArrayGoodness.saveCalculation();
+});
+
 const chiSquareGoodenssSection = $('.chi-goodness');
 
 $(document).on('keypress', '.goodness-width', function (e) {

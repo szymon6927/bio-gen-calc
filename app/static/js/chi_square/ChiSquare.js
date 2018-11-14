@@ -1,8 +1,9 @@
 "use strict";
 
-class ChiSquare {
+class ChiSquare extends AppModule {
 
   constructor(container) {
+    super();
     this.container = container;
     this.validate = false;
     this.width = 0;
@@ -190,10 +191,12 @@ class ChiSquare {
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (result) {
+      success: (result) => {
         console.log("Succesfull");
-
         render.successBlock(result);
+
+        this.setResult(result);
+        this.extendObjectToSave({'customer_input': this.buildJSON()})
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);

@@ -1,9 +1,12 @@
 {% extends 'userpanel/base.html' %}
 
+{% set order_by = request.args.get('order_by') %}
+{% set sort_by = request.args.get('sort_by') %}
+
 {% block userpanel_body %}
   <div class="row">
     <div class="col-md-6 col-sm-12">
-        <h1 class="mb-3">Yours calculations</h1>
+      <h1 class="mb-3">Yours calculations</h1>
     </div>
 
     <div class="col-md-6 col-sm-12 text-right">
@@ -11,36 +14,42 @@
 
         <label class="mr-2" for="order_by">Order by</label>
         <select class="custom-select mr-2" name="order_by" id="order_by">
-          <option value="" selected>---</option>
-          <option value="created_at">Create date</option>
-          <option value="title">Title</option>
-          <option value="module_name">Module name</option>
+          <option value="">---</option>
+          <option value="created_at" {% if order_by == "created_at" %}selected{% endif %}>Create date</option>
+          <option value="title" {% if order_by == "title" %}selected{% endif %}>Title</option>
+          <option value="module_name" {% if order_by == "module_name" %}selected{% endif %}>Module name</option>
         </select>
-  
+
         <label class="mr-2" for="sort_by">Sort by</label>
         <select class="custom-select mr-2" name="sort_by" id="sort_by">
-          <option value="" selected>---</option>
-          <option value="desc">Descending</option>
-          <option value="asc">Ascending</option>
+          <option value="">---</option>
+          <option value="desc" {% if sort_by == "desc" %}selected{% endif %}>Descending</option>
+          <option value="asc" {% if sort_by == "asc" %}selected{% endif %}>Ascending</option>
         </select>
 
         <button type="submit" class="btn btn-primary">Sort</button>
       </form>
     </div>
   </div>
-  
+
   <div class="calculations-wrapper">
     <div class="row">
       {% for calc in calculations %}
         <div class="col-md-12 col-sm-12">
           <div class="card mb-4">
             <div class="card-body">
-              <h5 class="card-title">Title: {% if calc.title %}{{ calc.title }}{% else%}Calculation - {{ calc.id }}{% endif %}</h5>
+              <h5 class="card-title">Title:
+                {% if calc.title %}{{ calc.title }}{% else %}Calculation - {{ calc.id }}{% endif %}</h5>
               <div class="card-content">
                 <p class="mb-1">Module name: <strong>{{ calc.module_name }}</strong></p>
                 <p class="small">Created at: {{ calc.created_at }}</p>
               </div>
-              <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}" class="btn btn-primary">Show details</a>
+              <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}" class="btn btn-primary">
+                Show details</a>
+
+              <a href="{{ url_for('userpanel.calculation_delete', calculation_id=calc.id) }}" class="btn btn-danger float-right">
+                Delete
+              </a>
             </div>
           </div>
         </div>

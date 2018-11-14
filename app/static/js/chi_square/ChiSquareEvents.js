@@ -30,6 +30,12 @@ $('.calcuate-button').click(() => {
   goToByScroll('.chi-result');
 });
 
+$('.chi-independence .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  chiArray.setContainer('.chi-independence');
+  chiArray.saveCalculation();
+});
+
 const chiSquareSection = $('.chi-independence');
 
 $(document).on('keypress', '.array-width, .array-height', function (e) {

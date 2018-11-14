@@ -18,7 +18,8 @@ def login():
         return redirect(url_for('userpanel.dashboard'))
 
     if form.validate_on_submit():
-        customer = Customer.query.filter(or_(Customer.login == form.login_or_email.data, Customer.email == form.login_or_email.data)).first()
+        customer = Customer.query.filter(
+            or_(Customer.login == form.login_or_email.data, Customer.email == form.login_or_email.data)).first()
         if customer:
             if check_password_hash(customer.password, form.password.data):
                 login_user(customer, remember=form.remember.data)
@@ -116,16 +117,27 @@ def calculations():
         elif sort_by == "asc":
             calculations = CustomerCalculation.query.filter_by(customer_id=current_user.id).order_by(asc(column_name))
     else:
-        calculations = CustomerCalculation.query.filter_by(customer_id=current_user.id).order_by(desc(CustomerCalculation.created_at))
+        calculations = CustomerCalculation.query.filter_by(customer_id=current_user.id).order_by(
+            desc(CustomerCalculation.created_at))
 
     return render_template('userpanel/calculations.html', calculations=calculations)
+
+
+@userpanel.route('/userpanel/calculations/delete/<int:calculation_id>')
+@login_required
+@nocache
+def calculation_delete(calculation_id):
+    calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
+    db.session.delete(calculation)
+    db.session.commit()
+
+    return redirect(url_for('userpanel.calculations'))
 
 
 @userpanel.route('/userpanel/calculations/<int:calculation_id>')
 @login_required
 @nocache
 def calculation_detail(calculation_id):
-    print(calculation_id)
     calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
-    
+
     return render_template('userpanel/calculation-detail.html', calculation=calculation)

@@ -116,6 +116,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ url_for('static', filename='js/helpers/AppModule.js') }}?ver={{ css_js_ver }}"></script>
 <script src="{{ url_for('static', filename='js/chi_square/ChiSquare.js') }}?ver={{ css_js_ver }}"></script>
 <script src="{{ url_for('static', filename='js/chi_square/ChiSquareEvents.js') }}?ver={{ css_js_ver }}"></script>
 <script src="{{ url_for('static', filename='js/chi_square/ChiSquareOfGoodness.js') }}?ver={{ css_js_ver }}"></script>

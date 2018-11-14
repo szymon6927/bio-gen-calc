@@ -1,7 +1,8 @@
 "use strict";
 
-class HardyWeinber {
+class HardyWeinber extends AppModule {
   constructor() {
+    super();
     this.ho = 0;
     this.he = 0;
     this.rho = 0;
@@ -23,10 +24,6 @@ class HardyWeinber {
 
   setAlpha(alpha) {
     this.alpha = parseFloat(alpha);
-  }
-
-  setResult(result) {
-    this.result = result;
   }
 
   getResult() {
@@ -68,42 +65,13 @@ class HardyWeinber {
       success: (result) => {
         console.log("Successfull!");
         render.successBlock(result);
+
         this.setResult(result);
+        this.extendObjectToSave({'customer_input': this.buildJSON()})
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);
         render.errorBlock(request);
-      }
-    })
-  }
-
-  saveCalculation() {
-    $('.cover').show();
-    const render = new RenderHelper('.save-calculation-form .messages');
-
-    let calculation = {};
-    calculation['customer_id'] = $('.customer-id').val();
-    calculation['module_name'] = $('.module-name').val();
-    calculation['title'] = $('.calculation-title').val();
-    calculation['customer_input'] = this.buildJSON();
-    calculation['result'] = this.getResult();
-
-    const path = "/send-calculation";
-    $.ajax({
-      type: "POST",
-      contentType: "application/json; charset=utf-8",
-      url: path,
-      data: JSON.stringify(calculation),
-      dataType: "json",
-      success: (result) => {
-        console.log("Successfull!");
-        render.successSaveCalculationBlock(result);
-        $('.cover').hide();
-      },
-      error: function (request) {
-        console.log("Something goes wrong, try again!", request);
-        render.errorBlock(request);
-        $('.cover').hide();
       }
     })
   }

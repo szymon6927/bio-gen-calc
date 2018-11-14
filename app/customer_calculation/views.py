@@ -16,13 +16,11 @@ def save_calculation():
         customer_input = data.get('customer_input')
         result = data.get('result').get('data')
 
-        calculation = CustomerCalculation(customer_id=customer_id, title=title, module_name=module_name, customer_input=customer_input, result=json.dumps(result))
+        calculation = CustomerCalculation(customer_id=customer_id, title=title, module_name=module_name,
+                                          customer_input=customer_input, result=json.dumps(result))
         db.session.add(calculation)
         db.session.commit()
 
         return jsonify({'info': "Calculation saved! Now you can see your calculation in user panel"})
     except Exception as e:
         abort(Response(str(e), 400))
-
-
-    
