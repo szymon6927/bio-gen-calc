@@ -20,9 +20,9 @@ from .admin.views import run_admin
 
 login_manager = LoginManager()
 
+app = Flask(__name__, instance_relative_config=True)
 
 def create_app(config_name):
-    app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
@@ -129,3 +129,6 @@ def register_blueprints(app):
     app.register_blueprint(userpanel)
     app.register_blueprint(customer_calculation)
     app.register_blueprint(privacy_policy)
+
+
+from .helpers import template_filters

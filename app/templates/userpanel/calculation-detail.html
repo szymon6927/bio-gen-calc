@@ -4,6 +4,14 @@
   <h1>Calculation details</h1>
   <hr>
   <h3>Title: {{ calculation.title }}</h3>
+
+  {% set user_input_dict = calculation.customer_input|to_dict %}
+
+
+  {% for k, v in user_input_dict.items() %}
+    dict item - {{ k }} / {{ v }} <br>
+  {% endfor %}
+
   <h5>Module name: {{ calculation.module_name }}</h5>
 
   <p>{{ calculation.customer_input }}</p>
@@ -26,10 +34,6 @@ function displayResults() {
   let data = {{ calculation.result|tojson|safe }}
 
   $('.results').json2html(data, transform);
-}
-
-function displayUserInput() {
-
 }
 
 $(document).ready(function() {
