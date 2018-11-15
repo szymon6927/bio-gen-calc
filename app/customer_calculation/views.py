@@ -14,7 +14,7 @@ def save_calculation():
         customer_id = data.get('customer_id')
         module_name = data.get('module_name')
         customer_input = data.get('customer_input')
-        result = data.get('result').get('data')
+        result = data.get('result')
 
         calculation = CustomerCalculation(customer_id=customer_id, title=title, module_name=module_name,
                                           customer_input=customer_input, result=json.dumps(result))

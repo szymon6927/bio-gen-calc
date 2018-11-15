@@ -1,43 +1,69 @@
 {% extends 'userpanel/base.html' %}
 
 {% block userpanel_body %}
-  <h1>Calculation details</h1>
-  <hr>
-  <h3>Title: {{ calculation.title }}</h3>
+  <div class="calculation-wrapper">
+    <h1 class="page-title">Calculation details</h1>
+    <hr>
+    <h3 class="title">Title: {{ calculation.title }}</h3>
+    <h5 class="module-name">Module name: {{ calculation.module_name }}</h5>
+    <hr>
 
-  {% set user_input_dict = calculation.customer_input|to_dict %}
+    <div class="user-input-wrapper">
+      <h5>Input:</h5>
+      {% set user_input_dict = calculation.customer_input|to_dict %}
 
+      {% for key, value in user_input_dict.items() %}
+        <div class="user-input">{{ key|translate_name }}: {{ value }}</div>
+      {% endfor %}
+    </div>
+    <hr>
 
-  {% for k, v in user_input_dict.items() %}
-    dict item - {{ k }} / {{ v }} <br>
-  {% endfor %}
+    <div class="calculation-result">
+      <h5>Result:</h5>
+      {% if calculation.module_name == "genetic distance" %}
+        <div class="genetic-distance-results">
+          {% set result = calculation.result|to_dict %}
 
-  <h5>Module name: {{ calculation.module_name }}</h5>
+          {% for key, value in result.items() %}
+            <div>{{ key|translate_name }}</div>
+            <div>{{ value|safe }}</div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="results"></div>
+      {% endif %}
+    </div>
 
-  <p>{{ calculation.customer_input }}</p>
-  
-
-  <p>{{ calculation.result }}</p>
-
-  <div class="user-input"></div>
-  <hr>
-  <div class="results"></div>
+  </div>
 {% endblock %}
 
 {% block userpanel_scripts %}
-<script>
-function displayResults() {
-  let transform = {'<>':'li','html':[
-      {'<>':'span','html':'${name} = ${value}'}
-  ]};
+  <script>
+    "use strict";
 
-  let data = {{ calculation.result|tojson|safe }}
+    function displayResults() {
+      let transform = {
+        '<>': 'div', 'class': 'result-row', 'html': [
+          {
+            '<>': 'div', 'class': 'result',
+            'html': '<div>${name} <span class="equal-char">=</span> ${value}</div>',
+          }
+        ]
+      };
 
-  $('.results').json2html(data, transform);
-}
+      const resultsContainer = $('.results');
 
-$(document).ready(function() {
-  displayResults();
-});
-</script>
+      if (resultsContainer.length !== 0) {
+        let data = {{ calculation.result|tojson|safe }};
+        resultsContainer.json2html(data, transform);
+      }
+      else {
+        console.log("Results container not exist")
+      }
+    }
+
+    $(document).ready(function () {
+      displayResults();
+    });
+  </script>
 {% endblock %}

@@ -197,7 +197,8 @@ class GeneticDistance extends AppModule {
 
         this.renderPDFButton();
 
-        this.extendObjectToSave({'customer_input': dataJSON, 'matrix': res.data.matrix, 'dendrogram': dendroImg})
+        this.setResult({data: {'matrix': res.data.matrix, 'dendrogram': dendroImg}});
+        this.extendObjectToSave({'customer_input': dataJSON})
       },
       error: (request) => {
         $('.cover').hide();

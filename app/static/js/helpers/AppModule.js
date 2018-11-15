@@ -6,7 +6,7 @@ class AppModule {
   }
 
   setResult(result) {
-    this.result = result;
+    this.result = result.data;
   }
 
   getResult() {
