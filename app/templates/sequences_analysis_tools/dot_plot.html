@@ -73,11 +73,19 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12 col-sm-12">
+      <div class="col-md-12 col-sm-12 raw-seq-wrapper">
         <div class="dotplot-raw-seq-results"></div>
+
+        {% with module_name="Raw Sequences in FASTA format" %}
+          {% include 'utils/save_calculation.html' %}
+        {% endwith %}
       </div>
-      <div class="col-md-12 col-sm-12">
+      <div class="col-md-12 col-sm-12 genebank-seq-wrapper">
         <div class="genebank-seq-results"></div>
+
+        {% with module_name="Sequences form GeneBank" %}
+          {% include 'utils/save_calculation.html' %}
+        {% endwith %}
       </div>
     </div>
 
@@ -89,8 +97,9 @@
 {% endblock %}
 
 {% block scripts %}
-<script
-  src="{{ url_for('static', filename='js/sequences_analysis_tools/DotPlot.js') }}?ver={{ css_js_ver }}"></script>
-<script
-  src="{{ url_for('static', filename='js/sequences_analysis_tools/DotPlotEvents.js') }}?ver={{ css_js_ver }}"></script>
+  <script src="{{ url_for('static', filename='js/helpers/AppModule.js') }}?ver={{ css_js_ver }}"></script>
+  <script
+    src="{{ url_for('static', filename='js/sequences_analysis_tools/DotPlot.js') }}?ver={{ css_js_ver }}"></script>
+  <script
+    src="{{ url_for('static', filename='js/sequences_analysis_tools/DotPlotEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}

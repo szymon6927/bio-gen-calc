@@ -1,6 +1,6 @@
 "use strict";
 
-class DotPlot {
+class DotPlot extends AppModule {
 
   buildJSONfromGeneBankSeq() {
     const firstID = $('#genebank-seq-1').val();
@@ -35,7 +35,7 @@ class DotPlot {
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (result) {
+      success: (result) => {
         console.log("Succesfull", result);
         render.successBlock(result);
 
@@ -53,11 +53,15 @@ class DotPlot {
         dotPlotImg.insertAfter(lastDivResult);
         alignment.insertAfter(lastDivResult);
 
+        this.setResult(result);
+        this.extendObjectToSave({'customer_input': dataJSON})
+        this.extendResultObject({"name": "alignment", "value": alignment.html()}, {"name": "dotplot_img", "value": dotPlotImg.html()})
+
         $('.cover').hide();
 
         goToByScroll('.dotplot-raw-seq-results')
       },
-      error: function (request) {
+      error: (request) => {
         console.log("Something goes wrong, try again!", request);
 
         render.errorBlock(request);

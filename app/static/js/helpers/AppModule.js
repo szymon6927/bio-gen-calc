@@ -46,6 +46,12 @@ class AppModule {
     }
   }
 
+  extendResultObject(data) {
+    if (!this.isEmpty(data)) {
+      this.result.push(data)
+    }
+  }
+
   saveCalculation() {
     $('.cover').show();
     const render = new RenderHelper(`${this.getContainer()} .save-calculation-form .messages`);
