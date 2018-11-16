@@ -54,8 +54,9 @@ class DotPlot extends AppModule {
         alignment.insertAfter(lastDivResult);
 
         this.setResult(result);
-        this.extendObjectToSave({'customer_input': dataJSON})
-        this.extendResultObject({"name": "alignment", "value": alignment.html()}, {"name": "dotplot_img", "value": dotPlotImg.html()})
+        this.extendObjectToSave({'customer_input': dataJSON});
+        this.extendResultObject({"name": "alignment", "value": alignment.html()});
+        this.extendResultObject({"name": "dotplot_img", "value": dotPlotImg.html()});
 
         $('.cover').hide();
 
@@ -83,7 +84,7 @@ class DotPlot extends AppModule {
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (result) {
+      success: (result) => {
         console.log("Succesfull", result);
         render.successBlock(result);
 
@@ -100,6 +101,11 @@ class DotPlot extends AppModule {
 
         dotPlotImg.insertAfter(lastDivResult);
         alignment.insertAfter(lastDivResult);
+
+        this.setResult(result);
+        this.extendObjectToSave({'customer_input': dataJSON});
+        this.extendResultObject({"name": "alignment", "value": alignment.html()});
+        this.extendResultObject({"name": "dotplot_img", "value": dotPlotImg.html()});
 
         $('.cover').hide();
 

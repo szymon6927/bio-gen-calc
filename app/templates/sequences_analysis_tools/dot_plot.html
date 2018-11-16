@@ -5,94 +5,93 @@
 {% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
 
 {% block body %}
-<div class="wrapper">
-  {% include 'utils/module_top_block.html' %}
+  <div class="wrapper">
+    {% include 'utils/module_top_block.html' %}
 
-  {% include 'utils/info_block.html' %}
+    {% include 'utils/info_block.html' %}
 
-  <section class="dot-plot">
-    <div class="row">
-      <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-12">
-        <div class="form-group">
-          <label for="type-of-data">Type of data:</label>
-          <select class="form-control" id="type-of-data">
-            <option>---</option>
-            <option value="raw-sequences">Raw Sequences in FASTA format</option>
-            <option value="sequences-form-genebank">Sequences form GeneBank</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="raw-sequences">
-        <div class="col-md-12 col-sm-12">
+    <section class="dot-plot">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3 col-md-12 col-sm-12 col-12">
           <div class="form-group">
-            <label for="name-seq-1">Name of sequence 1:</label>
-            <input type="text" class="form-control" id="name-seq-1">
+            <label for="type-of-data">Type of data:</label>
+            <select class="form-control" id="type-of-data">
+              <option>---</option>
+              <option value="raw-sequences">Raw Sequences in FASTA format</option>
+              <option value="sequences-form-genebank">Sequences form GeneBank</option>
+            </select>
           </div>
-
-          <div class="form-group">
-            <label for="content-seq-1">Insert first sequence:</label>
-            <textarea class="form-control" id="content-seq-1" rows="8"></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="name-seq-2">Name of sequence 2:</label>
-            <input type="text" class="form-control" id="name-seq-2">
-          </div>
-
-          <div class="form-group">
-            <label for="content-seq-2">Insert second sequence:</label>
-            <textarea class="form-control" id="content-seq-2" rows="8"></textarea>
-          </div>
-        </div>
-
-        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
-          <button type="submit" class="btn btn-block btn-danger dot-plot-raw-calculate">Calculate!</button>
         </div>
       </div>
 
-      <div class="sequences-form-genebank">
-        <div class="col-md-12 col-sm-12">
-          <div class="form-group">
-            <label for="genebank-seq-1">ID of sequence 1:</label>
-            <input type="text" class="form-control" id="genebank-seq-1">
+      <div class="row">
+        <div class="raw-sequences">
+          <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+              <label for="name-seq-1">Name of sequence 1:</label>
+              <input type="text" class="form-control" id="name-seq-1">
+            </div>
+
+            <div class="form-group">
+              <label for="content-seq-1">Insert first sequence:</label>
+              <textarea class="form-control" id="content-seq-1" rows="8"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="name-seq-2">Name of sequence 2:</label>
+              <input type="text" class="form-control" id="name-seq-2">
+            </div>
+
+            <div class="form-group">
+              <label for="content-seq-2">Insert second sequence:</label>
+              <textarea class="form-control" id="content-seq-2" rows="8"></textarea>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="genebank-seq-2">ID of sequence 2:</label>
-            <input type="text" class="form-control" id="genebank-seq-2">
+          <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
+            <button type="submit" class="btn btn-block btn-danger dot-plot-raw-calculate">Calculate!</button>
+          </div>
+
+          <div class="col-md-12 col-sm-12 raw-seq-wrapper">
+            <div class="dotplot-raw-seq-results"></div>
+
+            {% with module_name="Raw Sequences in FASTA format" %}
+              {% include 'utils/save_calculation.html' %}
+            {% endwith %}
           </div>
         </div>
 
-        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
-          <button type="submit" class="btn btn-block btn-danger dot-plot-genebank-calculate">Calculate!</button>
+        <div class="sequences-form-genebank">
+          <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+              <label for="genebank-seq-1">ID of sequence 1:</label>
+              <input type="text" class="form-control" id="genebank-seq-1">
+            </div>
+
+            <div class="form-group">
+              <label for="genebank-seq-2">ID of sequence 2:</label>
+              <input type="text" class="form-control" id="genebank-seq-2">
+            </div>
+          </div>
+
+          <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
+            <button type="submit" class="btn btn-block btn-danger dot-plot-genebank-calculate">Calculate!</button>
+          </div>
+
+          <div class="col-md-12 col-sm-12 genebank-seq-wrapper">
+            <div class="genebank-seq-results"></div>
+
+            {% with module_name="Sequences form GeneBank" %}
+              {% include 'utils/save_calculation.html' %}
+            {% endwith %}
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-12 col-sm-12 raw-seq-wrapper">
-        <div class="dotplot-raw-seq-results"></div>
+    </section>
+  </div>
 
-        {% with module_name="Raw Sequences in FASTA format" %}
-          {% include 'utils/save_calculation.html' %}
-        {% endwith %}
-      </div>
-      <div class="col-md-12 col-sm-12 genebank-seq-wrapper">
-        <div class="genebank-seq-results"></div>
-
-        {% with module_name="Sequences form GeneBank" %}
-          {% include 'utils/save_calculation.html' %}
-        {% endwith %}
-      </div>
-    </div>
-
-  </section>
-</div>
-
-{% include 'utils/modal.html' %}
+  {% include 'utils/modal.html' %}
 
 {% endblock %}
 
