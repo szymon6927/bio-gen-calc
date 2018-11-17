@@ -22,6 +22,7 @@ login_manager = LoginManager()
 
 app = Flask(__name__, instance_relative_config=True)
 
+
 def create_app(config_name):
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
@@ -48,8 +49,12 @@ def create_app(config_name):
         return db.session.query(User).get(user_id)
 
     @login_manager.user_loader
-    def load_customer(customer_id):
-        return Customer.query.get(int(customer_id))
+    def load_customer(id):
+        if request.path.startswith("/admin"):
+            return User.query.get(int(id))
+        else:
+            return Customer.query.get(int(id))
+
 
     @app.route('/robots.txt')
     @app.route('/sitemap.xml')
