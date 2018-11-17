@@ -40,7 +40,7 @@ class CustomerEditForm(FlaskForm):
     last_name = StringField('Last name:', validators=[DataRequired()])
     login = StringField('Login*')
     email = EmailField('Email*')
-    password = PasswordField('New password', validators=[Length(min=8, max=80), EqualTo('password_confirm', message='Passwords must match')])
+    password = PasswordField('New password', validators=[EqualTo('password_confirm', message='Passwords must match')])
     password_confirm = PasswordField('Confirm new password')
 
     def validate_login(self, login):
