@@ -8,30 +8,39 @@
     <h5 class="module-name">Module name: {{ calculation.module_name }}</h5>
     <hr>
 
-    <div class="user-input-wrapper">
-      <h5>Input:</h5>
+    <div class="user-input-wrapper pt-3 pb-3">
+      <h5 class="mb-3 bg-info text-white p-2 shadow">Input:</h5>
       {% set user_input_dict = calculation.customer_input|to_dict %}
 
-      {% for key, value in user_input_dict.items() %}
-        <div class="user-input">{{ key|translate_name }}: {{ value }}</div>
-      {% endfor %}
+      <div class="p-3 shadow ml-3 bg-white">
+        {% for key, value in user_input_dict.items() %}
+          <div class="user-input">
+            <span class="name font-weight-bold">{{ key|translate_name }}</span>
+            <span class="value">{{ value }}</span>
+          </div>
+        {% endfor %}
+      </div>
     </div>
     <hr>
 
-    <div class="calculation-result">
-      <h5>Result:</h5>
-      {% if calculation.module_name == "genetic distance" %}
-        <div class="genetic-distance-results">
-          {% set result = calculation.result|to_dict %}
+    <div class="calculation-result pt-3 pb-3">
+      <h5 class="mb-3 bg-success text-white p-2 shadow">Result:</h5>
+      <div class="p-3 shadow ml-3 bg-white">
+        {% if calculation.module_name == "genetic distance" %}
+          <div class="genetic-distance-results">
+            {% set result = calculation.result|to_dict %}
 
-          {% for key, value in result.items() %}
-            <div>{{ key|translate_name }}</div>
-            <div>{{ value|safe }}</div>
-          {% endfor %}
-        </div>
-      {% else %}
-        <div class="results"></div>
-      {% endif %}
+            {% for key, value in result.items() %}
+              <div class="mb-5">
+                <div class="name font-weight-bold">{{ key|translate_name }}</div>
+                <div class="value">{{ value|safe }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="results"></div>
+        {% endif %}
+      </div>
     </div>
 
   </div>
@@ -46,7 +55,8 @@
         '<>': 'div', 'class': 'result-row', 'html': [
           {
             '<>': 'div', 'class': 'result',
-            'html': '<div>${name} <span class="equal-char">=</span> ${value}</div>',
+            'html': '<span class="name font-weight-bold" data-name="${name}">${name}</span>' +
+            '<span class="value" data-name="${name}">${value}</span>',
           }
         ]
       };

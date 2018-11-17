@@ -27,15 +27,12 @@ class AppModule {
 
   createObjectToSave() {
     const container = $(this.getContainer());
-
     const calculationForm = container.find('.save-calculation-form');
 
     this.userInput['customer_id'] = calculationForm.find('.customer-id').val();
     this.userInput['module_name'] = calculationForm.find('.module-name').val();
     this.userInput['title'] = calculationForm.find('.calculation-title').val();
     this.userInput['result'] = this.getResult();
-
-    console.log(this.userInput);
 
     return this.userInput;
   }

@@ -1,6 +1,9 @@
 "use strict";
 
-class ConsensusSequence {
+class ConsensusSequence extends AppModule {
+  constructor() {
+    super();
+  }
 
   buildJSONfromRawSeq() {
     let seq = $('#fast-seq').val();
@@ -32,10 +35,13 @@ class ConsensusSequence {
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (result) {
+      success: (result) => {
         console.log("Succesfull", result);
 
         render.successBlock(result);
+
+        this.setResult(result);
+        this.extendObjectToSave({'customer_input': dataJSON});
 
         $('.cover').hide();
       },

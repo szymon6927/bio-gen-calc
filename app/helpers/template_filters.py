@@ -7,20 +7,29 @@ def to_dict(string):
 
 
 def translate_name(name):
-    if name == "amplified_marker":
-        return "Number or frequency of amplified marker"
-    elif name == "absecnce_marker":
-        return "Number or frequency of absecnce marker"
-    elif name == "width":
-        return "Table width"
-    elif name == "height":
-        return "Table height"
-    elif name == "matrix":
-        return "Distance matrix"
-    elif name == "dendrogram":
-        return "Dendogram"
-    else:
-        return name
+    translator = {}
+
+    translator['ho'] = "Homozygotes"
+    translator['he'] = "Heterozygotes"
+    translator['rho'] = "Rare homozygotes"
+    translator['alfa'] = "Level of significance"
+    translator['amplified_marker'] = "Number or frequency of amplified marker"
+    translator['absecnce_marker'] = "Number or frequency of absecnce marker"
+    translator['width'] = "Table height"
+    translator['height'] = "Table width"
+    translator['matrix'] = "Distance matrix"
+    translator['dendrogram'] = "Dendogram"
+    translator['dotplot_img'] = "Dot plot"
+    translator['field_sum'] = "Field sum"
+    translator['observed'] = "Group of Observed"
+    translator['expected'] = "Group of Expected"
+    translator['taxon_number'] = "Number of populations"
+    translator['locus_number'] = "Number of loci"
+    translator['type_of_distance'] = "Type of distance"
+    translator['type_of_dendrogram'] = "Type of dendrogram"
+    translator['number_of_alleles'] = "Number of alleles"
+
+    return translator.get(name, name)
 
 
 app.jinja_env.filters['to_dict'] = to_dict

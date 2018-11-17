@@ -21,6 +21,12 @@ $('.consensus-sequence-calculate.raw-seq').click(function () {
   consensusSeq.sendRawSeq()
 });
 
+$('.raw-sequences .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  consensusSeq.setContainer('.raw-sequences');
+  consensusSeq.saveCalculation();
+});
+
 $('.consensus-sequence-calculate.file-seq').click(function () {
   consensusSeq.sendSeqFile()
 });
