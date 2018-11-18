@@ -2,11 +2,11 @@ import json
 from flask import render_template, redirect, flash, url_for, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
-from sqlalchemy import and_, or_, desc, asc
+from sqlalchemy import and_, or_, desc, asc, func
 from . import userpanel
 from .forms import LoginForm, RegisterForm, CustomerEditForm
 from ..database import db
-from ..models.Userpanel import Customer, CustomerCalculation
+from ..models.Userpanel import Customer, CustomerCalculation, CustomerActivity
 from ..helpers.no_cache import nocache
 from ..helpers.file_helper import save_picture
 
@@ -69,7 +69,13 @@ def userpanel_view():
 @login_required
 @nocache
 def dashboard():
-    return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login)
+    activity = CustomerActivity.query.with_entities(CustomerActivity.id, CustomerActivity.customer_id,
+                                                    CustomerActivity.module_name, CustomerActivity.url,
+                                                    func.count(CustomerActivity.url).label('count'))\
+                                                    .filter_by(customer=current_user)\
+                                                    .group_by(CustomerActivity.url).all()
+
+    return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login, activity=activity)
 
 
 @userpanel.route('/userpanel/editprofile', methods=['GET', 'POST'])
@@ -114,11 +120,11 @@ def calculations():
     if order_by:
         column_name = order_by
         if sort_by == "desc":
-            calculations = CustomerCalculation.query.filter_by(customer_id=current_user.id).order_by(desc(column_name))
+            calculations = CustomerCalculation.query.filter_by(customer=current_user).order_by(desc(column_name))
         elif sort_by == "asc":
-            calculations = CustomerCalculation.query.filter_by(customer_id=current_user.id).order_by(asc(column_name))
+            calculations = CustomerCalculation.query.filter_by(customer=current_user).order_by(asc(column_name))
     else:
-        calculations = CustomerCalculation.query.filter_by(customer_id=current_user.id).order_by(
+        calculations = CustomerCalculation.query.filter_by(customer=current_user).order_by(
             desc(CustomerCalculation.created_at))
 
     return render_template('userpanel/calculations.html', calculations=calculations)

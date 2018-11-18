@@ -4,11 +4,12 @@ from .utils.StandardDistance import StandardDistance
 from .utils.GeometricDistance import GeometricDistance
 from .utils.TakezakiNeiDistance import TakezakiNeiDistance
 
-from ..helpers.db_helper import add_calculation
+from ..helpers.db_helper import add_calculation, add_customer_activity
 from ..helpers.constants import GENETIC_DISTANCE
 
 
 @genetic_distance.route('/genetic-distance')
+@add_customer_activity
 def genetic_distance_page():
     return render_template('genetic_distance/index.html', title="Estimation of Genetic Distance")
 

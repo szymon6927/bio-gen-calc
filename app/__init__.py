@@ -45,16 +45,11 @@ def create_app(config_name):
     login_manager.login_view = 'userpanel.login'
 
     @login_manager.user_loader
-    def load_user(user_id):
-        return db.session.query(User).get(user_id)
-
-    @login_manager.user_loader
-    def load_customer(id):
+    def load_customer(obj_id):
         if request.path.startswith("/admin"):
-            return User.query.get(int(id))
+            return User.query.get(int(obj_id))
         else:
-            return Customer.query.get(int(id))
-
+            return Customer.query.get(int(obj_id))
 
     @app.route('/robots.txt')
     @app.route('/sitemap.xml')

@@ -1,12 +1,16 @@
+import smtplib
+
 from flask import Flask, render_template, flash, redirect, url_for
-from . import contact
 from flask_mail import Mail, Message
+
+from . import contact
 from .forms import ContactForm
 
-import smtplib
+from ..helpers.db_helper import add_customer_activity
 
 
 @contact.route('/contact', methods=['GET', 'POST'])
+@add_customer_activity
 def contact_page():
     form = ContactForm()
     if form.validate_on_submit():

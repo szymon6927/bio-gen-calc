@@ -2,11 +2,12 @@ from flask import render_template, request, jsonify, abort, Response
 from . import hardy_weinber
 from .utils.HardyWeinberCalculation import HardyWeinberCalculation
 
-from ..helpers.db_helper import add_calculation
+from ..helpers.db_helper import add_calculation, add_customer_activity
 from ..helpers.constants import HARDY_WEINBERG
 
 
 @hardy_weinber.route('/hardy-weinber-page')
+@add_customer_activity
 def hardy_weinber_page():
     """
     Render the hardy_weinber template on the / route
