@@ -4,14 +4,29 @@
     <span>Gene Calc - User Panel</span>
   </a>
 
-  <nav class="nav-utils">
-    <a class="btn btn-outline-light mr-1" href="{{ url_for('home.homepage') }}">
-      <i class="fas fa-undo"></i>
-      <span>Back to app</span>
-    </a>
-    <a class="btn btn-outline-light mr-2" href="{{ url_for('userpanel.logout') }}">
-      <i class="fas fa-sign-out-alt"></i>
-      <span>Log out</span>
-    </a>
+  <nav class="nav-utils mr-3">
+    <div class="navbar-user nav-item dropdown">
+      <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" aria-expanded="false">
+        <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
+          <img src="{{ url_for('static', filename='uploads/profile_pics/' + current_user.profile_pic) }}" alt="profile picture" class="d-block ui-w-30 rounded-circle">
+          <span class="px-1 mr-lg-2 ml-2 ml-lg-0">{{ current_user.first_name }} {{ current_user.last_name }}</span>
+        </span>
+      </a>
+      <div class="dropdown-menu">
+        <a href="{{ url_for('userpanel.edit_profile') }}" class="dropdown-item">
+          <i class="fas fa-users-cog"></i>
+          <span class="pl-1">My profile</span>
+        </a>
+        <div class="dropdown-divider"></div>
+          <a href="{{ url_for('home.homepage') }}" target="_blank" class="dropdown-item">
+            <i class="fas fa-undo"></i>
+            <span class="pl-1">Back to app</span>
+          </a>
+        <a href="{{ url_for('userpanel.logout') }}" class="dropdown-item">
+          <i class="fas fa-sign-out-alt"></i>
+          <span class="pl-1">Log Out</span>
+        </a>
+      </div>
+    </div>
   </nav>
 </nav>

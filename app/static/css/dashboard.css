@@ -234,6 +234,29 @@
     border-right: 1px solid #dee2e6;
 }
 
+.statistics .title {
+    font-size: 18px;
+    border-bottom: 1px solid #ccc;
+}
+
+.statistics .subtitle {
+    font-size: 13px;
+}
+
+.navbar-user img {
+    width: 30px;
+}
+
+.navbar-user .dropdown-toggle {
+    border-left: 1px solid #fff;
+    cursor: pointer;
+}
+
+.footer {
+    position: relative;
+    z-index: 999;
+}
+
 @media (max-width: 1200px) {
     .sidebar {
         display: none;

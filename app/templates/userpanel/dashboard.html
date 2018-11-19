@@ -1,57 +1,109 @@
 {% extends 'userpanel/base.html' %}
 {% block userpanel_body %}
-  <h1>Welcome {{ current_user.login }}</h1>
-  <canvas class="chart"></canvas>
-  {% for item in activity %}
-    <input type="hidden" class="chart-item" data-name="{{ item.module_name }}" data-url="{{ item.url }}" value="{{ item.count }}" />
-  {% endfor %}
+<h1>Welcome {{ current_user.login }}</h1>
+<hr>
+<div class="row">
+  <div class="col-md-6 col-sm-6">
+    <div class="card mb-4 shadow statistics">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="card-icon">
+            <i class="fas fa-signal"></i>
+          </div>
+          <div class="ml-3">
+            <div class="text-large">
+              <div class="mb-1 pb-1 title">Total calculations: <strong>{{ statistics.total_calculations }}</strong></div>
+              <div class="subtitle">Go to <a href="{{ url_for('userpanel.calculations') }}">calculations page</a> to see details</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-sm-6">
+    <div class="card mb-4 shadow statistics">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="card-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <div class="ml-3">
+            <div class="text-large">
+              <div class="mb-1 pb-1 title">Total visits: <strong>{{ statistics.total_visits }}</strong></div>
+              <div class="subtitle">See the chart below</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
+
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="card shadow mt-4">
+      <div class="card-header font-weght-bold"><strong>{{ current_user.login }} - yours activity at <a href="{{ url_for('home.homepage') }}">Gene
+            Calc</a></strong></div>
+      <div class="card-body">
+        <div class="chart-warpper">
+          <canvas class="chart"></canvas>
+          {% for item in activity %}
+            <input type="hidden" class="chart-item" data-name="{{ item.module_name }}" data-url="{{ item.url }}" value="{{ item.count }}" />
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block userpanel_scripts %}
-  <!-- Graphs -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-  <script>
-    let chartWrapper = $(".chart");
+<!-- Graphs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script>
+  let chartWrapper = $(".chart");
 
-    let chartData = {
-      'labels': [],
-      'values': []
-    };
+  let chartData = {
+    'labels': [],
+    'values': []
+  };
 
-    let allItems = $('.chart-item');
+  let allItems = $('.chart-item');
 
-    allItems.each((index, elem) => {
-      chartData.labels.push($(elem).data('name'));
-      chartData.values.push($(elem).val());
-    });
+  allItems.each((index, elem) => {
+    chartData.labels.push($(elem).data('name'));
+    chartData.values.push($(elem).val());
+  });
 
-    let activityChart = new Chart(chartWrapper, {
-      type: 'line',
-      data: {
-        labels: chartData.labels,
-        datasets: [{
-          label: "Legend",
-          data: chartData.values,
-          lineTension: 0,
-          backgroundColor: 'transparent',
-          borderColor: '#007bff',
-          borderWidth: 4,
-          pointBackgroundColor: '#007bff'
+  let activityChart = new Chart(chartWrapper, {
+    type: 'line',
+    data: {
+      labels: chartData.labels,
+      datasets: [{
+        label: "Yours activity",
+        data: chartData.values,
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '#007bff',
+        borderWidth: 4,
+        pointBackgroundColor: '#007bff'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            stepSize: 1
+          }
         }]
       },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-              stepSize: 1
-            }
-          }]
-        },
-        legend: {
-          display: true,
-        }
+      legend: {
+        display: true,
       }
-    });
-  </script>
+    }
+  });
+</script>
 {% endblock %}

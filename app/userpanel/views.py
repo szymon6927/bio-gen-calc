@@ -75,7 +75,10 @@ def dashboard():
                                                     .filter_by(customer=current_user)\
                                                     .group_by(CustomerActivity.url).all()
 
-    return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login, activity=activity)
+    statistics = {}
+    statistics['total_calculations'] = CustomerCalculation.query.filter_by(customer=current_user).count()
+    statistics['total_visits'] = CustomerActivity.query.filter_by(customer=current_user).count()
+    return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login, activity=activity, statistics=statistics)
 
 
 @userpanel.route('/userpanel/editprofile', methods=['GET', 'POST'])
