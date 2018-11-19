@@ -2,16 +2,20 @@
 
 from datetime import datetime
 import pdfkit
-from flask import Flask, render_template, request, make_response, abort, Response, send_from_directory
-from .database import db
-from .models.Admin import User, Page
-from .models.Userpanel import Customer
 import base64
+
+from flask import Flask, render_template, request, make_response, abort, Response, send_from_directory
 
 from flask_htmlmin import HTMLMIN
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_compress import Compress
+
+from .database import db
+from .models.Admin import User, Page
+from .models.Userpanel import Customer
+
+# from .helpers.db_helper import enable_full_text_search
 
 # local imports
 from config import app_config
@@ -21,6 +25,7 @@ from .admin.views import run_admin
 login_manager = LoginManager()
 
 app = Flask(__name__, instance_relative_config=True)
+# enable_full_text_search(app)
 
 
 def create_app(config_name):

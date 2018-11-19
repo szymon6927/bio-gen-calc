@@ -38,10 +38,10 @@ class CustomerEditForm(FlaskForm):
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     first_name = StringField('First name:', validators=[DataRequired()])
     last_name = StringField('Last name:', validators=[DataRequired()])
-    login = StringField('Login*')
-    email = EmailField('Email*')
-    password = PasswordField('New password', validators=[EqualTo('password_confirm', message='Passwords must match')])
-    password_confirm = PasswordField('Confirm new password')
+    login = StringField('Login*:')
+    email = EmailField('Email*:')
+    password = PasswordField('New password:', validators=[EqualTo('password_confirm', message='Passwords must match')])
+    password_confirm = PasswordField('Confirm new password:')
 
     def validate_login(self, login):
         if login.data != current_user.login:

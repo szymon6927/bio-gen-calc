@@ -1,8 +1,7 @@
-import json
 from flask import render_template, redirect, flash, url_for, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
-from sqlalchemy import and_, or_, desc, asc, func
+from sqlalchemy import or_, desc, asc, func
 from . import userpanel
 from .forms import LoginForm, RegisterForm, CustomerEditForm
 from ..database import db
@@ -116,7 +115,7 @@ def edit_profile():
 @userpanel.route('/userpanel/calculations', methods=['GET'])
 @login_required
 @nocache
-def calculations():
+def calculations_all():
     order_by = request.args.get('order_by')
     sort_by = request.args.get('sort_by')
 
@@ -133,6 +132,16 @@ def calculations():
     return render_template('userpanel/calculations.html', calculations=calculations)
 
 
+# @userpanel.route('/userpanel/calculations/search', methods=['GET'])
+# @login_required
+# @nocache
+# def calculations_search():
+#     query = request.args.get('query')
+#     calculations = CustomerCalculation.query.whoosh_search(query).all()
+#
+#     return render_template('userpanel/calculations.html', calculations=calculations)
+
+
 @userpanel.route('/userpanel/calculations/delete/<int:calculation_id>')
 @login_required
 @nocache
@@ -141,7 +150,7 @@ def calculation_delete(calculation_id):
     db.session.delete(calculation)
     db.session.commit()
 
-    return redirect(url_for('userpanel.calculations'))
+    return redirect(url_for('userpanel.calculations_all'))
 
 
 @userpanel.route('/userpanel/calculations/<int:calculation_id>')

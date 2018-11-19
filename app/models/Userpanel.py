@@ -23,6 +23,7 @@ class Customer(UserMixin, db.Model):
 
 class CustomerCalculation(db.Model):
     __tablename__ = 'customer_calculations'
+    __searchable__ = ['title', 'module_name']
 
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'), nullable=False)

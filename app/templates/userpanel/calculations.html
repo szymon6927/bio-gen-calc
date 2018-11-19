@@ -10,7 +10,7 @@
     </div>
 
     <div class="col-md-6 col-sm-12 text-right">
-      <form class="form-inline mt-2 mb-2 float-right" action="{{ url_for('userpanel.calculations') }}" method="GET">
+      <form class="form-inline mt-2 mb-2 float-right" action="{{ url_for('userpanel.calculations_all') }}" method="GET">
 
         <label class="mr-2" for="order_by">Order by</label>
         <select class="custom-select mr-2" name="order_by" id="order_by">
@@ -31,6 +31,8 @@
       </form>
     </div>
   </div>
+
+  <hr>
 
   <div class="calculations-wrapper">
     <div class="row">

@@ -4,11 +4,24 @@
     <span>Gene Calc - User Panel</span>
   </a>
 
+{#  <form method="GET" action="{{ url_for('userpanel.calculations_search') }}"#}
+{#        class="form-inline d-none d-md-inline-block ml-auto mr-3">#}
+{#    <div class="input-group">#}
+{#      <input type="text" name="query" class="form-control" placeholder="Search for calculation..." />#}
+{#      <div class="input-group-append">#}
+{#        <button class="btn btn-primary" type="submit">#}
+{#          <i class="fas fa-search"></i>#}
+{#        </button>#}
+{#      </div>#}
+{#    </div>#}
+{#  </form>#}
+
   <nav class="nav-utils mr-3">
     <div class="navbar-user nav-item dropdown">
       <a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" aria-expanded="false">
         <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
-          <img src="{{ url_for('static', filename='uploads/profile_pics/' + current_user.profile_pic) }}" alt="profile picture" class="d-block ui-w-30 rounded-circle">
+          <img src="{{ url_for('static', filename='uploads/profile_pics/' + current_user.profile_pic) }}"
+               alt="profile picture" class="d-block ui-w-30 rounded-circle">
           <span class="px-1 mr-lg-2 ml-2 ml-lg-0">{{ current_user.first_name }} {{ current_user.last_name }}</span>
         </span>
       </a>
@@ -18,10 +31,10 @@
           <span class="pl-1">My profile</span>
         </a>
         <div class="dropdown-divider"></div>
-          <a href="{{ url_for('home.homepage') }}" target="_blank" class="dropdown-item">
-            <i class="fas fa-undo"></i>
-            <span class="pl-1">Back to app</span>
-          </a>
+        <a href="{{ url_for('home.homepage') }}" target="_blank" class="dropdown-item">
+          <i class="fas fa-undo"></i>
+          <span class="pl-1">Back to app</span>
+        </a>
         <a href="{{ url_for('userpanel.logout') }}" class="dropdown-item">
           <i class="fas fa-sign-out-alt"></i>
           <span class="pl-1">Log Out</span>

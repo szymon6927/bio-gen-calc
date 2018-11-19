@@ -1,6 +1,7 @@
 {% extends 'userpanel/base.html' %}
 {% block userpanel_body %}
   <h1>Edit profile</h1>
+  <hr>
 
   <form class="edit-profile" action="{{ url_for('userpanel.edit_profile') }}" method="POST" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
