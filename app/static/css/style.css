@@ -144,7 +144,7 @@ table th[scope=row] {
 
 .nav-info {
     color: #fff;
-} 
+}
 
 .nav-info a {
     color: #fff;
@@ -357,9 +357,10 @@ table th[scope=row] {
     width: 15px;
 }
 
-.darkmode-switcher  i {
+.darkmode-switcher i {
     font-size: 16px;
 }
+
 /* END DARKMODE SWITCHER */
 
 .userpanel {
@@ -697,7 +698,6 @@ table th[scope=row] {
 }
 
 @media (max-width: 768px) {
-
     .dataframe th,
     .dataframe td {
         font-size: 12px;
@@ -705,6 +705,10 @@ table th[scope=row] {
 
     #PopupSignupForm_0 {
         display: none !important;
+    }
+
+    .nav-info .company-name {
+        display: none;
     }
 }
 
@@ -722,10 +726,6 @@ table th[scope=row] {
         font-weight: bold;
         margin-bottom: 5px;
     }
-
-    .nav-info .company-name {
-        display: none;
-    } 
 }
 
 @media (max-width: 480px) {
