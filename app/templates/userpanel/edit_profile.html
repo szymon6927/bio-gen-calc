@@ -1,6 +1,6 @@
 {% extends 'userpanel/base.html' %}
 {% block userpanel_body %}
-  <h1>Edit profile</h1>
+  <h3>Edit profile</h3>
   <hr>
 
   <form class="edit-profile" action="{{ url_for('userpanel.edit_profile') }}" method="POST" enctype="multipart/form-data">
@@ -11,14 +11,16 @@
         <img src="{{ profile_pic }}" class="profile-pic rounded-circle" />
   
         <div class="form-group mt-3">
-            {{ form.picture.label() }}
-            {{ form.picture(class="form-control-file") }}
+          <div class="custom-file">
+            {{ form.picture(class="custom-file-input") }}
+            {{ form.picture.label(class="custom-file-label") }}
+          </div>
 
-            {% if form.picture.errors %}
-              {% for error in form.picture.errors %}
-                <span class="text-danger">{{ error }}</span></br>
-              {% endfor %}
-            {% endif %}
+          {% if form.picture.errors %}
+            {% for error in form.picture.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
   

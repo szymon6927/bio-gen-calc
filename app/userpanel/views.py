@@ -132,14 +132,14 @@ def calculations_all():
     return render_template('userpanel/calculations.html', calculations=calculations)
 
 
-# @userpanel.route('/userpanel/calculations/search', methods=['GET'])
-# @login_required
-# @nocache
-# def calculations_search():
-#     query = request.args.get('query')
-#     calculations = CustomerCalculation.query.whoosh_search(query).all()
-#
-#     return render_template('userpanel/calculations.html', calculations=calculations)
+@userpanel.route('/userpanel/calculations/search', methods=['GET'])
+@login_required
+@nocache
+def calculations_search():
+    query = request.args.get('query')
+    calculations = CustomerCalculation.query.filter(CustomerCalculation.title.like(f'%{query}%')).all()
+
+    return render_template('userpanel/calculations.html', calculations=calculations)
 
 
 @userpanel.route('/userpanel/calculations/delete/<int:calculation_id>')
@@ -159,4 +159,4 @@ def calculation_delete(calculation_id):
 def calculation_detail(calculation_id):
     calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
 
-    return render_template('userpanel/calculation-detail.html', calculation=calculation)
+    return render_template('userpanel/calculation_detail.html', calculation=calculation)

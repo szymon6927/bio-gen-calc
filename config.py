@@ -11,7 +11,6 @@ class Config(object):
     MAIL_PORT = 465
     MAIL_USE_SSL = True
     MINIFY_PAGE = True
-    WHOOSH_BASE = 'whoosh'
 
 
 class DevelopmentConfig(Config):

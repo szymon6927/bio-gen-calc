@@ -2,14 +2,19 @@
 
 {% set order_by = request.args.get('order_by') %}
 {% set sort_by = request.args.get('sort_by') %}
+{% set query = request.args.get('query') %}
 
 {% block userpanel_body %}
   <div class="row">
-    <div class="col-md-6 col-sm-12">
-      <h1 class="mb-3">Yours calculations</h1>
+    <div class="col-md-12 col-sm-12">
+      {% if query %}
+        <h3 class="mb-3 query-results-title">Results for query: <span>{{ query }}</span></h3>
+      {% else %}
+        <h3 class="mb-3">Yours calculations</h3>
+      {% endif %}
     </div>
 
-    <div class="col-md-6 col-sm-12 text-right">
+    <div class="col-md-12 col-sm-12 text-right">
       <form class="form-inline mt-2 mb-2 float-right" action="{{ url_for('userpanel.calculations_all') }}" method="GET">
 
         <label class="mr-2" for="order_by">Order by</label>
@@ -36,30 +41,46 @@
 
   <div class="calculations-wrapper">
     <div class="row">
-      {% for calc in calculations %}
-        <div class="col-md-12 col-sm-12">
-          <div class="card mb-4">
-            <div class="card-body">
-              <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}">
-                <h5 class="card-title">
-                  Title: {% if calc.title %}{{ calc.title }}{% else %}Calculation - {{ calc.id }}{% endif %}
-                </h5>
-              </a>
-              <div class="card-content">
-                <p class="mb-1">Module name: <strong>{{ calc.module_name }}</strong></p>
-                <p class="small">Created at: {{ calc.created_at }}</p>
-              </div>
-              <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}" class="btn btn-primary">
-                Show details</a>
+      {% if calculations %}
+        {% for calc in calculations %}
+          <div class="col-md-12 col-sm-12">
+            <div class="card mb-4">
+              <div class="card-body">
+                <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}">
+                  <h5 class="card-title">
+                    Title: {% if calc.title %}{{ calc.title }}{% else %}Calculation - {{ calc.id }}{% endif %}
+                  </h5>
+                </a>
+                <div class="card-content">
+                  <p class="mb-1">Module name: <strong>{{ calc.module_name }}</strong></p>
+                  <p class="small">Created at: {{ calc.created_at }}</p>
+                </div>
+                <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}" class="btn btn-primary">
+                  Show details</a>
 
-              <a href="{{ url_for('userpanel.calculation_delete', calculation_id=calc.id) }}"
-                 class="btn btn-danger float-right">
-                Delete
-              </a>
+                <a href="{{ url_for('userpanel.calculation_delete', calculation_id=calc.id) }}"
+                  class="btn btn-danger float-right">
+                  Delete
+                </a>
+              </div>
             </div>
           </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-md-12 col-sm-12 text-center">
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title text-center mb-4">
+                  <i class="fas fa-exclamation-circle"></i>
+                  <span>Error! Nothing found, try again :(</span>
+                </h5>
+                <a href="{{ url_for('userpanel.calculations_all') }}" class="btn btn-primary">
+                  Show all calculations
+                </a>
+              </div>
+            </div>
         </div>
-      {% endfor %}
+      {% endif %}
     </div>
   </div>
 {% endblock %}

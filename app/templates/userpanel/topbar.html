@@ -4,17 +4,18 @@
     <span>Gene Calc - User Panel</span>
   </a>
 
-{#  <form method="GET" action="{{ url_for('userpanel.calculations_search') }}"#}
-{#        class="form-inline d-none d-md-inline-block ml-auto mr-3">#}
-{#    <div class="input-group">#}
-{#      <input type="text" name="query" class="form-control" placeholder="Search for calculation..." />#}
-{#      <div class="input-group-append">#}
-{#        <button class="btn btn-primary" type="submit">#}
-{#          <i class="fas fa-search"></i>#}
-{#        </button>#}
-{#      </div>#}
-{#    </div>#}
-{#  </form>#}
+  <form method="GET" action="{{ url_for('userpanel.calculations_search') }}"
+        class="form-inline d-none d-md-inline-block ml-auto mr-3">
+    <div class="input-group">
+      {% set query = request.args.get('query') %}
+      <input type="text" name="query" value="{% if query %}{{ query }}{% endif %}" class="form-control" placeholder="Search for calculation..." />
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
 
   <nav class="nav-utils mr-3">
     <div class="navbar-user nav-item dropdown">
