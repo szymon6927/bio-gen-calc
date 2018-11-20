@@ -13,29 +13,31 @@
         <h3 class="mb-3">Yours calculations</h3>
       {% endif %}
     </div>
+    
+    {% if not query %}
+      <div class="col-md-12 col-sm-12 text-right">
+        <form class="form-inline mt-2 mb-2 float-right" action="{{ url_for('userpanel.calculations_all') }}" method="GET">
 
-    <div class="col-md-12 col-sm-12 text-right">
-      <form class="form-inline mt-2 mb-2 float-right" action="{{ url_for('userpanel.calculations_all') }}" method="GET">
+          <label class="mr-2" for="order_by">Order by</label>
+          <select class="custom-select mr-2" name="order_by" id="order_by">
+            <option value="">---</option>
+            <option value="created_at" {% if order_by == "created_at" %}selected{% endif %}>Create date</option>
+            <option value="title" {% if order_by == "title" %}selected{% endif %}>Title</option>
+            <option value="module_name" {% if order_by == "module_name" %}selected{% endif %}>Module name</option>
+          </select>
 
-        <label class="mr-2" for="order_by">Order by</label>
-        <select class="custom-select mr-2" name="order_by" id="order_by">
-          <option value="">---</option>
-          <option value="created_at" {% if order_by == "created_at" %}selected{% endif %}>Create date</option>
-          <option value="title" {% if order_by == "title" %}selected{% endif %}>Title</option>
-          <option value="module_name" {% if order_by == "module_name" %}selected{% endif %}>Module name</option>
-        </select>
+          <label class="mr-2" for="sort_by">Sort by</label>
+          <select class="custom-select mr-2" name="sort_by" id="sort_by">
+            <option value="">---</option>
+            <option value="desc" {% if sort_by == "desc" %}selected{% endif %}>Descending</option>
+            <option value="asc" {% if sort_by == "asc" %}selected{% endif %}>Ascending</option>
+          </select>
 
-        <label class="mr-2" for="sort_by">Sort by</label>
-        <select class="custom-select mr-2" name="sort_by" id="sort_by">
-          <option value="">---</option>
-          <option value="desc" {% if sort_by == "desc" %}selected{% endif %}>Descending</option>
-          <option value="asc" {% if sort_by == "asc" %}selected{% endif %}>Ascending</option>
-        </select>
-
-        <button type="submit" class="btn btn-primary">Sort</button>
-      </form>
+          <button type="submit" class="btn btn-primary mt-2 mt-sm-0">Sort</button>
+        </form>
+      </div>
     </div>
-  </div>
+  {% endif %}
 
   <hr>
 

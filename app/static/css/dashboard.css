@@ -1,6 +1,10 @@
 .h1, h1 {
     font-size: 2.1rem;
 }
+
+.h5, h5 {
+    font-size: 1.0rem;
+}
 /*
 * Sidebar
 */
@@ -116,13 +120,12 @@
 }
 
 .hamburger {
-    padding: 10px 0;
     cursor: pointer;
     z-index: 9;
     width: 50px;
     padding: 5px;
     border: 1px solid #ccc;
-    margin: 0 0 0 auto;
+    margin: 15px 0 0 auto;
 }
 
 .hamburger div {
@@ -276,6 +279,9 @@
         letter-spacing: -0.01em;
     }
 
+}
+
+@media (max-width: 320px) {
     .nav-utils a {
         padding: 5px;
     }
