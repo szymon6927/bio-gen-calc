@@ -2,9 +2,6 @@
     font-size: 2.1rem;
 }
 
-.h5, h5 {
-    font-size: 1.0rem;
-}
 /*
 * Sidebar
 */
@@ -136,7 +133,8 @@
 }
 
 .hamburger.active {
-    position: relative;
+    position: fixed;
+    right: 20px;
 }
 
 .hamburger.active div:nth-child(1) {
