@@ -70,14 +70,15 @@ def userpanel_view():
 def dashboard():
     activity = CustomerActivity.query.with_entities(CustomerActivity.id, CustomerActivity.customer_id,
                                                     CustomerActivity.module_name, CustomerActivity.url,
-                                                    func.count(CustomerActivity.url).label('count'))\
-                                                    .filter_by(customer=current_user)\
-                                                    .group_by(CustomerActivity.url).all()
+                                                    func.count(CustomerActivity.url).label('count')) \
+        .filter_by(customer=current_user) \
+        .group_by(CustomerActivity.url).all()
 
     statistics = {}
     statistics['total_calculations'] = CustomerCalculation.query.filter_by(customer=current_user).count()
     statistics['total_visits'] = CustomerActivity.query.filter_by(customer=current_user).count()
-    return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login, activity=activity, statistics=statistics)
+    return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login, activity=activity,
+                           statistics=statistics)
 
 
 @userpanel.route('/userpanel/editprofile', methods=['GET', 'POST'])
@@ -116,18 +117,28 @@ def edit_profile():
 @login_required
 @nocache
 def calculations_all():
-    order_by = request.args.get('order_by')
+    query = request.args.get('query')
+    order_by = request.args.get('order_by', "created_at")
     sort_by = request.args.get('sort_by')
+    page = request.args.get('page', 1, type=int)
+    per_page = 5
 
-    if order_by:
-        column_name = order_by
-        if sort_by == "desc":
-            calculations = CustomerCalculation.query.filter_by(customer=current_user).order_by(desc(column_name))
-        elif sort_by == "asc":
-            calculations = CustomerCalculation.query.filter_by(customer=current_user).order_by(asc(column_name))
+    if query:
+        return redirect(
+            url_for('userpanel.calculations_search', query=query, order_by=order_by, sort_by=sort_by, page=page))
+
+    if sort_by == "desc":
+        calculations = CustomerCalculation.query.filter_by(customer=current_user) \
+            .order_by(desc(order_by)) \
+            .paginate(page=page, per_page=per_page)
+    elif sort_by == "asc":
+        calculations = CustomerCalculation.query.filter_by(customer=current_user) \
+            .order_by(asc(order_by)) \
+            .paginate(page=page, per_page=per_page)
     else:
-        calculations = CustomerCalculation.query.filter_by(customer=current_user).order_by(
-            desc(CustomerCalculation.created_at))
+        calculations = CustomerCalculation.query.filter_by(customer=current_user) \
+            .order_by(desc(order_by)) \
+            .paginate(page=page, per_page=per_page)
 
     return render_template('userpanel/calculations.html', calculations=calculations)
 
@@ -137,7 +148,25 @@ def calculations_all():
 @nocache
 def calculations_search():
     query = request.args.get('query')
-    calculations = CustomerCalculation.query.filter(CustomerCalculation.title.like(f'%{query}%')).all()
+    order_by = request.args.get('order_by', "created_at")
+    sort_by = request.args.get('sort_by')
+    page = request.args.get('page', 1, type=int)
+    per_page = 5
+    if sort_by == "desc":
+        calculations = CustomerCalculation.query.filter(CustomerCalculation.title.like(f'%{query}%')) \
+            .filter(CustomerCalculation.customer == current_user) \
+            .order_by(desc(order_by)) \
+            .paginate(page=page, per_page=per_page)
+    elif sort_by == "asc":
+        calculations = CustomerCalculation.query.filter(CustomerCalculation.title.like(f'%{query}%')) \
+            .filter(CustomerCalculation.customer == current_user) \
+            .order_by(asc(order_by)) \
+            .paginate(page=page, per_page=per_page)
+    else:
+        calculations = CustomerCalculation.query.filter(CustomerCalculation.title.like(f'%{query}%')) \
+            .filter(CustomerCalculation.customer == current_user) \
+            .order_by(desc(order_by)) \
+            .paginate(page=page, per_page=per_page)
 
     return render_template('userpanel/calculations.html', calculations=calculations)
 

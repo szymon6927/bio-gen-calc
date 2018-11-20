@@ -1,0 +1,22 @@
+{% set calculation_pages = calculations.iter_pages() %}
+{% set order_by = request.args.get('order_by') %}
+{% set sort_by = request.args.get('sort_by') %}
+{% set query = request.args.get('query') %}
+
+{% if calculation_pages %}
+  <div class="col-md-12 col-sm-12">
+    <hr>
+    <nav aria-label="calculations paginator">
+      <ul class="pagination">
+        {% for page_num in calculation_pages %}
+          <li class="page-item {% if calculations.page == page_num %}active {% endif %}">
+            <a class="page-link"
+               href="{{ url_for('userpanel.calculations_all', page=page_num, order_by=order_by, sort_by=sort_by, query=query) }}">
+              {{ page_num }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+{% endif %}
