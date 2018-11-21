@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <div class="wrapper">
+    {% include 'utils/module_top_block.html' %}
+
+    <section class="register">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-12">
+          {{ module_desc.text|safe }}
+        </div>
+
+        <div class="col-md-6 offset-md-3 col-sm-12 col-12">
+          <form class="register-form" action="{{ url_for('userpanel.register') }}" method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+              {{ form.first_name.label }}
+              {{ form.first_name(class_="form-control", placeholder="first name") }}
+
+              {% if form.first_name.errors %}
+                {% for error in form.first_name.errors %}
+                  <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              {{ form.last_name.label }}
+              {{ form.last_name(class_="form-control", placeholder="last name") }}
+
+              {% if form.last_name.errors %}
+                {% for error in form.last_name.errors %}
+                  <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              {{ form.login.label }}
+              {{ form.login(class_="form-control", placeholder="login") }}
+
+              {% if form.login.errors %}
+                {% for error in form.login.errors %}
+                  <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              {{ form.email.label }}
+              {{ form.email(class_="form-control", placeholder="e-mail") }}
+
+              {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                  <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              {{ form.password.label }}
+              {{ form.password(class_="form-control", placeholder="password") }}
+
+              {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                  <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              {{ form.password_confirm.label }}
+              {{ form.password_confirm(class_="form-control", placeholder="confirm password") }}
+
+              {% if form.password_confirm.errors %}
+                {% for error in form.password_confirm.errors %}
+                  <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="private-policy" required>
+              <label class="form-check-label" for="private-policy">
+                I agree to have my personal data processed within the scope necessary for the keep
+                the highest quality of service. I have read and understood the data
+                <a href="{{ url_for('privacy_policy.privacy_policy_page') }}">privacy policy</a>.
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+
+            <p class="text-muted small mb-2 mt-3">Inputs with * are required</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}

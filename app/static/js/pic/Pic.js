@@ -1,7 +1,10 @@
+"use strict";
+
 // in future import showModal form './utils'
 
-class PicH {
+class PicH extends AppModule {
   constructor() {
+    super();
     this.markerType = '';
   }
 
@@ -95,10 +98,13 @@ class PicH {
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (result) {
+      success: (result) => {
         console.log("Successfull!");
 
         render.successBlock(result);
+
+        this.setResult(result);
+        this.extendObjectToSave({'customer_input': dataJSON})
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);
@@ -118,17 +124,20 @@ class PicH {
 
     const path = '/pic/send-dominant';
     const render = new RenderHelper('.dominant-result');
-    console.log(dataJSON);
+
     $.ajax({
       type: "POST",
       contentType: "application/json; charset=utf-8",
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (result) {
+      success: (result) => {
         console.log("Successfull!");
 
         render.successBlock(result);
+
+        this.setResult(result);
+        this.extendObjectToSave({'customer_input': dataJSON})
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);

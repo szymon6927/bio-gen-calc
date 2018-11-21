@@ -1,9 +1,13 @@
-class HardyWeinber {
+"use strict";
+
+class HardyWeinber extends AppModule {
   constructor() {
+    super();
     this.ho = 0;
     this.he = 0;
     this.rho = 0;
     this.alpha = 0;
+    this.result = Object;
   }
 
   setHo(ho) {
@@ -20,6 +24,10 @@ class HardyWeinber {
 
   setAlpha(alpha) {
     this.alpha = parseFloat(alpha);
+  }
+
+  getResult() {
+    return this.result;
   }
 
   isInt(value) {
@@ -46,7 +54,6 @@ class HardyWeinber {
     const render = new RenderHelper('.hw-results');
     const path = 'hardy-weinber/send-data';
     let dataJSON = this.buildJSON();
-    console.log(dataJSON);
 
     $.ajax({
       type: "POST",
@@ -54,9 +61,12 @@ class HardyWeinber {
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (result) {
+      success: (result) => {
         console.log("Successfull!");
         render.successBlock(result);
+
+        this.setResult(result);
+        this.extendObjectToSave({'customer_input': dataJSON})
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);

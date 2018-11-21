@@ -1,3 +1,5 @@
+"use strict";
+
 const chiArray = new ChiSquare('.array-wrapper');
 const validator = new Validation();
 
@@ -26,6 +28,12 @@ $('.calcuate-button').click(() => {
   chiArray.calacute();
   chiArray.sendData();
   goToByScroll('.chi-result');
+});
+
+$('.chi-independence .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  chiArray.setContainer('.chi-independence');
+  chiArray.saveCalculation();
 });
 
 const chiSquareSection = $('.chi-independence');

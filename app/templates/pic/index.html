@@ -5,94 +5,103 @@
 {% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
 
 {% block body %}
-<div class="wrapper">
-  {% include 'utils/module_top_block.html' %}
+  <div class="wrapper">
+    {% include 'utils/module_top_block.html' %}
 
-  {% include 'utils/info_block.html' %}
+    {% include 'utils/info_block.html' %}
 
-  <section class="pic-h">
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="form-group">
-          <label for="type-of-marker">Type of marker</label>
-          <select class="form-control" id="type-of-marker">
-            <option>select</option>
-            <option value="dominant">Dominant marker</option>
-            <option value="codominant">Codominant marker</option>
-          </select>
+    <section class="pic-h">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="form-group">
+            <label for="type-of-marker">Type of marker</label>
+            <select class="form-control" id="type-of-marker">
+              <option>select</option>
+              <option value="dominant">Dominant marker</option>
+              <option value="codominant">Codominant marker</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 markers-options">
+          <div class="codominant-wrapper">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="form-group">
+                  <label for="alleles-number">Number of alleles</label>
+                  <input id="alleles-number" type="number" min="0" class="form-control non-negative alleles-number"
+                         placeholder="alleles number">
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-6 col-xs-6 event-button">
+                <button type="submit" class="btn btn-block btn-primary generate-codominant">Generate!</button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 mt-4">
+                <div class="codominant-messages"></div>
+                <div class="inputs-wrapper"></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 event-button">
+                <button type="submit" class="btn btn-block btn-danger calcuate-codominant">Calculate!</button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8 offset-md-2 col-sm-12 col-xs-12 codominant-result"></div>
+
+              {% with module_name="PIC codominant marker" %}
+                {% include 'utils/save_calculation.html' %}
+              {% endwith %}
+            </div>
+          </div>
+          <div class="dominant-wrapper">
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label for="amplified-marker">Number or frequency of amplified marker</label>
+                  <input id="amplified-marker" type="number" min="0" class="form-control non-negative amplified-marker"
+                         placeholder="amplified marker">
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group">
+                  <label for="absecnce-marker">Number or frequency of absecnce marker</label>
+                  <input id="absecnce-marker" type="number" min="0" class="form-control non-negative absecnce-marker"
+                         placeholder="absecnce marker">
+                </div>
+              </div>
+
+              <div class="col-md-4 col-sm-6 col-xs-6 event-button">
+                <button type="submit" class="btn btn-block btn-danger calcuate-dominant">Calculate!</button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8 offset-md-2 col-sm-12 col-xs-12 dominant-result"></div>
+
+              {% with module_name="PIC dominant marker" %}
+                {% include 'utils/save_calculation.html' %}
+              {% endwith %}
+            </div>
+
+          </div>
         </div>
       </div>
-      <div class="col-md-12 col-sm-12 col-xs-12 markers-options">
-        <div class="codominant-wrapper">
-          <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
-              <div class="form-group">
-                <label for="alleles-number">Number of alleles</label>
-                <input id="alleles-number" type="number" min="0" class="form-control non-negative alleles-number"
-                       placeholder="alleles number">
-              </div>
-            </div>
+    </section>
+  </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-6 event-button">
-              <button type="submit" class="btn btn-block btn-primary generate-codominant">Generate!</button>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 mt-4">
-              <div class="codominant-messages"></div>
-              <div class="inputs-wrapper"></div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 event-button">
-              <button type="submit" class="btn btn-block btn-danger calcuate-codominant">Calculate!</button>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-8 offset-md-2 col-sm-12 col-xs-12 codominant-result"></div>
-          </div>
-        </div>
-        <div class="dominant-wrapper">
-          <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="form-group">
-                <label for="amplified-marker">Number or frequency of amplified marker</label>
-                <input id="amplified-marker" type="number" min="0" class="form-control non-negative amplified-marker"
-                       placeholder="amplified marker">
-              </div>
-            </div>
-
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="form-group">
-                <label for="absecnce-marker">Number or frequency of absecnce marker</label>
-                <input id="absecnce-marker" type="number" min="0" class="form-control non-negative absecnce-marker"
-                       placeholder="absecnce marker">
-              </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 col-xs-6 event-button">
-              <button type="submit" class="btn btn-block btn-danger calcuate-dominant">Calculate!</button>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-8 offset-md-2 col-sm-12 col-xs-12 dominant-result"></div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-{% include 'utils/modal.html' %}
+  {% include 'utils/modal.html' %}
 
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/Pic.js') }}?ver={{ css_js_ver }}"></script>
-<script src="{{ url_for('static', filename='js/PicEvents.js') }}?ver={{ css_js_ver }}"></script>
+  <script src="{{ url_for('static', filename='js/helpers/AppModule.js') }}?ver={{ css_js_ver }}"></script>
+  <script src="{{ url_for('static', filename='js/pic/Pic.js') }}?ver={{ css_js_ver }}"></script>
+  <script src="{{ url_for('static', filename='js/pic/PicEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}

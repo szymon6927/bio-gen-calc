@@ -1,3 +1,5 @@
+"use strict";
+
 class RenderHelper {
   constructor(container) {
     this.container = container;
@@ -36,6 +38,8 @@ class RenderHelper {
     $(this.container + ' .card-body').json2html(result.data, transform);
     $(this.container + ' .card-body').append(pdfRender);
     $(this.container + ' .card-body').append(downloadButton);
+
+    this.calculationBlock();
   }
 
   errorBlock(request) {
@@ -54,5 +58,19 @@ class RenderHelper {
     </div>`;
 
     $(this.container).html(template);
+  }
+
+  successSaveCalculationBlock(result) {
+    let template = `<div class="alert alert-success shadow" role="alert">${result.info}</div>`;
+
+    $(this.container).html(template);
+  }
+
+  calculationBlock() {
+    let saveCalculationBlock = $(this.container).next();
+
+    if (saveCalculationBlock.length !== 0) {
+      saveCalculationBlock.show();
+    }
   }
 }

@@ -1,0 +1,67 @@
+{% extends 'userpanel/base.html' %}
+
+{% set query = request.args.get('query') %}
+
+{% block userpanel_body %}
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      {% if query %}
+        <h3 class="mb-3 query-results-title">Results for query: <span>{{ query }}</span></h3>
+      {% else %}
+        <h3 class="mb-3">Yours calculations</h3>
+      {% endif %}
+    </div>
+
+    {% include 'userpanel/calculations_filter.html' %}
+  </div>
+
+  <hr>
+
+  <div class="calculations-wrapper">
+    <div class="row">
+      {% if calculations %}
+        {% for calc in calculations.items %}
+          <div class="col-md-12 col-sm-12">
+            <div class="card mb-4">
+              <div class="card-body">
+                <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}">
+                  <h5 class="card-title">
+                    Title: {% if calc.title %}{{ calc.title }}{% else %}Calculation - {{ calc.id }}{% endif %}
+                  </h5>
+                </a>
+                <div class="card-content">
+                  <p class="mb-1">Module name: <strong>{{ calc.module_name }}</strong></p>
+                  <p class="small">Created at: {{ calc.created_at }}</p>
+                </div>
+                <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}" class="btn btn-primary">
+                  Show details</a>
+
+                <a href="{{ url_for('userpanel.calculation_delete', calculation_id=calc.id) }}"
+                   class="btn btn-danger float-right">
+                  Delete
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+        {% include 'userpanel/calculations_paginator.html' %}
+
+      {% else %}
+        <div class="col-md-12 col-sm-12 text-center">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title text-center mb-4">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Error! Nothing found, try again :(</span>
+              </h5>
+              <a href="{{ url_for('userpanel.calculations_all') }}" class="btn btn-primary">
+                Show all calculations
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

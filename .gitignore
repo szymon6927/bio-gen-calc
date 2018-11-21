@@ -9,3 +9,4 @@ __pycache__
 instance
 .pytest_cache
 node_modules
+whoosh_index

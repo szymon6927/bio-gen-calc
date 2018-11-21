@@ -3,11 +3,12 @@ from . import pic
 from .utils.CodominantCalculation import Codominant
 from .utils.DominantCalculation import Dominant
 
-from ..helpers.db_helper import add_calculation
+from ..helpers.db_helper import add_calculation, add_customer_activity
 from ..helpers.constants import PIC_CODOMINANT, PIC_DOMINANT
 
 
 @pic.route('/pic')
+@add_customer_activity
 def pic_page():
     """
     Render the pic & h template

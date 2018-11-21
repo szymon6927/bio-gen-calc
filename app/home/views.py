@@ -1,9 +1,11 @@
 from flask import render_template
 from . import home
 from ..models.Admin import Page
+from ..helpers.db_helper import add_customer_activity
 
 
 @home.route('/')
+@add_customer_activity
 def homepage():
     """
     Render the homepage template on the / route

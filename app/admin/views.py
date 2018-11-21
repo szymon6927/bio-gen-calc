@@ -8,13 +8,13 @@ import flask_admin as admin
 import flask_login as login
 
 from flask_admin import BaseView, helpers, expose
+from flask_admin.contrib import sqla
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from ..database import db
 from ..models.Admin import Page, User
 
-from flask_admin.contrib import sqla
-
-from werkzeug.security import generate_password_hash, check_password_hash
+from ..helpers.no_cache import nocache
 
 
 class CKTextAreaWidget(widgets.TextArea):
@@ -82,12 +82,14 @@ class MyAdminIndexView(admin.AdminIndexView):
     UPLOADED_PATH = paths.get('abs_static_path')
 
     @expose('/')
+    @nocache
     def index(self):
         if not login.current_user.is_authenticated:
             return redirect(url_for('.login_view'))
         return super(MyAdminIndexView, self).index()
 
     @expose('/login/', methods=('GET', 'POST'))
+    @nocache
     def login_view(self):
         # handle user login
         form = LoginForm(request.form)
@@ -101,6 +103,7 @@ class MyAdminIndexView(admin.AdminIndexView):
         return super(MyAdminIndexView, self).index()
 
     @expose('/register/', methods=('GET', 'POST'))
+    @nocache
     def register_view(self):
         form = RegistrationForm(request.form)
         if helpers.validate_form_on_submit(form):
@@ -118,11 +121,13 @@ class MyAdminIndexView(admin.AdminIndexView):
         return super(MyAdminIndexView, self).index()
 
     @expose('/logout/')
+    @nocache
     def logout_view(self):
         login.logout_user()
         return redirect(url_for('.index'))
 
     @expose('/upload/', methods=['POST'])
+    @nocache
     def upload(self):
         f = request.files.get('upload')
         extension = f.filename.split('.')[1].lower()

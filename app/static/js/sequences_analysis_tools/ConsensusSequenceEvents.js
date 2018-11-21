@@ -1,3 +1,5 @@
+"use strict";
+
 const moduleSections = '.raw-sequences, .upload-sequences, .sequences-form-genebank';
 const moduleResultsSection = '.raw-seq-results, .file-seq-results, .file-seq-genebank-results';
 
@@ -17,6 +19,12 @@ $('#type-of-data').change(function () {
 
 $('.consensus-sequence-calculate.raw-seq').click(function () {
   consensusSeq.sendRawSeq()
+});
+
+$('.raw-sequences .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  consensusSeq.setContainer('.raw-sequences');
+  consensusSeq.saveCalculation();
 });
 
 $('.consensus-sequence-calculate.file-seq').click(function () {

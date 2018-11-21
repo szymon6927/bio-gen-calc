@@ -1,14 +1,51 @@
+<div class="nav-utility container-fluid">
+  <div class="nav-info float-left">
+    <div class="company-name">
+      <span><i class="fas fa-map-marker-alt"></i></span>
+      <span><a href="{{ url_for('about.about_page') }}">Gene Calc - Szymon Miks, Jan Bińkowski</a></span>
+    </div>
+    <div class="company-email">
+      <span><i class="far fa-envelope"></i></span>
+      <span><a href="mailto:contact@gene-calc.pl">contact@gene-calc.pl</a></span>
+    </div>
+  </div>
+
+
+  <div class="nav-tools float-right">
+    <div class="userpanel">
+      <div class="btn btn-outline-secondary btn-sm">
+        <i class="fas fa-user text-white"></i>
+        <a class="text-white" href="{{ url_for('userpanel.login') }}">
+          User panel {% if current_user.is_authenticated %}({{ current_user.login }}){% endif %}</a>
+      </div>
+    </div>
+
+    <div class="darkmode-switcher">
+      <span class="sun-icon">
+          <i class="fas fa-sun"></i>
+      </span>
+  
+      <input type="checkbox" id="switch" />
+      <label for="switch">Toggle</label>
+  
+      <span class="moon-icon">
+          <i class="far fa-moon"></i>
+      </span>
+    </div>
+  </div>
+</div>
+
 <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-primary mb-4">
   <a class="navbar-brand" href="{{ url_for('home.homepage') }}">
     <i class="fas fa-dna"></i>
     <span>Gene Calc</span>
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-genecalc"
+          aria-controls="navbar-genecalc" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+  <div class="collapse navbar-collapse" id="navbar-genecalc">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="{{ url_for('home.homepage') }}">Home</a>

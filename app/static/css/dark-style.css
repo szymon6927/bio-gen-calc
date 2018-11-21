@@ -1,0 +1,151 @@
+body {
+    background: linear-gradient(to right, rgb(30, 60, 114), rgb(42, 82, 152));
+}
+
+.navbar {
+    background-color: #393839 !important;
+}
+
+.footer {
+    background: #393839;
+}
+
+.wrapper {
+    background: #4d5052;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+hr {
+    border-top: 1px solid rgba(255, 255, 255, 0.49);
+}
+
+.jumbotron {
+    background-color: #595C5F;
+    border-bottom: 1px solid #fff;
+}
+
+.materials-methods span {
+    background-color: initial !important;
+    color: #fff;
+}
+
+.materials-methods * {
+    color: #fff !important;
+}
+
+.text-muted {
+    color: #ababab!important;
+}
+
+input.form-control {
+    background: #4d5052;
+    color: #fff;
+}
+
+.form-control:focus {
+    color: #fff;
+    background-color: #393839;
+    border-color: #fff;
+}
+
+.card {
+    background-color: #4d5052 !important;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.card-header {
+    background-color: #393839;
+}
+
+#back-top {
+    background-color: #295095 !important;
+}
+
+.form-control {
+    background-color: #4d5052;
+    color: #fff;
+}
+
+.dropdown-menu {
+    color: #ffffff;
+    background: #4d5052;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #393839;
+}
+
+.dropdown-item {
+    color: #ffffff;
+}
+
+table .summary {
+    background: #393839;
+}
+
+table th[scope=row] {
+    background: #4d5052;
+}
+
+.table td, .table th {
+    border-top: 1px solid #dee2e6;
+}
+
+.table .thead-light th {
+    color: #ffffff;
+    background-color: #4d5052;
+    border-color: #dee2e6;
+}
+
+.chi-goodness .table .thead-light th:last-child {
+    background-color: #393839; 
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #393839;
+}
+
+.dataframe tr th {
+    background: #393839;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #595c5e;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #294f94;
+    border-color: #294f94;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.alignment-wrapper {
+    background: #393839;
+}
+
+.alignment {
+    color: #fff;
+}
+
+.about .logo {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+a {
+    color: #cacaca;
+}
+
+a:hover {
+    color: #fff;
+}
+
+.nav-utility {
+    background: #595c5e;
+}

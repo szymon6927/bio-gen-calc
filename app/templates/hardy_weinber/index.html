@@ -5,60 +5,65 @@
 {% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
 
 {% block body %}
-<div class="wrapper">
-  {% include 'utils/module_top_block.html' %}
+  <div class="wrapper">
+    {% include 'utils/module_top_block.html' %}
 
-  {% include 'utils/info_block.html' %}
+    {% include 'utils/info_block.html' %}
 
-  <section class="hardy-weinberg">
-    <div class="row">
-      <div class="col-md-12 col-sm-12 co-xs-12">
-        <div class="row">
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="form-group">
-              <label for="ho">Homozygotes</label>
-              <input class="form-control non-negative" id="ho" min="0" placeholder="ho" type="number">
+    <section class="hardy-weinberg">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 co-xs-12">
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="ho">Homozygotes</label>
+                <input class="form-control non-negative" id="ho" min="0" placeholder="ho" type="number">
+              </div>
             </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="form-group">
-              <label for="he">Heterozygotes</label>
-              <input class="form-control non-negative" id="he" min="0" placeholder="he" type="number">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="he">Heterozygotes</label>
+                <input class="form-control non-negative" id="he" min="0" placeholder="he" type="number">
+              </div>
             </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="form-group">
-              <label for="rho">Rare homozygotes</label>
-              <input class="form-control non-negative" id="rho" min="0" placeholder="rho" type="number">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="rho">Rare homozygotes</label>
+                <input class="form-control non-negative" id="rho" min="0" placeholder="rho" type="number">
+              </div>
             </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="form-group">
-              <label for="alfa">Level of significance</label>
-              <input class="form-control non-negative" id="alfa" min="0" step="0.01" placeholder="alfa e.g. 0.05"
-                     type="number">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="form-group">
+                <label for="alfa">Level of significance</label>
+                <input class="form-control non-negative" id="alfa" min="0" step="0.01" placeholder="alfa e.g. 0.05"
+                       type="number">
+              </div>
             </div>
-          </div>
-          <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 mt-4">
-            <button type="submit" class="btn btn-block btn-danger calcuate-hw">Calcuate!</button>
+            <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 mt-4">
+              <button type="submit" class="btn btn-block btn-danger calcuate-hw">Calcuate!</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
 
-    <div class="row">
-      <div class="col-xl-8 offset-xl-4 col-lg-12 col-md-12 col-sm-12 col-xs-12 hw-results"></div>
-    </div>
+      <div class="row">
+        <div class="col-xl-8 offset-xl-4 col-lg-12 col-md-12 col-sm-12 hw-results"></div>
 
-  </section>
-</div>
+        {% with module_name="Hardy-Weinberg equilibrium" %}
+          {% include 'utils/save_calculation.html' %}
+        {% endwith %}
+      </div>
+    </section>
+  </div>
 
-{% include 'utils/modal.html' %}
+  {% include 'utils/modal.html' %}
 
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/HardyWeinber.js') }}?ver={{ css_js_ver }}"></script>
-<script src="{{ url_for('static', filename='js/HardyWeinberEvents.js') }}?ver={{ css_js_ver }}"></script>
+  <script src="{{ url_for('static', filename='js/helpers/AppModule.js') }}?ver={{ css_js_ver }}"></script>
+  <script src="{{ url_for('static', filename='js/hardy_weinberg/HardyWeinber.js') }}?ver={{ css_js_ver }}"></script>
+  <script
+    src="{{ url_for('static', filename='js/hardy_weinberg/HardyWeinberEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}

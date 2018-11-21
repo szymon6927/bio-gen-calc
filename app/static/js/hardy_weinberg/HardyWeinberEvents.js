@@ -1,3 +1,5 @@
+"use strict";
+
 const hw = new HardyWeinber();
 
 $('.calcuate-hw').click(function () {
@@ -33,6 +35,12 @@ $('.calcuate-hw').click(function () {
 $('.form-control').keypress(function (e) {
   if (e.which == 13) {
     $('.calcuate-hw').trigger('click');
-    return false;    //<---- Add this line
+    return false;
   }
+});
+
+$('.hardy-weinberg .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  hw.setContainer('.hardy-weinberg');
+  hw.saveCalculation();
 });

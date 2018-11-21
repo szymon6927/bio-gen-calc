@@ -2,15 +2,20 @@
 
 from datetime import datetime
 import pdfkit
-from flask import Flask, render_template, request, make_response, abort, Response, send_from_directory
-from .database import db
-from .models.Admin import User, Page
 import base64
+
+from flask import Flask, render_template, request, make_response, abort, Response, send_from_directory
 
 from flask_htmlmin import HTMLMIN
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_compress import Compress
+
+from .database import db
+from .models.Admin import User, Page
+from .models.Userpanel import Customer
+
+# from .helpers.db_helper import enable_full_text_search
 
 # local imports
 from config import app_config
@@ -19,9 +24,11 @@ from .admin.views import run_admin
 
 login_manager = LoginManager()
 
+app = Flask(__name__, instance_relative_config=True)
+# enable_full_text_search(app)
+
 
 def create_app(config_name):
-    app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
@@ -40,11 +47,14 @@ def create_app(config_name):
     register_blueprints(app)
 
     login_manager.init_app(app)
+    login_manager.login_view = 'userpanel.login'
 
-    # Create user loader function
     @login_manager.user_loader
-    def load_user(user_id):
-        return db.session.query(User).get(user_id)
+    def load_customer(obj_id):
+        if request.path.startswith("/admin"):
+            return User.query.get(int(obj_id))
+        else:
+            return Customer.query.get(int(obj_id))
 
     @app.route('/robots.txt')
     @app.route('/sitemap.xml')
@@ -83,7 +93,7 @@ def create_app(config_name):
         return {
             'now': datetime.utcnow(),
             'module_desc': Page.query.filter_by(breadcrumbs=request.path).first(),
-            'css_js_ver': 1.10
+            'css_js_ver': 1.11
         }
 
     @app.after_request
@@ -106,6 +116,8 @@ def register_blueprints(app):
     from .contact import contact as contact
     from .donors import donors
     from .newsletter import newsletter
+    from .userpanel import userpanel
+    from .customer_calculation import customer_calculation
     from .privacy_policy import privacy_policy
 
     app.register_blueprint(home_blueprint)
@@ -119,4 +131,9 @@ def register_blueprints(app):
     app.register_blueprint(contact)
     app.register_blueprint(donors)
     app.register_blueprint(newsletter)
+    app.register_blueprint(userpanel)
+    app.register_blueprint(customer_calculation)
     app.register_blueprint(privacy_policy)
+
+
+from .helpers import template_filters

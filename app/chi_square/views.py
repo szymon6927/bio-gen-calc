@@ -3,11 +3,12 @@ from . import chi_square
 from .utils.ChiSquareCalculation import ChiSquareCalculation
 from .utils.ChiSquareGoodness import ChiSquareGoodness
 
-from ..helpers.db_helper import add_calculation
+from ..helpers.db_helper import add_calculation, add_customer_activity
 from ..helpers.constants import CHI_SQUARE, CHI_SQUARE_GOODNESS
 
 
 @chi_square.route('/chi-square-page')
+@add_customer_activity
 def chi_square_page():
     """
     Render the chi_square_page template on the / route

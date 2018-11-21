@@ -1,11 +1,13 @@
+"use strict";
+
 const moduleSections = '.raw-sequences, .sequences-form-genebank';
-const moduleResultsSection = '.dotplot-raw-seq-results, .genebank-seq-results';
+// const moduleResultsSection = '.dotplot-raw-seq-results, .genebank-seq-results';
 
 const dotPlot = new DotPlot();
 
 $('#type-of-data').change(function () {
   $(moduleSections).hide();
-  $(moduleResultsSection).empty();
+  // $(moduleResultsSection).empty();
 
   let type = $(this).val();
   
@@ -23,6 +25,19 @@ $('.dot-plot-raw-calculate').click(function () {
 $('.dot-plot-genebank-calculate').click(function () {
   dotPlot.sendSeqGeneBank();
 });
+
+$('.raw-sequences .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  dotPlot.setContainer('.raw-sequences');
+  dotPlot.saveCalculation();
+});
+
+$('.sequences-form-genebank .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  dotPlot.setContainer('.sequences-form-genebank');
+  dotPlot.saveCalculation();
+});
+
 
 $('.raw-sequences .form-control').keypress(function (e) {
   if (e.which == 13) {

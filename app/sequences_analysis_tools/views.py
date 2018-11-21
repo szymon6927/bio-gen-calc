@@ -10,10 +10,14 @@ from .utils.DotPlot import DotPlot
 from ..helpers.file_helper import allowed_file
 
 from ..helpers.db_helper import add_calculation
-from ..helpers.constants import DOT_PLOT_RAW_SEQ, DOT_PLOT_GENEBANK_IDS, CONSENSUS_SEQUENCE_RAW_SEQ, CONSENSUS_SEQUENCE_FILE_SEQ, CONSENSUS_SEQUENCE_GENE_BANK, SEQUENCES_TOOLS
+from ..helpers.constants import (DOT_PLOT_RAW_SEQ, DOT_PLOT_GENEBANK_IDS, CONSENSUS_SEQUENCE_RAW_SEQ,
+                                 CONSENSUS_SEQUENCE_FILE_SEQ, CONSENSUS_SEQUENCE_GENE_BANK, SEQUENCES_TOOLS)
+
+from ..helpers.db_helper import add_customer_activity
 
 
 @sequences_analysis_tools.route('/sequences-analysis-tools/dot-plot')
+@add_customer_activity
 def dot_plot_page():
     return render_template('sequences_analysis_tools/dot_plot.html', title="Dot plot")
 
@@ -52,6 +56,7 @@ def dot_plot_genebank_ids():
 
 
 @sequences_analysis_tools.route('/sequences-analysis-tools/consensus-sequence')
+@add_customer_activity
 def consensus_sequence_page():
     return render_template('sequences_analysis_tools/consensus_sequence.html', title="Consensus Sequence")
 
@@ -62,7 +67,7 @@ def get_raw_seq_data():
         data = request.get_json()
         consensus_seq = ConsensusSequence(data)
         result = consensus_seq.raw_sequence()
-        
+
         add_calculation(module_name=CONSENSUS_SEQUENCE_RAW_SEQ,
                         user_data=data, result=result, ip_address=request.remote_addr)
 
@@ -119,6 +124,7 @@ def get_seq_genebank():
 
 
 @sequences_analysis_tools.route('/sequences-analysis-tools/sequences-tools')
+@add_customer_activity
 def sequences_tools_page():
     return render_template('sequences_analysis_tools/sequences_tools.html', title="Sequences Tools")
 
