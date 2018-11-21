@@ -2,7 +2,7 @@
 {% extends 'admin/base.html' %}
 
 {% block head_meta %}
- <meta charset="utf-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Gene Calc - administration panel">
   <meta name="keywords" content="gene-calc, gene calc">
@@ -17,71 +17,72 @@
 {% endblock %}
 
 {% block head_tail %}
-    {{ super() }}
-    <link href="{{ url_for('static', filename='css/admin/admin_style.css') }}" rel="stylesheet">
+  {{ super() }}
+  <link href="{{ url_for('static', filename='css/admin/admin_style.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block page_body %}
-    <header class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#admin-navbar-collapse">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        {% block brand %}
+  <header class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#admin-navbar-collapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      {% block brand %}
         <a class="navbar-brand" href="{{ admin_view.admin.url }}">{{ admin_view.admin.name }}</a>
-        {% endblock %}
-      </div>
-      <!-- navbar content -->
-      <div class="collapse navbar-collapse" id="admin-navbar-collapse">
-        {% block main_menu %}
-          {% if current_user.is_authenticated %}
+      {% endblock %}
+    </div>
+    <!-- navbar content -->
+    <div class="collapse navbar-collapse" id="admin-navbar-collapse">
+      {% block main_menu %}
+        {% if current_user.is_authenticated %}
           <ul class="navbar-nav">
             {{ layout.menu() }}
           </ul>
-          {% endif %}
-        {% endblock %}
+        {% endif %}
+      {% endblock %}
 
-        {% block menu_links %}
+      {% block menu_links %}
         <ul class="navbar-nav ml-auto">
           {{ layout.menu_links() }}
           {% if current_user.is_authenticated %}
             <a href="/admin/logout/" class="btn btn-danger my-2 my-sm-0">Logout ({{ current_user.login }})</a>
           {% endif %}
         </ul>
-        {% endblock %}
-        {% block access_control %}
-        {% endblock %}
-      </div>
-    </header>
-    <div id="particles-js"></div>
-    <div class="container">
-      <div class="wrapper">
-        {% block messages %}
-        {{ layout.messages() }}
-        {% endblock %}
-
-        {# store the jinja2 context for form_rules rendering logic #}
-        {% set render_ctx = h.resolve_ctx() %}
-
-        {% block body %}{% endblock %}
-      </div>
+      {% endblock %}
+      {% block access_control %}
+      {% endblock %}
     </div>
-    <footer class="footer bg-dark">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-sm-6 col-xs-12 text-left">
-            <p class="app-name"><a href="/">Gene Calc - Admin Panel</a>, Copyright © {{ now.year }} All Rights Reserved</span></p>
-          </div>
-          <div class="col-md-6 col-sm-6 col-xs-12 text-right">
-            <p>
-              Authors: <a href="mailto:miks.szymon@gmail.com">Szymon Miks</a> &
-              <a href="mailto:jan.binkowski96@gmail.com">Jan Bińkowski</a>
-            </p>
-          </div>
+  </header>
+  <div id="particles-js"></div>
+  <div class="container">
+    <div class="wrapper">
+      {% block messages %}
+        {{ layout.messages() }}
+      {% endblock %}
+
+      {# store the jinja2 context for form_rules rendering logic #}
+      {% set render_ctx = h.resolve_ctx() %}
+
+      {% block body %}{% endblock %}
+    </div>
+  </div>
+  <footer class="footer bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 text-left">
+          <p class="app-name"><a href="/">Gene Calc - Admin Panel</a>, Copyright © {{ now.year }} All Rights
+            Reserved</p>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 text-right">
+          <p>
+            Authors: <a href="mailto:miks.szymon@gmail.com">Szymon Miks</a> &
+            <a href="mailto:jan.binkowski96@gmail.com">Jan Bińkowski</a>
+          </p>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
 {% endblock %}
 
 {% block tail_js %}
@@ -89,55 +90,57 @@
           integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
           crossorigin="anonymous"></script>
   <script src="{{ admin_static.url(filename='bootstrap/bootstrap4/popper.min.js') }}" type="text/javascript"></script>
-  <script src="{{ admin_static.url(filename='bootstrap/bootstrap4/bootstrap.min.js', v='4.1.2') }}" type="text/javascript"></script>
+  <script src="{{ admin_static.url(filename='bootstrap/bootstrap4/bootstrap.min.js', v='4.1.2') }}"
+          type="text/javascript"></script>
   <script src="{{ admin_static.url(filename='vendor/moment.min.js', v='2.9.0') }}" type="text/javascript"></script>
-  <script src="{{ admin_static.url(filename='vendor/select2/select2.min.js', v='3.5.2') }}" type="text/javascript"></script>
+  <script src="{{ admin_static.url(filename='vendor/select2/select2.min.js', v='3.5.2') }}"
+          type="text/javascript"></script>
   {% if admin_view.extra_js %}
     {% for js_url in admin_view.extra_js %}
       <script src="{{ js_url }}" type="text/javascript"></script>
     {% endfor %}
   {% endif %}
-  {% endblock %}
+{% endblock %}
 {% block tail %}
-<script>
-$(window).bind("load", function() {
+  <script>
+    $(window).bind("load", function () {
 
- let footerHeight = 0,
-     footerTop = 0,
-     $footer = $(".footer");
+      let footerHeight = 0,
+        footerTop = 0,
+        $footer = $(".footer");
 
- positionFooter();
+      positionFooter();
 
- function positionFooter() {
-  footerHeight = $footer.height();
-  // 20 is as padding height
-  footerTop = ($(window).scrollTop()+$(window).height()-footerHeight-53)+"px";
+      function positionFooter() {
+        footerHeight = $footer.height();
+        // 20 is as padding height
+        footerTop = ($(window).scrollTop() + $(window).height() - footerHeight - 53) + "px";
 
-  if ( ($(document.body).height()+footerHeight) < $(window).height()) {
-     $footer.css({
-          position: "absolute",
-          width: "100%"
-     }).animate({
-          top: footerTop
-     })
-  }
-  else {
-    $footer.css({
-      position: "static"
-    })
-  }
+        if (($(document.body).height() + footerHeight) < $(window).height()) {
+          $footer.css({
+            position: "absolute",
+            width: "100%"
+          }).animate({
+            top: footerTop
+          })
+        }
+        else {
+          $footer.css({
+            position: "static"
+          })
+        }
 
-}
+      }
 
-$(window)
-  .scroll(positionFooter)
-  .resize(positionFooter)
-});
-</script>
-<script src="{{ url_for('static', filename='js/vendors/particles.min.js') }}"></script>
-<script>
-  particlesJS.load('particles-js', '/static/js/assets/particles.json', function () {
-    console.log('callback - particles.js config loaded');
-  });
-</script>
+      $(window)
+        .scroll(positionFooter)
+        .resize(positionFooter)
+    });
+  </script>
+  <script src="{{ url_for('static', filename='js/vendors/particles.min.js') }}"></script>
+  <script>
+    particlesJS.load('particles-js', '/static/js/assets/particles.json', function () {
+      console.log('callback - particles.js config loaded');
+    });
+  </script>
 {% endblock %}

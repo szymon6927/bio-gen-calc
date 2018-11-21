@@ -1,4 +1,3 @@
-from app import app
 from ast import literal_eval
 
 
@@ -31,6 +30,3 @@ def translate_name(name):
 
     return translator.get(name, name)
 
-
-app.jinja_env.filters['to_dict'] = to_dict
-app.jinja_env.filters['translate_name'] = translate_name

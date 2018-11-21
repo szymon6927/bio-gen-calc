@@ -22,15 +22,11 @@ from .admin.views import run_admin
 
 login_manager = LoginManager()
 
-app = Flask(__name__, instance_relative_config=True)
-
 
 def create_app(config_name):
+    app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
-
-    Compress(app)
-    HTMLMIN(app)
 
     admin = run_admin()
     admin.init_app(app)
@@ -42,9 +38,13 @@ def create_app(config_name):
         db.create_all()
 
     register_blueprints(app)
+    register_jinja_templte_filters(app)
 
     login_manager.init_app(app)
     login_manager.login_view = 'userpanel.login'
+
+    Compress(app)
+    HTMLMIN(app)
 
     @login_manager.user_loader
     def load_customer(obj_id):
@@ -102,24 +102,24 @@ def create_app(config_name):
 
 
 def register_blueprints(app):
-    from .home import home as home_blueprint
-    from .materials_and_methods import materials_and_methods as materials_and_methods_blueprint
-    from .about import about as about_blueprint
-    from .hardy_weinber import hardy_weinber as hardy_weinber
-    from .chi_square import chi_square as chi_square
-    from .pic import pic as pic
-    from .genetic_distance import genetic_distance as genetic_distance
-    from .sequences_analysis_tools import sequences_analysis_tools as sequences_analysis_tools
-    from .contact import contact as contact
+    from .home import home
+    from .materials_and_methods import materials_and_methods
+    from .about import about
+    from .hardy_weinber import hardy_weinber
+    from .chi_square import chi_square
+    from .pic import pic
+    from .genetic_distance import genetic_distance
+    from .sequences_analysis_tools import sequences_analysis_tools
+    from .contact import contact
     from .donors import donors
     from .newsletter import newsletter
     from .userpanel import userpanel
     from .customer_calculation import customer_calculation
     from .privacy_policy import privacy_policy
 
-    app.register_blueprint(home_blueprint)
-    app.register_blueprint(materials_and_methods_blueprint)
-    app.register_blueprint(about_blueprint)
+    app.register_blueprint(home)
+    app.register_blueprint(materials_and_methods)
+    app.register_blueprint(about)
     app.register_blueprint(hardy_weinber)
     app.register_blueprint(chi_square)
     app.register_blueprint(pic)
@@ -133,4 +133,8 @@ def register_blueprints(app):
     app.register_blueprint(privacy_policy)
 
 
-from .helpers import template_filters
+def register_jinja_templte_filters(app):
+    from .helpers.template_filters import to_dict, translate_name
+
+    app.jinja_env.filters['to_dict'] = to_dict
+    app.jinja_env.filters['translate_name'] = translate_name
