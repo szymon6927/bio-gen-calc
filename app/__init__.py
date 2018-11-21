@@ -15,8 +15,6 @@ from .database import db
 from .models.Admin import User, Page
 from .models.Userpanel import Customer
 
-# from .helpers.db_helper import enable_full_text_search
-
 # local imports
 from config import app_config
 
@@ -25,7 +23,6 @@ from .admin.views import run_admin
 login_manager = LoginManager()
 
 app = Flask(__name__, instance_relative_config=True)
-# enable_full_text_search(app)
 
 
 def create_app(config_name):

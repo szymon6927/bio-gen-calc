@@ -7,7 +7,7 @@ from flask_login import current_user
 
 from ..database import db
 from ..models.Calculation import Calculation
-from ..models.Userpanel import CustomerActivity, CustomerCalculation
+from ..models.Userpanel import CustomerActivity
 
 
 def add_calculation(module_name=None, user_data=None, result=None, ip_address=None):
@@ -55,8 +55,3 @@ def add_customer_activity(view):
         return view(*args, **kwargs)
     return add_activity
 
-
-# def enable_full_text_search(app):
-#     import flask_whooshalchemy as wa
-#
-#     wa.whoosh_index(app, CustomerCalculation)

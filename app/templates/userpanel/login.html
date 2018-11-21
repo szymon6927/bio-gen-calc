@@ -2,60 +2,65 @@
 
 {% block body %}
   <div class="wrapper">
-      {% include 'utils/module_top_block.html' %}
+    {% include 'utils/module_top_block.html' %}
 
-      <section class="login">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-12">
-            {{ module_desc.text|safe }}
-          </div>
-
-          <div class="col-md-6 offset-md-3 col-sm-12 col-12">
-            <form class="login-form" action="{{ url_for('userpanel.login') }}" method="POST">
-              {{ form.hidden_tag() }}
-              <div class="form-group">
-                {{ form.login_or_email.label }}
-                {{ form.login_or_email(class_="form-control", placeholder="login or email") }}
-              </div>
-              <div class="form-group">
-                {{ form.password.label }}
-                {{ form.password(class_="form-control", placeholder="password") }}
-              </div>
-
-              <div class="form-group">
-                
-                
-              </div>
-
-              <div class="form-group">
-                <div class="form-check">
-                  {{ form.remember(class_="form-check-input") }}
-                  {{ form.remember.label(class_="form-check-label") }}
-                </div>
-              </div>
-          
-              <button type="submit" class="btn btn-primary btn-block">Login</button>
-        
-              {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                  {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} mt-3" role="alert">{{ message|safe }}</div>
-                  {% endfor %}
-                {% endif %}
-              {% endwith %}
-      
-              {% for field in form.errors %}
-                {% for error in form.errors[field] %}
-                  <div class="alert alert-danger mt-3" role="alert">{{ error }}</div>
-                {% endfor %}
-              {% endfor %}
-            </form>
-          </div>
-
-          <div class="col-md-6 offset-md-3 col-sm-12 col-12 mt-4">
-            <p class="text-muted">Don't you have an account? Please register <a href="{{ url_for('userpanel.register') }}">here</a></p>
-          </div>
+    <section class="login">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-12">
+          {{ module_desc.text|safe }}
         </div>
-      </section>
-    </div>
+
+        <div class="col-md-6 offset-md-3 col-sm-12 col-12">
+          <form class="login-form" action="{{ url_for('userpanel.login') }}" method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+              {{ form.login_or_email.label }}
+              {{ form.login_or_email(class_="form-control", placeholder="login or email") }}
+
+              {% if form.login_or_email.errors %}
+                {% for error in form.login_or_email.errors %}
+                  <span class="text-danger">{{ error }}</span><br>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              {{ form.password.label }}
+              {{ form.password(class_="form-control", placeholder="password") }}
+
+              {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                  <span class="text-danger">{{ error }}</span><br>
+                {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              <div class="form-check">
+                {{ form.remember(class_="form-check-input") }}
+                {{ form.remember.label(class_="form-check-label") }}
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} mt-3" role="alert">{{ message|safe }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+          </form>
+        </div>
+
+        <div class="col-md-6 offset-md-3 col-sm-12 col-12 mt-4">
+          <p class="text-muted">Don't you have an account? Please register <a
+            href="{{ url_for('userpanel.register') }}">here</a></p>
+        </div>
+      </div>
+    </section>
+  </div>
 {% endblock %}

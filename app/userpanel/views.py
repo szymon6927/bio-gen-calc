@@ -20,10 +20,10 @@ def login():
     if form.validate_on_submit():
         customer = Customer.query.filter(
             or_(Customer.login == form.login_or_email.data, Customer.email == form.login_or_email.data)).first()
-        if customer:
-            if check_password_hash(customer.password, form.password.data):
-                login_user(customer, remember=form.remember.data)
-                return redirect(url_for('userpanel.dashboard'))
+        
+        if customer and check_password_hash(customer.password, form.password.data):
+            login_user(customer, remember=form.remember.data)
+            return redirect(url_for('userpanel.dashboard'))
 
         flash("Invalid username or password", 'danger')
 

@@ -22,7 +22,6 @@ class RegisterForm(FlaskForm):
                                                       EqualTo('password_confirm', message='Passwords must match')])
     password_confirm = PasswordField('Confirm password*', validators=[DataRequired()])
 
-
     def validate_login(self, login):
         customer = Customer.query.filter_by(login=login.data).first()
         if customer:
@@ -56,7 +55,7 @@ class CustomerEditForm(FlaskForm):
                 raise ValidationError('You can not change profile email.')
 
     def validate_password(self, password):
-        lower_name = self.first_name.data.lower() 
-    
+        lower_name = self.first_name.data.lower()
+
         if lower_name in password.data:
             raise ValidationError('Password contain your first name, please change this.')

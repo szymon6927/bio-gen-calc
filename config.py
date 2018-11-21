@@ -1,7 +1,4 @@
-# config.py
-
-
-class Config(object):
+class Config:
     """
     Common configurations
     """
@@ -10,7 +7,6 @@ class Config(object):
     MAIL_SERVER = "mail26.mydevil.net"
     MAIL_PORT = 465
     MAIL_USE_SSL = True
-    MINIFY_PAGE = True
 
 
 class DevelopmentConfig(Config):
@@ -18,6 +14,7 @@ class DevelopmentConfig(Config):
     Development configurations
     """
     DEBUG = True
+    MINIFY_PAGE = True
 
 
 class ProductionConfig(Config):
@@ -27,6 +24,7 @@ class ProductionConfig(Config):
     COMPRESS_MIMETYPES = ['text/html', 'text/css', 'text/xml', 'application/json', 'application/javascript']
     COMPRESS_LEVEL = 6
     COMPRESS_MIN_SIZE = 500
+    MINIFY_PAGE = True
     DEBUG = False
 
 
@@ -36,6 +34,7 @@ class TestingConfig(Config):
     """
     TESTING = True
     SQLALCHEMY_ECHO = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
 app_config = {
