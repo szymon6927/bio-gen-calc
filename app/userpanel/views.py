@@ -35,7 +35,7 @@ def login():
 @nocache
 def logout():
     logout_user()
-    return redirect(url_for('home.homepage'))
+    return redirect(url_for('userpanel.login'))
 
 
 @userpanel.route('/userpanel/register', methods=['GET', 'POST'])

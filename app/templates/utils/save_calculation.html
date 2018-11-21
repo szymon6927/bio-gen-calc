@@ -20,8 +20,8 @@
     </form>
   </div>
 {% else %}
-  <div class="col-lg-12 col-md-12 col-sm-12 text-center save-calculations mt-5">
-    <div class="card text-white bg-primary mb-5 shadow-lg">
+  <div class="col-lg-8 offset-lg-2 col-md-12 col-sm-12 text-center save-calculations mt-5">
+    <div class="card text-white bg-primary mb-2 shadow-lg">
       <div class="card-header">
         <span class="info-icon"><i class="fas fa-info-circle"></i></span>
         <span class="card-title mb-0">Important info:</span>
@@ -29,11 +29,11 @@
       <div class="card-body text-sm-left text-center">
         <p class="font-weight-bold mb-4">
           If you want to save your calculation in please
-          <a class="btn bg-dark shadow mt-sm-0 mt-3" href="{{ url_for('userpanel.login') }}">Login Here</a>
+          <a class="btn bg-dark font-weight-normal shadow mt-sm-0 mt-3" href="{{ url_for('userpanel.login') }}">Login Here</a>
         </p>
         <p class="font-weight-bold">
           Or if you don't have an account please
-          <a class="btn bg-dark shadow mt-sm-0 mt-3" href="{{ url_for('userpanel.register') }}">Register Here</a>
+          <a class="btn bg-dark font-weight-normal shadow mt-sm-0 mt-3" href="{{ url_for('userpanel.register') }}">Register Here</a>
         </p>
       </div>
     </div>
