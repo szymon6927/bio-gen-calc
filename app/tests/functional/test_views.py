@@ -63,11 +63,28 @@ def test_sequences_tools_page(test_client):
     assert response.status_code == 200
     assert b'Sequences Tools' in response.data
 
+
 def test_robots_page(test_client):
     response = test_client.get('/robots.txt')
     assert response.status_code == 200
     assert b'User-Agent: *' in response.data
 
+
 def test_sitemap_page(test_client):
     response = test_client.get('/sitemap.xml')
+    assert response.status_code == 200
+
+
+def test_admin_page(test_client):
+    response = test_client.get('/admin')
+    assert response.status_code == 200
+
+
+def test_userpanel_login_page(test_client):
+    response = test_client.get('/userpanel/login')
+    assert response.status_code == 200
+
+
+def test_userpanel_register_page(test_client):
+    response = test_client.get('/userpanel/register')
     assert response.status_code == 200
