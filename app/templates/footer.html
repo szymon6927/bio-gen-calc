@@ -1,6 +1,7 @@
 <div class="side-info" data-toggle="modal" data-target="#userpanel-modal"></div>
 
-<div class="modal fade" id="userpanel-modal" tabindex="-1" role="dialog" aria-labelledby="userpanel-modal-title" aria-hidden="true">
+<div class="modal fade" id="userpanel-modal" tabindex="-1" role="dialog" aria-labelledby="userpanel-modal-title"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -27,10 +28,23 @@
   <div class="container">
     {% include 'utils/newsletter_form.html' %}
     <div class="row">
-      <div class="col-md-6 col-sm-6 col-xs-12 text-left">
+      <div class="col-md-12 col-sm-12">
+        <div class="footer-userpanel text-right">
+          <span class="font-weight-bold pr-3">User panel:</span>
+          <span class="pr-3">
+            <i class="fas fa-sign-in-alt"></i>
+            <a class="pl-1" href="{{ url_for('userpanel.register') }}">Register</a>
+          </span>
+          <span>
+            <i class="fas fa-user-circle"></i>
+            <a class="pl-1" href="{{ url_for('userpanel.login') }}">Login</a>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12 pt-2 text-left">
         <p class="app-name"><a href="/">Gene Calc</a>, Copyright © {{ now.year }} All Rights Reserved</p>
       </div>
-      <div class="col-md-6 col-sm-6 col-xs-12 text-right">
+      <div class="col-md-6 col-sm-6 col-xs-12 pt-2 text-right">
         <p>
           Authors: <a href="mailto:miks.szymon@gmail.com">Szymon Miks</a> &
           <a href="mailto:jan.binkowski96@gmail.com">Jan Bińkowski</a>

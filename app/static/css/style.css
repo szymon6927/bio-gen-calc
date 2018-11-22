@@ -167,8 +167,8 @@ table th[scope=row] {
     background-position: center center;
     border: 1px solid white;
     text-indent: -99999px;
-    width: 54px;
-    height: 54px;
+    width: 44px;
+    height: 44px;
 }
 
 #back-top {
@@ -682,10 +682,16 @@ table th[scope=row] {
 #userpanel-modal .modal-content {
     border: 3px solid #ffffff85;
     background: #272727;
+    color: #fff;
 }
 
 #userpanel-modal .modal-content .close {
     color: #fff;
+}
+
+.footer-userpanel {
+    border-bottom: 1px solid #fff;
+    padding: 10px 0;
 }
 
 @media (min-width: 1331px) and (max-width: 1400px) {
