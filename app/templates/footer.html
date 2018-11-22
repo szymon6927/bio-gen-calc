@@ -1,3 +1,27 @@
+<div class="side-info" data-toggle="modal" data-target="#userpanel-modal"></div>
+
+<div class="modal fade" id="userpanel-modal" tabindex="-1" role="dialog" aria-labelledby="userpanel-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="userpanel-modal-title">Register to user panel</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Create an account if you want to save your calculations created with our app.</p>
+        <p><strong>No more text or Excel files, everything in one place!</strong></p>
+        <p>Click the button below to create a user account and login in</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No, thanks</button>
+        <a href="{{ url_for('userpanel.register') }}" class="btn btn-primary">Create an account</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <p id="back-top"><a href="/" title="Przejdź do góry strony">Przejdź do góry strony</a></p>
 <footer class="footer">
   <div class="container">

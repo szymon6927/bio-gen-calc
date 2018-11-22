@@ -9,7 +9,7 @@ body {
     padding: 0 15px 24px 15px;
     border-radius: 5px;
     margin-top: -14rem;
-    z-index: 999;
+    z-index: 99;
     position: relative;
 }
 
@@ -134,7 +134,7 @@ table th[scope=row] {
     width: 100%;
     background: #26507f;
     border-bottom: 1px solid #fff;
-    z-index: 9999;
+    z-index: 999;
     font-size: 13px;
 }
 
@@ -657,6 +657,37 @@ table th[scope=row] {
     display: none;
 }
 
+.side-info {
+    position: fixed;
+    right: -2px;
+    top: 200px;
+    background: #264f7f;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    z-index: 999;
+    border: 2px solid #fefefe;
+    cursor: pointer;
+    color: #fff;
+}
+
+.side-info::before {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900; 
+    content: "\f129";
+    font-size: 21px;
+}
+
+#userpanel-modal .modal-content {
+    border: 3px solid #ffffff85;
+    background: #272727;
+}
+
+#userpanel-modal .modal-content .close {
+    color: #fff;
+}
+
 @media (min-width: 1331px) and (max-width: 1400px) {
     .navbar-nav li {
         font-size: 15px;
@@ -739,5 +770,31 @@ table th[scope=row] {
 
     .logo {
         width: 100%;
+    }
+
+    .nav-tools .userpanel a {
+        font-size: 12px;
+    }
+
+    .nav-info .company-email {
+        font-size: 12px;
+    }
+
+    .userpanel {
+        margin: 0;
+    }
+
+    .nav-info i {
+        padding: 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .nav-info .company-email {
+        display: none;
+    }
+
+    .userpanel {
+        margin-right: 15px;
     }
 }
