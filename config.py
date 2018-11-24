@@ -35,6 +35,10 @@ class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
+    # Bcrypt algorithm hashing rounds (reduced for testing purposes only!)
+    BCRYPT_LOG_ROUNDS = 4
+    # Disable CSRF tokens in the Forms (only valid for testing purposes!)
+    WTF_CSRF_ENABLED = False
 
 
 app_config = {

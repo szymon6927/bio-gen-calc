@@ -5,6 +5,9 @@ from .. import create_app
 @pytest.fixture(scope='module')
 def test_client():
     flask_app = create_app('testing')
+    flask_app.config.update(
+        SQLALCHEMY_DATABASE_URI='sqlite://'
+    )
 
     testing_client = flask_app.test_client()
 
