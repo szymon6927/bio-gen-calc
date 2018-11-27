@@ -7,8 +7,10 @@ class ConsensusSequence extends AppModule {
 
   buildJSONfromRawSeq() {
     let seq = $('#fast-seq').val();
+    let threshold = $('#threshold-rawseq').val() || 0.55;
     let data = {};
     data['sequences'] = seq;
+    data['threshold'] = parseFloat(threshold);
 
     return JSON.stringify(data);
   }
@@ -16,10 +18,12 @@ class ConsensusSequence extends AppModule {
   buildJSONfromGeneBankSeq() {
     let sequenceType = $('#type-of-sequence').val();
     let geneBankSeq = $('#gene-bank-seq').val();
+    let threshold = $('#threshold-genebank').val() || 0.55;
 
     let data = {};
     data['sequence-type'] = sequenceType;
     data['genebank-seq'] = geneBankSeq;
+    data['threshold'] = parseFloat(threshold);
 
     return JSON.stringify(data)
   }
@@ -59,12 +63,21 @@ class ConsensusSequence extends AppModule {
     $('.cover').show();
     const render = new RenderHelper('.file-seq-results');
     const path = '/sequences-analysis-tools/consensus-sequence/send-seq-file';
-    const file = new FormData($('#seq-upload-form')[0]);
-    console.log(file);
+
+    let fileInput = document.getElementById('seq-file');
+    let file = fileInput.files[0];
+
+    let formData = new FormData();
+    formData.append('file', file);
+
+    let threshold = parseFloat($('#threshold-fileupload').val()) || 0.55;
+    formData.append('threshold', threshold);
+
+
     $.ajax({
       type: "POST",
       url: path,
-      data: file,
+      data: formData,
       contentType: false,
       cache: false,
       processData: false,

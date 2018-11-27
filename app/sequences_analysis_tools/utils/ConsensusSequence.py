@@ -13,13 +13,14 @@ class ConsensusSequence:
 
     def raw_sequence(self):
         filename = create_seq_file(self.data['sequences'])
+        threshold = self.data.get('threshold', 0.55)
 
         muscle = MuscleCommandline(input=filename)
         stdout, stderr = muscle()
         align = AlignIO.read(StringIO(stdout), "fasta")
 
         summary_align = AlignInfo.SummaryInfo(align)
-        consensus = summary_align.gap_consensus(threshold=0.55, ambiguous='N')
+        consensus = summary_align.gap_consensus(threshold=threshold, ambiguous='N')
 
         add_result(self, "Consenus sequence", str(consensus))
         add_result(self, "Sequence length", len(consensus))
@@ -31,12 +32,15 @@ class ConsensusSequence:
     def file_seq(self):
         filename = create_seq_file(self.data['sequences'])
 
+        if type(self.data.get('threshold')) is str:
+            threshold = float(self.data.get('threshold'))
+
         muscle = MuscleCommandline(input=filename)
         stdout, stderr = muscle()
         align = AlignIO.read(StringIO(stdout), "fasta")
 
         summary_align = AlignInfo.SummaryInfo(align)
-        consensus = summary_align.gap_consensus(threshold=0.55, ambiguous='N')
+        consensus = summary_align.gap_consensus(threshold=threshold, ambiguous='N')
 
         remove_temp_file(filename)
 
@@ -61,13 +65,14 @@ class ConsensusSequence:
             file_content += ">" + seq_name + "\n" + seq_content + "\n"
 
         filename = create_seq_file(file_content)
+        threshold = self.data.get('threshold', 0.55)
 
         muscle = MuscleCommandline(input=filename)
         stdout, stderr = muscle()
         align = AlignIO.read(StringIO(stdout), "fasta")
 
         summary_align = AlignInfo.SummaryInfo(align)
-        consensus = summary_align.gap_consensus(threshold=0.55, ambiguous='N')
+        consensus = summary_align.gap_consensus(threshold=threshold, ambiguous='N')
 
         remove_temp_file(filename)
 

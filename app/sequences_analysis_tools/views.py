@@ -91,6 +91,8 @@ def get_seq_file_data():
 
         data = dict()
         data['sequences'] = file.read().decode()
+        data['threshold'] = request.form['threshold']
+
         consensus_seq = ConsensusSequence(data)
         result = consensus_seq.file_seq()
 

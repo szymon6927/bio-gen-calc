@@ -27,6 +27,13 @@
 
       <div class="row">
         <div class="raw-sequences">
+          <div class="col-md-6 offset-md-3 col-sm-12">
+            <div class="form-group">
+              <label for="threshold-rawseq">Threshold:</label>
+              <input type="number" class="form-control non-negative" min="0" max="1" id="threshold-rawseq" placeholder="e.g. 0.55" />
+            </div>
+          </div>
+
           <div class="col-md-12 col-sm-12">
             <div class="form-group">
               <label for="fast-seq">Insert <strong>FASTA</strong> sequence:</label>
@@ -49,8 +56,15 @@
         </div>
 
         <div class="upload-sequences">
+          <div class="col-md-6 offset-md-3 col-sm-12">
+            <div class="form-group">
+              <label for="threshold-fileupload">Threshold:</label>
+              <input type="number" class="form-control non-negative" id="threshold-fileupload" placeholder="e.g. 0.55" />
+            </div>
+          </div>
+
           <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
-            <form id="seq-upload-form" method="post" enctype="multipart/form-data">
+            <form id="seq-upload-form" method="POST" enctype="multipart/form-data">
               <div class="upload-wrapper mt-5 mb-5">
                 <div class="form-group">
                   <label class="btn btn-primary btn-block" for="seq-file">
@@ -75,6 +89,13 @@
         </div>
 
         <div class="sequences-form-genebank">
+          <div class="col-md-6 offset-md-3 col-sm-12">
+            <div class="form-group">
+              <label for="threshold-genebank">Threshold:</label>
+              <input type="number" class="form-control non-negative" id="threshold-genebank" placeholder="e.g. 0.55" />
+            </div>
+          </div>
+
           <div class="col-md-12 col-sm-12">
             <div class="form-group">
               <label for="type-of-sequence">Type of sequence:</label>
