@@ -1,7 +1,7 @@
 import json
 
 
-def test_hw_communiction(test_client):
+def test_hw_communiction(test_client, init_db):
     data = dict()
     data["ho"] = 4
     data["he"] = 3
@@ -12,7 +12,7 @@ def test_hw_communiction(test_client):
     assert response.status_code == 200
 
 
-def test_chi_square_communiction(test_client):
+def test_chi_square_communiction(test_client, init_db):
     data = dict()
     data['row-0'] = [4.0, 4.0]
     data['row-1'] = [2.0, 3.0]
@@ -26,7 +26,7 @@ def test_chi_square_communiction(test_client):
     assert response.status_code == 200
 
 
-def test_chi_square_goodnes_communiction(test_client):
+def test_chi_square_goodnes_communiction(test_client, init_db):
     data = dict()
     data['observed'] = [4.0, 3.0, 2.0]
     data['expected'] = [3.0, 2.0, 4.0]
@@ -37,7 +37,7 @@ def test_chi_square_goodnes_communiction(test_client):
     assert response.status_code == 200
 
 
-def test_genetic_distance_communiction(test_client):
+def test_genetic_distance_communiction(test_client, init_db):
     data = dict()
     data["taxon_number"] = "6"
     data["locus_number"] = "1"
@@ -57,7 +57,7 @@ def test_genetic_distance_communiction(test_client):
     assert response.status_code == 200
 
 
-def test_pic_dominant_communiction(test_client):
+def test_pic_dominant_communiction(test_client, init_db):
     data = dict()
     data["amplified_marker"] = 2
     data["absecnce_marker"] = 3
@@ -67,7 +67,7 @@ def test_pic_dominant_communiction(test_client):
     assert response.status_code == 200
 
 
-def test_pic_codominant_communiction(test_client):
+def test_pic_codominant_communiction(test_client, init_db):
     data = dict()
     data["count"] = 3
     data["allele-0"] = 4
@@ -79,7 +79,7 @@ def test_pic_codominant_communiction(test_client):
     assert response.status_code == 200
 
 
-def test_generate_pdf(test_client):
+def test_generate_pdf(test_client, init_db):
     data = dict()
     data["content"] = "<h1>TEST</h1>"
 
@@ -88,7 +88,7 @@ def test_generate_pdf(test_client):
     assert response.mimetype == 'application/pdf'
 
 
-def test_dotplot_raw_seq_communiction(test_client):
+def test_dotplot_raw_seq_communiction(test_client, init_db):
     data = dict()
     data['seq-name-1'] = "xxx"
     data['seq-content-1'] = "CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGATGAGACCGTGGAATAAACGATCGAGTG"
@@ -101,7 +101,7 @@ def test_dotplot_raw_seq_communiction(test_client):
     assert response.status_code == 200
 
 
-def test_dotplot_genebank_seq_communiction(test_client):
+def test_dotplot_genebank_seq_communiction(test_client, init_db):
     data = dict()
     data['seq-name-1'] = "2765658"
     data['seq-name-2'] = "2765657"
@@ -112,7 +112,7 @@ def test_dotplot_genebank_seq_communiction(test_client):
     assert response.status_code == 200
 
 
-def test_consensus_sequence_raw_seq_communiction(test_client):
+def test_consensus_sequence_raw_seq_communiction(test_client, init_db):
     data = dict()
     data['sequences'] = """>gi|2765658
     CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGATGAGACCGTGGAATAAACGATCGAGTG
@@ -124,7 +124,7 @@ def test_consensus_sequence_raw_seq_communiction(test_client):
     assert response.status_code == 200
 
 
-def test_sequences_tools_complement_communiction(test_client):
+def test_sequences_tools_complement_communiction(test_client, init_db):
     data = dict()
     data['type'] = "complement"
     data['sequences'] = """>2765658

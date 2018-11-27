@@ -13,7 +13,7 @@ from ..helpers.file_helper import save_picture
 @userpanel.route('/userpanel/login', methods=['GET', 'POST'])
 @nocache
 def login():
-    form = LoginForm()
+    form = LoginForm(request.form)
     if current_user.is_authenticated:
         return redirect(url_for('userpanel.dashboard'))
 
@@ -25,6 +25,8 @@ def login():
             return redirect(url_for('userpanel.dashboard'))
 
         flash("Invalid username or password", 'danger')
+    else:
+        flash("szymon12")
 
     return render_template('userpanel/login.html', title="Login to your account", form=form)
 
