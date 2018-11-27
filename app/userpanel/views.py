@@ -25,8 +25,6 @@ def login():
             return redirect(url_for('userpanel.dashboard'))
 
         flash("Invalid username or password", 'danger')
-    else:
-        flash("szymon12")
 
     return render_template('userpanel/login.html', title="Login to your account", form=form)
 
