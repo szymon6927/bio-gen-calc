@@ -28,6 +28,41 @@ class ConsensusSequence extends AppModule {
     return JSON.stringify(data)
   }
 
+  async buildJSONfromFileSeq(fileInput, threshold) {
+
+    try {
+      const fileContents = await this.readFileContent(fileInput);
+      let data = {};
+      data['file-seq'] = fileContents;
+      data['threshold'] = parseFloat(threshold);
+
+      return JSON.stringify(data);
+    }
+    catch (e) {
+      console.log(e.message);
+    }
+  }
+
+  readFileContent(fileInput) {
+    const file = fileInput.files[0];
+
+    const temporaryFileReader = new FileReader();
+
+    return new Promise((resolve, reject) => {
+
+      temporaryFileReader.onerror = () => {
+        temporaryFileReader.abort();
+        reject(new DOMException("Problem parsing input file."));
+      };
+
+      temporaryFileReader.onload = () => {
+        resolve(temporaryFileReader.result);
+      };
+
+      temporaryFileReader.readAsDataURL(file);
+    });
+  }
+
   sendRawSeq() {
     $('.cover').show();
     const dataJSON = this.buildJSONfromRawSeq();
@@ -70,7 +105,7 @@ class ConsensusSequence extends AppModule {
     let formData = new FormData();
     formData.append('file', file);
 
-    let threshold = parseFloat($('#threshold-fileupload').val()) || 0.55;
+    let threshold = $('#threshold-fileupload').val() || 0.55;
     formData.append('threshold', threshold);
 
 
@@ -81,7 +116,7 @@ class ConsensusSequence extends AppModule {
       contentType: false,
       cache: false,
       processData: false,
-      success: function (result) {
+      success: (result) => {
         console.log("Succesfull");
 
         $('.file-seq-results').html('<a id="download-link" download="consensus-sequence.fasta" style="display:none;"></a>');
@@ -90,6 +125,16 @@ class ConsensusSequence extends AppModule {
         downloadLink.href = 'data:text/plain;base64,' + result;
 
         downloadLink.click();
+
+        this.buildJSONfromFileSeq(fileInput, threshold)
+          .then((dataJSON) => {
+            render.calculationBlock();
+            this.setResult(result);
+            this.extendObjectToSave({'customer_input': dataJSON});
+            console.log(dataJSON);
+          }).catch((req) => {
+            console.log("Error: ", req);
+        });
 
         $('.cover').hide();
       },
@@ -114,7 +159,7 @@ class ConsensusSequence extends AppModule {
       data: dataJSON,
       cache: false,
       processData: false,
-      success: function (result) {
+      success: (result) => {
         console.log("Succesfull");
 
         $('.file-seq-genebank-results').html('<a id="download-link" download="consensus-sequence.fasta" style="display:none;"></a>');
@@ -122,7 +167,13 @@ class ConsensusSequence extends AppModule {
         let downloadLink = document.getElementById('download-link');
         downloadLink.href = 'data:text/plain;base64,' + result;
 
+        console.log(result);
+
         downloadLink.click();
+
+        render.calculationBlock();
+        this.setResult(result);
+        this.extendObjectToSave({'customer_input': dataJSON});
 
         $('.cover').hide();
       },

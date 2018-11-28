@@ -50,7 +50,7 @@
           <div class="col-md-12 col-sm-12">
             <div class="raw-seq-results"></div>
 
-            {% with module_name="Consensus Sequence" %}
+            {% with module_name="Consensus Sequence Raw Sequences" %}
               {% include 'utils/save_calculation.html' %}
             {% endwith %}
           </div>
@@ -87,6 +87,10 @@
 
           <div class="col-md-12 col-sm-12">
             <div class="file-seq-results"></div>
+
+            {% with module_name="Consensus Sequence form FASTA file" %}
+              {% include 'utils/save_calculation.html' %}
+            {% endwith %}
           </div>
         </div>
 
@@ -124,6 +128,10 @@
 
           <div class="col-md-12 col-sm-12">
             <div class="file-seq-genebank-results"></div>
+
+            {% with module_name="Consensus Sequence form GeneBank" %}
+              {% include 'utils/save_calculation.html' %}
+            {% endwith %}
           </div>
         </div>
       </div>

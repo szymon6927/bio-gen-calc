@@ -37,8 +37,20 @@ $('.consensus-sequence-calculate.file-seq').click(function () {
   }
 });
 
+$('.upload-sequences .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  consensusSeq.setContainer('.upload-sequences');
+  consensusSeq.saveCalculation();
+});
+
 $('.consensus-sequence-calculate.genebank-seq').click(function () {
   if (validator.floatBetween01('#threshold-genebank')) {
     consensusSeq.sendSeqGeneBank()
   }
+});
+
+$('.sequences-form-genebank .save-calculation-form').submit(function(e) {
+  e.preventDefault();
+  consensusSeq.setContainer('.sequences-form-genebank');
+  consensusSeq.saveCalculation();
 });

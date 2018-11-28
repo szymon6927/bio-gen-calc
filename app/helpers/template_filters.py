@@ -30,3 +30,10 @@ def translate_name(name):
 
     return translator.get(name, name)
 
+
+def remove_first_last_double_quotes(text):
+    if text.startswith('"') and text.endswith('"'):
+        text = text[1:-1]
+
+        return text
+

@@ -10,16 +10,31 @@
 
     <div class="user-input-wrapper pt-3 pb-3">
       <h5 class="mb-3 bg-info text-white p-2 shadow">Input:</h5>
-      {% set user_input_dict = calculation.customer_input|to_dict %}
+      {% set customer_input_dict = calculation.customer_input|to_dict %}
 
-      <div class="p-3 shadow ml-3 bg-white">
-        {% for key, value in user_input_dict.items() %}
-          <div class="user-input">
-            <span class="name font-weight-bold">{{ key|translate_name }}</span>
-            <span class="value">{{ value }}</span>
+      {% if calculation.module_name == "Consensus Sequence form FASTA file" %}
+        <div class="p-3 shadow ml-3 bg-white">
+          <div class="user-input mb-3">
+            <span class="name font-weight-bold">Your input file:</span>
+            <span class="value">
+              <a class="btn btn-primary" download="input.fasta" href="{{ customer_input_dict['file-seq'] }}">Download</a>
+            </span>
           </div>
-        {% endfor %}
-      </div>
+          <div class="user-input">
+            <span class="name font-weight-bold">Threshold</span>
+            <span class="value">{{ customer_input_dict['threshold'] }}</span>
+          </div>
+        </div>
+      {% else %}
+        <div class="p-3 shadow ml-3 bg-white">
+          {% for key, value in customer_input_dict.items() %}
+            <div class="user-input">
+              <span class="name font-weight-bold">{{ key|translate_name }}</span>
+              <span class="value">{{ value }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
     <hr>
 
@@ -37,6 +52,13 @@
               </div>
             {% endfor %}
           </div>
+        {% elif calculation.module_name == "Consensus Sequence form GeneBank"
+                or calculation.module_name ==  "Consensus Sequence form FASTA file" %}
+          <p class="font-weight-bold">Click the button below to download your file with calculation result</p>
+          <a class="btn btn-danger" download="consensus-sequence.fasta"
+             href="data:text/plain;base64,{{ calculation.result|rm_quotes }}">
+            Download
+          </a>
         {% else %}
           <div class="results"></div>
         {% endif %}
