@@ -11,7 +11,6 @@ from ..helpers.file_helper import save_picture
 
 
 @userpanel.route('/userpanel/login', methods=['GET', 'POST'])
-@nocache
 def login():
     form = LoginForm(request.form)
     if current_user.is_authenticated:
@@ -31,7 +30,6 @@ def login():
 
 @userpanel.route('/userpanel/logout')
 @login_required
-@nocache
 def logout():
     logout_user()
     return redirect(url_for('userpanel.login'))
@@ -58,14 +56,12 @@ def register():
 
 @userpanel.route('/userpanel/', methods=['GET'], strict_slashes=False)
 @login_required
-@nocache
 def userpanel_view():
     return redirect(url_for('userpanel.dashboard'))
 
 
 @userpanel.route('/userpanel/dashboard', methods=['GET'])
 @login_required
-@nocache
 def dashboard():
     activity = CustomerActivity.query.with_entities(CustomerActivity.id, CustomerActivity.customer_id,
                                                     CustomerActivity.module_name, CustomerActivity.url,
@@ -82,7 +78,6 @@ def dashboard():
 
 @userpanel.route('/userpanel/editprofile', methods=['GET', 'POST'])
 @login_required
-@nocache
 def edit_profile():
     customer_id = current_user.id
 
@@ -114,7 +109,6 @@ def edit_profile():
 
 @userpanel.route('/userpanel/calculations', methods=['GET'])
 @login_required
-@nocache
 def calculations_all():
     query = request.args.get('query')
     order_by = request.args.get('order_by', "created_at")
@@ -144,7 +138,6 @@ def calculations_all():
 
 @userpanel.route('/userpanel/calculations/search', methods=['GET'])
 @login_required
-@nocache
 def calculations_search():
     query = request.args.get('query')
     order_by = request.args.get('order_by', "created_at")
@@ -172,7 +165,6 @@ def calculations_search():
 
 @userpanel.route('/userpanel/calculations/delete/<int:calculation_id>')
 @login_required
-@nocache
 def calculation_delete(calculation_id):
     calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
     db.session.delete(calculation)
@@ -183,7 +175,6 @@ def calculation_delete(calculation_id):
 
 @userpanel.route('/userpanel/calculations/<int:calculation_id>')
 @login_required
-@nocache
 def calculation_detail(calculation_id):
     calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
 

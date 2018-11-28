@@ -93,19 +93,17 @@ def create_app(config_name):
             'css_js_ver': 1.11
         }
 
-    # @app.after_request
-    # def add_header(response):
-    #     cache_values = {
-    #         'image/gif, image/jpeg, image/png '
-    #     }
-    #     print(response.content_type, flush=True)
-    #     if "text/html" in response.content_type:
-    #         pass
-    #     if current_user.is_authenticated:
-    #         response.cache_control.max_age = 300
-    #     else:
-    #         response.cache_control.max_age = 31536000
-    #     return response
+    @app.after_request
+    def add_header(response):
+        if "text/html" in response.content_type:
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response.headers["Pragma"] = "no-cache"
+            response.headers["Expires"] = "0"
+            response.headers['Cache-Control'] = 'public, max-age=0'
+            return response
+
+        response.cache_control.max_age = 31536000
+        return response
 
     return app
 

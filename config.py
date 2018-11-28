@@ -3,7 +3,7 @@ class Config:
     Common configurations
     """
     COMPRESS_MIMETYPES = ['text/html', 'text/css', 'text/xml', 'application/json', 'application/javascript']
-    COMPRESS_LEVEL = 6
+    COMPRESS_LEVEL = 8
     COMPRESS_MIN_SIZE = 500
 
     MINIFY_PAGE = True
