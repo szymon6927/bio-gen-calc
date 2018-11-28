@@ -7,7 +7,7 @@ import base64
 from flask import Flask, render_template, request, make_response, abort, Response, send_from_directory
 
 from flask_htmlmin import HTMLMIN
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from flask_migrate import Migrate
 from flask_compress import Compress
 
@@ -93,10 +93,19 @@ def create_app(config_name):
             'css_js_ver': 1.11
         }
 
-    @app.after_request
-    def add_header(response):
-        response.cache_control.max_age = 31536000
-        return response
+    # @app.after_request
+    # def add_header(response):
+    #     cache_values = {
+    #         'image/gif, image/jpeg, image/png '
+    #     }
+    #     print(response.content_type, flush=True)
+    #     if "text/html" in response.content_type:
+    #         pass
+    #     if current_user.is_authenticated:
+    #         response.cache_control.max_age = 300
+    #     else:
+    #         response.cache_control.max_age = 31536000
+    #     return response
 
     return app
 

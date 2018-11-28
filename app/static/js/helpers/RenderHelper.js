@@ -62,6 +62,10 @@ class RenderHelper {
 
   successSaveCalculationBlock(result) {
     let template = `<div class="alert alert-success shadow" role="alert">${result.info}</div>`;
+    
+    if ($(this.container).is(':hidden')) {
+      $(this.container).show();
+    }
 
     $(this.container).html(template);
   }

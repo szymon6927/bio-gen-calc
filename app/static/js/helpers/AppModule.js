@@ -49,6 +49,11 @@ class AppModule {
     }
   }
 
+  clearInputAndHideMessage() {
+    $(`${this.getContainer()} .save-calculation-form .calculation-title`).val("");
+    $(`${this.getContainer()} .save-calculation-form .messages`).delay(5000).fadeOut('slow');
+  }
+
   saveCalculation() {
     $('.cover').show();
     const render = new RenderHelper(`${this.getContainer()} .save-calculation-form .messages`);
@@ -65,6 +70,7 @@ class AppModule {
         console.log("Successfull!");
         render.successSaveCalculationBlock(result);
         $('.cover').hide();
+        this.clearInputAndHideMessage();
       },
       error: function (request) {
         console.log("Something goes wrong, try again!", request);

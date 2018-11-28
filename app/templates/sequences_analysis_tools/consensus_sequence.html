@@ -30,7 +30,8 @@
           <div class="col-md-6 offset-md-3 col-sm-12">
             <div class="form-group">
               <label for="threshold-rawseq">Threshold:</label>
-              <input type="number" class="form-control non-negative" min="0" max="1" id="threshold-rawseq" placeholder="e.g. 0.55" />
+              <input type="number" class="form-control non-negative float01" min="0" max="1" id="threshold-rawseq" placeholder="e.g. 0.55" />
+              <div class="invalid-feedback">Value range 0.0 - 1.0</div>
             </div>
           </div>
 
@@ -59,7 +60,8 @@
           <div class="col-md-6 offset-md-3 col-sm-12">
             <div class="form-group">
               <label for="threshold-fileupload">Threshold:</label>
-              <input type="number" class="form-control non-negative" id="threshold-fileupload" placeholder="e.g. 0.55" />
+              <input type="number" class="form-control non-negative float01" min="0" max="1" id="threshold-fileupload" placeholder="e.g. 0.55" />
+              <div class="invalid-feedback">Value range 0.0 - 1.0</div>
             </div>
           </div>
 
@@ -92,7 +94,8 @@
           <div class="col-md-6 offset-md-3 col-sm-12">
             <div class="form-group">
               <label for="threshold-genebank">Threshold:</label>
-              <input type="number" class="form-control non-negative" id="threshold-genebank" placeholder="e.g. 0.55" />
+              <input type="number" class="form-control non-negative float01" min="0" max="1" id="threshold-genebank" placeholder="e.g. 0.55" />
+              <div class="invalid-feedback">Value range 0.0 - 1.0</div>
             </div>
           </div>
 

@@ -1,6 +1,9 @@
 "use strict";
 
-class SequencesTools {
+class SequencesTools extends AppModule {
+  constructor() {
+    super();
+  }
 
   buildJSON() {
     let type = $('#transformation-type').val();
@@ -24,15 +27,18 @@ class SequencesTools {
       url: path,
       data: dataJSON,
       dataType: "json",
-      success: function (result) {
+      success: (result) => {
         console.log("Succesfull", result);
 
         render.successBlock(result);
 
+        this.setResult(result);
+        this.extendObjectToSave({'customer_input': dataJSON});
+
         $('.cover').hide();
         goToByScroll('.sequences-tools-results');
       },
-      error: function (request) {
+      error: (request) => {
         console.log("Something goes wrong, try again!", request);
 
         render.errorBlock(request);

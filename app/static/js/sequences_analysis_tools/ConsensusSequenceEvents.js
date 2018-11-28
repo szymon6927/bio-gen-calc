@@ -1,5 +1,7 @@
 "use strict";
 
+const validator = new Validation();
+
 const moduleSections = '.raw-sequences, .upload-sequences, .sequences-form-genebank';
 const moduleResultsSection = '.raw-seq-results, .file-seq-results, .file-seq-genebank-results';
 
@@ -18,7 +20,9 @@ $('#type-of-data').change(function () {
 });
 
 $('.consensus-sequence-calculate.raw-seq').click(function () {
-  consensusSeq.sendRawSeq()
+  if (validator.floatBetween01('#threshold-rawseq')) {
+    consensusSeq.sendRawSeq()
+  }
 });
 
 $('.raw-sequences .save-calculation-form').submit(function(e) {
@@ -28,9 +32,13 @@ $('.raw-sequences .save-calculation-form').submit(function(e) {
 });
 
 $('.consensus-sequence-calculate.file-seq').click(function () {
-  consensusSeq.sendSeqFile()
+  if (validator.floatBetween01('#threshold-fileupload')) {
+    consensusSeq.sendSeqFile()
+  }
 });
 
 $('.consensus-sequence-calculate.genebank-seq').click(function () {
-  consensusSeq.sendSeqGeneBank()
+  if (validator.floatBetween01('#threshold-genebank')) {
+    consensusSeq.sendSeqGeneBank()
+  }
 });
