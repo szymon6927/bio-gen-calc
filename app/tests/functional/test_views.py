@@ -25,7 +25,7 @@ def test_chi_square_page(test_client, init_db):
 def test_pic_page(test_client, init_db):
     response = test_client.get('/pic')
     assert response.status_code == 200
-    assert b'Polymorphic information content & Heterozygosity.' in response.data
+    assert b'Polymorphic information content & Heterozygosity' in response.data
 
 
 def test_genetic_distance_page(test_client, init_db):
