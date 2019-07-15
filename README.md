@@ -94,7 +94,7 @@ flask run
 
 ## Git flow
 
-Create your feature branch from development.
+Create your feature branch from master.
 
 Branch naming:
 - pattern: trello-task_id-short-description
