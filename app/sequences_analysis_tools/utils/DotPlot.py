@@ -26,7 +26,7 @@ class DotPlot:
         return round(min(coverage_list), 1)
 
     def get_alignments(self):
-        alignments = pairwise2.align.globalxx(self.data['seq-content-1'], self.data['seq-content-2'])
+        alignments = pairwise2.align.globalms(self.data['seq-content-1'], self.data['seq-content-2'], 2, -1, -0.5, -0.1)
 
         string_alignment = pairwise2.format_alignment(*alignments[0])
 
