@@ -92,6 +92,20 @@ To start application locally type:
 flask run
 ```
 
+## Git flow
+
+Create your feature branch from master.
+
+Branch naming:
+- pattern: trello-task_id-short-description
+- eg: trello-20-remove-flask-admin
+
+Commit names conventions:
+- pattern. [trello-task_id]: commit description
+- eg. [trello-20]: Removed flask-admin package
+
+After finishing implementation of your feature - create pull request to master branch.
+
   
 ### Theoretical information available from:
 
