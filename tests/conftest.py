@@ -1,9 +1,11 @@
 import pytest
+
 from werkzeug.security import generate_password_hash
-from .. import create_app
-from ..database import db
-from ..models.Userpanel import Customer
-from ..models.Admin import User, Page
+
+from app import create_app
+from app.database import db
+from app.models.Userpanel import Customer
+from app.models.Admin import User, Page
 
 
 @pytest.fixture(scope='module')

@@ -15,7 +15,7 @@
 # [0.01686, 0.07421, 0.1772, 0.32277, 0.50239, 0.01961, 0.08004, 0.1772,
 # 0.30119, 0.01961, 0.07421, 0.15374, 0.01686, 0.06002, 0.01284]
 
-from ...genetic_distance.utils.StandardDistance import StandardDistance
+from app.genetic_distance.utils.StandardDistance import StandardDistance
 
 
 def test_genetic_distance_basic():
