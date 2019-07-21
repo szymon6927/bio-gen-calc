@@ -53,6 +53,17 @@ function showInputFileName() {
   }
 }
 
+function initCKEDITOR(selector) {
+  ClassicEditor
+      .create(document.querySelector(`${selector}`))
+      .then(editor => {
+        theEditor = editor;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+}
+
 $(document).ready(function() {
   $('.hamburger').click(function() {
     openMenu();  

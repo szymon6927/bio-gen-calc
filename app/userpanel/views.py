@@ -3,11 +3,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
 from sqlalchemy import or_, desc, asc, func
 from . import userpanel
-from .forms import LoginForm, RegisterForm, CustomerEditForm
+from .forms import LoginForm, RegisterForm, CustomerEditForm, PageEditForm
 from ..database import db
-from ..models.Userpanel import Customer, CustomerCalculation, CustomerActivity
+# from ..models.Userpanel import Customer, CustomerCalculation, CustomerActivity
 from ..helpers.no_cache import nocache
 from ..helpers.file_helper import save_picture
+
+from app.userpanel.models import Customer, CustomerActivity, Page
+from app.customer_calculation.models import CustomerCalculation
 
 
 @userpanel.route('/userpanel/login', methods=['GET', 'POST'])
@@ -63,16 +66,16 @@ def userpanel_view():
 @userpanel.route('/userpanel/dashboard', methods=['GET'])
 @login_required
 def dashboard():
-    activity = CustomerActivity.query.with_entities(CustomerActivity.id, CustomerActivity.customer_id,
-                                                    CustomerActivity.module_name, CustomerActivity.url,
-                                                    func.count(CustomerActivity.url).label('count')) \
-        .filter_by(customer=current_user) \
-        .group_by(CustomerActivity.url).all()
+    # activity = CustomerActivity.query.with_entities(CustomerActivity.id, CustomerActivity.customer_id,
+    #                                                 CustomerActivity.module_name, CustomerActivity.url,
+    #                                                 func.count(CustomerActivity.url).label('count')) \
+    #     .filter_by(customer=current_user) \
+    #     .group_by(CustomerActivity.url).all()
 
     statistics = {}
     statistics['total_calculations'] = CustomerCalculation.query.filter_by(customer=current_user).count()
     statistics['total_visits'] = CustomerActivity.query.filter_by(customer=current_user).count()
-    return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login, activity=activity,
+    return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login, activity='',
                            statistics=statistics)
 
 
@@ -179,3 +182,19 @@ def calculation_detail(calculation_id):
     calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
 
     return render_template('userpanel/calculation_detail.html', calculation=calculation)
+
+
+@userpanel.route('/userpanel/pages')
+@login_required
+def pages_list_view():
+    pages = Page.query.all()
+    return render_template('userpanel/pages.html', pages=pages)
+
+
+@userpanel.route('/userpanel/pages/<int:page_id>', methods=['GET', 'POST'])
+@login_required
+def page_details_view(page_id):
+    page = Page.query.get_or_404(page_id)
+    form = PageEditForm(obj=page)
+
+    return render_template('userpanel/page_details.html', form=form, page=page)

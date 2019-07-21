@@ -2,6 +2,7 @@ import datetime
 
 from flask_login import UserMixin
 from app.database import db
+from app import login_manager
 
 
 class Customer(UserMixin, db.Model):
@@ -16,14 +17,16 @@ class Customer(UserMixin, db.Model):
     login = db.Column(db.String(25), unique=True)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(80))
-    is_admin = db.Column(db.Boolean(), default=False)
+    is_superuser = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now)
 
     def __repr__(self):
         return "<Customer: {} ({})>".format(self.first_name, self.last_name)
 
-    def is_admin(self):
-        return self.is_admin
+
+@login_manager.user_loader
+def load_customer(obj_id):
+    return Customer.query.get(int(obj_id))
 
 
 class CustomerActivity(db.Model):

@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField
+from wtforms import StringField, PasswordField, BooleanField, HiddenField, TextAreaField
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
-from ..models.Userpanel import Customer
+
+from app.userpanel.models import Customer
 
 
 class LoginForm(FlaskForm):
@@ -59,3 +60,15 @@ class CustomerEditForm(FlaskForm):
 
         if lower_name in password.data:
             raise ValidationError('Password contain your first name, please change this.')
+
+
+class PageEditForm(FlaskForm):
+    id = HiddenField()
+    name = StringField('Page name:', validators=[DataRequired()])
+    is_active = BooleanField('Active:')
+    slug = StringField('Page slug:')
+    seo_title = StringField('SEO title:')
+    seo_desc = StringField('SEO description:')
+    seo_keywords = StringField('SEO keywords:')
+    text = TextAreaField('Page text:')
+    desc = TextAreaField('Page description:')

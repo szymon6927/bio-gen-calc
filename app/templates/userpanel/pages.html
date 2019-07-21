@@ -1,0 +1,11 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+    <div class="pages">
+      {% for page in pages %}
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <a href="{{ url_for('userpanel.page_details_view', page_id=page.id) }}">{{ page.name }}</a>
+        </div>
+      {% endfor %}
+    </div>
+{% endblock %}

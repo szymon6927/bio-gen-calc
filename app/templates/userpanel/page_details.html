@@ -1,0 +1,118 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <h3>Edit page</h3>
+  <hr>
+
+  <form class="edit-pages" action="{{ url_for('userpanel.page_details_view', page_id=page.id) }}" method="POST"
+        enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.name.label }}
+          {{ form.name(class_="form-control") }}
+
+          {% if form.name.errors %}
+            {% for error in form.name.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.slug.label }}
+          {{ form.slug(class_="form-control") }}
+
+          {% if form.slug.errors %}
+            {% for error in form.slug.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.seo_title.label }}
+          {{ form.seo_title(class_="form-control") }}
+
+          {% if form.seo_title.errors %}
+            {% for error in form.seo_title.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.seo_desc.label }}
+          {{ form.seo_desc(class_="form-control") }}
+
+          {% if form.seo_desc.errors %}
+            {% for error in form.seo_desc.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.seo_keywords.label }}
+          {{ form.seo_keywords(class_="form-control") }}
+
+          {% if form.seo_keywords.errors %}
+            {% for error in form.seo_keywords.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.text.label }}
+          {{ form.text(class_="form-control") }}
+
+          {% if form.text.errors %}
+            {% for error in form.text.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.desc.label }}
+          {{ form.desc(class_="form-control") }}
+
+          {% if form.desc.errors %}
+            {% for error in form.desc.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-6 offset-md-3 col-sm-12">
+      <button type="submit" class="btn btn-block btn-primary">Save</button>
+    </div>
+  </form>
+{% endblock %}
+
+{% block userpanel_scripts %}
+  <script>
+      $(document).ready(function () {
+          initCKEDITOR('#text');
+          initCKEDITOR('#desc');
+      });
+  </script>
+{% endblock %}

@@ -19,6 +19,13 @@
           <span>Calculations</span>
         </a>
       </li>
+      {% if current_user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('userpanel.pages_list_view') }}">
+            <span>Pages</span>
+          </a>
+        </li>
+      {% endif %}
     </ul>
   </div>
 </nav>
