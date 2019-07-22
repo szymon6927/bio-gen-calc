@@ -1,8 +1,10 @@
 import json
 from flask import request, jsonify, abort, Response
-from . import customer_calculation
-from ..database import db
-from ..models.Userpanel import CustomerCalculation, Customer
+
+from app.customer_calculation import customer_calculation
+from app.customer_calculation.models import CustomerCalculation
+from app.database import db
+from app.userpanel.models import Customer
 
 
 @customer_calculation.route('/send-calculation', methods=['POST'])

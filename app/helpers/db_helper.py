@@ -2,12 +2,13 @@ import json
 import numpy as np
 from functools import wraps
 
-from flask import request, current_app
+from flask import request
+from flask import current_app
 from flask_login import current_user
 
-from ..database import db
-from ..models.Calculation import Calculation
-from ..models.Userpanel import CustomerActivity
+from app.database import db
+from app.userpanel.models import Calculation
+from app.userpanel.models import CustomerActivity
 
 
 def add_calculation(module_name=None, user_data=None, result=None, ip_address=None):
