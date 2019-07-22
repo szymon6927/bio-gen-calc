@@ -64,6 +64,10 @@ function initCKEDITOR(selector) {
       });
 }
 
+function confirmPageDelete() {
+  return confirm("Are you sure to delete this page?");
+}
+
 $(document).ready(function() {
   $('.hamburger').click(function() {
     openMenu();  
@@ -73,6 +77,12 @@ $(document).ready(function() {
 
   $('#picture').change(function() {
     showInputFileName();
+  })
+
+  $('.delete-page').click(function (e) {
+    if (!confirmPageDelete()) {
+      e.preventDefault();
+    }
   })
 });
 

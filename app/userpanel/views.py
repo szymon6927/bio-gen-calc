@@ -197,4 +197,60 @@ def page_details_view(page_id):
     page = Page.query.get_or_404(page_id)
     form = PageEditForm(obj=page)
 
+    if form.validate_on_submit():
+        page.name = form.name.data
+        page.is_active = form.is_active.data
+        page.slug = form.slug.data
+        page.seo_title = form.seo_title.data
+        page.desc = form.seo_desc.data
+        page.seo_keywords = form.seo_keywords.data
+        page.text = form.text.data
+        page.desc = form.desc.data
+
+        db.session.add(page)
+        db.session.commit()
+
+        flash('You have successfully edited the page.', 'success')
+
+        return redirect(url_for('userpanel.page_details_view', page_id=page.id))
+
     return render_template('userpanel/page_details.html', form=form, page=page)
+
+
+@userpanel.route('/userpanel/pages/add-page', methods=['GET', 'POST'])
+@login_required
+def add_new_page():
+    form = PageEditForm()
+
+    if form.validate_on_submit():
+        page = Page()
+        page.name = form.name.data
+        page.is_active = form.is_active.data
+        page.slug = form.slug.data
+        page.seo_title = form.seo_title.data
+        page.desc = form.seo_desc.data
+        page.seo_keywords = form.seo_keywords.data
+        page.text = form.text.data
+        page.desc = form.desc.data
+
+        db.session.add(page)
+        db.session.commit()
+
+        flash('You have successfully added the page.', 'success')
+
+        return redirect(url_for('userpanel.pages_list_view'))
+
+    return render_template('userpanel/add_page.html', form=form)
+
+
+@userpanel.route('/userpanel/pages/delete/<int:page_id>')
+@login_required
+def delete_page(page_id):
+    page = Page.query.get_or_404(page_id)
+
+    db.session.delete(page)
+    db.session.commit()
+
+    flash('You have successfully delete the page - {}.'.format(page.name), 'success')
+
+    return redirect(url_for('userpanel.pages_list_view'))
