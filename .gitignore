@@ -136,8 +136,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# App
+app/helpers/temp
+
 # End of https://www.gitignore.io/api/flask
-
-
-# MY
-temp/
