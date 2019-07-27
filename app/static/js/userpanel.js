@@ -79,7 +79,7 @@ $(document).ready(function() {
     showInputFileName();
   })
 
-  $('.delete-page').click(function (e) {
+  $('.delete-page, .delete-customer').click(function (e) {
     if (!confirmPageDelete()) {
       e.preventDefault();
     }

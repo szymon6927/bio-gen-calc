@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, HiddenField, TextAreaField
+from wtforms import StringField, PasswordField, BooleanField, HiddenField, TextAreaField, DateTimeField
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
@@ -72,3 +72,14 @@ class PageEditForm(FlaskForm):
     seo_keywords = StringField('SEO keywords:')
     text = TextAreaField('Page text:')
     desc = TextAreaField('Page description:')
+
+
+class AdminCustomerEditForm(FlaskForm):
+    id = HiddenField()
+    first_name = StringField('First name:')
+    last_name = StringField('Last name:')
+    login = StringField('Login:')
+    email = EmailField('Email:')
+    password = PasswordField('Password:')
+    is_superuser = BooleanField('Super user:')
+    created_at = DateTimeField('Created:')

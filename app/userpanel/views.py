@@ -3,9 +3,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
 from sqlalchemy import or_, desc, asc, func
 from . import userpanel
-from .forms import LoginForm, RegisterForm, CustomerEditForm, PageEditForm
+from .forms import LoginForm, RegisterForm, CustomerEditForm, PageEditForm, AdminCustomerEditForm
 from ..database import db
-# from ..models.Userpanel import Customer, CustomerCalculation, CustomerActivity
 from ..helpers.no_cache import nocache
 from ..helpers.file_helper import save_picture
 
@@ -254,3 +253,48 @@ def delete_page(page_id):
     flash('You have successfully delete the page - {}.'.format(page.name), 'success')
 
     return redirect(url_for('userpanel.pages_list_view'))
+
+
+@userpanel.route('/userpanel/customers/')
+@login_required
+def customers_list_view():
+    customers = Customer.query.all()
+    return render_template('userpanel/customers.html', customers=customers)
+
+
+@userpanel.route('/userpanel/customers/<int:customer_id>', methods=['GET', 'POST'])
+@login_required
+def customer_details_view(customer_id):
+    customer = Customer.query.get_or_404(customer_id)
+    form = AdminCustomerEditForm(obj=customer)
+
+    if form.validate_on_submit():
+        customer.first_name = form.first_name.data
+        customer.last_name = form.last_name.data
+        customer.login = form.login.data
+        customer.email = form.email.data
+        customer.password = form.password.data
+        customer.is_superuser = form.is_superuser.data
+        customer.created_at = form.created_at.data
+
+        db.session.add(customer)
+        db.session.commit()
+
+        flash('You have successfully edited the customer.', 'success')
+
+        return redirect(url_for('userpanel.customer_details_view', customer_id=customer.id))
+
+    return render_template('userpanel/customer_details.html', form=form, customer=customer)
+
+
+@userpanel.route('/userpanel/customers/delete/<int:customer_id>')
+@login_required
+def delete_customer(customer_id):
+    customer = Customer.query.get_or_404(customer_id)
+
+    db.session.delete(customer)
+    db.session.commit()
+
+    flash('You have successfully delete the customer - {}.'.format(customer.login), 'success')
+
+    return redirect(url_for('userpanel.customers_list_view'))
