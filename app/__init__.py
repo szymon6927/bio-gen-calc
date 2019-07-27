@@ -1,5 +1,3 @@
-# app/__init__.py
-
 from datetime import datetime
 import pdfkit
 import base64

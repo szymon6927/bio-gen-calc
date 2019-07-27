@@ -1,5 +1,5 @@
-from ...helpers.tests_helper import find_value_by_name
-from ...sequences_analysis_tools.utils.DotPlot import DotPlot
+from app.helpers.tests_helper import find_value_by_name
+from app.sequences_analysis_tools.utils.DotPlot import DotPlot
 
 
 def test_dotplot_raw_seq_basic():

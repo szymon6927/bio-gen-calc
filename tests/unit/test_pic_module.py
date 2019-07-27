@@ -1,6 +1,6 @@
-from ...helpers.tests_helper import find_value_by_name
-from ...pic.utils.DominantCalculation import Dominant
-from ...pic.utils.CodominantCalculation import Codominant
+from app.helpers.tests_helper import find_value_by_name
+from app.pic.utils.DominantCalculation import Dominant
+from app.pic.utils.CodominantCalculation import Codominant
 
 
 def test_pic_dominant_basic():

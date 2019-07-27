@@ -1,5 +1,5 @@
-from ...helpers.tests_helper import find_value_by_name
-from ...sequences_analysis_tools.utils.SequencesTools import SequencesTools
+from app.helpers.tests_helper import find_value_by_name
+from app.sequences_analysis_tools.utils.SequencesTools import SequencesTools
 
 
 def test_sequences_tools_complement():
