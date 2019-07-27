@@ -35,6 +35,7 @@
             {% endfor %}
           {% endif %}
         </div>
+
         <div class="form-group">
           {{ form.last_name.label }}
           {{ form.last_name(class_="form-control") }}
@@ -45,7 +46,7 @@
             {% endfor %}
           {% endif %}
         </div>
-    
+
         <div class="form-group">
           {{ form.login.label }}
           {{ form.login(class_="form-control", disabled=True) }}
@@ -56,7 +57,7 @@
             {% endfor %}
           {% endif %}
         </div>
-    
+
         <div class="form-group">
           {{ form.email.label }}
           {{ form.email(class_="form-control", disabled=True) }}
