@@ -36,7 +36,7 @@ def login():
 
         flash("Invalid username or password", 'danger')
 
-    return render_template('userpanel/login.html', title="Login to your account", form=form)
+    return render_template('userpanel/customers/login.html', title="Login to your account", form=form)
 
 
 @userpanel.route('/userpanel/logout')
@@ -62,7 +62,7 @@ def register():
 
         return redirect(url_for('userpanel.dashboard'))
 
-    return render_template('userpanel/register.html', title="Register for an account", form=form)
+    return render_template('userpanel/customers/register.html', title="Register for an account", form=form)
 
 
 @userpanel.route('/userpanel/', methods=['GET'], strict_slashes=False)
@@ -114,7 +114,7 @@ def edit_profile():
 
     profile_pic = url_for('static', filename='uploads/profile_pics/' + current_user.profile_pic)
 
-    return render_template('userpanel/edit_profile.html', form=form, profile_pic=profile_pic)
+    return render_template('userpanel/customers/edit_profile.html', form=form, profile_pic=profile_pic)
 
 
 @userpanel.route('/userpanel/calculations', methods=['GET'])
@@ -143,7 +143,7 @@ def calculations_all():
             .order_by(desc(order_by)) \
             .paginate(page=page, per_page=per_page)
 
-    return render_template('userpanel/calculations.html', calculations=calculations)
+    return render_template('userpanel/calculations/calculations.html', calculations=calculations)
 
 
 @userpanel.route('/userpanel/calculations/search', methods=['GET'])
@@ -170,7 +170,7 @@ def calculations_search():
             .order_by(desc(order_by)) \
             .paginate(page=page, per_page=per_page)
 
-    return render_template('userpanel/calculations.html', calculations=calculations)
+    return render_template('userpanel/calculations/calculations.html', calculations=calculations)
 
 
 @userpanel.route('/userpanel/calculations/delete/<int:calculation_id>')
@@ -188,14 +188,14 @@ def calculation_delete(calculation_id):
 def calculation_detail(calculation_id):
     calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
 
-    return render_template('userpanel/calculation_detail.html', calculation=calculation)
+    return render_template('userpanel/calculations/calculation_detail.html', calculation=calculation)
 
 
 @userpanel.route('/userpanel/pages')
 @login_required
 def pages_list_view():
     pages = Page.query.all()
-    return render_template('userpanel/pages.html', pages=pages)
+    return render_template('userpanel/pages/pages.html', pages=pages)
 
 
 @userpanel.route('/userpanel/pages/<int:page_id>', methods=['GET', 'POST'])
@@ -221,7 +221,7 @@ def page_details_view(page_id):
 
         return redirect(url_for('userpanel.page_details_view', page_id=page.id))
 
-    return render_template('userpanel/page_details.html', form=form, page=page)
+    return render_template('userpanel/pages/page_details.html', form=form, page=page)
 
 
 @userpanel.route('/userpanel/pages/add-page', methods=['GET', 'POST'])
@@ -247,7 +247,7 @@ def add_new_page():
 
         return redirect(url_for('userpanel.pages_list_view'))
 
-    return render_template('userpanel/add_page.html', form=form)
+    return render_template('userpanel/pages/add_page.html', form=form)
 
 
 @userpanel.route('/userpanel/pages/delete/<int:page_id>')
@@ -267,7 +267,7 @@ def delete_page(page_id):
 @login_required
 def customers_list_view():
     customers = Customer.query.all()
-    return render_template('userpanel/customers.html', customers=customers)
+    return render_template('userpanel/customers/customers.html', customers=customers)
 
 
 @userpanel.route('/userpanel/customers/<int:customer_id>', methods=['GET', 'POST'])
@@ -292,7 +292,7 @@ def customer_details_view(customer_id):
 
         return redirect(url_for('userpanel.customer_details_view', customer_id=customer.id))
 
-    return render_template('userpanel/customer_details.html', form=form, customer=customer)
+    return render_template('userpanel/customers/customer_details.html', form=form, customer=customer)
 
 
 @userpanel.route('/userpanel/customers/delete/<int:customer_id>')
