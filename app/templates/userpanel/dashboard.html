@@ -67,23 +67,23 @@
 
 {% block userpanel_scripts %}
   <!-- Graphs -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
   <script>
-    let chartWrapper = $(".chart");
+    const chartWrapper = $(".chart");
 
     let chartData = {
       'labels': [],
       'values': []
     };
 
-    let allItems = $('.chart-item');
+    const allItems = $('.chart-item');
 
     allItems.each((index, elem) => {
       chartData.labels.push($(elem).data('name'));
       chartData.values.push($(elem).val());
     });
 
-    let activityChart = new Chart(chartWrapper, {
+    const activityChart = new Chart(chartWrapper, {
       type: 'line',
       data: {
         labels: chartData.labels,

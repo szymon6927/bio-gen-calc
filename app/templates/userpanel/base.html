@@ -22,7 +22,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,900" rel="stylesheet">
 
-  <link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dashboard.css') }}?ver={{ css_js_ver }}" rel="stylesheet">
 </head>
 
 <body>
@@ -61,7 +61,7 @@
 
 <script src="{{ url_for('static', filename='js/vendors/bootstrap.min.js') }}"></script>
 
-<script src="{{ url_for('static', filename='js/userpanel.js') }}"></script>
+<script src="{{ url_for('static', filename='js/userpanel.js') }}?ver={{ css_js_ver }}"></script>
 
 {% block userpanel_scripts %}{% endblock %}
 
