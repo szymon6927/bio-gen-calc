@@ -2,14 +2,23 @@ from flask import render_template, redirect, flash, url_for, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, login_user, logout_user, current_user
 from sqlalchemy import or_, desc, asc, func
-from . import userpanel
-from .forms import LoginForm, RegisterForm, CustomerEditForm, PageEditForm, AdminCustomerEditForm
-from ..database import db
-from ..helpers.no_cache import nocache
-from ..helpers.file_helper import save_picture
 
-from app.userpanel.models import Customer, CustomerActivity, Page
+from app.userpanel import userpanel
+from app.userpanel.forms import LoginForm
+from app.userpanel.forms import RegisterForm
+from app.userpanel.forms import CustomerEditForm
+from app.userpanel.forms import PageEditForm
+from app.userpanel.forms import AdminCustomerEditForm
+
+from app.userpanel.models import Customer
+from app.userpanel.models import CustomerActivity
+from app.userpanel.models import Page
+
 from app.customer_calculation.models import CustomerCalculation
+
+from app.database import db
+from app.helpers.no_cache import nocache
+from app.helpers.file_helper import save_picture
 
 
 @userpanel.route('/userpanel/login', methods=['GET', 'POST'])
@@ -65,16 +74,15 @@ def userpanel_view():
 @userpanel.route('/userpanel/dashboard', methods=['GET'])
 @login_required
 def dashboard():
-    # activity = CustomerActivity.query.with_entities(CustomerActivity.id, CustomerActivity.customer_id,
-    #                                                 CustomerActivity.module_name, CustomerActivity.url,
-    #                                                 func.count(CustomerActivity.url).label('count')) \
-    #     .filter_by(customer=current_user) \
-    #     .group_by(CustomerActivity.url).all()
+    activity = CustomerActivity.query.with_entities(CustomerActivity.url, CustomerActivity.module_name,
+                                                    func.count(CustomerActivity.url).label('count')) \
+        .filter_by(customer=current_user) \
+        .group_by(CustomerActivity.url, CustomerActivity.module_name).all()
 
     statistics = {}
     statistics['total_calculations'] = CustomerCalculation.query.filter_by(customer=current_user).count()
     statistics['total_visits'] = CustomerActivity.query.filter_by(customer=current_user).count()
-    return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login, activity='',
+    return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login, activity=activity,
                            statistics=statistics)
 
 
@@ -298,3 +306,10 @@ def delete_customer(customer_id):
     flash('You have successfully delete the customer - {}.'.format(customer.login), 'success')
 
     return redirect(url_for('userpanel.customers_list_view'))
+
+
+@userpanel.context_processor
+def inject():
+    return {
+        'module_desc': Page.query.filter_by(slug=request.path).first()
+    }
