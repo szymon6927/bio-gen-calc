@@ -114,7 +114,7 @@ def edit_profile():
 
     profile_pic = url_for('static', filename='uploads/profile_pics/' + current_user.profile_pic)
 
-    return render_template('userpanel/customers/edit_profile.html', form=form, profile_pic=profile_pic)
+    return render_template('userpanel/customers/customer_edit_profile.html', form=form, profile_pic=profile_pic)
 
 
 @userpanel.route('/userpanel/calculations', methods=['GET'])
@@ -247,7 +247,7 @@ def add_new_page():
 
         return redirect(url_for('userpanel.pages_list_view'))
 
-    return render_template('userpanel/pages/add_page.html', form=form)
+    return render_template('userpanel/pages/page_add.html', form=form)
 
 
 @userpanel.route('/userpanel/pages/delete/<int:page_id>')
