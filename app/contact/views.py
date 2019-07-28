@@ -1,12 +1,12 @@
 import smtplib
 
-from flask import Flask, render_template, flash, redirect, url_for
+from flask import Flask, render_template, flash, redirect, url_for, request
 from flask_mail import Mail, Message
 
-from . import contact
-from .forms import ContactForm
-
-from ..helpers.db_helper import add_customer_activity
+from app.contact import contact
+from app.contact.forms import ContactForm
+from app.helpers.db_helper import add_customer_activity
+from app.userpanel.models import Page
 
 
 @contact.route('/contact', methods=['GET', 'POST'])
@@ -36,3 +36,10 @@ def contact_page():
         return redirect(url_for('contact.contact_page'))
 
     return render_template('contact/index.html', title="Contact Us", form=form)
+
+
+@contact.context_processor
+def inject():
+    return {
+        'module_desc': Page.query.filter_by(slug=request.path).first()
+    }

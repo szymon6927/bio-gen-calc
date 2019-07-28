@@ -2,7 +2,8 @@ import os
 import requests
 
 from flask import request, jsonify
-from . import newsletter
+
+from app.newsletter import newsletter
 
 
 @newsletter.route('/newsletter/add', methods=['POST'])

@@ -1,11 +1,15 @@
 from flask import render_template, request, jsonify, abort, Response
-from . import genetic_distance
-from .utils.StandardDistance import StandardDistance
-from .utils.GeometricDistance import GeometricDistance
-from .utils.TakezakiNeiDistance import TakezakiNeiDistance
 
-from ..helpers.db_helper import add_calculation, add_customer_activity
-from ..helpers.constants import GENETIC_DISTANCE
+from app.genetic_distance import genetic_distance
+from app.genetic_distance.utils.StandardDistance import StandardDistance
+from app.genetic_distance.utils.GeometricDistance import GeometricDistance
+from app.genetic_distance.utils.TakezakiNeiDistance import TakezakiNeiDistance
+
+from app.userpanel.models import Page
+
+from app.helpers.db_helper import add_calculation
+from app.helpers.db_helper import add_customer_activity
+from app.helpers.constants import GENETIC_DISTANCE
 
 
 @genetic_distance.route('/genetic-distance')
@@ -45,4 +49,11 @@ def get_data():
         abort(Response(f'The quantity or quality of the data is inappropriate! {str(e)}', 409))
     except Exception as e:
         abort(Response(str(e), 400))
+
+
+@genetic_distance.context_processor
+def inject():
+    return {
+        'module_desc': Page.query.filter_by(slug=request.path).first()
+    }
 
