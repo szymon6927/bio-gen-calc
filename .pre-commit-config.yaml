@@ -1,0 +1,22 @@
+repos:
+- repo: https://github.com/ambv/black
+  rev: stable
+  hooks:
+    - id: black
+      language_version: python3.7
+- repo: git://github.com/pre-commit/pre-commit-hooks
+  rev: 'v1.2.3'
+  hooks:
+    - id: check-added-large-files
+    - id: check-docstring-first
+    - id: check-merge-conflict
+    - id: check-yaml
+    - id: check-json
+    - id: debug-statements
+      language_version: python3.7
+    - id: end-of-file-fixer
+    - id: flake8
+      args:
+        - --max-line=120
+      exclude: '(.*/migrations/.*.py|settings.py)'
+    - id: trailing-whitespace
