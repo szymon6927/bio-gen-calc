@@ -20,3 +20,11 @@ repos:
         - --max-line=120
       exclude: '(.*/migrations/.*.py|settings.py)'
     - id: trailing-whitespace
+    - id: check-executables-have-shebangs
+    - id: mixed-line-ending
+      args:
+        - --fix=auto
+- repo: git://github.com/FalconSocial/pre-commit-python-sorter
+  rev: b57843b0b874df1d16eb0bef00b868792cb245c2
+  hooks:
+    - id: python-import-sorter
