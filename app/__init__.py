@@ -30,7 +30,7 @@ def create_app(config_name):
     register_jinja_templte_filters(app)
 
     login_manager.init_app(app)
-    login_manager.login_view = 'userpanel.login'
+    login_manager.login_view = 'userpanel.login_view'
 
     compress.init_app(app)
     htmlmin.init_app(app)

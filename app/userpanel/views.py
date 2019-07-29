@@ -22,7 +22,7 @@ from app.helpers.file_helper import save_picture
 
 
 @userpanel.route('/userpanel/login', methods=['GET', 'POST'])
-def login():
+def login_view():
     form = LoginForm(request.form)
     if current_user.is_authenticated:
         return redirect(url_for('userpanel.dashboard_view'))
@@ -41,14 +41,14 @@ def login():
 
 @userpanel.route('/userpanel/logout')
 @login_required
-def logout():
+def logout_view():
     logout_user()
-    return redirect(url_for('userpanel.login'))
+    return redirect(url_for('userpanel.login_view'))
 
 
 @userpanel.route('/userpanel/register', methods=['GET', 'POST'])
 @nocache
-def register():
+def register_view():
     form = RegisterForm()
 
     if form.validate_on_submit():

@@ -17,7 +17,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">No, thanks</button>
-        <a href="{{ url_for('userpanel.register') }}" class="btn btn-primary">Create an account</a>
+        <a href="{{ url_for('userpanel.register_view') }}" class="btn btn-primary">Create an account</a>
       </div>
     </div>
   </div>
@@ -33,11 +33,11 @@
           <span class="font-weight-bold pr-3">User panel:</span>
           <span class="pr-3">
             <i class="fas fa-sign-in-alt"></i>
-            <a class="pl-1" href="{{ url_for('userpanel.register') }}">Register</a>
+            <a class="pl-1" href="{{ url_for('userpanel.register_view') }}">Register</a>
           </span>
           <span>
             <i class="fas fa-user-circle"></i>
-            <a class="pl-1" href="{{ url_for('userpanel.login') }}">Login</a>
+            <a class="pl-1" href="{{ url_for('userpanel.login_view') }}">Login</a>
           </span>
         </div>
       </div>
