@@ -35,6 +35,9 @@ source venv/bin/activate
 pip install -r requirements/dev.txt
 ```
 
+If you have problems with installation `mysqlclient` package with the above command.
+Try to install it by hand with `pip install mysqlclient`
+
 4. Create `config.env` file by copying `config.env.tmp` and fill these with required environment variables
 
 6. Export local environment variables
