@@ -11,7 +11,7 @@
         {% for page_num in calculation_pages %}
           <li class="page-item {% if calculations.page == page_num %}active {% endif %}">
             <a class="page-link"
-               href="{{ url_for('userpanel.calculations_all', page=page_num, order_by=order_by, sort_by=sort_by, query=query) }}">
+               href="{{ url_for('userpanel.calculations_list_view', page=page_num, order_by=order_by, sort_by=sort_by, query=query) }}">
               {{ page_num }}
             </a>
           </li>

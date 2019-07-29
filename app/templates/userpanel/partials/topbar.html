@@ -1,10 +1,10 @@
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand" href="{{ url_for('userpanel.dashboard') }}">
+  <a class="navbar-brand" href="{{ url_for('userpanel.dashboard_view') }}">
     <i class="fas fa-dna"></i>
     <span>Gene Calc - User Panel</span>
   </a>
 
-  <form method="GET" action="{{ url_for('userpanel.calculations_search') }}"
+  <form method="GET" action="{{ url_for('userpanel.calculations_search_view') }}"
         class="form-inline d-none d-md-inline-block ml-auto mr-3">
     <div class="input-group">
       {% set query = request.args.get('query') %}
@@ -27,7 +27,7 @@
         </span>
       </a>
       <div class="dropdown-menu">
-        <a href="{{ url_for('userpanel.edit_profile') }}" class="dropdown-item">
+        <a href="{{ url_for('userpanel.edit_profile_view') }}" class="dropdown-item">
           <i class="fas fa-users-cog"></i>
           <span class="pl-1">My profile</span>
         </a>
@@ -36,7 +36,7 @@
           <i class="fas fa-undo"></i>
           <span class="pl-1">Back to app</span>
         </a>
-        <a href="{{ url_for('userpanel.logout') }}" class="dropdown-item">
+        <a href="{{ url_for('userpanel.logout_view') }}" class="dropdown-item">
           <i class="fas fa-sign-out-alt"></i>
           <span class="pl-1">Log Out</span>
         </a>

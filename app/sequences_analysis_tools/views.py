@@ -1,19 +1,25 @@
 import base64
 from flask import render_template, request, jsonify, abort, Response, make_response
 from werkzeug.utils import secure_filename
-from . import sequences_analysis_tools
 
-from .utils.SequencesTools import SequencesTools
-from .utils.ConsensusSequence import ConsensusSequence
-from .utils.DotPlot import DotPlot
+from app.sequences_analysis_tools import sequences_analysis_tools
 
-from ..helpers.file_helper import allowed_file
+from app.sequences_analysis_tools.utils.SequencesTools import SequencesTools
+from app.sequences_analysis_tools.utils.ConsensusSequence import ConsensusSequence
+from app.sequences_analysis_tools.utils.DotPlot import DotPlot
 
-from ..helpers.db_helper import add_calculation
-from ..helpers.constants import (DOT_PLOT_RAW_SEQ, DOT_PLOT_GENEBANK_IDS, CONSENSUS_SEQUENCE_RAW_SEQ,
-                                 CONSENSUS_SEQUENCE_FILE_SEQ, CONSENSUS_SEQUENCE_GENE_BANK, SEQUENCES_TOOLS)
+from app.userpanel.models import Page
 
-from ..helpers.db_helper import add_customer_activity
+from app.helpers.file_helper import allowed_file
+from app.helpers.db_helper import add_calculation
+from app.helpers.db_helper import add_customer_activity
+
+from app.helpers.constants import DOT_PLOT_RAW_SEQ
+from app.helpers.constants import DOT_PLOT_GENEBANK_IDS
+from app.helpers.constants import CONSENSUS_SEQUENCE_RAW_SEQ
+from app.helpers.constants import CONSENSUS_SEQUENCE_FILE_SEQ
+from app.helpers.constants import CONSENSUS_SEQUENCE_GENE_BANK
+from app.helpers.constants import SEQUENCES_TOOLS
 
 
 @sequences_analysis_tools.route('/sequences-analysis-tools/dot-plot')
@@ -144,3 +150,10 @@ def get_sequences_data():
         return jsonify({'data': result})
     except Exception as e:
         abort(Response(str(e), 400))
+
+
+@sequences_analysis_tools.context_processor
+def inject():
+    return {
+        'module_desc': Page.query.filter_by(slug=request.path).first()
+    }

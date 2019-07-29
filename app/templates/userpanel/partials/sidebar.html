@@ -1,0 +1,41 @@
+<nav class="col-xl-2 bg-light sidebar shadow">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('userpanel.dashboard_view') }}">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('userpanel.edit_profile_view') }}">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('userpanel.calculations_list_view') }}">
+          <i class="fas fa-calculator"></i>
+          <span>Calculations</span>
+        </a>
+      </li>
+      {% if current_user.is_superuser %}
+        <li class="nav-item">
+          <div class="nav-link border-top">
+            <strong>Super User Section</strong>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('userpanel.pages_list_view') }}">
+            <span>Pages</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('userpanel.customers_list_view') }}">
+            <span>Customers</span>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

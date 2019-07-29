@@ -1,9 +1,13 @@
 from flask import render_template, request, jsonify, abort, Response
-from . import hardy_weinber
-from .utils.HardyWeinberCalculation import HardyWeinberCalculation
 
-from ..helpers.db_helper import add_calculation, add_customer_activity
-from ..helpers.constants import HARDY_WEINBERG
+from app.hardy_weinber import hardy_weinber
+from app.hardy_weinber.utils.HardyWeinberCalculation import HardyWeinberCalculation
+
+from app.userpanel.models import Page
+
+from app.helpers.db_helper import add_calculation
+from app.helpers.db_helper import add_customer_activity
+from app.helpers.constants import HARDY_WEINBERG
 
 
 @hardy_weinber.route('/hardy-weinber-page')
@@ -30,3 +34,10 @@ def get_data():
         abort(Response("Please check type of input data", 409))
     except Exception as e:
         abort(Response(str(e), 400))
+
+
+@hardy_weinber.context_processor
+def inject():
+    return {
+        'module_desc': Page.query.filter_by(slug=request.path).first()
+    }

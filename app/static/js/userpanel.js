@@ -53,6 +53,21 @@ function showInputFileName() {
   }
 }
 
+function initCKEDITOR(selector) {
+  ClassicEditor
+      .create(document.querySelector(`${selector}`))
+      .then(editor => {
+        theEditor = editor;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+}
+
+function confirmPageDelete() {
+  return confirm("Are you sure to delete this page?");
+}
+
 $(document).ready(function() {
   $('.hamburger').click(function() {
     openMenu();  
@@ -62,6 +77,12 @@ $(document).ready(function() {
 
   $('#picture').change(function() {
     showInputFileName();
+  })
+
+  $('.delete-page, .delete-customer').click(function (e) {
+    if (!confirmPageDelete()) {
+      e.preventDefault();
+    }
   })
 });
 

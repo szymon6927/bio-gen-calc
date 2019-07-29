@@ -1,0 +1,40 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <div class="customers">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Login</th>
+        <th scope="col">Email</th>
+        <th scope="col">Super user</th>
+        <th scope="col">#</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for customer in customers %}
+        <tr>
+          <th scope="row"></th>
+          <td>{{ customer.first_name }}</td>
+          <td>{{ customer.last_name }}</td>
+          <td>{{ customer.login }}</td>
+          <td>{{ customer.email }}</td>
+          <td>{{ customer.is_superuser }}</td>
+          <td>
+            <a href="{{ url_for('userpanel.customer_details_view', customer_id=customer.id) }}" class="btn btn-primary">
+              Edit customer
+            </a>
+            <a href="{{ url_for('userpanel.customer_delete_view', customer_id=customer.id) }}"
+               class="btn btn-danger delete-customer">
+              Delete customer
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

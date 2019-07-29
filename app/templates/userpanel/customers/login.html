@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-md-6 offset-md-3 col-sm-12 col-12">
-          <form class="login-form" action="{{ url_for('userpanel.login') }}" method="POST">
+          <form class="login-form" action="{{ url_for('userpanel.login_view') }}" method="POST">
             {{ form.hidden_tag() }}
 
             <div class="form-group">
@@ -58,7 +58,7 @@
 
         <div class="col-md-6 offset-md-3 col-sm-12 col-12 mt-4">
           <p class="text-muted">Don't you have an account? Please register <a
-            href="{{ url_for('userpanel.register') }}">here</a></p>
+            href="{{ url_for('userpanel.register_view') }}">here</a></p>
         </div>
       </div>
     </section>

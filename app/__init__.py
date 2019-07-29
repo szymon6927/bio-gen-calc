@@ -5,20 +5,17 @@ import base64
 from flask import Flask, render_template, request, make_response, abort, Response, send_from_directory
 
 from flask_htmlmin import HTMLMIN
-from flask_login import LoginManager, current_user
+from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_compress import Compress
 
-from .database import db
-from .models.Admin import User, Page
-from .models.Userpanel import Customer
-
-# local imports
+from app.database import db
 from config import app_config
 
-from .admin.views import run_admin
-
 login_manager = LoginManager()
+migrate = Migrate()
+compress = Compress()
+htmlmin = HTMLMIN()
 
 
 def create_app(config_name):
@@ -26,30 +23,17 @@ def create_app(config_name):
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
-    admin = run_admin()
-    admin.init_app(app)
-
     db.init_app(app)
-    migrate = Migrate(app, db)
-
-    with app.test_request_context():
-        db.create_all()
+    migrate.init_app(app, db)
 
     register_blueprints(app)
     register_jinja_templte_filters(app)
 
     login_manager.init_app(app)
-    login_manager.login_view = 'userpanel.login'
+    login_manager.login_view = 'userpanel.login_view'
 
-    Compress(app)
-    HTMLMIN(app)
-
-    @login_manager.user_loader
-    def load_customer(obj_id):
-        if request.path.startswith("/admin"):
-            return User.query.get(int(obj_id))
-        else:
-            return Customer.query.get(int(obj_id))
+    compress.init_app(app)
+    htmlmin.init_app(app)
 
     @app.route('/robots.txt')
     @app.route('/sitemap.xml')
@@ -80,14 +64,12 @@ def create_app(config_name):
 
     @app.errorhandler(404)
     def page_not_found(e):
-        print(e)
         return render_template("404.html", title="404 Page not found!")
 
     @app.context_processor
     def inject_now():
         return {
             'now': datetime.utcnow(),
-            'module_desc': Page.query.filter_by(breadcrumbs=request.path).first(),
             'css_js_ver': 1.11
         }
 

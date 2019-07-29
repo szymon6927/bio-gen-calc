@@ -1,101 +1,96 @@
 {% extends 'userpanel/base.html' %}
+
 {% block userpanel_body %}
-  <h3>Edit profile</h3>
+  <h3>Edit customer</h3>
   <hr>
 
-  <form class="edit-profile" action="{{ url_for('userpanel.edit_profile') }}" method="POST" enctype="multipart/form-data">
+  <form class="edit-customer" action="{{ url_for('userpanel.customer_details_view', customer_id=customer.id) }}"
+        method="POST" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
 
     <div class="row">
-      <div class="col-md-4 col-sm-6 mt-4 text-center">
-        <img src="{{ profile_pic }}" class="profile-pic rounded-circle" />
-  
-        <div class="form-group mt-3">
-          <div class="custom-file">
-            {{ form.picture(class="custom-file-input") }}
-            {{ form.picture.label(class="custom-file-label text-left") }}
-          </div>
-
-          {% if form.picture.errors %}
-            {% for error in form.picture.errors %}
-              <span class="text-danger">{{ error }}</span></br>
-            {% endfor %}
-          {% endif %}
-        </div>
-      </div>
-  
-      <div class="col-md-8 col-sm-6">
+      <div class="col-md-12">
         <div class="form-group">
           {{ form.first_name.label }}
           {{ form.first_name(class_="form-control") }}
 
           {% if form.first_name.errors %}
             {% for error in form.first_name.errors %}
-                <span class="text-danger">{{ error }}</span></br>
+              <span class="text-danger">{{ error }}</span></br>
             {% endfor %}
           {% endif %}
         </div>
+
         <div class="form-group">
           {{ form.last_name.label }}
           {{ form.last_name(class_="form-control") }}
 
           {% if form.last_name.errors %}
             {% for error in form.last_name.errors %}
-                <span class="text-danger">{{ error }}</span></br>
+              <span class="text-danger">{{ error }}</span></br>
             {% endfor %}
           {% endif %}
         </div>
-    
+
         <div class="form-group">
           {{ form.login.label }}
           {{ form.login(class_="form-control", disabled=True) }}
 
           {% if form.login.errors %}
             {% for error in form.login.errors %}
-                <span class="text-danger">{{ error }}</span></br>
+              <span class="text-danger">{{ error }}</span></br>
             {% endfor %}
           {% endif %}
         </div>
-    
+
         <div class="form-group">
           {{ form.email.label }}
           {{ form.email(class_="form-control", disabled=True) }}
 
           {% if form.email.errors %}
             {% for error in form.email.errors %}
-                <span class="text-danger">{{ error }}</span></br>
+              <span class="text-danger">{{ error }}</span></br>
             {% endfor %}
           {% endif %}
         </div>
 
         <div class="form-group">
           {{ form.password.label }}
-          {{ form.password(class_="form-control") }}
+          {{ form.password(class_="form-control", disabled=True) }}
 
           {% if form.password.errors %}
             {% for error in form.password.errors %}
-                <span class="text-danger">{{ error }}</span></br>
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        <div class="form-check mb-3">
+          {{ form.is_superuser(class_="form-check-input") }}
+          {{ form.is_superuser.label(class_="form-check-label") }}
+
+          {% if form.is_superuser.errors %}
+            {% for error in form.is_superuser.errors %}
+              <span class="text-danger">{{ error }}</span></br>
             {% endfor %}
           {% endif %}
         </div>
 
         <div class="form-group">
-          {{ form.password_confirm.label }}
-          {{ form.password_confirm(class_="form-control") }}
+          {{ form.created_at.label }}
+          {{ form.created_at(class_="form-control") }}
 
-          {% if form.password_confirm.errors %}
-            {% for error in form.password_confirm.errors %}
-                <span class="text-danger">{{ error }}</span></br>
+          {% if form.created_at.errors %}
+            {% for error in form.created_at.errors %}
+              <span class="text-danger">{{ error }}</span></br>
             {% endfor %}
           {% endif %}
         </div>
       </div>
 
       <div class="col-md-6 offset-md-3 col-sm-12">
-        <button type="submit" class="btn btn-block btn-primary">Edit</button>
+        <button type="submit" class="btn btn-block btn-primary">Save</button>
       </div>
     </div>
-
-
   </form>
 {% endblock %}

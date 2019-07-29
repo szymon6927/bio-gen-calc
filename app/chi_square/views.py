@@ -1,10 +1,14 @@
 from flask import render_template, request, jsonify, abort, Response
-from . import chi_square
-from .utils.ChiSquareCalculation import ChiSquareCalculation
-from .utils.ChiSquareGoodness import ChiSquareGoodness
 
-from ..helpers.db_helper import add_calculation, add_customer_activity
-from ..helpers.constants import CHI_SQUARE, CHI_SQUARE_GOODNESS
+from app.chi_square import chi_square
+from app.chi_square.utils.ChiSquareCalculation import ChiSquareCalculation
+from app.chi_square.utils.ChiSquareGoodness import ChiSquareGoodness
+
+from app.helpers.db_helper import add_customer_activity
+from app.helpers.db_helper import add_calculation
+from app.helpers.constants import CHI_SQUARE
+from app.helpers.constants import CHI_SQUARE_GOODNESS
+from app.userpanel.models import Page
 
 
 @chi_square.route('/chi-square-page')
@@ -48,3 +52,10 @@ def get_goodness_data():
         abort(Response(f'Please check type of input data, {str(e)}', 409))
     except Exception as e:
         abort(Response(str(e), 400))
+
+
+@chi_square.context_processor
+def inject():
+    return {
+        'module_desc': Page.query.filter_by(slug=request.path).first()
+    }

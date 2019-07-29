@@ -22,20 +22,20 @@
 
   <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,900" rel="stylesheet">
 
-  <link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dashboard.css') }}?ver={{ css_js_ver }}" rel="stylesheet">
 </head>
 
 <body>
-{% include "userpanel/topbar.html" %}
+{% include "userpanel/partials/topbar.html" %}
 
 <div class="container-fluid">
   <div class="row">
 
-    {% include "userpanel/sidebar.html" %}
+    {% include "userpanel/partials/sidebar.html" %}
     <main role="main" class="col-xl-10 col-lg-12 ml-sm-auto px-4">
-      {% include 'userpanel/menu_icon.html' %}
+      {% include 'userpanel/partials/menu_icon.html' %}
 
-      {% include 'userpanel/messages.html' %}
+      {% include 'userpanel/partials/messages.html' %}
       
       <div class="userpanel-container bg-light shadow mt-4">
         {% block userpanel_body %}{% endblock %}
@@ -45,7 +45,7 @@
   </div>
 </div>
 
-{% include "userpanel/footer.html" %}
+{% include "userpanel/partials/footer.html" %}
 
 <div id="overlay"></div>
 
@@ -57,10 +57,11 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script>
 
 <script src="{{ url_for('static', filename='js/vendors/bootstrap.min.js') }}"></script>
 
-<script src="{{ url_for('static', filename='js/userpanel.js') }}"></script>
+<script src="{{ url_for('static', filename='js/userpanel.js') }}?ver={{ css_js_ver }}"></script>
 
 {% block userpanel_scripts %}{% endblock %}
 

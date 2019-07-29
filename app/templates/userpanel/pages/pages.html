@@ -1,0 +1,30 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+    <div class="pages">
+      <div class="row">
+        <div class="col-md-12 text-right mb-4">
+          <a href="{{ url_for('userpanel.page_add_view') }}" class="btn btn-success">Add new page</a>
+        </div>
+      </div>
+      <div class="row">
+        {% for page in pages %}
+          <div class="col-md-6 col-sm-6 col-12">
+            <div class="card mb-sm-5 mb-4">
+              <div class="card-body">
+                <h4 class="card-title">Name: {{ page.name }}</h4>
+                <div class="page-details">
+                  <p>Slug: {{ page.slug }}</p>
+                </div>
+                <a href="{{ url_for('userpanel.page_details_view', page_id=page.id) }}"
+                   class="btn btn-primary">Edit page</a>
+                <a href="{{ url_for('userpanel.page_delete_view', page_id=page.id) }}" class="btn btn-danger delete-page">
+                  Delete page
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+{% endblock %}
