@@ -1,9 +1,9 @@
-# Gene-Calc 
+# Gene-Calc
 
 [Gene Calc - Website](https://gene-calc.pl/)
 
 The Gene-Calc is a constantly developed tool dedicated for calculations related to biological sciences, especially focused in field of genetics. Application offers couple of tools such as:
- 
+
 - Hardy–Weinberg equilibrium calculator
 - Chi-square tests:
     - Independence (Associations) chi-square
@@ -22,21 +22,26 @@ The Gene-Calc is a constantly developed tool dedicated for calculations related 
 
 1. Create a virtual environment
 ```
-python3 -m venv venv
+$ python3 -m venv venv
 ```
 
 2. Run a virtualenv environment
 ```
-source venv/bin/activate
+$ source venv/bin/activate
 ```
 
 3. Install required packages with dev dependencies
 ```
-pip install -r requirements/dev.txt
+$ pip install -r requirements/dev.txt
 ```
 
 If you have problems with installation `mysqlclient` package with the above command.
 Try to install it by hand with `pip install mysqlclient`
+
+After installation of requirements install pre-commit
+```
+$ pre-commit install
+```
 
 4. Create `config.env` file by copying `config.env.tmp` and fill these with required environment variables
 
@@ -44,7 +49,7 @@ Try to install it by hand with `pip install mysqlclient`
 
 On Mac OS
 ```bash
-set -o allexport; source config.env; set +o allexport;
+$ set -o allexport; source config.env; set +o allexport;
 ```
 
 In root directory
@@ -55,7 +60,7 @@ $ mkdir instance
 and then
 
 ```
-touch config.py
+$ touch config.py
 ```
 
 and here is an example config which you can paste into `config.py` file:
@@ -82,7 +87,7 @@ $ exit
 
 Apply application migrations:
 ```
-flask db migrate
+$ flask db migrate
 ```
 
 Next import data into your local database:
@@ -92,7 +97,7 @@ $ mysql -u root gene_calc < fixtures/data.sql
 
 To start application locally type:
 ```
-flask run
+$ flask run
 ```
 
 ## Git flow
@@ -109,20 +114,20 @@ Commit names conventions:
 
 After finishing implementation of your feature - create pull request to master branch.
 
-  
+
 ### Theoretical information available from:
 
 [https://gene-calc.pl/about](https://gene-calc.pl/about)
 
- 
+
 ### Authors
 
 [Szymon Miks](https://szymonmiks.pl) & [Jan Bińkowski](https://www.linkedin.com/in/jan-bi%C5%84kowski-a16b99141/)
- 
+
 #### License
 
 This project is licensed under the GNU GPL License
 
 #### Moreover
 
-If you have any questions or ideas how to develop this app, please let us know via e-mail: contact@gene-calc.pl 
+If you have any questions or ideas how to develop this app, please let us know via e-mail: contact@gene-calc.pl
