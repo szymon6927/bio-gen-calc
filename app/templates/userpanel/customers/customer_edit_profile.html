@@ -3,7 +3,7 @@
   <h3>Edit profile</h3>
   <hr>
 
-  <form class="edit-profile" action="{{ url_for('userpanel.edit_profile') }}" method="POST" enctype="multipart/form-data">
+  <form class="edit-profile" action="{{ url_for('userpanel.edit_profile_view') }}" method="POST" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
 
     <div class="row">

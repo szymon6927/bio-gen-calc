@@ -25,14 +25,14 @@ from app.helpers.file_helper import save_picture
 def login():
     form = LoginForm(request.form)
     if current_user.is_authenticated:
-        return redirect(url_for('userpanel.dashboard'))
+        return redirect(url_for('userpanel.dashboard_view'))
 
     if form.validate_on_submit():
         customer = Customer.query.filter(
             or_(Customer.login == form.login_or_email.data, Customer.email == form.login_or_email.data)).first()
         if customer and check_password_hash(customer.password, form.password.data):
             login_user(customer, remember=form.remember.data)
-            return redirect(url_for('userpanel.dashboard'))
+            return redirect(url_for('userpanel.dashboard_view'))
 
         flash("Invalid username or password", 'danger')
 
@@ -60,7 +60,7 @@ def register():
 
         login_user(new_customer)
 
-        return redirect(url_for('userpanel.dashboard'))
+        return redirect(url_for('userpanel.dashboard_view'))
 
     return render_template('userpanel/customers/register.html', title="Register for an account", form=form)
 
@@ -68,12 +68,12 @@ def register():
 @userpanel.route('/userpanel/', methods=['GET'], strict_slashes=False)
 @login_required
 def userpanel_view():
-    return redirect(url_for('userpanel.dashboard'))
+    return redirect(url_for('userpanel.dashboard_view'))
 
 
 @userpanel.route('/userpanel/dashboard', methods=['GET'])
 @login_required
-def dashboard():
+def dashboard_view():
     activity = CustomerActivity.query.with_entities(CustomerActivity.url, CustomerActivity.module_name,
                                                     func.count(CustomerActivity.url).label('count')) \
         .filter_by(customer=current_user) \
@@ -88,7 +88,7 @@ def dashboard():
 
 @userpanel.route('/userpanel/editprofile', methods=['GET', 'POST'])
 @login_required
-def edit_profile():
+def edit_profile_view():
     customer_id = current_user.id
 
     profile = Customer.query.get_or_404(customer_id)
@@ -110,7 +110,7 @@ def edit_profile():
 
         flash('You have successfully edited the profile.', 'success')
 
-        return redirect(url_for('userpanel.edit_profile'))
+        return redirect(url_for('userpanel.edit_profile_view'))
 
     profile_pic = url_for('static', filename='uploads/profile_pics/' + current_user.profile_pic)
 
@@ -119,7 +119,7 @@ def edit_profile():
 
 @userpanel.route('/userpanel/calculations', methods=['GET'])
 @login_required
-def calculations_all():
+def calculations_list_view():
     query = request.args.get('query')
     order_by = request.args.get('order_by', "created_at")
     sort_by = request.args.get('sort_by')
@@ -128,7 +128,7 @@ def calculations_all():
 
     if query:
         return redirect(
-            url_for('userpanel.calculations_search', query=query, order_by=order_by, sort_by=sort_by, page=page))
+            url_for('userpanel.calculations_search_view', query=query, order_by=order_by, sort_by=sort_by, page=page))
 
     if sort_by == "desc":
         calculations = CustomerCalculation.query.filter_by(customer=current_user) \
@@ -148,7 +148,7 @@ def calculations_all():
 
 @userpanel.route('/userpanel/calculations/search', methods=['GET'])
 @login_required
-def calculations_search():
+def calculations_search_view():
     query = request.args.get('query')
     order_by = request.args.get('order_by', "created_at")
     sort_by = request.args.get('sort_by')
@@ -175,20 +175,20 @@ def calculations_search():
 
 @userpanel.route('/userpanel/calculations/delete/<int:calculation_id>')
 @login_required
-def calculation_delete(calculation_id):
+def calculation_delete_view(calculation_id):
     calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
     db.session.delete(calculation)
     db.session.commit()
 
-    return redirect(url_for('userpanel.calculations_all'))
+    return redirect(url_for('userpanel.calculations_list_view'))
 
 
 @userpanel.route('/userpanel/calculations/<int:calculation_id>')
 @login_required
-def calculation_detail(calculation_id):
+def calculation_details_view(calculation_id):
     calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
 
-    return render_template('userpanel/calculations/calculation_detail.html', calculation=calculation)
+    return render_template('userpanel/calculations/calculation_details.html', calculation=calculation)
 
 
 @userpanel.route('/userpanel/pages')
@@ -226,7 +226,7 @@ def page_details_view(page_id):
 
 @userpanel.route('/userpanel/pages/add-page', methods=['GET', 'POST'])
 @login_required
-def add_new_page():
+def page_add_view():
     form = PageEditForm()
 
     if form.validate_on_submit():
@@ -252,7 +252,7 @@ def add_new_page():
 
 @userpanel.route('/userpanel/pages/delete/<int:page_id>')
 @login_required
-def delete_page(page_id):
+def page_delete_view(page_id):
     page = Page.query.get_or_404(page_id)
 
     db.session.delete(page)
@@ -297,7 +297,7 @@ def customer_details_view(customer_id):
 
 @userpanel.route('/userpanel/customers/delete/<int:customer_id>')
 @login_required
-def delete_customer(customer_id):
+def customer_delete_view(customer_id):
     customer = Customer.query.get_or_404(customer_id)
 
     db.session.delete(customer)

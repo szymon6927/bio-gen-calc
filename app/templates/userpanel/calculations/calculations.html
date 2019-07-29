@@ -24,7 +24,7 @@
           <div class="col-md-12 col-sm-12">
             <div class="card mb-4">
               <div class="card-body">
-                <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}">
+                <a href="{{ url_for('userpanel.calculation_details_view', calculation_id=calc.id) }}">
                   <h5 class="card-title">
                     Title: {% if calc.title %}{{ calc.title }}{% else %}Calculation - {{ calc.id }}{% endif %}
                   </h5>
@@ -33,10 +33,10 @@
                   <p class="mb-1">Module name: <strong>{{ calc.module_name }}</strong></p>
                   <p class="small">Created at: {{ calc.created_at }}</p>
                 </div>
-                <a href="{{ url_for('userpanel.calculation_detail', calculation_id=calc.id) }}" class="btn btn-primary">
+                <a href="{{ url_for('userpanel.calculation_details_view', calculation_id=calc.id) }}" class="btn btn-primary">
                   Show details</a>
 
-                <a href="{{ url_for('userpanel.calculation_delete', calculation_id=calc.id) }}"
+                <a href="{{ url_for('userpanel.calculation_delete_view', calculation_id=calc.id) }}"
                    class="btn btn-danger float-right">
                   Delete
                 </a>
@@ -55,7 +55,7 @@
                 <i class="fas fa-exclamation-circle"></i>
                 <span>Error! Nothing found, try again :(</span>
               </h5>
-              <a href="{{ url_for('userpanel.calculations_all') }}" class="btn btn-primary">
+              <a href="{{ url_for('userpanel.calculations_list_view') }}" class="btn btn-primary">
                 Show all calculations
               </a>
             </div>

@@ -3,7 +3,7 @@
 {% set query = request.args.get('query') %}
 
 <div class="col-md-12 col-sm-12 text-right">
-  <form class="form-inline mt-2 mb-2 float-right" action="{{ url_for('userpanel.calculations_all') }}"
+  <form class="form-inline mt-2 mb-2 float-right" action="{{ url_for('userpanel.calculations_list_view') }}"
         method="GET">
 
     {% if query %}

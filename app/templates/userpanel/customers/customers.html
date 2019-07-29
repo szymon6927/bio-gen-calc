@@ -27,7 +27,7 @@
             <a href="{{ url_for('userpanel.customer_details_view', customer_id=customer.id) }}" class="btn btn-primary">
               Edit customer
             </a>
-            <a href="{{ url_for('userpanel.delete_customer', customer_id=customer.id) }}"
+            <a href="{{ url_for('userpanel.customer_delete_view', customer_id=customer.id) }}"
                class="btn btn-danger delete-customer">
               Delete customer
             </a>
