@@ -1,13 +1,18 @@
-from datetime import datetime
-import pdfkit
 import base64
+from datetime import datetime
 
-from flask import Flask, render_template, request, make_response, abort, Response, send_from_directory
-
+import pdfkit
+from flask import Flask
+from flask import Response
+from flask import abort
+from flask import make_response
+from flask import render_template
+from flask import request
+from flask import send_from_directory
+from flask_compress import Compress
 from flask_htmlmin import HTMLMIN
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from flask_compress import Compress
 
 from app.database import db
 from config import app_config
@@ -46,10 +51,11 @@ def create_app(config_name):
             data = request.get_json()
 
             template = render_template('utils/pdf_template.html', content=data['content'])
-            css = ['app/static/css/vendors/bootstrap.min.css',
-                   'app/static/css/style.css',
-                   'app/static/css/pdf-style.css'
-                   ]
+            css = [
+                'app/static/css/vendors/bootstrap.min.css',
+                'app/static/css/style.css',
+                'app/static/css/pdf-style.css',
+            ]
             try:
                 pdf = base64.b64encode(pdfkit.from_string(template, False, css=css))
             except FileNotFoundError:
@@ -68,10 +74,7 @@ def create_app(config_name):
 
     @app.context_processor
     def inject_now():
-        return {
-            'now': datetime.utcnow(),
-            'css_js_ver': 1.11
-        }
+        return {'now': datetime.utcnow(), 'css_js_ver': 1.11}
 
     @app.after_request
     def add_header(response):
