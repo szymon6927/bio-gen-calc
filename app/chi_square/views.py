@@ -17,9 +17,6 @@ from app.userpanel.models import Page
 @chi_square.route('/chi-square-page')
 @add_customer_activity
 def chi_square_page():
-    """
-    Render the chi_square_page template on the / route
-    """
     return render_template('chi_square/index.html', title="Chi-Square tests")
 
 

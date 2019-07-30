@@ -5,7 +5,7 @@ from scipy.stats import chi2_contingency
 from scipy.stats import power_divergence
 from scipy.stats.contingency import expected_freq
 
-from ...helpers.result_aggregator import add_result
+from app.helpers.result_aggregator import add_result
 
 
 class ChiSquareCalculation:
