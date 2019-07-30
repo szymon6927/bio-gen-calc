@@ -14,11 +14,11 @@ from sqlalchemy import or_
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
-from app.common.decorators import nocache
 from app.customer_calculation.models import CustomerCalculation
 from app.database import db
 from app.helpers.file_helper import save_picture
 from app.userpanel import userpanel
+from app.userpanel.decorators import nocache
 from app.userpanel.forms import AdminCustomerEditForm
 from app.userpanel.forms import CustomerEditForm
 from app.userpanel.forms import LoginForm
