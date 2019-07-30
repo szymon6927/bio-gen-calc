@@ -1,7 +1,10 @@
 import itertools
-from .GeneticDistance import GeneticDistance
+from math import log
+from math import sqrt
+
 from scipy.stats.mstats import gmean
-from math import sqrt, log
+
+from .GeneticDistance import GeneticDistance
 
 
 class GeometricDistance(GeneticDistance):
@@ -27,7 +30,7 @@ class GeometricDistance(GeneticDistance):
 
             square_sum_list = []
             for g_list in column_sliced:
-                square_sum = sum(j*j for j in g_list)
+                square_sum = sum(j * j for j in g_list)
                 square_sum_list.append(square_sum)
 
             g_square_sum[i] = square_sum_list
