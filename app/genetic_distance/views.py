@@ -4,13 +4,13 @@ from flask import jsonify
 from flask import render_template
 from flask import request
 
+from app.common.constants import GENETIC_DISTANCE
+from app.common.decorators import add_customer_activity
 from app.genetic_distance import genetic_distance
 from app.genetic_distance.ds.GeometricDistance import GeometricDistance
 from app.genetic_distance.ds.StandardDistance import StandardDistance
 from app.genetic_distance.ds.TakezakiNeiDistance import TakezakiNeiDistance
-from app.helpers.constants import GENETIC_DISTANCE
 from app.helpers.db_helper import add_calculation
-from app.helpers.db_helper import add_customer_activity
 from app.userpanel.models import Page
 
 

@@ -2,7 +2,7 @@ import numpy as np
 from scipy.stats import chisquare
 from scipy.stats import power_divergence
 
-from app.helpers.result_aggregator import add_result
+from app.common.result_aggregator import add_result
 
 
 class HardyWeinberCalculation:

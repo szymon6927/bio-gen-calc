@@ -1,7 +1,9 @@
-from flask import abort, Response
-from Bio.Seq import Seq
 from Bio.Alphabet import IUPAC
-from ...helpers.result_aggregator import add_result
+from Bio.Seq import Seq
+from flask import Response
+from flask import abort
+
+from app.common.result_aggregator import add_result
 
 
 class SequencesTools:

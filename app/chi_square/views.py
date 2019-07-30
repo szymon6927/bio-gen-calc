@@ -7,10 +7,10 @@ from flask import request
 from app.chi_square import chi_square
 from app.chi_square.ds.ChiSquareCalculation import ChiSquareCalculation
 from app.chi_square.ds.ChiSquareGoodness import ChiSquareGoodness
-from app.helpers.constants import CHI_SQUARE
-from app.helpers.constants import CHI_SQUARE_GOODNESS
+from app.common.constants import CHI_SQUARE
+from app.common.constants import CHI_SQUARE_GOODNESS
+from app.common.decorators import add_customer_activity
 from app.helpers.db_helper import add_calculation
-from app.helpers.db_helper import add_customer_activity
 from app.userpanel.models import Page
 
 

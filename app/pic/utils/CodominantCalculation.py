@@ -1,5 +1,6 @@
 import itertools
-from ...helpers.result_aggregator import add_result
+
+from app.common.result_aggregator import add_result
 
 
 class Codominant:
@@ -51,7 +52,8 @@ class Codominant:
             geno_type_i = pair[0]
             geno_type_j = pair[1]
             pic += (alleles_freq[geno_type_i] * alleles_freq[geno_type_j]) * (
-                        1.0 - (alleles_freq[geno_type_i] * alleles_freq[geno_type_j]))
+                1.0 - (alleles_freq[geno_type_i] * alleles_freq[geno_type_j])
+            )
 
         return round(pic, 4)
 

@@ -4,11 +4,11 @@ from flask import jsonify
 from flask import render_template
 from flask import request
 
+from app.common.constants import HARDY_WEINBERG
+from app.common.decorators import add_customer_activity
 from app.hardy_weinber import hardy_weinber
 from app.hardy_weinber.ds.HardyWeinberCalculation import HardyWeinberCalculation
-from app.helpers.constants import HARDY_WEINBERG
 from app.helpers.db_helper import add_calculation
-from app.helpers.db_helper import add_customer_activity
 from app.userpanel.models import Page
 
 

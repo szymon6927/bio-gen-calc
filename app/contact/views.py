@@ -10,11 +10,11 @@ from flask import url_for
 from flask_mail import Mail
 from flask_mail import Message
 
+from app.common.decorators import add_customer_activity
 from app.contact import contact
 from app.contact.forms import ContactForm
 from app.contact.literals import MESSAGE_TITLE
 from app.contact.literals import SENDER_NAME
-from app.helpers.db_helper import add_customer_activity
 from app.userpanel.models import Page
 
 

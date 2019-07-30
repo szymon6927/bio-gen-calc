@@ -1,15 +1,17 @@
-from flask import render_template, request, jsonify, abort, Response
+from flask import Response
+from flask import abort
+from flask import jsonify
+from flask import render_template
+from flask import request
 
+from app.common.constants import PIC_CODOMINANT
+from app.common.constants import PIC_DOMINANT
+from app.common.decorators import add_customer_activity
+from app.helpers.db_helper import add_calculation
 from app.pic import pic
 from app.pic.utils.CodominantCalculation import Codominant
 from app.pic.utils.DominantCalculation import Dominant
-
 from app.userpanel.models import Page
-
-from app.helpers.db_helper import add_calculation
-from app.helpers.db_helper import add_customer_activity
-from app.helpers.constants import PIC_DOMINANT
-from app.helpers.constants import PIC_CODOMINANT
 
 
 @pic.route('/pic')
@@ -55,6 +57,4 @@ def pic_dominant():
 
 @pic.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}

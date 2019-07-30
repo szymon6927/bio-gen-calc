@@ -36,4 +36,3 @@ def remove_first_last_double_quotes(text):
         text = text[1:-1]
 
         return text
-

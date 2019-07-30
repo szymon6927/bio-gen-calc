@@ -124,7 +124,7 @@ def register_blueprints(app):
 
 
 def register_jinja_templte_filters(app):
-    from .helpers.template_filters import to_dict, translate_name, remove_first_last_double_quotes
+    from app.common.template_filters import to_dict, translate_name, remove_first_last_double_quotes
 
     app.jinja_env.filters['to_dict'] = to_dict
     app.jinja_env.filters['translate_name'] = translate_name
