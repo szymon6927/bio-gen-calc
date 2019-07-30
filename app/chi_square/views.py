@@ -1,13 +1,16 @@
-from flask import render_template, request, jsonify, abort, Response
+from flask import Response
+from flask import abort
+from flask import jsonify
+from flask import render_template
+from flask import request
 
 from app.chi_square import chi_square
-from app.chi_square.utils.ChiSquareCalculation import ChiSquareCalculation
-from app.chi_square.utils.ChiSquareGoodness import ChiSquareGoodness
-
-from app.helpers.db_helper import add_customer_activity
-from app.helpers.db_helper import add_calculation
+from app.chi_square.ds.ChiSquareCalculation import ChiSquareCalculation
+from app.chi_square.ds.ChiSquareGoodness import ChiSquareGoodness
 from app.helpers.constants import CHI_SQUARE
 from app.helpers.constants import CHI_SQUARE_GOODNESS
+from app.helpers.db_helper import add_calculation
+from app.helpers.db_helper import add_customer_activity
 from app.userpanel.models import Page
 
 
@@ -24,7 +27,7 @@ def chi_square_page():
 def get_data():
     try:
         data = request.get_json()
-        
+
         chi = ChiSquareCalculation(data)
         result = chi.calculate()
 
@@ -56,6 +59,4 @@ def get_goodness_data():
 
 @chi_square.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}

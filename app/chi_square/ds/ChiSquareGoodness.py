@@ -1,6 +1,7 @@
 import numpy as np
-from scipy.stats import power_divergence
 from scipy.stats import chisquare
+from scipy.stats import power_divergence
+
 from ...helpers.result_aggregator import add_result
 
 
@@ -28,4 +29,3 @@ class ChiSquareGoodness:
         self.chi_goodness_standard()
         self.chi_goodness_yats()
         return self.results
-
