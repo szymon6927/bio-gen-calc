@@ -7,8 +7,7 @@ from flask import request
 from app.chi_square import chi_square
 from app.chi_square.ds.ChiSquareCalculation import ChiSquareCalculation
 from app.chi_square.ds.ChiSquareGoodness import ChiSquareGoodness
-from app.common.constants import CHI_SQUARE
-from app.common.constants import CHI_SQUARE_GOODNESS
+from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.helpers.db_helper import add_calculation
 from app.userpanel.models import Page
@@ -28,7 +27,9 @@ def get_data():
         chi = ChiSquareCalculation(data)
         result = chi.calculate()
 
-        add_calculation(module_name=CHI_SQUARE, user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.CHI_SQUARE, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
         return jsonify({'data': result})
     except TypeError as e:
@@ -45,7 +46,9 @@ def get_goodness_data():
         chi_goodness = ChiSquareGoodness(data["observed"], data["expected"])
         result = chi_goodness.calculate()
 
-        add_calculation(module_name=CHI_SQUARE_GOODNESS, user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.CHI_SQUARE_GOODNESS, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
         return jsonify({'data': result})
     except TypeError as e:

@@ -4,7 +4,7 @@ from flask import jsonify
 from flask import render_template
 from flask import request
 
-from app.common.constants import GENETIC_DISTANCE
+from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.genetic_distance import genetic_distance
 from app.genetic_distance.ds.GeometricDistance import GeometricDistance
@@ -37,7 +37,7 @@ def get_data():
         gen_distance.build_matrix()
 
         add_calculation(
-            module_name=f'{GENETIC_DISTANCE}_{distance_choice}',
+            module_name=f'{ModuleName.GENETIC_DISTANCE}_{distance_choice}',
             user_data=data,
             result=gen_distance.get_matrix().tolist(),
             ip_address=request.remote_addr,

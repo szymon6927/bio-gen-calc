@@ -4,8 +4,7 @@ from flask import jsonify
 from flask import render_template
 from flask import request
 
-from app.common.constants import PIC_CODOMINANT
-from app.common.constants import PIC_DOMINANT
+from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.helpers.db_helper import add_calculation
 from app.pic import pic
@@ -30,7 +29,9 @@ def pic_codominant():
         co_d = Codominant(data)
         result = co_d.calculate()
 
-        add_calculation(module_name=PIC_CODOMINANT, user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.PIC_CODOMINANT, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
         return jsonify({'data': result})
     except TypeError as e:
@@ -46,7 +47,9 @@ def pic_dominant():
         do = Dominant(data)
         result = do.calculate()
 
-        add_calculation(module_name=PIC_DOMINANT, user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.PIC_DOMINANT, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
         return jsonify({'data': result})
     except TypeError as e:

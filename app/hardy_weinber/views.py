@@ -4,7 +4,7 @@ from flask import jsonify
 from flask import render_template
 from flask import request
 
-from app.common.constants import HARDY_WEINBERG
+from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.hardy_weinber import hardy_weinber
 from app.hardy_weinber.ds.HardyWeinberCalculation import HardyWeinberCalculation
@@ -26,7 +26,9 @@ def get_data():
 
         result = hw.calcualte()
 
-        add_calculation(module_name=HARDY_WEINBERG, user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.HARDY_WEINBERG, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
         return jsonify({'data': result})
     except TypeError:
