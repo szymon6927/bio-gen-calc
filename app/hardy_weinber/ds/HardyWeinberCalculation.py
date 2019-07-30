@@ -1,11 +1,11 @@
 import numpy as np
 from scipy.stats import chisquare
 from scipy.stats import power_divergence
-from ...helpers.result_aggregator import add_result
+
+from app.helpers.result_aggregator import add_result
 
 
 class HardyWeinberCalculation:
-
     def __init__(self, data):
         self.data = data
         self.results = []
@@ -61,8 +61,10 @@ class HardyWeinberCalculation:
             pval = pval_yates
 
         if pval <= alfa:
-            msg = "Distribution does not consistent with Hardy Weinberg's law at the level " \
-                  "of significance: {}".format(alfa)
+            msg = (
+                "Distribution does not consistent with Hardy Weinberg's law at the level "
+                "of significance: {}".format(alfa)
+            )
             add_result(self, 'status', msg)
 
             fis = 1 - (he / e_he)

@@ -1,21 +1,20 @@
-from flask import render_template, request, jsonify, abort, Response
+from flask import Response
+from flask import abort
+from flask import jsonify
+from flask import render_template
+from flask import request
 
 from app.hardy_weinber import hardy_weinber
-from app.hardy_weinber.utils.HardyWeinberCalculation import HardyWeinberCalculation
-
-from app.userpanel.models import Page
-
+from app.hardy_weinber.ds.HardyWeinberCalculation import HardyWeinberCalculation
+from app.helpers.constants import HARDY_WEINBERG
 from app.helpers.db_helper import add_calculation
 from app.helpers.db_helper import add_customer_activity
-from app.helpers.constants import HARDY_WEINBERG
+from app.userpanel.models import Page
 
 
 @hardy_weinber.route('/hardy-weinber-page')
 @add_customer_activity
 def hardy_weinber_page():
-    """
-    Render the hardy_weinber template on the / route
-    """
     return render_template('hardy_weinber/index.html', title="Hardy-Weinberg equilibrium")
 
 
@@ -38,6 +37,4 @@ def get_data():
 
 @hardy_weinber.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}
