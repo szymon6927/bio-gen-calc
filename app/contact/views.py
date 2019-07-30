@@ -1,10 +1,19 @@
 import smtplib
+from os import environ
 
-from flask import Flask, render_template, flash, redirect, url_for, request
-from flask_mail import Mail, Message
+from flask import Flask
+from flask import flash
+from flask import redirect
+from flask import render_template
+from flask import request
+from flask import url_for
+from flask_mail import Mail
+from flask_mail import Message
 
 from app.contact import contact
 from app.contact.forms import ContactForm
+from app.contact.literals import MESSAGE_TITLE
+from app.contact.literals import SENDER_NAME
 from app.helpers.db_helper import add_customer_activity
 from app.userpanel.models import Page
 
@@ -17,9 +26,11 @@ def contact_page():
         app = Flask(__name__)
         mail = Mail(app)
 
-        msg = Message("Message from gene-calc.pl contact page",
-                      sender=("Gene-Calc Team - contact", "contact@gene-calc.pl"),
-                      recipients=[form.email.data])
+        msg = Message(
+            MESSAGE_TITLE,
+            sender=(SENDER_NAME, environ.get('EMAIL', "contact@gene-calc.pl")),
+            recipients=[form.email.data],
+        )
         msg.body = form.message.data
         try:
             mail.send(msg)
@@ -40,6 +51,4 @@ def contact_page():
 
 @contact.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}
