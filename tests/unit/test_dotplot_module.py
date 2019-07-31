@@ -1,5 +1,5 @@
 from app.helpers.tests_helper import find_value_by_name
-from app.sequences_analysis_tools.utils.DotPlot import DotPlot
+from app.sequences_analysis_tools.ds.DotPlot import DotPlot
 
 
 def test_dotplot_raw_seq_basic():
@@ -17,7 +17,7 @@ def test_dotplot_raw_seq_basic():
         {'name': "Sequence yyy lenght", 'value': 70},
         {'name': "Coverage [%]", 'value': 100},
         {'name': "Average identity [%]", 'value': 61.4},
-        {'name': "Fragmental identity [%]", 'value': 61.4}
+        {'name': "Fragmental identity [%]", 'value': 61.4},
     ]
 
     base64_img = dotplot.get_dot_plot_image()
@@ -48,7 +48,7 @@ def test_dotplot_genebank_basic():
         {'name': "Sequence 2765657 lenght", 'value': 753},
         {'name': "Coverage [%]", 'value': 98.3},
         {'name': "Average identity [%]", 'value': 82.4},
-        {'name': "Fragmental identity [%]", 'value': 83.1}
+        {'name': "Fragmental identity [%]", 'value': 83.1},
     ]
 
     base64_img = dotplot.get_dot_plot_image()

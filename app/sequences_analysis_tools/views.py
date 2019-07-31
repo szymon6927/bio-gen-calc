@@ -13,9 +13,9 @@ from app.common.decorators import add_customer_activity
 from app.helpers.db_helper import add_calculation
 from app.helpers.file_helper import allowed_file
 from app.sequences_analysis_tools import sequences_analysis_tools
-from app.sequences_analysis_tools.utils.ConsensusSequence import ConsensusSequence
-from app.sequences_analysis_tools.utils.DotPlot import DotPlot
-from app.sequences_analysis_tools.utils.SequencesTools import SequencesTools
+from app.sequences_analysis_tools.ds.ConsensusSequence import ConsensusSequence
+from app.sequences_analysis_tools.ds.DotPlot import DotPlot
+from app.sequences_analysis_tools.ds.SequencesTools import SequencesTools
 from app.userpanel.models import Page
 
 

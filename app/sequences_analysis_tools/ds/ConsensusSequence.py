@@ -7,9 +7,8 @@ from Bio.Align import AlignInfo
 from Bio.Align.Applications import MuscleCommandline
 
 from app.common.result_aggregator import add_result
-
-from ...helpers.file_helper import create_seq_file
-from ...helpers.file_helper import remove_temp_file
+from app.helpers.file_helper import create_seq_file
+from app.helpers.file_helper import remove_temp_file
 
 
 class ConsensusSequence:
