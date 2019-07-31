@@ -1,6 +1,6 @@
 from app.helpers.tests_helper import find_value_by_name
-from app.pic.utils.DominantCalculation import Dominant
-from app.pic.utils.CodominantCalculation import Codominant
+from app.pic.ds.CodominantCalculation import Codominant
+from app.pic.ds.DominantCalculation import Dominant
 
 
 def test_pic_dominant_basic():
@@ -11,14 +11,12 @@ def test_pic_dominant_basic():
     pic_dominant = Dominant(data)
     results = pic_dominant.calculate()
 
-    expected_results = [
-        {'name': "PIC", 'value': 0.48}
-    ]
+    expected_results = [{'name': "PIC", 'value': 0.48}]
 
     for i, result in enumerate(results):
         name = result.get('name')
         value = result.get('value')
-        
+
         expected_value = find_value_by_name(expected_results, name)
 
         assert expected_value == value
@@ -34,15 +32,12 @@ def test_pic_codominant_basic():
     pic_codominant = Codominant(data)
     results = pic_codominant.calculate()
 
-    expected_results = [
-        {'name': "H", 'value': 0.642},
-        {'name': "PIC", 'value': 0.5676},
-    ]
+    expected_results = [{'name': "H", 'value': 0.642}, {'name': "PIC", 'value': 0.5676}]
 
     for i, result in enumerate(results):
         name = result.get('name')
         value = result.get('value')
-        
+
         expected_value = find_value_by_name(expected_results, name)
 
         assert expected_value == value

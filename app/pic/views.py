@@ -8,17 +8,14 @@ from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.helpers.db_helper import add_calculation
 from app.pic import pic
-from app.pic.utils.CodominantCalculation import Codominant
-from app.pic.utils.DominantCalculation import Dominant
+from app.pic.ds.CodominantCalculation import Codominant
+from app.pic.ds.DominantCalculation import Dominant
 from app.userpanel.models import Page
 
 
 @pic.route('/pic')
 @add_customer_activity
 def pic_page():
-    """
-    Render the pic & h template
-    """
     return render_template('pic/index.html', title="Polymorphic information content & Heterozygosity")
 
 
