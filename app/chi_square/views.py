@@ -1,22 +1,23 @@
-from flask import render_template, request, jsonify, abort, Response
+from flask import Blueprint
+from flask import Response
+from flask import abort
+from flask import jsonify
+from flask import render_template
+from flask import request
 
-from app.chi_square import chi_square
-from app.chi_square.utils.ChiSquareCalculation import ChiSquareCalculation
-from app.chi_square.utils.ChiSquareGoodness import ChiSquareGoodness
-
-from app.helpers.db_helper import add_customer_activity
+from app.chi_square.ds.ChiSquareCalculation import ChiSquareCalculation
+from app.chi_square.ds.ChiSquareGoodness import ChiSquareGoodness
+from app.common.constants import ModuleName
+from app.common.decorators import add_customer_activity
 from app.helpers.db_helper import add_calculation
-from app.helpers.constants import CHI_SQUARE
-from app.helpers.constants import CHI_SQUARE_GOODNESS
 from app.userpanel.models import Page
+
+chi_square = Blueprint('chi_square', __name__)
 
 
 @chi_square.route('/chi-square-page')
 @add_customer_activity
 def chi_square_page():
-    """
-    Render the chi_square_page template on the / route
-    """
     return render_template('chi_square/index.html', title="Chi-Square tests")
 
 
@@ -24,11 +25,13 @@ def chi_square_page():
 def get_data():
     try:
         data = request.get_json()
-        
+
         chi = ChiSquareCalculation(data)
         result = chi.calculate()
 
-        add_calculation(module_name=CHI_SQUARE, user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.CHI_SQUARE, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
         return jsonify({'data': result})
     except TypeError as e:
@@ -45,7 +48,9 @@ def get_goodness_data():
         chi_goodness = ChiSquareGoodness(data["observed"], data["expected"])
         result = chi_goodness.calculate()
 
-        add_calculation(module_name=CHI_SQUARE_GOODNESS, user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.CHI_SQUARE_GOODNESS, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
         return jsonify({'data': result})
     except TypeError as e:
@@ -56,6 +61,4 @@ def get_goodness_data():
 
 @chi_square.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}

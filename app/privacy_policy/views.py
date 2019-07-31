@@ -1,8 +1,11 @@
-from flask import render_template, request
+from flask import Blueprint
+from flask import render_template
+from flask import request
 
-from app.privacy_policy import privacy_policy
+from app.common.decorators import add_customer_activity
 from app.userpanel.models import Page
-from app.helpers.db_helper import add_customer_activity
+
+privacy_policy = Blueprint('privacy_policy', __name__)
 
 
 @privacy_policy.route('/privacy-policy', methods=['GET'])
@@ -13,6 +16,4 @@ def privacy_policy_page():
 
 @privacy_policy.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}

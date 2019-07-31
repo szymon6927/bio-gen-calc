@@ -1,9 +1,19 @@
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, HiddenField, TextAreaField, DateTimeField
-from flask_wtf.file import FileField, FileAllowed
-from wtforms.fields.html5 import EmailField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed
+from flask_wtf.file import FileField
+from wtforms import BooleanField
+from wtforms import DateTimeField
+from wtforms import HiddenField
+from wtforms import PasswordField
+from wtforms import StringField
+from wtforms import TextAreaField
+from wtforms.fields.html5 import EmailField
+from wtforms.validators import DataRequired
+from wtforms.validators import Email
+from wtforms.validators import EqualTo
+from wtforms.validators import Length
+from wtforms.validators import ValidationError
 
 from app.userpanel.models import Customer
 
@@ -19,8 +29,10 @@ class RegisterForm(FlaskForm):
     last_name = StringField('Last name:')
     login = StringField('Login*', validators=[DataRequired(), Length(min=3, max=25)])
     email = EmailField('Email*', validators=[DataRequired(), Email()])
-    password = PasswordField('Password*', validators=[DataRequired(), Length(min=8, max=80),
-                                                      EqualTo('password_confirm', message='Passwords must match')])
+    password = PasswordField(
+        'Password*',
+        validators=[DataRequired(), Length(min=8, max=80), EqualTo('password_confirm', message='Passwords must match')],
+    )
     password_confirm = PasswordField('Confirm password*', validators=[DataRequired()])
 
     def validate_login(self, login):

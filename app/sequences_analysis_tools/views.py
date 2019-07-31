@@ -1,25 +1,24 @@
 import base64
-from flask import render_template, request, jsonify, abort, Response, make_response
+
+from flask import Blueprint
+from flask import Response
+from flask import abort
+from flask import jsonify
+from flask import make_response
+from flask import render_template
+from flask import request
 from werkzeug.utils import secure_filename
 
-from app.sequences_analysis_tools import sequences_analysis_tools
-
-from app.sequences_analysis_tools.utils.SequencesTools import SequencesTools
-from app.sequences_analysis_tools.utils.ConsensusSequence import ConsensusSequence
-from app.sequences_analysis_tools.utils.DotPlot import DotPlot
-
+from app.common.constants import ModuleName
+from app.common.decorators import add_customer_activity
+from app.helpers.db_helper import add_calculation
+from app.helpers.file_helper import allowed_file
+from app.sequences_analysis_tools.ds.ConsensusSequence import ConsensusSequence
+from app.sequences_analysis_tools.ds.DotPlot import DotPlot
+from app.sequences_analysis_tools.ds.SequencesTools import SequencesTools
 from app.userpanel.models import Page
 
-from app.helpers.file_helper import allowed_file
-from app.helpers.db_helper import add_calculation
-from app.helpers.db_helper import add_customer_activity
-
-from app.helpers.constants import DOT_PLOT_RAW_SEQ
-from app.helpers.constants import DOT_PLOT_GENEBANK_IDS
-from app.helpers.constants import CONSENSUS_SEQUENCE_RAW_SEQ
-from app.helpers.constants import CONSENSUS_SEQUENCE_FILE_SEQ
-from app.helpers.constants import CONSENSUS_SEQUENCE_GENE_BANK
-from app.helpers.constants import SEQUENCES_TOOLS
+sequences_analysis_tools = Blueprint('sequences_analysis_tools', __name__)
 
 
 @sequences_analysis_tools.route('/sequences-analysis-tools/dot-plot')
@@ -35,11 +34,13 @@ def dot_plot_raw_seq():
         dot_plot = DotPlot(data)
         result = dot_plot.raw_sequence()
 
-        add_calculation(module_name=DOT_PLOT_RAW_SEQ, user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.DOT_PLOT_RAW_SEQ, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
-        return jsonify({'data': result,
-                        'dotplot_base64': dot_plot.get_dot_plot_image(),
-                        'alignment': dot_plot.get_alignments()})
+        return jsonify(
+            {'data': result, 'dotplot_base64': dot_plot.get_dot_plot_image(), 'alignment': dot_plot.get_alignments()}
+        )
     except Exception as e:
         abort(Response(str(e), 400))
 
@@ -51,12 +52,13 @@ def dot_plot_genebank_ids():
         dot_plot = DotPlot(data)
         result = dot_plot.genebank_seq()
 
-        add_calculation(module_name=DOT_PLOT_GENEBANK_IDS,
-                        user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.DOT_PLOT_GENEBANK_IDS, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
-        return jsonify({'data': result,
-                        'dotplot_base64': dot_plot.get_dot_plot_image(),
-                        'alignment': dot_plot.get_alignments()})
+        return jsonify(
+            {'data': result, 'dotplot_base64': dot_plot.get_dot_plot_image(), 'alignment': dot_plot.get_alignments()}
+        )
     except Exception as e:
         abort(Response(str(e), 400))
 
@@ -74,8 +76,12 @@ def get_raw_seq_data():
         consensus_seq = ConsensusSequence(data)
         result = consensus_seq.raw_sequence()
 
-        add_calculation(module_name=CONSENSUS_SEQUENCE_RAW_SEQ,
-                        user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.CONSENSUS_SEQUENCE_RAW_SEQ,
+            user_data=data,
+            result=result,
+            ip_address=request.remote_addr,
+        )
 
         return jsonify({'data': result})
     except Exception as e:
@@ -93,7 +99,7 @@ def get_seq_file_data():
         abort(Response('No selected file', 400))
 
     if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
+        secure_filename(file.filename)  # TODO: secure_filename return correct filename, we should do sth with this
 
         data = dict()
         data['sequences'] = file.read().decode()
@@ -102,8 +108,12 @@ def get_seq_file_data():
         consensus_seq = ConsensusSequence(data)
         result = consensus_seq.file_seq()
 
-        add_calculation(module_name=CONSENSUS_SEQUENCE_FILE_SEQ,
-                        user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.CONSENSUS_SEQUENCE_FILE_SEQ,
+            user_data=data,
+            result=result,
+            ip_address=request.remote_addr,
+        )
 
         response = make_response(base64.b64encode(result.encode()))
         response.headers['Content-Type'] = 'text/plain'
@@ -120,8 +130,12 @@ def get_seq_genebank():
         consensus_seq = ConsensusSequence(data)
         result = consensus_seq.genebank_seq()
 
-        add_calculation(module_name=CONSENSUS_SEQUENCE_GENE_BANK,
-                        user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.CONSENSUS_SEQUENCE_GENE_BANK,
+            user_data=data,
+            result=result,
+            ip_address=request.remote_addr,
+        )
 
         response = make_response(base64.b64encode(result.encode()))
         response.headers['Content-Type'] = 'text/plain'
@@ -144,8 +158,9 @@ def get_sequences_data():
         seq_tools = SequencesTools(data)
         result = seq_tools.calculate()
 
-        add_calculation(module_name=SEQUENCES_TOOLS,
-                        user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.SEQUENCES_TOOLS, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
         return jsonify({'data': result})
     except Exception as e:
@@ -154,6 +169,4 @@ def get_sequences_data():
 
 @sequences_analysis_tools.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}

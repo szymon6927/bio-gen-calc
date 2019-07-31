@@ -1,25 +1,26 @@
-from flask import render_template, request, jsonify, abort, Response
+from flask import Blueprint
+from flask import Response
+from flask import abort
+from flask import jsonify
+from flask import render_template
+from flask import request
 
-from app.hardy_weinber import hardy_weinber
-from app.hardy_weinber.utils.HardyWeinberCalculation import HardyWeinberCalculation
-
+from app.common.constants import ModuleName
+from app.common.decorators import add_customer_activity
+from app.hardy_weinber.ds.HardyWeinberCalculation import HardyWeinberCalculation
+from app.helpers.db_helper import add_calculation
 from app.userpanel.models import Page
 
-from app.helpers.db_helper import add_calculation
-from app.helpers.db_helper import add_customer_activity
-from app.helpers.constants import HARDY_WEINBERG
+hardy_weinberg = Blueprint('hardy_weinber', __name__)
 
 
-@hardy_weinber.route('/hardy-weinber-page')
+@hardy_weinberg.route('/hardy-weinber-page')
 @add_customer_activity
 def hardy_weinber_page():
-    """
-    Render the hardy_weinber template on the / route
-    """
     return render_template('hardy_weinber/index.html', title="Hardy-Weinberg equilibrium")
 
 
-@hardy_weinber.route('/hardy-weinber/send-data', methods=['POST'])
+@hardy_weinberg.route('/hardy-weinber/send-data', methods=['POST'])
 def get_data():
     try:
         data = request.get_json()
@@ -27,7 +28,9 @@ def get_data():
 
         result = hw.calcualte()
 
-        add_calculation(module_name=HARDY_WEINBERG, user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.HARDY_WEINBERG, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
         return jsonify({'data': result})
     except TypeError:
@@ -36,8 +39,6 @@ def get_data():
         abort(Response(str(e), 400))
 
 
-@hardy_weinber.context_processor
+@hardy_weinberg.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}

@@ -1,9 +1,11 @@
+from flask import Blueprint
 from flask import render_template
 from flask import request
 
-from app.home import home
+from app.common.decorators import add_customer_activity
 from app.userpanel.models import Page
-from app.helpers.db_helper import add_customer_activity
+
+home = Blueprint('home', __name__)
 
 
 @home.route('/')
@@ -15,6 +17,4 @@ def homepage():
 
 @home.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}

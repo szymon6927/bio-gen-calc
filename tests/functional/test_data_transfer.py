@@ -1,5 +1,6 @@
-import pytest
 import json
+
+import pytest
 
 
 def test_hw_communiction(test_client):
@@ -32,8 +33,9 @@ def test_chi_square_goodnes_communiction(test_client):
     data['observed'] = [4.0, 3.0, 2.0]
     data['expected'] = [3.0, 2.0, 4.0]
 
-    response = test_client.post('/chi-square/send-data-goodness', data=json.dumps(data),
-                                content_type='application/json')
+    response = test_client.post(
+        '/chi-square/send-data-goodness', data=json.dumps(data), content_type='application/json'
+    )
 
     assert response.status_code == 200
 
@@ -52,8 +54,9 @@ def test_genetic_distance_communiction(test_client):
     data["column_4"] = [0.7, 0.3]
     data["column_5"] = [0.8, 0.2]
 
-    response = test_client.post('/genetic-distance/send-data-distance', data=json.dumps(data),
-                                content_type='application/json')
+    response = test_client.post(
+        '/genetic-distance/send-data-distance', data=json.dumps(data), content_type='application/json'
+    )
 
     assert response.status_code == 200
 
@@ -97,8 +100,9 @@ def test_dotplot_raw_seq_communiction(test_client):
     data['seq-name-2'] = "yyy"
     data['seq-content-2'] = "AATCTGGAGGACCTGTGGTAACTCAGCTCGTCGTGGCACTGCTTTTGTCGTGACCCTGCTTTGTTGTTGG"
 
-    response = test_client.post('/sequences-analysis-tools/dot-plot/send-raw-seq',
-                                data=json.dumps(data), content_type='application/json')
+    response = test_client.post(
+        '/sequences-analysis-tools/dot-plot/send-raw-seq', data=json.dumps(data), content_type='application/json'
+    )
 
     assert response.status_code == 200
 
@@ -108,8 +112,9 @@ def test_dotplot_genebank_seq_communiction(test_client):
     data['seq-name-1'] = "2765658"
     data['seq-name-2'] = "2765657"
 
-    response = test_client.post('/sequences-analysis-tools/dot-plot/send-genebank-ids',
-                                data=json.dumps(data), content_type='application/json')
+    response = test_client.post(
+        '/sequences-analysis-tools/dot-plot/send-genebank-ids', data=json.dumps(data), content_type='application/json'
+    )
 
     assert response.status_code == 200
 
@@ -117,12 +122,17 @@ def test_dotplot_genebank_seq_communiction(test_client):
 @pytest.mark.skip(reason="muscle not installed")
 def test_consensus_sequence_raw_seq_communiction(test_client):
     data = dict()
-    data['sequences'] = """>gi|2765658
+    data[
+        'sequences'
+    ] = """>gi|2765658
     CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGATGAGACCGTGGAATAAACGATCGAGTG
     AATCCGGAGGACCGGTGTACTCAGCTCACCGGGGGCATTGCTCCCGTGGTGACCCTGATTTGTTGTTGGG"""
 
-    response = test_client.post('/sequences-analysis-tools/consensus-sequence/send-raw-seq',
-                                data=json.dumps(data), content_type='application/json')
+    response = test_client.post(
+        '/sequences-analysis-tools/consensus-sequence/send-raw-seq',
+        data=json.dumps(data),
+        content_type='application/json',
+    )
 
     assert response.status_code == 200
 
@@ -130,7 +140,9 @@ def test_consensus_sequence_raw_seq_communiction(test_client):
 def test_sequences_tools_complement_communiction(test_client):
     data = dict()
     data['type'] = "complement"
-    data['sequences'] = """>2765658
+    data[
+        'sequences'
+    ] = """>2765658
 CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGATGAGACCGTGGAATAAACGATCGAGTG
 AATCCGGAGGACCGGTGTACTCAGCTCACCGGGGGCATTGCTCCCGTGGTGACCCTGATTTGTTGTTGGG
 CCGCCTCGGGAGCGTCCATGGCGGGTTTGAACCTCTAGCCCGGCGCAGTTTGGGCGCCAAGCCATATGAA
@@ -148,7 +160,8 @@ CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGTTGAGACAGCAGAACATACGATCGAGTG
 AATCCGGAGGACCCGTGGTTACACGGCTCACCGTGGCTTTGCTCTCGTGGTGAACCCGGTTTGCGACCGG
 GCCGCCTCGGGAACTTTCATGGCGGGTTTGAACGTCTAGCGCGGCGCAGTTTGCGCCAAGTCATATGGAG"""
 
-    response = test_client.post('/sequences-analysis-tools/sequences-tools/send-data',
-                                data=json.dumps(data), content_type='application/json')
+    response = test_client.post(
+        '/sequences-analysis-tools/sequences-tools/send-data', data=json.dumps(data), content_type='application/json'
+    )
 
     assert response.status_code == 200

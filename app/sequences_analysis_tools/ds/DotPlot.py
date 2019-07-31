@@ -1,8 +1,12 @@
-import pylab
-from io import BytesIO
 import base64
-from Bio import pairwise2, Entrez, SeqIO
-from ...helpers.result_aggregator import add_result
+from io import BytesIO
+
+import pylab
+from Bio import Entrez
+from Bio import SeqIO
+from Bio import pairwise2
+
+from app.common.result_aggregator import add_result
 
 
 class DotPlot:
@@ -63,10 +67,9 @@ class DotPlot:
 
         window = 8
 
-        for (seq, section_dict) in [(rec_one.upper(), dict_one),
-                                    (rec_two.upper(), dict_two)]:
+        for (seq, section_dict) in [(rec_one.upper(), dict_one), (rec_two.upper(), dict_two)]:
             for i in range(len(seq) - window):
-                section = seq[i:i + window]
+                section = seq[i : i + window]
                 try:
                     section_dict[section].append(i)
                 except KeyError:

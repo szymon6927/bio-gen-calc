@@ -1,5 +1,7 @@
+from math import log
+from math import sqrt
+
 from .GeneticDistance import GeneticDistance
-from math import sqrt, log
 
 
 class StandardDistance(GeneticDistance):

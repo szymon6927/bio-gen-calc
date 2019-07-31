@@ -1,5 +1,5 @@
-from app.helpers.tests_helper import find_value_by_name
 from app.chi_square.utils.ChiSquareCalculation import ChiSquareCalculation
+from app.helpers.tests_helper import find_value_by_name
 
 
 def test_chi_sqaure_basic():
@@ -20,7 +20,7 @@ def test_chi_sqaure_basic():
         {'name': "Chi-square correlation", 'value': 0.09759},
         {'name': "Yate`s Chi square", 'value': 0.04836},
         {'name': "Yate`s Chi square p-value", 'value': 0.82594},
-        {'name': "Yate`s chi-square correlation", 'value': 0.06099}
+        {'name': "Yate`s chi-square correlation", 'value': 0.06099},
     ]
 
     chi_square = ChiSquareCalculation(data)

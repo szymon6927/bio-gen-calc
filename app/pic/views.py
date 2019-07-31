@@ -1,23 +1,23 @@
-from flask import render_template, request, jsonify, abort, Response
+from flask import Blueprint
+from flask import Response
+from flask import abort
+from flask import jsonify
+from flask import render_template
+from flask import request
 
-from app.pic import pic
-from app.pic.utils.CodominantCalculation import Codominant
-from app.pic.utils.DominantCalculation import Dominant
-
+from app.common.constants import ModuleName
+from app.common.decorators import add_customer_activity
+from app.helpers.db_helper import add_calculation
+from app.pic.ds.CodominantCalculation import Codominant
+from app.pic.ds.DominantCalculation import Dominant
 from app.userpanel.models import Page
 
-from app.helpers.db_helper import add_calculation
-from app.helpers.db_helper import add_customer_activity
-from app.helpers.constants import PIC_DOMINANT
-from app.helpers.constants import PIC_CODOMINANT
+pic = Blueprint('pic', __name__)
 
 
 @pic.route('/pic')
 @add_customer_activity
 def pic_page():
-    """
-    Render the pic & h template
-    """
     return render_template('pic/index.html', title="Polymorphic information content & Heterozygosity")
 
 
@@ -28,7 +28,9 @@ def pic_codominant():
         co_d = Codominant(data)
         result = co_d.calculate()
 
-        add_calculation(module_name=PIC_CODOMINANT, user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.PIC_CODOMINANT, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
         return jsonify({'data': result})
     except TypeError as e:
@@ -44,7 +46,9 @@ def pic_dominant():
         do = Dominant(data)
         result = do.calculate()
 
-        add_calculation(module_name=PIC_DOMINANT, user_data=data, result=result, ip_address=request.remote_addr)
+        add_calculation(
+            module_name=ModuleName.PIC_DOMINANT, user_data=data, result=result, ip_address=request.remote_addr
+        )
 
         return jsonify({'data': result})
     except TypeError as e:
@@ -55,6 +59,4 @@ def pic_dominant():
 
 @pic.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}

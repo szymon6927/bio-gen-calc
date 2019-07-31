@@ -1,24 +1,34 @@
-from flask import render_template, redirect, flash, url_for, request
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_required, login_user, logout_user, current_user
-from sqlalchemy import or_, desc, asc, func
+from flask import Blueprint
+from flask import flash
+from flask import redirect
+from flask import render_template
+from flask import request
+from flask import url_for
+from flask_login import current_user
+from flask_login import login_required
+from flask_login import login_user
+from flask_login import logout_user
+from sqlalchemy import asc
+from sqlalchemy import desc
+from sqlalchemy import func
+from sqlalchemy import or_
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
 
-from app.userpanel import userpanel
-from app.userpanel.forms import LoginForm
-from app.userpanel.forms import RegisterForm
-from app.userpanel.forms import CustomerEditForm
-from app.userpanel.forms import PageEditForm
+from app.customer_calculation.models import CustomerCalculation
+from app.database import db
+from app.helpers.file_helper import save_picture
+from app.userpanel.decorators import nocache
 from app.userpanel.forms import AdminCustomerEditForm
-
+from app.userpanel.forms import CustomerEditForm
+from app.userpanel.forms import LoginForm
+from app.userpanel.forms import PageEditForm
+from app.userpanel.forms import RegisterForm
 from app.userpanel.models import Customer
 from app.userpanel.models import CustomerActivity
 from app.userpanel.models import Page
 
-from app.customer_calculation.models import CustomerCalculation
-
-from app.database import db
-from app.helpers.no_cache import nocache
-from app.helpers.file_helper import save_picture
+userpanel = Blueprint('userpanel', __name__)
 
 
 @userpanel.route('/userpanel/login', methods=['GET', 'POST'])
@@ -29,7 +39,8 @@ def login_view():
 
     if form.validate_on_submit():
         customer = Customer.query.filter(
-            or_(Customer.login == form.login_or_email.data, Customer.email == form.login_or_email.data)).first()
+            or_(Customer.login == form.login_or_email.data, Customer.email == form.login_or_email.data)
+        ).first()
         if customer and check_password_hash(customer.password, form.password.data):
             login_user(customer, remember=form.remember.data)
             return redirect(url_for('userpanel.dashboard_view'))
@@ -53,8 +64,13 @@ def register_view():
 
     if form.validate_on_submit():
         hashed_password = generate_password_hash(form.password.data, method='sha256')
-        new_customer = Customer(first_name=form.first_name.data, last_name=form.last_name.data,
-                                login=form.login.data, email=form.email.data, password=hashed_password)
+        new_customer = Customer(
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            login=form.login.data,
+            email=form.email.data,
+            password=hashed_password,
+        )
         db.session.add(new_customer)
         db.session.commit()
 
@@ -74,16 +90,21 @@ def userpanel_view():
 @userpanel.route('/userpanel/dashboard', methods=['GET'])
 @login_required
 def dashboard_view():
-    activity = CustomerActivity.query.with_entities(CustomerActivity.url, CustomerActivity.module_name,
-                                                    func.count(CustomerActivity.url).label('count')) \
-        .filter_by(customer=current_user) \
-        .group_by(CustomerActivity.url, CustomerActivity.module_name).all()
+    activity = (
+        CustomerActivity.query.with_entities(
+            CustomerActivity.url, CustomerActivity.module_name, func.count(CustomerActivity.url).label('count')
+        )
+        .filter_by(customer=current_user)
+        .group_by(CustomerActivity.url, CustomerActivity.module_name)
+        .all()
+    )
 
     statistics = {}
     statistics['total_calculations'] = CustomerCalculation.query.filter_by(customer=current_user).count()
     statistics['total_visits'] = CustomerActivity.query.filter_by(customer=current_user).count()
-    return render_template('userpanel/dashboard.html', title="Dashboard", user=current_user.login, activity=activity,
-                           statistics=statistics)
+    return render_template(
+        'userpanel/dashboard.html', title="Dashboard", user=current_user.login, activity=activity, statistics=statistics
+    )
 
 
 @userpanel.route('/userpanel/editprofile', methods=['GET', 'POST'])
@@ -128,20 +149,27 @@ def calculations_list_view():
 
     if query:
         return redirect(
-            url_for('userpanel.calculations_search_view', query=query, order_by=order_by, sort_by=sort_by, page=page))
+            url_for('userpanel.calculations_search_view', query=query, order_by=order_by, sort_by=sort_by, page=page)
+        )
 
     if sort_by == "desc":
-        calculations = CustomerCalculation.query.filter_by(customer=current_user) \
-            .order_by(desc(order_by)) \
+        calculations = (
+            CustomerCalculation.query.filter_by(customer=current_user)
+            .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
+        )
     elif sort_by == "asc":
-        calculations = CustomerCalculation.query.filter_by(customer=current_user) \
-            .order_by(asc(order_by)) \
+        calculations = (
+            CustomerCalculation.query.filter_by(customer=current_user)
+            .order_by(asc(order_by))
             .paginate(page=page, per_page=per_page)
+        )
     else:
-        calculations = CustomerCalculation.query.filter_by(customer=current_user) \
-            .order_by(desc(order_by)) \
+        calculations = (
+            CustomerCalculation.query.filter_by(customer=current_user)
+            .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
+        )
 
     return render_template('userpanel/calculations/calculations.html', calculations=calculations)
 
@@ -155,20 +183,26 @@ def calculations_search_view():
     page = request.args.get('page', 1, type=int)
     per_page = 5
     if sort_by == "desc":
-        calculations = CustomerCalculation.query.filter(CustomerCalculation.title.like(f'%{query}%')) \
-            .filter(CustomerCalculation.customer == current_user) \
-            .order_by(desc(order_by)) \
+        calculations = (
+            CustomerCalculation.query.filter(CustomerCalculation.title.like(f'%{query}%'))
+            .filter(CustomerCalculation.customer == current_user)
+            .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
+        )
     elif sort_by == "asc":
-        calculations = CustomerCalculation.query.filter(CustomerCalculation.title.like(f'%{query}%')) \
-            .filter(CustomerCalculation.customer == current_user) \
-            .order_by(asc(order_by)) \
+        calculations = (
+            CustomerCalculation.query.filter(CustomerCalculation.title.like(f'%{query}%'))
+            .filter(CustomerCalculation.customer == current_user)
+            .order_by(asc(order_by))
             .paginate(page=page, per_page=per_page)
+        )
     else:
-        calculations = CustomerCalculation.query.filter(CustomerCalculation.title.like(f'%{query}%')) \
-            .filter(CustomerCalculation.customer == current_user) \
-            .order_by(desc(order_by)) \
+        calculations = (
+            CustomerCalculation.query.filter(CustomerCalculation.title.like(f'%{query}%'))
+            .filter(CustomerCalculation.customer == current_user)
+            .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
+        )
 
     return render_template('userpanel/calculations/calculations.html', calculations=calculations)
 
@@ -310,6 +344,4 @@ def customer_delete_view(customer_id):
 
 @userpanel.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}

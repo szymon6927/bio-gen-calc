@@ -1,9 +1,11 @@
 from math import sqrt
+
 import numpy as np
+from scipy.stats import chi2_contingency
 from scipy.stats import power_divergence
 from scipy.stats.contingency import expected_freq
-from scipy.stats import chi2_contingency
-from ...helpers.result_aggregator import add_result
+
+from app.common.result_aggregator import add_result
 
 
 class ChiSquareCalculation:
@@ -61,5 +63,3 @@ class ChiSquareCalculation:
         add_result(self, "corelation_yats", round(corelation_yats, 5))
 
         return self.results
-
-

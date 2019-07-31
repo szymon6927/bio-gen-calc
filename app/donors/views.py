@@ -1,8 +1,11 @@
-from flask import render_template, request
+from flask import Blueprint
+from flask import render_template
+from flask import request
 
-from app.donors import donors
-from app.helpers.db_helper import add_customer_activity
+from app.common.decorators import add_customer_activity
 from app.userpanel.models import Page
+
+donors = Blueprint('donors', __name__)
 
 
 @donors.route('/donors')
@@ -13,6 +16,4 @@ def donors_page():
 
 @donors.context_processor
 def inject():
-    return {
-        'module_desc': Page.query.filter_by(slug=request.path).first()
-    }
+    return {'module_desc': Page.query.filter_by(slug=request.path).first()}

@@ -1,5 +1,6 @@
-from .GeneticDistance import GeneticDistance
 from math import sqrt
+
+from .GeneticDistance import GeneticDistance
 
 
 class TakezakiNeiDistance(GeneticDistance):
@@ -10,7 +11,9 @@ class TakezakiNeiDistance(GeneticDistance):
         sum_product = {}
         pair_combination = self.get_pair_combination(self.column_range)
         for pair in pair_combination:
-            product = [sqrt(a * b) for a, b in zip(self.data["column_" + str(pair[0])], self.data["column_" + str(pair[1])])]
+            product = [
+                sqrt(a * b) for a, b in zip(self.data["column_" + str(pair[0])], self.data["column_" + str(pair[1])])
+            ]
 
             key = f'{pair[0]}_{pair[1]}'
             sum_product[key] = round(sum(i for i in product), 5)
@@ -27,4 +30,3 @@ class TakezakiNeiDistance(GeneticDistance):
             self.distances.append(round(d, 5))
 
         self.condensed_matrix = self.distances[:]
-

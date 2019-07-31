@@ -1,4 +1,4 @@
-from ...helpers.result_aggregator import add_result
+from app.common.result_aggregator import add_result
 
 
 class Dominant:
@@ -11,8 +11,9 @@ class Dominant:
         if isinstance(self.data["amplified_marker"], float):
             fi = self.data["amplified_marker"]
         else:
-            fi = int(self.data["amplified_marker"]) / (int(self.data["amplified_marker"]) + int(
-                self.data["absecnce_marker"]))
+            fi = int(self.data["amplified_marker"]) / (
+                int(self.data["amplified_marker"]) + int(self.data["absecnce_marker"])
+            )
 
         pic = 1 - (fi ** 2 + ((1 - fi) ** 2))
 

@@ -1,19 +1,20 @@
 # important for use matplotlib at backend
+import base64
+import itertools
 import os
+from io import BytesIO
+
 import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy.cluster.hierarchy import dendrogram
+from scipy.cluster.hierarchy import linkage
+from scipy.spatial.distance import squareform
 
 if os.environ.get('DISPLAY', '') == '':
     print('no display found. Using non-interactive Agg backend')
     mpl.use('Agg')
-
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import itertools
-from scipy.cluster.hierarchy import linkage, dendrogram
-from scipy.spatial.distance import squareform
-from io import BytesIO
-import base64
 
 
 class GeneticDistance:
@@ -82,7 +83,7 @@ class GeneticDistance:
             'upgmc': 'centroid',
             'wpgmc': 'median',
             'single-linkage': 'single',
-            'complete-linkage': 'complete'
+            'complete-linkage': 'complete',
         }
 
         distance = self.data.get("type_of_dendrogram")
@@ -108,7 +109,7 @@ class GeneticDistance:
     def render_dendrogram(self):
         method = linkage(np.asarray(self.condensed_matrix), self.detect_dendrogram_type())
 
-        dendro = dendrogram(method, orientation='left')
+        dendrogram(method, orientation='left')
 
         figfile = BytesIO()
         plt.savefig(figfile, format='png', dpi=120)

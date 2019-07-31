@@ -1,3 +1,4 @@
 [flake8]
+ignore = E203
 max-line-length = 120
 exclude = venv,requirements/,__pycache__/
