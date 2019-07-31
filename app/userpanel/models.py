@@ -1,8 +1,9 @@
 import datetime
 
 from flask_login import UserMixin
-from app.database import db
+
 from app import login_manager
+from app.database import db
 
 
 class Customer(UserMixin, db.Model):

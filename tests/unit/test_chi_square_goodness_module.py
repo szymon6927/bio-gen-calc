@@ -1,5 +1,5 @@
-from app.helpers.tests_helper import find_value_by_name
 from app.chi_square.utils.ChiSquareGoodness import ChiSquareGoodness
+from app.helpers.tests_helper import find_value_by_name
 
 
 def test_chi_sqaure_goodness_basic():
@@ -13,7 +13,7 @@ def test_chi_sqaure_goodness_basic():
         {'name': "dof", 'value': 2},
         {'name': "Chi square p-value", 'value': 0.72494},
         {'name': "Yate`s Chi square", 'value': 0.77083},
-        {'name': "Yate`s Chi square p-value", 'value': 0.68017}
+        {'name': "Yate`s Chi square p-value", 'value': 0.68017},
     ]
 
     chi_square_goodness = ChiSquareGoodness(data['observed'], data['expected'])

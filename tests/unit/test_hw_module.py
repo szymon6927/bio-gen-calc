@@ -1,5 +1,5 @@
-from app.helpers.tests_helper import find_value_by_name
 from app.hardy_weinber.utils.HardyWeinberCalculation import HardyWeinberCalculation
+from app.helpers.tests_helper import find_value_by_name
 
 
 def test_hw_basic():
@@ -22,15 +22,16 @@ def test_hw_basic():
         {'name': "Chi-square value", 'value': 0.803},
         {'name': "Yate`s chi-square value", 'value': 0.16133},
         {'name': "Yate`s p-value", 'value': 0.9225},
-        {'name': "status", 'value': "Distribution consistent with Hardy Weinberg's law at the level of significance: 0.05"}
+        {
+            'name': "status",
+            'value': "Distribution consistent with Hardy Weinberg's law at the level of significance: 0.05",
+        },
     ]
 
     for i, result in enumerate(results):
         name = result.get('name')
         value = result.get('value')
-        
+
         expected_value = find_value_by_name(expected_results, name)
 
         assert expected_value == value
-
-

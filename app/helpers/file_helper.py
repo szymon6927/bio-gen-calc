@@ -1,8 +1,9 @@
 import os
-import uuid
 import secrets
-from PIL import Image
+import uuid
+
 from flask import current_app
+from PIL import Image
 
 
 def create_seq_file(content):
