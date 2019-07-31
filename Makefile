@@ -7,4 +7,4 @@ format:
 	black app --skip-string-normalization
 	isort --apply
 
-.PHONY: update-deps format
+.PHONY: format update-deps
