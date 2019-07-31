@@ -92,25 +92,31 @@ def create_app(config_name):
 
 
 def register_blueprints(app):
-    from .home import home
-    from .materials_and_methods import materials_and_methods
-    from .about import about
-    from .hardy_weinber import hardy_weinber
-    from .chi_square import chi_square
-    from .pic import pic
-    from .genetic_distance import genetic_distance
-    from .sequences_analysis_tools import sequences_analysis_tools
-    from .contact import contact
-    from .donors import donors
-    from .newsletter import newsletter
-    from .userpanel import userpanel
-    from .customer_calculation import customer_calculation
-    from .privacy_policy import privacy_policy
+    """ Register application blueprints
+
+    :param app: instance of the flask application
+    :type app: Flask
+    """
+
+    from app.home.views import home
+    from app.materials_and_methods.views import materials_and_methods
+    from app.about.views import about
+    from app.hardy_weinber.views import hardy_weinberg
+    from app.chi_square.views import chi_square
+    from app.pic.views import pic
+    from app.genetic_distance.views import genetic_distance
+    from app.sequences_analysis_tools.views import sequences_analysis_tools
+    from app.contact.views import contact
+    from app.donors.views import donors
+    from app.newsletter.views import newsletter
+    from app.userpanel.views import userpanel
+    from app.customer_calculation.views import customer_calculation
+    from app.privacy_policy.views import privacy_policy
 
     app.register_blueprint(home)
     app.register_blueprint(materials_and_methods)
     app.register_blueprint(about)
-    app.register_blueprint(hardy_weinber)
+    app.register_blueprint(hardy_weinberg)
     app.register_blueprint(chi_square)
     app.register_blueprint(pic)
     app.register_blueprint(genetic_distance)
@@ -124,6 +130,12 @@ def register_blueprints(app):
 
 
 def register_jinja_templte_filters(app):
+    """Register jinja template filters
+
+    :param app: instance of the flask application
+    :type app: Flask
+    """
+
     from app.common.template_filters import to_dict, translate_name, remove_first_last_double_quotes
 
     app.jinja_env.filters['to_dict'] = to_dict

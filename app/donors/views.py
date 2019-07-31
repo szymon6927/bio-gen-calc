@@ -1,9 +1,11 @@
+from flask import Blueprint
 from flask import render_template
 from flask import request
 
 from app.common.decorators import add_customer_activity
-from app.donors import donors
 from app.userpanel.models import Page
+
+donors = Blueprint('donors', __name__)
 
 
 @donors.route('/donors')

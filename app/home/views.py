@@ -1,9 +1,11 @@
+from flask import Blueprint
 from flask import render_template
 from flask import request
 
 from app.common.decorators import add_customer_activity
-from app.home import home
 from app.userpanel.models import Page
+
+home = Blueprint('home', __name__)
 
 
 @home.route('/')

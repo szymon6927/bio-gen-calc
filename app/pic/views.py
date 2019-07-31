@@ -1,3 +1,4 @@
+from flask import Blueprint
 from flask import Response
 from flask import abort
 from flask import jsonify
@@ -7,10 +8,11 @@ from flask import request
 from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.helpers.db_helper import add_calculation
-from app.pic import pic
 from app.pic.ds.CodominantCalculation import Codominant
 from app.pic.ds.DominantCalculation import Dominant
 from app.userpanel.models import Page
+
+pic = Blueprint('pic', __name__)
 
 
 @pic.route('/pic')

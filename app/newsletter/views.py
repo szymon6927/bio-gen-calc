@@ -1,12 +1,13 @@
 import os
 
 import requests
+from flask import Blueprint
 from flask import Response
 from flask import abort
 from flask import jsonify
 from flask import request
 
-from app.newsletter import newsletter
+newsletter = Blueprint('newsletter', __name__)
 
 
 @newsletter.route('/newsletter/add', methods=['POST'])

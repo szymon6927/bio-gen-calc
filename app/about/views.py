@@ -1,9 +1,11 @@
+from flask import Blueprint
 from flask import render_template
 from flask import request
 
-from app.about import about
 from app.common.decorators import add_customer_activity
 from app.userpanel.models import Page
+
+about = Blueprint('about', __name__)
 
 
 @about.route('/about')

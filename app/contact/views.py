@@ -1,6 +1,7 @@
 import smtplib
 from os import environ
 
+from flask import Blueprint
 from flask import Flask
 from flask import flash
 from flask import redirect
@@ -11,11 +12,12 @@ from flask_mail import Mail
 from flask_mail import Message
 
 from app.common.decorators import add_customer_activity
-from app.contact import contact
 from app.contact.forms import ContactForm
 from app.contact.literals import MESSAGE_TITLE
 from app.contact.literals import SENDER_NAME
 from app.userpanel.models import Page
+
+contact = Blueprint('contact', __name__)
 
 
 @contact.route('/contact', methods=['GET', 'POST'])

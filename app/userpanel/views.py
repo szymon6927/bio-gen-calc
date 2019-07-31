@@ -1,3 +1,4 @@
+from flask import Blueprint
 from flask import flash
 from flask import redirect
 from flask import render_template
@@ -17,7 +18,6 @@ from werkzeug.security import generate_password_hash
 from app.customer_calculation.models import CustomerCalculation
 from app.database import db
 from app.helpers.file_helper import save_picture
-from app.userpanel import userpanel
 from app.userpanel.decorators import nocache
 from app.userpanel.forms import AdminCustomerEditForm
 from app.userpanel.forms import CustomerEditForm
@@ -27,6 +27,8 @@ from app.userpanel.forms import RegisterForm
 from app.userpanel.models import Customer
 from app.userpanel.models import CustomerActivity
 from app.userpanel.models import Page
+
+userpanel = Blueprint('userpanel', __name__)
 
 
 @userpanel.route('/userpanel/login', methods=['GET', 'POST'])

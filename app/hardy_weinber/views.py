@@ -1,3 +1,4 @@
+from flask import Blueprint
 from flask import Response
 from flask import abort
 from flask import jsonify
@@ -6,19 +7,20 @@ from flask import request
 
 from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
-from app.hardy_weinber import hardy_weinber
 from app.hardy_weinber.ds.HardyWeinberCalculation import HardyWeinberCalculation
 from app.helpers.db_helper import add_calculation
 from app.userpanel.models import Page
 
+hardy_weinberg = Blueprint('hardy_weinber', __name__)
 
-@hardy_weinber.route('/hardy-weinber-page')
+
+@hardy_weinberg.route('/hardy-weinber-page')
 @add_customer_activity
 def hardy_weinber_page():
     return render_template('hardy_weinber/index.html', title="Hardy-Weinberg equilibrium")
 
 
-@hardy_weinber.route('/hardy-weinber/send-data', methods=['POST'])
+@hardy_weinberg.route('/hardy-weinber/send-data', methods=['POST'])
 def get_data():
     try:
         data = request.get_json()
@@ -37,6 +39,6 @@ def get_data():
         abort(Response(str(e), 400))
 
 
-@hardy_weinber.context_processor
+@hardy_weinberg.context_processor
 def inject():
     return {'module_desc': Page.query.filter_by(slug=request.path).first()}

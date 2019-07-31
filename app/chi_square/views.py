@@ -1,16 +1,18 @@
+from flask import Blueprint
 from flask import Response
 from flask import abort
 from flask import jsonify
 from flask import render_template
 from flask import request
 
-from app.chi_square import chi_square
 from app.chi_square.ds.ChiSquareCalculation import ChiSquareCalculation
 from app.chi_square.ds.ChiSquareGoodness import ChiSquareGoodness
 from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.helpers.db_helper import add_calculation
 from app.userpanel.models import Page
+
+chi_square = Blueprint('chi_square', __name__)
 
 
 @chi_square.route('/chi-square-page')

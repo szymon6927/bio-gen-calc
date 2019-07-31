@@ -1,9 +1,11 @@
+from flask import Blueprint
 from flask import render_template
 from flask import request
 
 from app.common.decorators import add_customer_activity
-from app.privacy_policy import privacy_policy
 from app.userpanel.models import Page
+
+privacy_policy = Blueprint('privacy_policy', __name__)
 
 
 @privacy_policy.route('/privacy-policy', methods=['GET'])

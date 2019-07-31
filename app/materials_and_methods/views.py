@@ -1,9 +1,11 @@
+from flask import Blueprint
 from flask import render_template
 from flask import request
 
 from app.common.decorators import add_customer_activity
-from app.materials_and_methods import materials_and_methods
 from app.userpanel.models import Page
+
+materials_and_methods = Blueprint('materials_and_methods', __name__)
 
 
 @materials_and_methods.route('/materials-and-methods')

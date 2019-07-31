@@ -1,14 +1,16 @@
 import json
 
+from flask import Blueprint
 from flask import Response
 from flask import abort
 from flask import jsonify
 from flask import request
 from flask_login import current_user
 
-from app.customer_calculation import customer_calculation
 from app.customer_calculation.models import CustomerCalculation
 from app.database import db
+
+customer_calculation = Blueprint('customer_calculation', __name__)
 
 
 @customer_calculation.route('/send-calculation', methods=['POST'])
