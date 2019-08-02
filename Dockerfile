@@ -7,7 +7,8 @@ RUN apt-get install -y \
             python3-dev \
             libffi-dev \
             python-dev \
-            wkhtmltopdf
+            wkhtmltopdf \
+            muscle
 
 COPY requirements /requirements
 RUN pip install -r /requirements/requirements.txt
