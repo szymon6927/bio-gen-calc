@@ -2,6 +2,8 @@ import json
 
 import pytest
 
+from app.userpanel.models import Customer
+
 
 def test_hw_communiction(test_client):
     data = dict()
@@ -138,6 +140,10 @@ def test_consensus_sequence_raw_seq_communiction(test_client):
 
 
 def test_sequences_tools_complement_communiction(test_client):
+    print("test_sequences_tools_complement_communiction")
+    all_customers = Customer.query.all()
+    print("all_customers: ", all_customers)
+
     data = dict()
     data['type'] = "complement"
     data[
