@@ -1,4 +1,4 @@
-from app.chi_square.utils.ChiSquareGoodness import ChiSquareGoodness
+from app.chi_square.ds.ChiSquareGoodness import ChiSquareGoodness
 from app.helpers.tests_helper import find_value_by_name
 
 

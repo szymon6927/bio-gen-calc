@@ -1,4 +1,4 @@
-from app.chi_square.utils.ChiSquareCalculation import ChiSquareCalculation
+from app.chi_square.ds.ChiSquareCalculation import ChiSquareCalculation
 from app.helpers.tests_helper import find_value_by_name
 
 
