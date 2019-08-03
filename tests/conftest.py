@@ -7,41 +7,33 @@ from app.userpanel.models import Customer
 from app.userpanel.models import Page
 
 
-@pytest.fixture(scope='module')
-def test_client():
-    flask_app = create_app('testing')
-    flask_app.config.update(SQLALCHEMY_DATABASE_URI='sqlite://')
+@pytest.fixture
+def app():
+    """Create and configure a new app instance for each test."""
+    app = create_app('testing')
+    app.config.update(SQLALCHEMY_DATABASE_URI='sqlite://')
 
-    testing_client = flask_app.test_client()
+    with app.app_context():
+        db.create_all()
 
-    ctx = flask_app.app_context()
-    ctx.push()
+        customers, pages = get_fixtures()
+        for page in pages:
+            db.session.add(page)
 
-    yield testing_client  # this is where the testing happens!
+        db.session.commit()
 
-    ctx.pop()
+        yield app
 
-
-@pytest.fixture(scope='module')
-def init_db():
-    db.create_all()
-
-    customers, pages = create_db_rows()
-
-    for customer in customers:
-        db.session.add(customer)
-
-    for page in pages:
-        db.session.add(page)
-
-    db.session.commit()
-
-    yield db
-
-    db.drop_all()
+        db.drop_all()
 
 
-def create_db_rows():
+@pytest.fixture
+def test_client(app):
+    """A test client for the app."""
+    return app.test_client()
+
+
+def get_fixtures():
     customers = [
         Customer(
             first_name="Test 1",
@@ -49,6 +41,7 @@ def create_db_rows():
             email="test1@test.com",
             login="test1",
             password=generate_password_hash("testing123", method='sha256'),
+            is_superuser=True,
         ),
         Customer(
             first_name="Test 2",
@@ -60,78 +53,76 @@ def create_db_rows():
     ]
 
     pages = [
-        Page(name="Gene-Calc", is_active=1, breadcrumbs="/", text="Test content text", desc="Test content desc"),
+        Page(name="Gene-Calc", is_active=1, slug="/", text="Test content text", desc="Test content desc"),
         Page(
             name="Materials & Methods",
             is_active=1,
-            breadcrumbs="/materials-and-methods",
+            slug="/materials-and-methods",
             text="Test content text",
             desc="Test content desc",
         ),
         Page(
             name="Hardy-Weinberg equilibrium",
             is_active=1,
-            breadcrumbs="/hardy-weinber-page",
+            slug="/hardy-weinber-page",
             text="Test content text",
             desc="Test content desc",
         ),
         Page(
             name="Chi-Square tests",
             is_active=1,
-            breadcrumbs="/chi-square-page",
+            slug="/chi-square-page",
             text="Test content text",
             desc="Test content desc",
         ),
         Page(
             name="Polymorphic information content & Heterozygosity",
             is_active=1,
-            breadcrumbs="/pic",
+            slug="/pic",
             text="Test content text",
             desc="Test content desc",
         ),
         Page(
             name="Genetic Distance",
             is_active=1,
-            breadcrumbs="/genetic-distance",
+            slug="/genetic-distance",
             text="Test content text",
             desc="Test content desc",
         ),
         Page(
             name="Dot plot",
             is_active=1,
-            breadcrumbs="/sequences-analysis-tools/dot-plot",
+            slug="/sequences-analysis-tools/dot-plot",
             text="Test content text",
             desc="Test content desc",
         ),
         Page(
             name="Consensus Sequence",
             is_active=1,
-            breadcrumbs="/sequences-analysis-tools/consensus-sequence",
+            slug="/sequences-analysis-tools/consensus-sequence",
             text="Test content text",
             desc="Test content desc",
         ),
         Page(
             name="Sequences Tools",
             is_active=1,
-            breadcrumbs="/sequences-analysis-tools/sequences-tools",
+            slug="/sequences-analysis-tools/sequences-tools",
             text="Test content text",
             desc="Test content desc",
         ),
-        Page(name="About", is_active=1, breadcrumbs="/about", text="Test content text", desc="Test content desc"),
+        Page(name="About", is_active=1, slug="/about", text="Test content text", desc="Test content desc"),
         Page(
             name="Our donors and cooperators",
             is_active=1,
-            breadcrumbs="/donors",
+            slug="/donors",
             text="Test content text",
             desc="Test content desc",
         ),
-        Page(
-            name="Contact Us", is_active=1, breadcrumbs="/contact", text="Test content text", desc="Test content desc"
-        ),
+        Page(name="Contact Us", is_active=1, slug="/contact", text="Test content text", desc="Test content desc"),
         Page(
             name="Privacy policy",
             is_active=1,
-            breadcrumbs="/privacy-policy",
+            slug="/privacy-policy",
             text="Test content text",
             desc="Test content desc",
         ),
