@@ -6,3 +6,5 @@ class URL:
     CONTACT_GET = "/contact"
     CONTACT_POST = "/contact"
     DONORS_GET = "/donors"
+    GENETIC_DISTANCE_GET = "/genetic-distance"
+    GENETIC_DISTANCE_POST = "/genetic-distance/send-data-distance"
