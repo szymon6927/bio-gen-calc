@@ -5,3 +5,4 @@ class URL:
     CHI_SQUARE_GOODNESS_POST = "/chi-square/send-data-goodness"
     CONTACT_GET = "/contact"
     CONTACT_POST = "/contact"
+    DONORS_GET = "/donors"
