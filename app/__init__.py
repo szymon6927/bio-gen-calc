@@ -80,7 +80,7 @@ def create_app(config_name):
 
     @app.context_processor
     def inject_now():
-        return {'now': datetime.utcnow(), 'css_js_ver': 1.11}
+        return {'now': datetime.utcnow(), 'css_js_ver': 1.12}
 
     @app.after_request
     def add_header(response):
