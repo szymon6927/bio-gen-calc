@@ -1,4 +1,4 @@
-from app.hardy_weinber.ds.HardyWeinberCalculation import HardyWeinberCalculation
+from app.hardy_weinberg.ds.HardyWeinberCalculation import HardyWeinberCalculation
 from app.helpers.tests_helper import find_value_by_name
 
 

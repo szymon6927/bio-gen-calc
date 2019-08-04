@@ -7,20 +7,20 @@ from flask import request
 
 from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
-from app.hardy_weinber.ds.HardyWeinberCalculation import HardyWeinberCalculation
+from app.hardy_weinberg.ds.HardyWeinberCalculation import HardyWeinberCalculation
 from app.helpers.db_helper import add_calculation
 from app.userpanel.models import Page
 
-hardy_weinberg = Blueprint('hardy_weinber', __name__)
+hardy_weinberg = Blueprint('hardy_weinberg', __name__)
 
 
-@hardy_weinberg.route('/hardy-weinber-page')
+@hardy_weinberg.route('/hardy-weinberg-page')
 @add_customer_activity
-def hardy_weinber_page():
-    return render_template('hardy_weinber/index.html', title="Hardy-Weinberg equilibrium")
+def hardy_weinberg_page():
+    return render_template('hardy_weinberg/index.html', title="Hardy-Weinberg equilibrium")
 
 
-@hardy_weinberg.route('/hardy-weinber/send-data', methods=['POST'])
+@hardy_weinberg.route('/hardy-weinberg/send-data', methods=['POST'])
 def get_data():
     try:
         data = request.get_json()

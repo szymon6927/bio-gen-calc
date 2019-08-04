@@ -6,9 +6,11 @@ from flask import Flask
 from flask import Response
 from flask import abort
 from flask import make_response
+from flask import redirect
 from flask import render_template
 from flask import request
 from flask import send_from_directory
+from flask import url_for
 from flask_compress import Compress
 from flask_htmlmin import HTMLMIN
 from flask_login import LoginManager
@@ -68,6 +70,10 @@ def create_app(config_name):
         except Exception as e:
             abort(Response(str(e)), 400)
 
+    @app.route('/hardy-weinber-page')
+    def redirection():
+        return redirect(url_for('hardy_weinberg.hardy_weinberg_page'))
+
     @app.errorhandler(404)
     def page_not_found(e):
         return render_template("404.html", title="404 Page not found!")
@@ -101,7 +107,7 @@ def register_blueprints(app):
     from app.home.views import home
     from app.materials_and_methods.views import materials_and_methods
     from app.about.views import about
-    from app.hardy_weinber.views import hardy_weinberg
+    from app.hardy_weinberg.views import hardy_weinberg
     from app.chi_square.views import chi_square
     from app.pic.views import pic
     from app.genetic_distance.views import genetic_distance

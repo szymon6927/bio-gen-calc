@@ -11,7 +11,7 @@ def test_about_page(test_client):
 
 
 def test_hw_page(test_client):
-    response = test_client.get('/hardy-weinber-page')
+    response = test_client.get('/hardy-weinberg-page')
     assert response.status_code == 200
     assert b'Hardy-Weinberg equilibrium' in response.data
 

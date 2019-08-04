@@ -12,7 +12,7 @@ def test_hw_communiction(test_client):
     data["rho"] = 2
     data["alfa"] = 0.05
 
-    response = test_client.post('/hardy-weinber/send-data', data=json.dumps(data), content_type='application/json')
+    response = test_client.post('/hardy-weinberg/send-data', data=json.dumps(data), content_type='application/json')
     assert response.status_code == 200
 
 

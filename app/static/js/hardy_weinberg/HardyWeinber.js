@@ -52,7 +52,7 @@ class HardyWeinber extends AppModule {
 
   sendData() {
     const render = new RenderHelper('.hw-results');
-    const path = 'hardy-weinber/send-data';
+    const path = 'hardy-weinberg/send-data';
     let dataJSON = this.buildJSON();
 
     $.ajax({

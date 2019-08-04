@@ -64,7 +64,7 @@ def get_fixtures():
         Page(
             name="Hardy-Weinberg equilibrium",
             is_active=1,
-            slug="/hardy-weinber-page",
+            slug="/hardy-weinberg-page",
             text="Test content text",
             desc="Test content desc",
         ),
