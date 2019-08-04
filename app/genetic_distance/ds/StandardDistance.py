@@ -1,7 +1,7 @@
 from math import log
 from math import sqrt
 
-from .GeneticDistance import GeneticDistance
+from app.genetic_distance.ds.GeneticDistance import GeneticDistance
 
 
 class StandardDistance(GeneticDistance):
