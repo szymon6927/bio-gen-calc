@@ -13,3 +13,6 @@ class URL:
     HOME_GET = "/"
     MATERIALS_AND_METHODS_GET = "/materials-and-methods"
     NEWSLETTER_POST = "/newsletter/add"
+    PIC_GET = "/pic"
+    PIC_CODOMINANT_POST = "/pic/send-codominant"
+    PIC_DOMINANT_POST = "/pic/send-dominant"

@@ -34,7 +34,7 @@ def pic_codominant():
 
         return jsonify({'data': result})
     except TypeError as e:
-        abort(Response(f'Please check type of input data. {e}', 409))
+        abort(Response(f'Please check type of input data. {e}', 422))
     except Exception as e:
         abort(Response(str(e), 400))
 
@@ -52,7 +52,7 @@ def pic_dominant():
 
         return jsonify({'data': result})
     except TypeError as e:
-        abort(Response(f'Please check type of input data. {e}', 409))
+        abort(Response(f'Please check type of input data. {e}', 422))
     except Exception as e:
         abort(Response(str(e), 400))
 
