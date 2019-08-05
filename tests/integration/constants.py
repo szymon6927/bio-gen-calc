@@ -12,3 +12,4 @@ class URL:
     HARDY_WEINBERG_POST = "/hardy-weinberg/send-data"
     HOME_GET = "/"
     MATERIALS_AND_METHODS_GET = "/materials-and-methods"
+    NEWSLETTER_POST = "/newsletter/add"
