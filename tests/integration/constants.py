@@ -10,3 +10,4 @@ class URL:
     GENETIC_DISTANCE_POST = "/genetic-distance/send-data-distance"
     HARDY_WEINBERG_GET = "/hardy-weinberg-page"
     HARDY_WEINBERG_POST = "/hardy-weinberg/send-data"
+    HOME_GET = "/"
