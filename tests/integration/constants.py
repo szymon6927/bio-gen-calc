@@ -16,3 +16,4 @@ class URL:
     PIC_GET = "/pic"
     PIC_CODOMINANT_POST = "/pic/send-codominant"
     PIC_DOMINANT_POST = "/pic/send-dominant"
+    PRIVACY_POLICY_GET = "/privacy-policy"
