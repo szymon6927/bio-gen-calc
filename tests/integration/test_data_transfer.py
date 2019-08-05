@@ -85,7 +85,6 @@ def test_pic_codominant_communiction(test_client):
     assert response.status_code == 200
 
 
-@pytest.mark.skip(reason="wkhtmltopdf not installed")
 def test_generate_pdf(test_client):
     data = dict()
     data["content"] = "<h1>TEST</h1>"
