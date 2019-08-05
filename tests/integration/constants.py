@@ -8,3 +8,5 @@ class URL:
     DONORS_GET = "/donors"
     GENETIC_DISTANCE_GET = "/genetic-distance"
     GENETIC_DISTANCE_POST = "/genetic-distance/send-data-distance"
+    HARDY_WEINBERG_GET = "/hardy-weinberg-page"
+    HARDY_WEINBERG_POST = "/hardy-weinberg/send-data"
