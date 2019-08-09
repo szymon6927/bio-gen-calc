@@ -24,3 +24,5 @@ class URL:
     CONSENSUS_SEQUENCE_RAW_SEQ_POST = "/sequences-analysis-tools/consensus-sequence/send-raw-seq"
     CONSENSUS_SEQUENCE_FILE_SEQ_POST = "/sequences-analysis-tools/consensus-sequence/send-seq-file"
     CONSENSUS_SEQUENCE_GENE_BANK_POST = "/sequences-analysis-tools/consensus-sequence/send-genebank-file"
+    SEQUENCES_TOOLS_GET = "/sequences-analysis-tools/sequences-tools"
+    SEQUENCES_TOOLS_POST = "/sequences-analysis-tools/sequences-tools/send-data"

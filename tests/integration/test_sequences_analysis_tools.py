@@ -132,9 +132,41 @@ def test_post_consensus_sequence_file_seq_file_without_name(test_client):
     assert len(calculations) == 0
 
 
-def test_post_consensus_sequence_gene_bank_seq_ok(test_client):
+def test_post_consensus_sequence_gene_bank_seq_protein_ok(test_client):
     data = dict()
     data['sequence-type'] = "protein"
+    data['genebank-seq'] = "ADZ48385.1\nABM89502.1"
+
+    response = test_client.post(
+        URL.CONSENSUS_SEQUENCE_GENE_BANK_POST, data=json.dumps(data), content_type='application/json'
+    )
+
+    calculation = Calculation.query.first()
+
+    assert response.status_code == 200
+    assert response.mimetype == 'text/plain'
+    assert response.headers.get('content-type') == 'text/plain; charset=utf-8'
+    assert ModuleName.CONSENSUS_SEQUENCE_GENE_BANK in calculation.module_name
+
+
+def test_post_consensus_sequence_gene_bank_seq_protein_wrong_gene_bank_ids(test_client):
+    data = dict()
+    data['sequence-type'] = "protein"
+    data['genebank-seq'] = "2765658\n2765657"
+
+    response = test_client.post(
+        URL.CONSENSUS_SEQUENCE_GENE_BANK_POST, data=json.dumps(data), content_type='application/json'
+    )
+
+    calculations = Calculation.query.all()
+
+    assert response.status_code == 400
+    assert len(calculations) == 0
+
+
+def test_post_consensus_sequence_gene_bank_seq_nucleotide_ok(test_client):
+    data = dict()
+    data['sequence-type'] = "nucleotide"
     data['genebank-seq'] = "2765658\n2765657"
 
     response = test_client.post(
@@ -147,3 +179,60 @@ def test_post_consensus_sequence_gene_bank_seq_ok(test_client):
     assert response.mimetype == 'text/plain'
     assert response.headers.get('content-type') == 'text/plain; charset=utf-8'
     assert ModuleName.CONSENSUS_SEQUENCE_GENE_BANK in calculation.module_name
+
+
+def test_post_consensus_sequence_gene_bank_seq_nucleotide_wrong_gene_bank_ids(test_client):
+    data = dict()
+    data['sequence-type'] = "nucleotide"
+    data['genebank-seq'] = "ADZ48385.1\nABM89502.1"
+
+    response = test_client.post(
+        URL.CONSENSUS_SEQUENCE_GENE_BANK_POST, data=json.dumps(data), content_type='application/json'
+    )
+
+    calculations = Calculation.query.all()
+
+    assert response.status_code == 400
+    assert len(calculations) == 0
+
+
+def test_get_sequences_tools_ok(test_client):
+    response = test_client.get(URL.SEQUENCES_TOOLS_GET)
+
+    assert response.status_code == 200
+    assert b'Sequences Tools' in response.data
+
+
+def test_post_sequences_tools_ok(test_client):
+    data = dict()
+    data[
+        'sequences'
+    ] = """>2765658
+CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGATGAGACCGTGGAATAAACGATCGAGTG
+AATCCGGAGGACCGGTGTACTCAGCTCACCGGGGGCATTGCTCCCGTGGTGACCCTGATTTGTTGTTGGG
+CCGCCTCGGGAGCGTCCATGGCGGGTTTGAACCTCTAGCCCGGCGCAGTTTGGGCGCCAAGCCATATGAA
+AGCATCACCGGCGAATGGCATTGTCTTCCCCAAAACCCGGAGCGGCGGCGTGCTGTCGCGTGCCCAATGA
+
+
+>2765657
+CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGTTGAGACAACAGAATATATGATCGAGTG
+AATCTGGAGGACCTGTGGTAACTCAGCTCGTCGTGGCACTGCTTTTGTCGTGACCCTGCTTTGTTGTTGG
+GCCTCCTCAAGAGCTTTCATGGCAGGTTTGAACTTTAGTACGGTGCAGTTTGCGCCAAGTCATATAAAGC
+
+
+>2765656
+CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGTTGAGACAGCAGAACATACGATCGAGTG
+AATCCGGAGGACCCGTGGTTACACGGCTCACCGTGGCTTTGCTCTCGTGGTGAACCCGGTTTGCGACCGG
+GCCGCCTCGGGAACTTTCATGGCGGGTTTGAACGTCTAGCGCGGCGCAGTTTGCGCCAAGTCATATGGAG"""
+
+    sequences_types = ['complement', 'reverse_and_complement', 'reverse', 'transcription', 'translation_to_amino_acid']
+
+    for sequence_type in sequences_types:
+        data['type'] = sequence_type
+
+        response = test_client.post(URL.SEQUENCES_TOOLS_POST, data=json.dumps(data), content_type='application/json')
+
+        calculation = Calculation.query.first()
+
+        assert response.status_code == 200
+        assert ModuleName.SEQUENCES_TOOLS in calculation.module_name
