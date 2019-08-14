@@ -1,0 +1,114 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2.1
+
+executors:
+  python:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/python:3.7
+
+jobs:
+  checkout_code:
+    executor: python
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
+
+  run_tests:
+    executor: python
+    docker:
+      # specify the version you desire here
+      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
+      - image: circleci/python:3.7
+        environment:
+          DATABASE_URL: mysql://user:passw0rd@localhost/test_db
+          SECRET_KEY: secret
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      - image: circleci/mysql:8.0.4
+        environment:
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+
+      # run tests!
+      # this example uses Django's built-in test-runner
+      # other common Python testing frameworks include pytest and nose
+      # https://pytest.org
+      # https://nose.readthedocs.io
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements/dev.txt" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements/dev.txt
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "requirements/dev.txt" }}
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            pytest
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
+
+#  push_and_deploy:
+#    executor: aws-cli/default
+#    working_directory: ~/repo
+#    steps:
+#      - attach_workspace:
+#          at: ~/repo
+#      - aws-cli/install
+#      - aws-cli/configure:
+#          aws-access-key-id: AWS_ACCESS_KEY_ID_STAGING
+#          aws-secret-access-key: AWS_SECRET_ACCESS_KEY_STAGING
+#          aws-region: AWS_DEFAULT_REGION_STAGING
+#      - aws-code-deploy/push-bundle:
+#          application-name: calluna-journeyhive-staging-second_app
+#          bundle-bucket: calluna-bucket-journeyhive-staging
+#          bundle-key: codedeploy/dummy/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BUILD_NUM}
+#          bundle-source: .
+#      - aws-code-deploy/deploy-bundle:
+#          application-name: calluna-journeyhive-staging-second_app
+#          deployment-group: calluna-journeyhive-staging-second_app-group
+#          bundle-bucket: calluna-bucket-journeyhive-staging
+#          bundle-key: codedeploy/dummy/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BUILD_NUM}
+
+workflows:
+  version: 2.1
+  test-and-deploy:
+    jobs:
+      - checkout_code
+      - run_tests:
+          requires:
+            - checkout_code
+#      - push_and_deploy:
+#          requires:
+#            - run_tests
+#          filters:
+#            branches:
+#              only:
+#                - master
