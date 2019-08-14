@@ -1,4 +1,5 @@
 import base64
+import os
 from datetime import datetime
 
 import pdfkit
@@ -18,6 +19,8 @@ from flask_migrate import Migrate
 
 from app.database import db
 from config import app_config
+
+APP_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 login_manager = LoginManager()
 migrate = Migrate()

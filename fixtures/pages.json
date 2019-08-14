@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "name": "Gene-Calc",
+    "is_active": 1,
+    "slug": "/",
+    "text": "Test content text",
+    "desc": "Test content des"
+  },
+  {
+    "id": 2,
+    "name": "Materials & Methods",
+    "is_active": 1,
+    "slug": "/materials-and-methods",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  },
+  {
+    "id": 3,
+    "name": "Hardy-Weinberg equilibrium",
+    "is_active": 1,
+    "slug": "/hardy-weinberg-page",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  },
+  {
+    "id": 4,
+    "name": "Chi-Square tests",
+    "is_active": 1,
+    "slug": "/chi-square-page",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  },
+  {
+    "id": 5,
+    "name": "Polymorphic information content & Heterozygosity",
+    "is_active": 1,
+    "slug": "/pic",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  },
+  {
+    "id": 6,
+    "name": "Genetic Distance",
+    "is_active": 1,
+    "slug": "/genetic-distance",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  },
+  {
+    "id": 7,
+    "name": "Dot plot",
+    "is_active": 1,
+    "slug": "/sequences-analysis-tools/dot-plot",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  },
+  {
+    "id": 8,
+    "name": "Consensus Sequence",
+    "is_active": 1,
+    "slug": "/sequences-analysis-tools/consensus-sequence",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  },
+  {
+    "id": 9,
+    "name": "Sequences Tools",
+    "is_active": 1,
+    "slug": "/sequences-analysis-tools/sequences-tools",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  },
+  {
+    "id": 10,
+    "name": "About",
+    "is_active": 1,
+    "slug": "/about",
+    "text": "Test content text",
+    "desc": "Test content des"
+  },
+  {
+    "id": 11,
+    "name": "Our donors and cooperators",
+    "is_active": 1,
+    "slug": "/donors",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  },
+  {
+    "id": 12,
+    "name": "Contact Us",
+    "is_active": 1,
+    "slug": "/contact",
+    "text": "Test content text",
+    "desc": "Test content des"
+  },
+  {
+    "id": 13,
+    "name": "Privacy policy",
+    "is_active": 1,
+    "slug": "/privacy-policy",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  }
+]

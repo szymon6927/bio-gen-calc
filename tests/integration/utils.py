@@ -1,5 +1,11 @@
+import json
+import os
+
 from werkzeug.security import generate_password_hash
 
+from app import APP_DIR
+from app.common.constants import ModuleName
+from app.customer_calculation.models import CustomerCalculation
 from app.database import db
 from app.userpanel.models import Customer
 from tests.integration.constants import URL
@@ -44,3 +50,44 @@ def login_customer(test_client, login_or_email, password):
     data['password'] = password
 
     return test_client.post(URL.USERPANEL_LOGIN_POST, data=data, follow_redirects=True)
+
+
+def create_calculations(logged_customer):
+    fake_calculations = [
+        {'title': 'HW calculation', 'module_name': ModuleName.HARDY_WEINBERG, 'customer_input': "{}", 'result': "{}"},
+        {
+            'title': 'PIC dominant calculation',
+            'module_name': ModuleName.PIC_DOMINANT,
+            'customer_input': "{}",
+            'result': "{}",
+        },
+        {
+            'title': 'PIC codominant calculation',
+            'module_name': ModuleName.PIC_CODOMINANT,
+            'customer_input': "{}",
+            'result': "{}",
+        },
+    ]
+
+    for fake_calculation in fake_calculations:
+        calculation = CustomerCalculation(
+            customer=logged_customer,
+            title=fake_calculation.get('title'),
+            module_name=fake_calculation.get('module_name'),
+            customer_input=fake_calculation.get('customer_input'),
+            result=fake_calculation.get('result'),
+        )
+
+        db.session.add(calculation)
+        db.session.commit()
+
+    return fake_calculations
+
+
+def get_pages_fixture():
+    pages_fixture_file = os.path.join(APP_DIR, 'fixtures', 'pages.json')
+
+    with open(pages_fixture_file) as page_fixture:
+        data = json.load(page_fixture)
+
+        return data
