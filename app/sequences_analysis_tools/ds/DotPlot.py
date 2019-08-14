@@ -132,19 +132,18 @@ class DotPlot:
 
         with Entrez.efetch(db="nucleotide", rettype="gb", retmode="text", id=self.data['seq-name-1']) as handle:
             seq_record = SeqIO.read(handle, "gb")
+            seq_name_1 = str(seq_record.id) + " " + str(seq_record.description)[:30]
             self.data['seq-content-1'] = str(seq_record.seq)
 
         with Entrez.efetch(db="nucleotide", rettype="gb", retmode="text", id=self.data['seq-name-2']) as handle:
             seq_record = SeqIO.read(handle, "gb")
+            seq_name_2 = str(seq_record.id) + " " + str(seq_record.description)[:30]
             self.data['seq-content-2'] = str(seq_record.seq)
-
-        seq_name_1 = self.data['seq-name-1']
-        seq_name_2 = self.data['seq-name-2']
 
         alignment = self.get_alignments()
 
-        add_result(self, f'Sequence {seq_name_1} lenght', len(self.data['seq-content-1']))
-        add_result(self, f'Sequence {seq_name_2} lenght', len(self.data['seq-content-2']))
+        add_result(self, f'Seq id. {seq_name_1} ... lenght [bp]', len(self.data['seq-content-1']))
+        add_result(self, f'Seq id. {seq_name_2} ... lenght [bp]', len(self.data['seq-content-2']))
 
         ident = alignment.count("|")
 
