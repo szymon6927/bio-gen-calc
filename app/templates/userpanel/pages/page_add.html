@@ -1,10 +1,10 @@
 {% extends 'userpanel/base.html' %}
 
 {% block userpanel_body %}
-  <h3>Edit page</h3>
+  <h3>Add new page</h3>
   <hr>
 
-  <form class="add-page" action="{{ url_for('userpanel.add_new_page') }}" method="POST"
+  <form class="add-page" action="{{ url_for('userpanel.page_add_view') }}" method="POST"
         enctype="multipart/form-data">
     {{ form.hidden_tag() }}
 
