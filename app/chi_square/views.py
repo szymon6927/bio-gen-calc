@@ -35,7 +35,7 @@ def get_data():
 
         return jsonify({'data': result})
     except TypeError as e:
-        abort(Response(f'Please check type of input data, {str(e)}', 409))
+        abort(Response(f'Please check type of input data, {str(e)}', 422))
     except Exception as e:
         abort(Response(str(e), 400))
 
@@ -54,7 +54,7 @@ def get_goodness_data():
 
         return jsonify({'data': result})
     except TypeError as e:
-        abort(Response(f'Please check type of input data, {str(e)}', 409))
+        abort(Response(f'Please check type of input data, {str(e)}', 422))
     except Exception as e:
         abort(Response(str(e), 400))
 

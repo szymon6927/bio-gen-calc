@@ -7,6 +7,7 @@ RUN apt-get install -y \
             python3-dev \
             libffi-dev \
             python-dev \
+            sqlite3 \
             wkhtmltopdf \
             muscle
 

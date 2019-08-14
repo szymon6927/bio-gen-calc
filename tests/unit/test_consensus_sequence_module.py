@@ -1,10 +1,7 @@
-import pytest
-
 from app.helpers.tests_helper import find_value_by_name
 from app.sequences_analysis_tools.ds.ConsensusSequence import ConsensusSequence
 
 
-@pytest.mark.skip(reason="muscle not installed")
 def test_consensus_sequence_raw_seq_basic():
     data = dict()
     data[

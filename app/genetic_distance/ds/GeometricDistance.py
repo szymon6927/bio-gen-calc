@@ -4,7 +4,7 @@ from math import sqrt
 
 from scipy.stats.mstats import gmean
 
-from .GeneticDistance import GeneticDistance
+from app.genetic_distance.ds.GeneticDistance import GeneticDistance
 
 
 class GeometricDistance(GeneticDistance):

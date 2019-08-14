@@ -1,140 +1,45 @@
 import pytest
-from werkzeug.security import generate_password_hash
 
 from app import create_app
 from app.database import db
-from app.userpanel.models import Customer
 from app.userpanel.models import Page
+from tests.integration.utils import get_pages_fixture
 
 
-@pytest.fixture(scope='module')
-def test_client():
-    flask_app = create_app('testing')
-    flask_app.config.update(SQLALCHEMY_DATABASE_URI='sqlite://')
+@pytest.fixture
+def app():
+    """Create and configure a new app instance for each test."""
+    app = create_app('testing')
+    app.config.update(SQLALCHEMY_DATABASE_URI='sqlite://')
 
-    testing_client = flask_app.test_client()
+    with app.app_context():
+        db.create_all()
 
-    ctx = flask_app.app_context()
-    ctx.push()
+        load_pages()
 
-    yield testing_client  # this is where the testing happens!
+        yield app
 
-    ctx.pop()
+        db.drop_all()
 
 
-@pytest.fixture(scope='module')
-def init_db():
-    db.create_all()
+@pytest.fixture
+def test_client(app):
+    """A test client for the app."""
+    return app.test_client()
 
-    customers, pages = create_db_rows()
 
-    for customer in customers:
-        db.session.add(customer)
+def load_pages():
+    pages_fixture = get_pages_fixture()
 
-    for page in pages:
+    for page_fixture in pages_fixture:
+        page = Page(
+            name=page_fixture.get('name'),
+            is_active=page_fixture.get('is_active'),
+            slug=page_fixture.get('slug'),
+            text=page_fixture.get('text'),
+            desc=page_fixture.get('desc'),
+        )
+
         db.session.add(page)
 
     db.session.commit()
-
-    yield db
-
-    db.drop_all()
-
-
-def create_db_rows():
-    customers = [
-        Customer(
-            first_name="Test 1",
-            last_name="Test 1",
-            email="test1@test.com",
-            login="test1",
-            password=generate_password_hash("testing123", method='sha256'),
-        ),
-        Customer(
-            first_name="Test 2",
-            last_name="Test 2",
-            email="test2@test.com",
-            login="test2",
-            password=generate_password_hash("testing321", method='sha256'),
-        ),
-    ]
-
-    pages = [
-        Page(name="Gene-Calc", is_active=1, breadcrumbs="/", text="Test content text", desc="Test content desc"),
-        Page(
-            name="Materials & Methods",
-            is_active=1,
-            breadcrumbs="/materials-and-methods",
-            text="Test content text",
-            desc="Test content desc",
-        ),
-        Page(
-            name="Hardy-Weinberg equilibrium",
-            is_active=1,
-            breadcrumbs="/hardy-weinber-page",
-            text="Test content text",
-            desc="Test content desc",
-        ),
-        Page(
-            name="Chi-Square tests",
-            is_active=1,
-            breadcrumbs="/chi-square-page",
-            text="Test content text",
-            desc="Test content desc",
-        ),
-        Page(
-            name="Polymorphic information content & Heterozygosity",
-            is_active=1,
-            breadcrumbs="/pic",
-            text="Test content text",
-            desc="Test content desc",
-        ),
-        Page(
-            name="Genetic Distance",
-            is_active=1,
-            breadcrumbs="/genetic-distance",
-            text="Test content text",
-            desc="Test content desc",
-        ),
-        Page(
-            name="Dot plot",
-            is_active=1,
-            breadcrumbs="/sequences-analysis-tools/dot-plot",
-            text="Test content text",
-            desc="Test content desc",
-        ),
-        Page(
-            name="Consensus Sequence",
-            is_active=1,
-            breadcrumbs="/sequences-analysis-tools/consensus-sequence",
-            text="Test content text",
-            desc="Test content desc",
-        ),
-        Page(
-            name="Sequences Tools",
-            is_active=1,
-            breadcrumbs="/sequences-analysis-tools/sequences-tools",
-            text="Test content text",
-            desc="Test content desc",
-        ),
-        Page(name="About", is_active=1, breadcrumbs="/about", text="Test content text", desc="Test content desc"),
-        Page(
-            name="Our donors and cooperators",
-            is_active=1,
-            breadcrumbs="/donors",
-            text="Test content text",
-            desc="Test content desc",
-        ),
-        Page(
-            name="Contact Us", is_active=1, breadcrumbs="/contact", text="Test content text", desc="Test content desc"
-        ),
-        Page(
-            name="Privacy policy",
-            is_active=1,
-            breadcrumbs="/privacy-policy",
-            text="Test content text",
-            desc="Test content desc",
-        ),
-    ]
-
-    return customers, pages

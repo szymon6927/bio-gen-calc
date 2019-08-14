@@ -49,9 +49,9 @@ def get_data():
             {'data': {'dendro_base64': gen_distance.render_dendrogram(), 'matrix': gen_distance.redner_matrix()}}
         )
     except TypeError as e:
-        abort(Response(f'Please check type of input data. {str(e)}', 409))
+        abort(Response(f'Please check type of input data. {str(e)}', 422))
     except ValueError as e:
-        abort(Response(f'The quantity or quality of the data is inappropriate! {str(e)}', 409))
+        abort(Response(f'The quantity or quality of the data is inappropriate! {str(e)}', 422))
     except Exception as e:
         abort(Response(str(e), 400))
 

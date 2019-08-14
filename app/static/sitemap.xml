@@ -27,6 +27,11 @@
         <priority>0.80</priority>
     </url>
     <url>
+        <loc>https://gene-calc.pl/hardy-weinberg-page</loc>
+        <lastmod>2019-08-04T20:56:22+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
         <loc>https://gene-calc.pl/chi-square-page</loc>
         <lastmod>2018-10-16T20:56:22+00:00</lastmod>
         <priority>0.80</priority>

@@ -44,8 +44,8 @@ def test_dotplot_genebank_basic():
     results = dotplot.genebank_seq()
 
     expected_results = [
-        {'name': "Sequence 2765658 lenght", 'value': 740},
-        {'name': "Sequence 2765657 lenght", 'value': 753},
+        {'name': "Seq id. Z78533.1 C.irapeanum 5.8S rRNA gene and ... lenght [bp]", 'value': 740},
+        {'name': "Seq id. Z78532.1 C.californicum 5.8S rRNA gene  ... lenght [bp]", 'value': 753},
         {'name': "Coverage [%]", 'value': 98.3},
         {'name': "Average identity [%]", 'value': 82.4},
         {'name': "Fragmental identity [%]", 'value': 83.1},

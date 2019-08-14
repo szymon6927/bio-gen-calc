@@ -2,7 +2,9 @@ from datetime import datetime
 from functools import update_wrapper
 from functools import wraps
 
+from flask import abort
 from flask import make_response
+from flask_login import current_user
 
 
 def nocache(view):
@@ -16,3 +18,14 @@ def nocache(view):
         return response
 
     return update_wrapper(no_cache, view)
+
+
+def superuser_required(view):
+    @wraps(view)
+    def decorator(*args, **kwargs):
+        if not current_user.is_superuser:
+            abort(403)
+
+        return view(*args, **kwargs)
+
+    return update_wrapper(decorator, view)

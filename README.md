@@ -202,6 +202,19 @@ In case local development by `virtualenv`
 DOCKER=0
 ```
 
+## Tests
+
+To run tests via docker-compose type:
+```
+docker-compose -f docker-compose.local.yml exec backend pytest -v
+```
+
+If you want to run the tests without docker you have to install dependencies which I have mentioned before in section
+`Local development [virtualenv]` then in root app directory type:
+```
+pytest -v
+```
+
 ## Pre-commit config
 
 We use a pre-commit hook which checking a quality of code.
