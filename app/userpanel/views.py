@@ -19,6 +19,7 @@ from app.customer_calculation.models import CustomerCalculation
 from app.database import db
 from app.helpers.file_helper import save_picture
 from app.userpanel.decorators import nocache
+from app.userpanel.decorators import superuser_required
 from app.userpanel.forms import AdminCustomerEditForm
 from app.userpanel.forms import CustomerEditForm
 from app.userpanel.forms import LoginForm
@@ -110,9 +111,7 @@ def dashboard_view():
 @userpanel.route('/userpanel/editprofile', methods=['GET', 'POST'])
 @login_required
 def edit_profile_view():
-    customer_id = current_user.id
-
-    profile = Customer.query.get_or_404(customer_id)
+    profile = Customer.query.get_or_404(current_user.id)
     form = CustomerEditForm(obj=profile)
 
     if form.validate_on_submit():
@@ -214,6 +213,8 @@ def calculation_delete_view(calculation_id):
     db.session.delete(calculation)
     db.session.commit()
 
+    flash('You have successfully deleted the calculation.', 'success')
+
     return redirect(url_for('userpanel.calculations_list_view'))
 
 
@@ -227,6 +228,7 @@ def calculation_details_view(calculation_id):
 
 @userpanel.route('/userpanel/pages')
 @login_required
+@superuser_required
 def pages_list_view():
     pages = Page.query.all()
     return render_template('userpanel/pages/pages.html', pages=pages)
@@ -234,6 +236,7 @@ def pages_list_view():
 
 @userpanel.route('/userpanel/pages/<int:page_id>', methods=['GET', 'POST'])
 @login_required
+@superuser_required
 def page_details_view(page_id):
     page = Page.query.get_or_404(page_id)
     form = PageEditForm(obj=page)
@@ -260,6 +263,7 @@ def page_details_view(page_id):
 
 @userpanel.route('/userpanel/pages/add-page', methods=['GET', 'POST'])
 @login_required
+@superuser_required
 def page_add_view():
     form = PageEditForm()
 
@@ -286,6 +290,7 @@ def page_add_view():
 
 @userpanel.route('/userpanel/pages/delete/<int:page_id>')
 @login_required
+@superuser_required
 def page_delete_view(page_id):
     page = Page.query.get_or_404(page_id)
 
@@ -299,6 +304,7 @@ def page_delete_view(page_id):
 
 @userpanel.route('/userpanel/customers/')
 @login_required
+@superuser_required
 def customers_list_view():
     customers = Customer.query.all()
     return render_template('userpanel/customers/customers.html', customers=customers)
@@ -306,6 +312,7 @@ def customers_list_view():
 
 @userpanel.route('/userpanel/customers/<int:customer_id>', methods=['GET', 'POST'])
 @login_required
+@superuser_required
 def customer_details_view(customer_id):
     customer = Customer.query.get_or_404(customer_id)
     form = AdminCustomerEditForm(obj=customer)
@@ -331,6 +338,7 @@ def customer_details_view(customer_id):
 
 @userpanel.route('/userpanel/customers/delete/<int:customer_id>')
 @login_required
+@superuser_required
 def customer_delete_view(customer_id):
     customer = Customer.query.get_or_404(customer_id)
 
