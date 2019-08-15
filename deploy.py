@@ -22,7 +22,7 @@ class Command:
 
     @property
     def git_clone(self):
-        return f"git -C {self.ROOT_PATH} clone -b trello-15-circleci https://github.com/szymon6927/bio-gen-calc.git"
+        return f"git -C {self.ROOT_PATH} clone https://github.com/szymon6927/bio-gen-calc.git"
 
     @property
     def copy_passenger_wsgi(self):
@@ -53,7 +53,7 @@ class Command:
 
     @property
     def upgrade_db(self):
-        return f"source {self.VIRTUAL_ENV_PATH} && flask db upgrade && deactivate"
+        return f"{self.ROOT_PATH}upgrade_db.sh"
 
     @property
     def restart_service(self):
@@ -66,7 +66,7 @@ class Command:
         return backup_package, f"cp -r {self.ROOT_PATH}public_python/ {self.ROOT_PATH}{backup_package}/"
 
     def revert_deploy(self, deploy_package):
-        return f"rm -rf {self.APP_PATH} && mv {self.ROOT_PATH}{deploy_package}/ public_python"
+        return f"cp -r {self.ROOT_PATH}{deploy_package}/* {self.APP_PATH}"
 
 
 class Deployer:
@@ -79,6 +79,7 @@ class Deployer:
 
         try:
             self.client = paramiko.SSHClient()
+            self.client.load_system_host_keys()
             self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
             self.client.connect(
@@ -86,6 +87,7 @@ class Deployer:
                 port=SSHCredentials.SSH_PORT,
                 username=SSHCredentials.SSH_USERNAME,
                 password=SSHCredentials.SSH_PASSWORD,
+                timeout=3600,
             )
         except paramiko.AuthenticationException:
             print("Authentication failed, please verify your credentials")
