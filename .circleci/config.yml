@@ -73,15 +73,16 @@ jobs:
           path: test-reports
           destination: test-reports
 
-  push_and_deploy:
-    executor: python
-    working_directory: ~/repo
+  deploy:
+    machine:
+      enabled: true
     steps:
       - attach_workspace:
           at: ~/repo
       - run:
-        name: deploy master branch
-        command: python3 deploy.py
+          name: deploy master branch
+          command: |
+            python3 deploy.py
 
 workflows:
   version: 2.1
@@ -91,7 +92,7 @@ workflows:
       - run_tests:
           requires:
             - checkout_code
-      - push_and_deploy:
+      - deploy:
           requires:
             - run_tests
           filters:
