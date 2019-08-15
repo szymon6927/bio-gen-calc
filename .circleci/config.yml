@@ -73,27 +73,15 @@ jobs:
           path: test-reports
           destination: test-reports
 
-#  push_and_deploy:
-#    executor: aws-cli/default
-#    working_directory: ~/repo
-#    steps:
-#      - attach_workspace:
-#          at: ~/repo
-#      - aws-cli/install
-#      - aws-cli/configure:
-#          aws-access-key-id: AWS_ACCESS_KEY_ID_STAGING
-#          aws-secret-access-key: AWS_SECRET_ACCESS_KEY_STAGING
-#          aws-region: AWS_DEFAULT_REGION_STAGING
-#      - aws-code-deploy/push-bundle:
-#          application-name: calluna-journeyhive-staging-second_app
-#          bundle-bucket: calluna-bucket-journeyhive-staging
-#          bundle-key: codedeploy/dummy/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BUILD_NUM}
-#          bundle-source: .
-#      - aws-code-deploy/deploy-bundle:
-#          application-name: calluna-journeyhive-staging-second_app
-#          deployment-group: calluna-journeyhive-staging-second_app-group
-#          bundle-bucket: calluna-bucket-journeyhive-staging
-#          bundle-key: codedeploy/dummy/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BUILD_NUM}
+  push_and_deploy:
+    executor: python
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+        name: deploy master branch
+        command: python3 deploy.py
 
 workflows:
   version: 2.1
@@ -103,10 +91,10 @@ workflows:
       - run_tests:
           requires:
             - checkout_code
-#      - push_and_deploy:
-#          requires:
-#            - run_tests
-#          filters:
-#            branches:
-#              only:
-#                - master
+      - push_and_deploy:
+          requires:
+            - run_tests
+          filters:
+            branches:
+              only:
+                - master
