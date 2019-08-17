@@ -27,14 +27,6 @@ def test_command_revert_deploy():
     assert "cp -r" in revert_command
 
 
-def test_deployer_connect():
-    deployer = Deployer()
-
-    result = deployer._connect()
-
-    assert result is False
-
-
 @patch('deploy.Deployer._execute_command')
 @patch('deploy.Deployer._connect')
 def test_deployer_make_backup(mock_connect, mock_exec_command):
