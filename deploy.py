@@ -90,16 +90,16 @@ class Deployer:
                 timeout=3600,
             )
         except paramiko.AuthenticationException:
-            print("Authentication failed, please verify your credentials")
+            print("🚫 Authentication failed, please verify your credentials")
             result_flag = False
         except paramiko.SSHException as ssh_exception:
-            print(f"Could not establish SSH connection: {ssh_exception}")
+            print(f"🚫 Could not establish SSH connection: {ssh_exception}")
             result_flag = False
         except socket.timeout as e:
-            print(f"Connection timed out, message: {str(e)}")
+            print(f"🚫 Connection timed out, message: {str(e)}")
             result_flag = False
         except Exception as e:
-            print(f"Exception in connecting to the server, message: {str(e)}")
+            print(f"🚫 Exception in connecting to the server, message: {str(e)}")
             result_flag = False
             self.client.close()
         else:
@@ -115,57 +115,65 @@ class Deployer:
             connection = self._connect()
 
             if connection:
-                print(f"Executing command: {command}")
-
                 stdin, stdout, stderr = self.client.exec_command(command, timeout=3600)
-                ssh_output = stdout.read().decode()
-                ssh_error = stderr.read().decode()
-
                 status = stdout.channel.recv_exit_status()
-                print(f"Status: {status}")
+                ssh_stdout_output = stdout.read().decode()
+                ssh_stderr_output = stderr.read().decode()
+
+                print(f"👉 [Command] {command} | [status={status}]")
 
                 if status != 0:
-                    print(f"Problem occurred while running command: {command}")
-                    print(f"The error is {ssh_error}")
+                    print(f"❌ Problem occurred, error: {ssh_stderr_output}")
                     result_flag = False
-                else:
-                    print(f"{command} -> command execution completed successfully")
-                    print(f"Output is: ssh_output - {ssh_output}, ssh_error - {ssh_error}")
+
+                print(f"👆 execution completed successfully")
+
+                if ssh_stdout_output or ssh_stderr_output:
+                    print("Full output 👇")
+                    print(f"💪 [STDOUT] - {ssh_stdout_output}")
+                    print(f"💪 [STDERR] - {ssh_stderr_output}")
 
                 self.client.close()
             else:
-                print("Could not establish SSH connection")
+                print("🚫 Could not establish SSH connection")
                 self.client.close()
                 result_flag = False
         except socket.timeout:
-            print(f"Command: {command} - timed out.")
+            print(f"🚫 {command} [timed out].")
             self.client.close()
             result_flag = False
         except paramiko.SSHException:
-            print(f"Failed to execute the command: {command}")
+            print(f"🚫 Failed to execute the command: {command}")
             self.client.close()
             result_flag = False
 
         return result_flag
 
     def make_backup(self):
+        print(f"⌛ Creating a backup.")
+
         backup_name, command = self.command.make_backup()
 
         executed = self._execute_command(command)
 
         if not executed:
-            sys.exit("Error! Can not create a backup !!!")
+            sys.exit("❌ Error! Can not create a backup !!!")
 
+        print(f"✅ Backup {backup_name} created correctly!")
+        print("------------------------------------------------------------------------")
         return backup_name
 
     def revert_deploy(self, backup_name):
+        print(f"⌛ Reverting deployment")
+
         command = self.command.revert_deploy(backup_name)
 
         executed = self._execute_command(command)
 
         if not executed:
-            sys.exit("Error! Can not revert a deploy !!!")
+            sys.exit("❌ Error! Can not revert a deploy !!!")
 
+        print(f"✅ Deployment reverted correctly!")
         self._execute_command(self.command.restart_service)
 
     def deploy(self):
@@ -185,22 +193,20 @@ class Deployer:
         }
 
         for step, command in workflow.items():
-            print(f"Running step: {step}")
+            print(f"⌛ RUNNING STEP: {step}")
 
             executed = self._execute_command(command)
             if not executed:
-                print(f"Something went from on step: {step} with command: {command}")
-                print("Reverting deploy!")
+                print(f"❌ Something went from on step: {step} with command: {command}")
+                print("✅ Reverting deploy!")
                 self.revert_deploy(backup_name)
                 break
 
+            print("------------------------------------------------------------------------")
+
 
 if __name__ == '__main__':
-    print("**********************************")
-    print("**********************************")
-    print("**********************************")
+    print("❗❗ Run deployment ✨ 🚀")
     deployer = Deployer()
     deployer.deploy()
-    print("**********************************")
-    print("**********************************")
-    print("**********************************")
+    print("🍺 Deployment finished 🔥")
