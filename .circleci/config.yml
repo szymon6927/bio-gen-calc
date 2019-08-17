@@ -1,0 +1,101 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2.1
+
+executors:
+  python:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/python:3.7
+
+jobs:
+  checkout_code:
+    executor: python
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
+
+  run_tests:
+    executor: python
+    docker:
+      # specify the version you desire here
+      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
+      - image: circleci/python:3.7
+        environment:
+          DATABASE_URL: mysql://user:passw0rd@localhost/test_db
+          SECRET_KEY: secret
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      - image: circleci/mysql:8.0.4
+        environment:
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
+
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: install wkhtmltopdf
+          command: sudo apt-get install wkhtmltopdf
+      - run:
+          name: install muscle
+          command: sudo apt-get install muscle
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements/dev.txt" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements/dev.txt
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "requirements/dev.txt" }}
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            pytest
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
+
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: deploy master branch
+          command: |
+            python3 deploy.py
+
+workflows:
+  version: 2.1
+  test-and-deploy:
+    jobs:
+      - checkout_code
+      - run_tests:
+          requires:
+            - checkout_code
+      - deploy:
+          requires:
+            - run_tests
+          filters:
+            branches:
+              only:
+                - master

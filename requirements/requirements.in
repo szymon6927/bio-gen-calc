@@ -10,9 +10,9 @@ mysql-connector-python
 mysqlclient
 biopython
 matplotlib
-numpy
+numpy==1.16.4
 pandas
-scipy
+scipy==1.2.2
 pdfkit
 Pillow
 pytest
