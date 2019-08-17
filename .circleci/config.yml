@@ -74,8 +74,9 @@ jobs:
           destination: test-reports
 
   deploy:
-    machine:
-      enabled: true
+    executor: python
+    docker:
+      - image: circleci/python:3.7
     steps:
       - attach_workspace:
           at: ~/repo
@@ -95,7 +96,7 @@ workflows:
       - deploy:
           requires:
             - run_tests
-          filters:
-            branches:
-              only:
-                - master
+#          filters:
+#            branches:
+#              only:
+#                - master
