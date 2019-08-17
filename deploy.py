@@ -175,6 +175,7 @@ class Deployer:
 
         print(f"✅ Deployment reverted correctly!")
         self._execute_command(self.command.restart_service)
+        return True
 
     def deploy(self):
         """Make an deployment"""
@@ -200,9 +201,11 @@ class Deployer:
                 print(f"❌ Something went from on step: {step} with command: {command}")
                 print("✅ Reverting deploy!")
                 self.revert_deploy(backup_name)
-                break
+                return False
 
             print("------------------------------------------------------------------------")
+
+        return True
 
 
 if __name__ == '__main__':
