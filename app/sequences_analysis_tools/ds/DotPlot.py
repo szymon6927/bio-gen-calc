@@ -88,8 +88,8 @@ class DotPlot:
         pylab.scatter(x, y)
         pylab.xlim(0, len(rec_one) - window)
         pylab.ylim(0, len(rec_two) - window)
-        pylab.xlabel(f'{rec_one_name[:20]} (length {len(rec_one)} bp) ...')
-        pylab.ylabel(f'{rec_two_name[:20]} (length {len(rec_two)} bp) ...')
+        pylab.xlabel(f'{rec_one_name} (length {len(rec_one)} bp) ...')
+        pylab.ylabel(f'{rec_two_name} (length {len(rec_two)} bp) ...')
         pylab.title("Dot plot - Gene-Calc")
 
         figfile = BytesIO()
@@ -132,13 +132,15 @@ class DotPlot:
 
         with Entrez.efetch(db="nucleotide", rettype="gb", retmode="text", id=self.data['seq-name-1']) as handle:
             seq_record = SeqIO.read(handle, "gb")
-            seq_name_1 = str(seq_record.id) + " " + str(seq_record.description)[:30]
+            seq_name_1 = str(seq_record.id) + " " + str(seq_record.description)[:25]
             self.data['seq-content-1'] = str(seq_record.seq)
+            self.data['seq-name-1'] = seq_name_1
 
         with Entrez.efetch(db="nucleotide", rettype="gb", retmode="text", id=self.data['seq-name-2']) as handle:
             seq_record = SeqIO.read(handle, "gb")
-            seq_name_2 = str(seq_record.id) + " " + str(seq_record.description)[:30]
+            seq_name_2 = str(seq_record.id) + " " + str(seq_record.description)[:25]
             self.data['seq-content-2'] = str(seq_record.seq)
+            self.data['seq-name-2'] = seq_name_2
 
         alignment = self.get_alignments()
 

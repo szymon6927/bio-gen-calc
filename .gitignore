@@ -134,5 +134,7 @@ dmypy.json
 
 # App
 app/helpers/temp
+.vscode/
+*.swp
 
 # End of https://www.gitignore.io/api/flask
