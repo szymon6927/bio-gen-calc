@@ -12,7 +12,7 @@ RUN apt-get install -y \
             muscle
 
 COPY requirements /requirements
-RUN pip install -r /requirements/requirements.txt
+RUN pip install -r /requirements/dev.txt
 
 COPY wait-for-it.sh /
 RUN chmod +x /wait-for-it.sh
