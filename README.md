@@ -1,5 +1,7 @@
 # Gene-Calc
 
+[![CircleCI](https://circleci.com/gh/szymon6927/bio-gen-calc/tree/master.svg?style=svg)](https://circleci.com/gh/szymon6927/bio-gen-calc/tree/master)
+
 [Gene Calc - Website](https://gene-calc.pl/)
 
 The Gene-Calc is a constantly developed tool dedicated for calculations related to biological sciences, especially focused in field of genetics. Application offers couple of tools such as:
@@ -69,41 +71,6 @@ On Mac OS
 $ set -o allexport; source config.env; set +o allexport;
 ```
 
-In root directory
-```
-$ mkdir instance
-```
-
-and then
-
-```
-$ touch config.py
-```
-
-and here is an example config which you can paste into `config.py` file:
-
-```
-from os import environ
-
-SECRET_KEY = environ.get('SECRET_KEY', 'secret')
-
-DB_USER = environ.get('DB_USER', 'root')
-DB_PASSWORD = environ.get('DB_PASSWORD', '')
-DB_NAME = environ.get('DB_NAME', 'gene_calc')
-DB_HOST = environ.get('DB_HOST', 'localhost')
-
-MYSQL_DATABASE = environ.get('MYSQL_DATABASE')
-MYSQL_USER = environ.get('MYSQL_USER')
-MYSQL_PASSWORD = environ.get('MYSQL_PASSWORD')
-
-USE_DOCKER = int(environ.get('DOCKER', 0))
-
-if USE_DOCKER == 1:
-    SQLALCHEMY_DATABASE_URI = f'mysql://{MYSQL_USER}:{MYSQL_PASSWORD}@database/{MYSQL_DATABASE}'
-else:
-    SQLALCHEMY_DATABASE_URI = f'mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
-```
-
 In your local MySQL database
 ```
 $ mysql -u root
@@ -150,6 +117,8 @@ without this tools it is impossible to correctly run the tests
 
 To start local development using docker:
 
+Create `config.env` file by copying `config.env.tmp` and fill these with required environment variables
+
 Export local environment variables
 
 On Mac OS
@@ -192,6 +161,8 @@ Password: test123test123
 
 ## Env variables
 
+All required env variables are in `config.env.tmp` file
+
 If you want to start local development by docker you have to remember to correctly set up env variables in `config.env`
 ```
 DOCKER=1
@@ -204,7 +175,7 @@ DOCKER=0
 
 ## Tests
 
-To run tests via docker-compose type:
+To run tests via docker-compose type (remember that containers should be running):
 ```
 docker-compose -f docker-compose.local.yml exec backend pytest -v
 ```
@@ -243,14 +214,30 @@ $ make format
 Create your feature branch from master.
 
 Branch naming:
-- pattern: trello-task_id-short-description
+- pattern: trello-task-id-short-description
 - eg: trello-20-remove-flask-admin
 
 Commit names conventions:
-- pattern. [trello-task_id]: commit description
+- pattern. [trello-task-id]: commit description
 - eg. [trello-20]: Removed flask-admin package
 
 After finishing implementation of your feature - create pull request to master branch.
+
+## CI/CD
+
+We are using [CircleCI](https://circleci.com) for continuous integration and continuous deployment.
+
+On each time when Github PR is created the tests are run on CircleCI.
+When all tests passed and there is minimum one approve from a code review, then merge is possible.
+After merge to master branch CircleCI run deployment.
+So after this, if everything goes correctly changes should be visible on production.
+
+## Troubleshooting
+
+1. I have problem with `mysql-client` installation in virtualenv
+
+Comment out mysql-client form `requirements/dev.txt` to complete installation all dev dependencies.
+Like black, pre-commit etc. And use docker instead of virtualenv.
 
 
 ### Theoretical information available from:
