@@ -17,3 +17,5 @@ pdfkit
 Pillow
 pytest
 requests
+scikit-learn
+seaborn
