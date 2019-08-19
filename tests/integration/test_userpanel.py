@@ -412,7 +412,8 @@ def test_get_pages_with_normal_customer(test_client):
 
     response = test_client.get(URL.USERPANEL_PAGES_GET)
 
-    assert response.status_code == 403
+    assert response.status_code == 200
+    assert b'You do not have access here!' in response.data
 
 
 def test_get_page_details(test_client):

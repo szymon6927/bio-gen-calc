@@ -79,7 +79,11 @@ def create_app(config_name):
 
     @app.errorhandler(404)
     def page_not_found(e):
-        return render_template("404.html", title="404 Page not found!")
+        return render_template("error_pages/404.html", title="404 Page not found!")
+
+    @app.errorhandler(403)
+    def page_forbidden(e):
+        return render_template("error_pages/403.html", title="403 Page forbidden")
 
     @app.context_processor
     def inject_now():
