@@ -1,0 +1,22 @@
+<div class="upload-data-sheet">
+
+  <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
+    <form id="seq-upload-form" method="POST" enctype="multipart/form-data">
+      <div class="upload-wrapper mt-5 mb-5">
+        <div class="form-group">
+          <label class="btn btn-primary btn-block" for="data-file">
+            <input type="file" name="file" class="form-control-file" id="data-file" hidden
+                   onchange="$('.upload-file-name').val(this.files[0].name)">
+            Click to upload file
+          </label>
+          <input type="text" class="form-control upload-file-name"/>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
+    <button type="submit" class="btn btn-block btn-danger">Calculate!
+    </button>
+  </div>
+</div>
