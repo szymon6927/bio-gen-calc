@@ -12,6 +12,7 @@ class Customer(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     calculations = db.relationship('CustomerCalculation', backref='customer', lazy='joined')
     activity = db.relationship('CustomerActivity', backref='customer', lazy='joined')
+    ampc_data = db.relationship('AMPCData', backref='customer', lazy='joined')
     first_name = db.Column(db.String(120), nullable=True)
     last_name = db.Column(db.String(120), nullable=True)
     profile_pic = db.Column(db.String(20), nullable=False, default='profile.svg')
