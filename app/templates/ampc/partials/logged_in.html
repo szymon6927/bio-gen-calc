@@ -1,13 +1,13 @@
-<div class="upload-data-sheet">
-  <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
-    <div class="form-group">
-      <label for="model-title">Your model title</label>
-      <input class="form-control non-negative" id="model-title" type="text">
+<div class="pre-train-section upload-data-sheet">
+  <form id="ml-pre-train-form">
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
+      <div class="form-group">
+        <label for="project-name">Your project name</label>
+        <input class="form-control" id="project-name" type="text" required>
+      </div>
     </div>
-  </div>
 
-  <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
-    <form id="ml-upload-form" method="POST" enctype="multipart/form-data">
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
       <div class="upload-wrapper mt-5 mb-5">
         <div class="form-group">
           <label class="btn btn-primary btn-block" for="data-file">
@@ -18,22 +18,28 @@
           <input type="text" class="form-control upload-file-name"/>
         </div>
       </div>
-    </form>
-  </div>
-
-  <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
-    <div class="form-group">
-      <label for="model-type">Choose model type</label>
-      <select class="form-control" id="model-type">
-        <option>-----</option>
-        <option value="classification">classification</option>
-        <option value="regression">regression</option>
-      </select>
     </div>
-  </div>
 
-  <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
-    <button type="submit" class="btn btn-block btn-danger">Calculate!
-    </button>
-  </div>
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
+      <div class="form-group">
+        <label for="model-type">Choose model type</label>
+        <select class="form-control" id="model-type">
+          <option value="classification">classification</option>
+          <option value="regression">regression</option>
+        </select>
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="normalize-dataset">
+        <label class="form-check-label" for="normalize-dataset">Do you want to normalize dataset?</label>
+      </div>
+    </div>
+
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
+      <button type="submit" class="btn btn-block btn-danger pre-train">Pre-train
+      </button>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pre-train-results"></div>
+  </form>
 </div>

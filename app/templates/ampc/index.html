@@ -26,4 +26,9 @@
 {% endblock %}
 
 {% block scripts %}
+  <script src="{{ url_for('static', filename='js/helpers/AppModule.js') }}?ver={{ css_js_ver }}"></script>
+  <script
+    src="{{ url_for('static', filename='js/ampc/AMPCModule.js') }}?ver={{ css_js_ver }}"></script>
+  <script
+    src="{{ url_for('static', filename='js/ampc/AMPCEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}
