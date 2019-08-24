@@ -34,7 +34,7 @@ def remove_temp_file(filename):
 
 
 def allowed_file(filename):
-    allowed_extension = set(['fasta'])
+    allowed_extension = set(['fasta', 'csv', 'xls'])
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extension
 
 
