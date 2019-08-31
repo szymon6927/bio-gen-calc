@@ -1,5 +1,9 @@
 import datetime
+import os
 
+from flask import current_app
+
+from app.ampc.config import AMPC_UPLOAD_PATH
 from app.database import db
 
 
@@ -14,6 +18,9 @@ class AMPCData(db.Model):
     normalization = db.Column(db.Boolean, default=False)
     trained_model = db.Column(db.String(40), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now)
+
+    def dataset_path(self):
+        return os.path.join(current_app.root_path, AMPC_UPLOAD_PATH, self.dataset)
 
     def __repr__(self):
         return f"AMPC data: {self.project_name}, {self.model_type}"
