@@ -1,5 +1,5 @@
 <div class="pre-train-section upload-data-sheet">
-  <form id="ml-pre-train-form">
+  <form id="ml-pre-train-form" class="mb-4">
     <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
       <div class="form-group">
         <label for="project-name">Your project name</label>
@@ -41,5 +41,29 @@
     </div>
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pre-train-results"></div>
+  </form>
+
+  <form class="user-model-choice">
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
+      <div class="form-group">
+        <label for="user-model-choice">Choose model type</label>
+        <select class="form-control">
+          <option value="classification">Model 1</option>
+          <option value="regression">Model 2</option>
+          <option value="regression">Model 3</option>
+          <option value="regression">Model 4</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
+      <button class="btn btn-block btn-danger train">Trainw</button>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 train-errors"></div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 train-success">
+      <p>Model trainded succesfully</p>
+      <a href="#" class="btn btn-danger">Predict</a>
+    </div>
   </form>
 </div>

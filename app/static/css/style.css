@@ -673,8 +673,8 @@ table th[scope=row] {
 }
 
 .side-info::before {
-    font-family: "Font Awesome 5 Free"; 
-    font-weight: 900; 
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     content: "\f129";
     font-size: 21px;
 }
@@ -692,6 +692,11 @@ table th[scope=row] {
 .footer-userpanel {
     border-bottom: 1px solid #fff;
     padding: 10px 0;
+}
+
+.user-model-choice,
+.train-success{
+    display: none;
 }
 
 @media (min-width: 1331px) and (max-width: 1400px) {
