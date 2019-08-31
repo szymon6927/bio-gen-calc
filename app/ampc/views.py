@@ -13,6 +13,8 @@ from werkzeug.utils import secure_filename
 
 from app.ampc.config import AMPC_UPLOAD_PATH
 from app.ampc.models import AMPCData
+from app.ampc.services import pre_train
+from app.ampc.services import train
 from app.common.decorators import add_customer_activity
 from app.database import db
 from app.helpers.file_helper import allowed_file
@@ -53,21 +55,23 @@ def ampc_pre_train():
         db.session.add(ampc_data)
         db.session.commit()
 
-        return jsonify(
-            {
-                'project_name': request.form.get('project_name'),
-                'dataset': filename,
-                'model_type': request.form.get('model_type'),
-                'normalization': request.form.get('normalization'),
-            }
-        )
+        result = pre_train(ampc_data)
+        result.update({'data_id': ampc_data.id})
+        return jsonify(result)
 
     abort(Response('No file, or wrong file extension', 400))
 
 
 @ampc.route('/ampc/train', methods=['POST'])
 def ampc_train():
-    pass
+    data = request.get_json()
+
+    ampc_data_id = data.get('data_id')
+    user_choice = data.get('selected_model')
+
+    model_name = train(int(ampc_data_id), user_choice)
+
+    return jsonify([data, model_name])
 
 
 @ampc.context_processor
