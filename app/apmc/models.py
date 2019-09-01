@@ -24,7 +24,10 @@ class AMPCData(db.Model):
         return os.path.join(current_app.root_path, APMC_DATASET_UPLOAD_PATH, self.dataset)
 
     def model_path(self):
-        return os.path.join(current_app.root_path, APMC_MODELS_UPLOAD_PATH, self.trained_model)
+        if self.trained_model:
+            return os.path.join(current_app.root_path, APMC_MODELS_UPLOAD_PATH, self.trained_model)
+
+        return None
 
     def __repr__(self):
         return f"APMC data: {self.project_name}, {self.model_type}"

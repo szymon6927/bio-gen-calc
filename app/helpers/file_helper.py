@@ -53,5 +53,8 @@ def save_picture(form_picture):
 
 
 def remove_file(file_path):
+    if not file_path:
+        return
+
     if os.path.isfile(file_path):
         os.remove(file_path)
