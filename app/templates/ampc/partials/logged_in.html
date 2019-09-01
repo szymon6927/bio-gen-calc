@@ -40,30 +40,50 @@
       </button>
     </div>
 
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pre-train-results"></div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pre-train-results mt-4"></div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 best-model-recommendation mt-4"></div>
   </form>
 
   <form class="user-model-choice">
     <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12">
+      <div class="card text-white bg-info mb-4 shadow-lg">
+        <div class="card-header">
+          <span class="info-icon"><i class="fas fa-info-circle"></i></span>
+          <span class="mb-0">Important info:</span>
+        </div>
+        <div class="card-body">
+          <p>
+            <span>Model training may take a while. Please be patient. If you have any problems please contact us.</span>
+          </p>
+          <a class="font-weight-bold" href="mailto:contact@gene-calc.pl">contact@gene-calc.pl</a>
+        </div>
+      </div>
+
       <div class="form-group">
         <label for="user-model-choice">Choose model type</label>
-        <select class="form-control">
-          <option value="classification">Model 1</option>
-          <option value="regression">Model 2</option>
-          <option value="regression">Model 3</option>
-          <option value="regression">Model 4</option>
-        </select>
+        <select class="form-control"></select>
       </div>
     </div>
 
     <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 col-12 event-button">
-      <button class="btn btn-block btn-danger train">Trainw</button>
+      <button class="btn btn-block btn-danger train">Train</button>
     </div>
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 train-errors"></div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 train-success">
-      <p>Model trainded succesfully</p>
-      <a href="#" class="btn btn-danger">Predict</a>
+      <div class="card text-white bg-secondary mt-5 mb-5 shadow-lg">
+        <div class="card-header">
+          <span class="info-icon"><i class="fas fa-info-circle"></i></span>
+          <span class="card-title mb-0">Model trained successfully</span>
+        </div>
+        <div class="card-body">
+          <p><strong>Your model is ready to use. Click PREDICT button and
+            then you will be redirected to userpanel where you will be able to use your model and make an
+            prediction.</strong></p>
+
+          <a href="#" class="btn btn-danger btn-block predict">Predict</a>
+        </div>
+      </div>
     </div>
   </form>
 </div>

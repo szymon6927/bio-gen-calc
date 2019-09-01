@@ -20,10 +20,13 @@ class AMPCModule extends AppModule {
 
     result.forEach((item, index) => {
       template += `
-      <div>Model name: ${item.model_name}</div>
-      <div>Accuracy: ${item.accuracy}</div>
-      <div>cross_validate_score: ${item.cross_validate_score}</div>
-      <div>${item.matrix_report}</div>`
+      <div class="pre-train-result mb-3">
+        <div class="item font-weight-bold">Model name: ${item.model_name}</div>
+        <div class="item font-weight-bold">Accuracy: ${item.accuracy}</div>
+        <div class="item font-weight-bold">Cross validate score: ${item.cross_validate_score}</div>
+        <div class="table">${item.matrix_report}</div>
+      </div>
+      <hr>`
     });
 
     wrapper.html(template);
@@ -35,14 +38,33 @@ class AMPCModule extends AppModule {
 
     result.forEach((item, index) => {
       template += `
-      <div class="mb-3">
-        <div>Model name: ${item.model_name}</div>
-        <div>cross_validate_score: ${item.cross_validate_score}</div>
-        <div>MAE: ${item.MAE}</div>
-        <div>MSE: ${item.MSE}</div>
-        <div>R2: ${item.R2}</div>
-      </div>`
+      <div class="pre-train-result mb-3">
+        <div class="item font-weight-bold">Model name: ${item.model_name}</div>
+        <div class="item font-weight-bold">Cross validate score: ${item.cross_validate_score}</div>
+        <div class="item font-weight-bold">MAE: ${item.MAE}</div>
+        <div class="item font-weight-bold">MSE: ${item.MSE}</div>
+        <div class="item font-weight-bold">R2: ${item.R2}</div>
+      </div>
+      <hr>`
     });
+
+    wrapper.html(template);
+  }
+
+  renderBestModelRecommendation(bestModelName) {
+    const wrapper = $('.best-model-recommendation');
+
+    const template = `
+          <div class="card text-white bg-info mb-5 shadow-lg">
+            <div class="card-header">
+              <span class="info-icon"><i class="fas fa-info-circle"></i></span>
+              <span class="card-title mb-0">Best model recommendation</span>
+            </div>
+            <div class="card-body">
+              <p class="mb-0">For the best results we recommend to use:</p>
+              <p><strong>${bestModelName}</strong></p>
+            </div>
+          </div>`;
 
     wrapper.html(template);
   }
@@ -99,6 +121,8 @@ class AMPCModule extends AppModule {
           this.renderPreTrainResultsRegression(result.model_metrics);
         }
 
+        this.renderBestModelRecommendation(result.best_model);
+
         $('.user-model-choice').show();
         this.renderModelChoices(result.user_choices);
 
@@ -124,6 +148,11 @@ class AMPCModule extends AppModule {
     return JSON.stringify(data);
   }
 
+  setPredictHref() {
+    let predictButton = document.querySelector('.predict');
+    predictButton.href = `/userpanel/models/${this.getAmpcDataID()}`
+  }
+
   train() {
     $('.cover').show();
     const path = '/ampc/train';
@@ -140,6 +169,7 @@ class AMPCModule extends AppModule {
         console.log("Successfull!");
         console.log(result);
         $('.cover').hide();
+        this.setPredictHref();
         $('.train-errors').hide();
         $('.train-success').show();
       },
