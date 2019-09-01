@@ -10,17 +10,17 @@ from app.apmc.models import AMPCData
 from app.database import db
 
 
-def pre_train(ampc_data: AMPCData) -> dict:
-    pre_model_creator = PreModelConstructor(model_type=ampc_data.model_type)
+def pre_train(apmc_data: AMPCData) -> dict:
+    pre_model_creator = PreModelConstructor(model_type=apmc_data.model_type)
 
-    loaded_data = load_data(ampc_data.dataset_path())
+    loaded_data = load_data(apmc_data.dataset_path())
     X_array = loaded_data.get('X_array')
     y_vector = loaded_data.get('y_vector')
 
-    validation = Validator(X=X_array, y=y_vector, model_type=ampc_data.model_type)
+    validation = Validator(X=X_array, y=y_vector, model_type=apmc_data.model_type)
     validation.validate()
 
-    split_data = data_set_split(X_array, y_vector, normalization=ampc_data.normalization)
+    split_data = data_set_split(X_array, y_vector, normalization=apmc_data.normalization)
 
     model_metrics, user_choices = pre_model_creator.build_model_metrics(split_data)
 
@@ -31,34 +31,37 @@ def pre_train(ampc_data: AMPCData) -> dict:
     }
 
 
-def train(ampc_data_id, selected_model):
-    ampc_data = AMPCData.query.get_or_404(ampc_data_id)
+def train(apmc_data_id, selected_model):
+    apmc_data = AMPCData.query.get_or_404(apmc_data_id)
 
     repo_factory = {
         ModelTypeChoices.classification: ClassificationModelRepository(),
         ModelTypeChoices.regression: RegressionModelRepository(),
     }
-    repo = repo_factory[ampc_data.model_type]
+    repo = repo_factory[apmc_data.model_type]
 
-    loaded_data = load_data(ampc_data.dataset_path())
+    loaded_data = load_data(apmc_data.dataset_path())
     X_array = loaded_data.get('X_array')
     y_vector = loaded_data.get('y_vector')
 
-    split_data = data_set_split(X_array, y_vector, normalization=ampc_data.normalization)
+    split_data = data_set_split(X_array, y_vector, normalization=apmc_data.normalization)
 
     X_train = split_data.get('X_train')
     y_train = split_data.get('y_train')
 
-    optimizer = repo.get_optimizer(selected_model)
-    hyperparameters, accuracy_gs = optimizer(X_train, y_train)
-
     model_function = repo.get_function(selected_model)
-    model, _ = model_function(**hyperparameters, **split_data)
+    optimizer = repo.get_optimizer(selected_model)
 
-    model_path = Model.export_model(ampc_data_id, selected_model, ampc_data.model_type, model)
+    if optimizer:
+        hyperparameters, accuracy_gs = optimizer(X_train, y_train)
+        model, _ = model_function(**hyperparameters, **split_data)
+    else:
+        model, _ = model_function(**split_data)
 
-    ampc_data.trained_model = model_path
-    db.session.add(ampc_data)
+    model_path = Model.export_model(apmc_data_id, selected_model, apmc_data.model_type, model)
+
+    apmc_data.trained_model = model_path
+    db.session.add(apmc_data)
     db.session.commit()
 
     return model_path

@@ -358,40 +358,40 @@ def customer_delete_view(customer_id):
 
 @userpanel.route('/userpanel/models', methods=['GET'])
 @login_required
-def ampc_list_view():
+def apmc_list_view():
     order_by = request.args.get('order_by', "created_at")
     sort_by = request.args.get('sort_by')
     page = request.args.get('page', 1, type=int)
     per_page = 5
 
     if sort_by == "desc":
-        ampc_data = (
+        apmc_data = (
             AMPCData.query.filter_by(customer=current_user)
             .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
         )
     elif sort_by == "asc":
-        ampc_data = (
+        apmc_data = (
             AMPCData.query.filter_by(customer=current_user)
             .order_by(asc(order_by))
             .paginate(page=page, per_page=per_page)
         )
     else:
-        ampc_data = (
+        apmc_data = (
             AMPCData.query.filter_by(customer=current_user)
             .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
         )
 
-    return render_template('userpanel/apmc/ampc_data_list.html', ampc_data=ampc_data)
+    return render_template('userpanel/apmc/apmc_data_list.html', apmc_data=apmc_data)
 
 
-@userpanel.route('/userpanel/models/<int:ampc_data_id>', methods=['GET', 'POST'])
+@userpanel.route('/userpanel/models/<int:apmc_data_id>', methods=['GET', 'POST'])
 @login_required
-def ampc_details_view(ampc_data_id):
-    ampc_data = AMPCData.query.get_or_404(ampc_data_id)
+def apmc_details_view(apmc_data_id):
+    apmc_data = AMPCData.query.get_or_404(apmc_data_id)
 
-    loaded_data = load_data(ampc_data.dataset_path())
+    loaded_data = load_data(apmc_data.dataset_path())
     X_names = loaded_data.get('X_names')
 
     ModelForm.update_form(ModelForm, X_names.tolist())
@@ -401,30 +401,30 @@ def ampc_details_view(ampc_data_id):
         input_values = [value for key, value in form.data.items() if key != 'csrf_token']
         input_values = np.array(input_values).reshape(1, -1).astype(np.float64)
 
-        model = joblib.load(ampc_data.model_path())
+        model = joblib.load(apmc_data.model_path())
         predicted_data = model.predict(input_values)
 
         flash(f'You have successfully predicted.', 'success')
 
         return render_template(
-            'userpanel/apmc/ampc_data_details.html', form=form, predicted_data=predicted_data, ampc_data=ampc_data
+            'userpanel/apmc/apmc_data_details.html', form=form, predicted_data=predicted_data, apmc_data=apmc_data
         )
 
-    return render_template('userpanel/apmc/ampc_data_details.html', form=form, ampc_data=ampc_data)
+    return render_template('userpanel/apmc/apmc_data_details.html', form=form, apmc_data=apmc_data)
 
 
-@userpanel.route('/userpanel/models/delete/<int:ampc_data_id>')
+@userpanel.route('/userpanel/models/delete/<int:apmc_data_id>')
 @login_required
-def ampc_delete_view(ampc_data_id):
-    ampc_data = AMPCData.query.get_or_404(ampc_data_id)
+def apmc_delete_view(apmc_data_id):
+    apmc_data = AMPCData.query.get_or_404(apmc_data_id)
 
-    db.session.delete(ampc_data)
+    db.session.delete(apmc_data)
     db.session.commit()
-    remove_file(ampc_data.model_path())
+    remove_file(apmc_data.model_path())
 
-    flash('You have successfully delete the model - {}.'.format(ampc_data.project_name), 'success')
+    flash('You have successfully delete the model - {}.'.format(apmc_data.project_name), 'success')
 
-    return redirect(url_for('userpanel.ampc_list_view'))
+    return redirect(url_for('userpanel.apmc_list_view'))
 
 
 @userpanel.context_processor

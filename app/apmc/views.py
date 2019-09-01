@@ -11,7 +11,7 @@ from flask import request
 from flask_login import current_user
 from werkzeug.utils import secure_filename
 
-from app.apmc.config import AMPC_UPLOAD_PATH
+from app.apmc.config import APMC_DATASET_UPLOAD_PATH
 from app.apmc.models import AMPCData
 from app.apmc.services import pre_train
 from app.apmc.services import train
@@ -20,17 +20,17 @@ from app.database import db
 from app.helpers.file_helper import allowed_file
 from app.userpanel.models import Page
 
-ampc = Blueprint('apmc', __name__)
+apmc = Blueprint('apmc', __name__)
 
 
-@ampc.route('/apmc')
+@apmc.route('/apmc')
 @add_customer_activity
-def ampc_page():
-    return render_template('apmc/index.html', title="AMPC")
+def apmc_page():
+    return render_template('apmc/index.html', title="APMC")
 
 
-@ampc.route('/apmc/pre-train', methods=['POST'])
-def ampc_pre_train():
+@apmc.route('/apmc/pre-train', methods=['POST'])
+def apmc_pre_train():
     if 'file' not in request.files:
         abort(Response('No file part', 400))
 
@@ -42,9 +42,9 @@ def ampc_pre_train():
     if file and allowed_file(file.filename):
         random_hex = secrets.token_hex(8)
         filename = f"{random_hex}_{secure_filename(file.filename)}"
-        file.save(os.path.join(current_app.root_path, AMPC_UPLOAD_PATH, filename))
+        file.save(os.path.join(current_app.root_path, APMC_DATASET_UPLOAD_PATH, filename))
 
-        ampc_data = AMPCData(
+        apmc_data = AMPCData(
             customer=current_user,
             project_name=request.form.get('project_name'),
             dataset=filename,
@@ -52,28 +52,28 @@ def ampc_pre_train():
             normalization=request.form.get('normalization') == "true",
         )
 
-        db.session.add(ampc_data)
+        db.session.add(apmc_data)
         db.session.commit()
 
-        result = pre_train(ampc_data)
-        result.update({'data_id': ampc_data.id})
+        result = pre_train(apmc_data)
+        result.update({'data_id': apmc_data.id})
         return jsonify(result)
 
     abort(Response('No file, or wrong file extension', 400))
 
 
-@ampc.route('/apmc/train', methods=['POST'])
-def ampc_train():
+@apmc.route('/apmc/train', methods=['POST'])
+def apmc_train():
     data = request.get_json()
 
-    ampc_data_id = data.get('data_id')
+    apmc_data_id = data.get('data_id')
     user_choice = data.get('selected_model')
 
-    model_name = train(int(ampc_data_id), user_choice)
+    model_name = train(int(apmc_data_id), user_choice)
 
     return jsonify([data, model_name])
 
 
-@ampc.context_processor
+@apmc.context_processor
 def inject():
     return {'module_desc': Page.query.filter_by(slug=request.path).first()}

@@ -8,34 +8,34 @@
       <h3 class="mb-3">Yours models</h3>
     </div>
 
-    {% include 'userpanel/apmc/partials/ampc_data_list_filter.html' %}
+    {% include 'userpanel/apmc/partials/apmc_data_list_filter.html' %}
   </div>
 
   <hr>
 
   <div class="calculations-wrapper">
     <div class="row">
-      {% if ampc_data %}
-        {% for ampc in ampc_data.items %}
+      {% if apmc_data %}
+        {% for apmc in apmc_data.items %}
           <div class="col-md-12 col-sm-12">
             <div class="card mb-4">
               <div class="card-body">
-                <a href="{{ url_for('userpanel.ampc_details_view', ampc_data_id=ampc.id) }}">
+                <a href="{{ url_for('userpanel.apmc_details_view', apmc_data_id=apmc.id) }}">
                   <h5 class="card-title">
-                    {% if ampc.project_name %}Project name: {{ ampc.project_name }}{% else %}Model - {{ ampc.id }}{% endif %}
+                    {% if apmc.project_name %}Project name: {{ apmc.project_name }}{% else %}Model - {{ apmc.id }}{% endif %}
                   </h5>
                 </a>
                 <div class="card-content">
-                  <p class="mb-1">Model type: <strong>{{ ampc.model_type }}</strong></p>
-                  <p class="small mb-0">Normalization: <strong>{{ ampc.normalization }}</strong></p>
-                  <p class="small mb-0">Data set: <strong>{{ ampc.dataset}}</strong></p>
-                  <p class="small mb-0">Trained model: <strong>{{ ampc.trained_model}}</strong></p>
-                  <p class="small">Created at: {{ ampc.created_at }}</p>
+                  <p class="mb-1">Model type: <strong>{{ apmc.model_type }}</strong></p>
+                  <p class="small mb-0">Normalization: <strong>{{ apmc.normalization }}</strong></p>
+                  <p class="small mb-0">Data set: <strong>{{ apmc.dataset}}</strong></p>
+                  <p class="small mb-0">Trained model: <strong>{{ apmc.trained_model}}</strong></p>
+                  <p class="small">Created at: {{ apmc.created_at }}</p>
                 </div>
-                <a href="{{ url_for('userpanel.ampc_details_view', ampc_data_id=ampc.id) }}" class="btn btn-primary">
+                <a href="{{ url_for('userpanel.apmc_details_view', apmc_data_id=apmc.id) }}" class="btn btn-primary">
                   Use</a>
 
-                <a href="{{ url_for('userpanel.ampc_delete_view', ampc_data_id=ampc.id) }}"
+                <a href="{{ url_for('userpanel.apmc_delete_view', apmc_data_id=apmc.id) }}"
                    class="btn btn-danger float-right delete-apmc-data">
                   Delete
                 </a>
@@ -44,7 +44,7 @@
           </div>
         {% endfor %}
 
-        {% include 'userpanel/apmc/partials/ampc_data_paginator.html' %}
+        {% include 'userpanel/apmc/partials/apmc_data_paginator.html' %}
       {% else %}
         <div class="col-md-12 col-sm-12 text-center">
           <div class="card mb-4">
@@ -53,7 +53,7 @@
                 <i class="fas fa-exclamation-circle"></i>
                 <span>Error! Nothing found, try again :(</span>
               </h5>
-              <a href="{{ url_for('userpanel.ampc_details_view') }}" class="btn btn-primary">
+              <a href="{{ url_for('userpanel.apmc_details_view') }}" class="btn btn-primary">
                 Show all models
               </a>
             </div>

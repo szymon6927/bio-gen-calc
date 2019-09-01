@@ -1,0 +1,22 @@
+{% set apmc_data_pages = apmc_data.iter_pages() %}
+{% set order_by = request.args.get('order_by') %}
+{% set sort_by = request.args.get('sort_by') %}
+{% set query = request.args.get('query') %}
+
+{% if apmc_data_pages %}
+  <div class="col-md-12 col-sm-12">
+    <hr>
+    <nav aria-label="apmc-data paginator">
+      <ul class="pagination">
+        {% for page_num in apmc_data_pages %}
+          <li class="page-item {% if apmc_data.page == page_num %}active {% endif %}">
+            <a class="page-link"
+               href="{{ url_for('userpanel.apmc_list_view', page=page_num, order_by=order_by, sort_by=sort_by, query=query) }}">
+              {{ page_num }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+{% endif %}

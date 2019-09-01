@@ -5,7 +5,7 @@ import joblib
 from flask import current_app
 from werkzeug.utils import secure_filename
 
-from app.apmc.config import AMPC_MODELS_UPLOAD_PATH
+from app.apmc.config import APMC_MODELS_UPLOAD_PATH
 
 
 class Model:
@@ -14,7 +14,7 @@ class Model:
         random_hex = secrets.token_hex(4)
         filename = f"{id}_{random_hex}_{model_type}_{secure_filename(model_key)}"
 
-        path = os.path.join(current_app.root_path, AMPC_MODELS_UPLOAD_PATH, filename)
+        path = os.path.join(current_app.root_path, APMC_MODELS_UPLOAD_PATH, filename)
         joblib.dump(model, path)
 
         return filename

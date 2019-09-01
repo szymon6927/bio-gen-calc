@@ -3,15 +3,15 @@
 class APMCModule extends AppModule {
   constructor() {
     super();
-    this.ampcDataID = null;
+    this.apmcDataID = null;
   }
 
-  setAmpcDataID(id) {
-    this.ampcDataID = id;
+  setApmcDataID(id) {
+    this.apmcDataID = id;
   }
 
-  getAmpcDataID() {
-    return this.ampcDataID;
+  getApmcDataID() {
+    return this.apmcDataID;
   }
 
   renderPreTrainResultsClassification(result) {
@@ -112,7 +112,7 @@ class APMCModule extends AppModule {
         console.log("Succesfull");
         console.log(result);
 
-        this.setAmpcDataID(result.data_id);
+        this.setApmcDataID(result.data_id);
 
         if (modelType === "classification") {
           this.renderPreTrainResultsClassification(result.model_metrics);
@@ -143,14 +143,14 @@ class APMCModule extends AppModule {
     let data = {};
 
     data['selected_model'] = document.querySelector('.user-model-choice select').value;
-    data['data_id'] = this.getAmpcDataID();
+    data['data_id'] = this.getApmcDataID();
 
     return JSON.stringify(data);
   }
 
   setPredictHref() {
     let predictButton = document.querySelector('.predict');
-    predictButton.href = `/userpanel/models/${this.getAmpcDataID()}`
+    predictButton.href = `/userpanel/models/${this.getApmcDataID()}`
   }
 
   train() {
