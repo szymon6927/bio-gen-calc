@@ -100,5 +100,9 @@ class AdminCustomerEditForm(FlaskForm):
 class ModelForm(FlaskForm):
     @staticmethod
     def update_form(form, data):
+        for instance_attribute in dir(form):
+            if instance_attribute.startswith("model"):
+                delattr(form, instance_attribute)
+
         for key in data:
-            setattr(form, key, StringField(key, validators=[DataRequired()]))
+            setattr(form, f"model_{key}", StringField(key, validators=[DataRequired()]))
