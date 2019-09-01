@@ -8,8 +8,8 @@ from app.apmc.config import APMC_MODELS_UPLOAD_PATH
 from app.database import db
 
 
-class AMPCData(db.Model):
-    __tablename__ = 'ampc_data'
+class APMCData(db.Model):
+    __tablename__ = 'apmc_data'
 
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'), nullable=False)

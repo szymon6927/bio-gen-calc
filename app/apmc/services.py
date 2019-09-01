@@ -6,11 +6,11 @@ from app.apmc.ds.processing.data_processing import data_set_split
 from app.apmc.ds.processing.data_processing import load_data
 from app.apmc.ds.repositories.classification_model_repository import ClassificationModelRepository
 from app.apmc.ds.repositories.regression_model_repository import RegressionModelRepository
-from app.apmc.models import AMPCData
+from app.apmc.models import APMCData
 from app.database import db
 
 
-def pre_train(apmc_data: AMPCData) -> dict:
+def pre_train(apmc_data: APMCData) -> dict:
     pre_model_creator = PreModelConstructor(model_type=apmc_data.model_type)
 
     loaded_data = load_data(apmc_data.dataset_path())
@@ -32,7 +32,7 @@ def pre_train(apmc_data: AMPCData) -> dict:
 
 
 def train(apmc_data_id, selected_model):
-    apmc_data = AMPCData.query.get_or_404(apmc_data_id)
+    apmc_data = APMCData.query.get_or_404(apmc_data_id)
 
     repo_factory = {
         ModelTypeChoices.classification: ClassificationModelRepository(),

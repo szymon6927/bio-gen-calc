@@ -12,7 +12,7 @@ from flask_login import current_user
 from werkzeug.utils import secure_filename
 
 from app.apmc.config import APMC_DATASET_UPLOAD_PATH
-from app.apmc.models import AMPCData
+from app.apmc.models import APMCData
 from app.apmc.services import pre_train
 from app.apmc.services import train
 from app.common.decorators import add_customer_activity
@@ -44,7 +44,7 @@ def apmc_pre_train():
         filename = f"{random_hex}_{secure_filename(file.filename)}"
         file.save(os.path.join(current_app.root_path, APMC_DATASET_UPLOAD_PATH, filename))
 
-        apmc_data = AMPCData(
+        apmc_data = APMCData(
             customer=current_user,
             project_name=request.form.get('project_name'),
             dataset=filename,

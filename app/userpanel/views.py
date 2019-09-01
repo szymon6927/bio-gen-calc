@@ -18,7 +18,7 @@ from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
 from app.apmc.ds.processing.data_processing import load_data
-from app.apmc.models import AMPCData
+from app.apmc.models import APMCData
 from app.customer_calculation.models import CustomerCalculation
 from app.database import db
 from app.helpers.file_helper import remove_file
@@ -366,19 +366,19 @@ def apmc_list_view():
 
     if sort_by == "desc":
         apmc_data = (
-            AMPCData.query.filter_by(customer=current_user)
+            APMCData.query.filter_by(customer=current_user)
             .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
         )
     elif sort_by == "asc":
         apmc_data = (
-            AMPCData.query.filter_by(customer=current_user)
+            APMCData.query.filter_by(customer=current_user)
             .order_by(asc(order_by))
             .paginate(page=page, per_page=per_page)
         )
     else:
         apmc_data = (
-            AMPCData.query.filter_by(customer=current_user)
+            APMCData.query.filter_by(customer=current_user)
             .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
         )
@@ -389,7 +389,7 @@ def apmc_list_view():
 @userpanel.route('/userpanel/models/<int:apmc_data_id>', methods=['GET', 'POST'])
 @login_required
 def apmc_details_view(apmc_data_id):
-    apmc_data = AMPCData.query.get_or_404(apmc_data_id)
+    apmc_data = APMCData.query.get_or_404(apmc_data_id)
 
     loaded_data = load_data(apmc_data.dataset_path())
     X_names = loaded_data.get('X_names')
@@ -416,7 +416,7 @@ def apmc_details_view(apmc_data_id):
 @userpanel.route('/userpanel/models/delete/<int:apmc_data_id>')
 @login_required
 def apmc_delete_view(apmc_data_id):
-    apmc_data = AMPCData.query.get_or_404(apmc_data_id)
+    apmc_data = APMCData.query.get_or_404(apmc_data_id)
 
     db.session.delete(apmc_data)
     db.session.commit()
