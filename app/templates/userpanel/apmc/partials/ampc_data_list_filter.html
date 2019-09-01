@@ -1,0 +1,25 @@
+{% set order_by = request.args.get('order_by') %}
+{% set sort_by = request.args.get('sort_by') %}
+
+<div class="col-md-12 col-sm-12 text-right">
+  <form class="form-inline mt-2 mb-2 float-right" action="{{ url_for('userpanel.ampc_list_view') }}"
+        method="GET">
+
+    <label class="mr-2" for="order_by">Order by</label>
+    <select class="custom-select mr-2" name="order_by" id="order_by">
+      <option value="">---</option>
+      <option value="created_at" {% if order_by == "created_at" %}selected{% endif %}>Create date</option>
+      <option value="project_name" {% if order_by == "project_name" %}selected{% endif %}>Project name</option>
+      <option value="model_type" {% if order_by == "model_type" %}selected{% endif %}>Model type</option>
+    </select>
+
+    <label class="mr-2" for="sort_by">Sort by</label>
+    <select class="custom-select mr-2" name="sort_by" id="sort_by">
+      <option value="">---</option>
+      <option value="desc" {% if sort_by == "desc" %}selected{% endif %}>Descending</option>
+      <option value="asc" {% if sort_by == "asc" %}selected{% endif %}>Ascending</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary mt-2 mt-sm-0">Sort</button>
+  </form>
+</div>

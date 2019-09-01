@@ -1,3 +1,5 @@
+import joblib
+import numpy as np
 from flask import Blueprint
 from flask import flash
 from flask import redirect
@@ -15,6 +17,8 @@ from sqlalchemy import or_
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
+from app.ampc.ds.processing.data_processing import load_data
+from app.ampc.models import AMPCData
 from app.customer_calculation.models import CustomerCalculation
 from app.database import db
 from app.helpers.file_helper import save_picture
@@ -23,6 +27,7 @@ from app.userpanel.decorators import superuser_required
 from app.userpanel.forms import AdminCustomerEditForm
 from app.userpanel.forms import CustomerEditForm
 from app.userpanel.forms import LoginForm
+from app.userpanel.forms import ModelForm
 from app.userpanel.forms import PageEditForm
 from app.userpanel.forms import RegisterForm
 from app.userpanel.models import Customer
@@ -348,6 +353,77 @@ def customer_delete_view(customer_id):
     flash('You have successfully delete the customer - {}.'.format(customer.login), 'success')
 
     return redirect(url_for('userpanel.customers_list_view'))
+
+
+@userpanel.route('/userpanel/models', methods=['GET'])
+@login_required
+def ampc_list_view():
+    order_by = request.args.get('order_by', "created_at")
+    sort_by = request.args.get('sort_by')
+    page = request.args.get('page', 1, type=int)
+    per_page = 5
+
+    if sort_by == "desc":
+        ampc_data = (
+            AMPCData.query.filter_by(customer=current_user)
+            .order_by(desc(order_by))
+            .paginate(page=page, per_page=per_page)
+        )
+    elif sort_by == "asc":
+        ampc_data = (
+            AMPCData.query.filter_by(customer=current_user)
+            .order_by(asc(order_by))
+            .paginate(page=page, per_page=per_page)
+        )
+    else:
+        ampc_data = (
+            AMPCData.query.filter_by(customer=current_user)
+            .order_by(desc(order_by))
+            .paginate(page=page, per_page=per_page)
+        )
+
+    return render_template('userpanel/apmc/ampc_data_list.html', ampc_data=ampc_data)
+
+
+@userpanel.route('/userpanel/models/<int:ampc_data_id>', methods=['GET', 'POST'])
+@login_required
+def ampc_details_view(ampc_data_id):
+    ampc_data = AMPCData.query.get_or_404(ampc_data_id)
+
+    loaded_data = load_data(ampc_data.dataset_path())
+    X_names = loaded_data.get('X_names')
+
+    ModelForm.update_form(ModelForm, X_names.tolist())
+
+    form = ModelForm(request.form)
+
+    if form.validate_on_submit():
+        input_values = [value for key, value in form.data.items() if key != 'csrf_token']
+        input_values = np.array(input_values).reshape(1, -1).astype(np.float64)
+
+        model = joblib.load(ampc_data.model_path())
+        predicted_data = model.predict(input_values)
+
+        flash(f'You have successfully predicted.', 'success')
+
+        return render_template(
+            'userpanel/apmc/ampc_data_details.html', form=form, predicted_data=predicted_data, ampc_data=ampc_data
+        )
+
+    return render_template('userpanel/apmc/ampc_data_details.html', form=form, ampc_data=ampc_data)
+
+
+@userpanel.route('/userpanel/models/delete/<int:ampc_data_id>')
+@login_required
+def ampc_delete_view(ampc_data_id):
+    ampc_data = AMPCData.query.get_or_404(ampc_data_id)
+
+    db.session.delete(ampc_data)
+    db.session.commit()
+
+    flash('You have successfully delete the model - {}.'.format(ampc_data.project_name), 'success')
+
+    return redirect(url_for('userpanel.ampc_list_view'))
 
 
 @userpanel.context_processor

@@ -3,6 +3,7 @@ import os
 
 from flask import current_app
 
+from app.ampc.config import AMPC_MODELS_UPLOAD_PATH
 from app.ampc.config import AMPC_UPLOAD_PATH
 from app.database import db
 
@@ -21,6 +22,9 @@ class AMPCData(db.Model):
 
     def dataset_path(self):
         return os.path.join(current_app.root_path, AMPC_UPLOAD_PATH, self.dataset)
+
+    def model_path(self):
+        return os.path.join(current_app.root_path, AMPC_MODELS_UPLOAD_PATH, self.trained_model)
 
     def __repr__(self):
         return f"AMPC data: {self.project_name}, {self.model_type}"

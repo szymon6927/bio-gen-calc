@@ -1,0 +1,51 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <h3>Edit customer</h3>
+  <hr>
+
+  <form class="edit-customer" action="{{ url_for('userpanel.ampc_details_view', ampc_data_id=ampc_data.id) }}"
+        method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="row">
+      <div class="col-md-12">
+        {% for field in form if field.widget.input_type != 'hidden' %}
+          <div class="form-group">
+            {{ field.label }}
+            {{ field(class_="form-control") }}
+
+            {% if field.errors %}
+              {% for error in field.errors %}
+                <span class="text-danger">{{ error }}</span></br>
+              {% endfor %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="col-md-6 offset-md-3 col-sm-12">
+        <button type="submit" class="btn btn-block btn-primary">Predict</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <hr>
+        {% if predicted_data %}
+          <div class="col-md-6 offset-md-3 col-sm-12 col-12 text-center">
+            <div class="card mb-sm-5 mb-4">
+              <div class="card-body">
+                <h4 class="card-title">Prediction is:</h4>
+                <div class="details">
+                  {% for data in predicted_data %}
+                    <p>{{ data }}</p>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </form>
+{% endblock %}
