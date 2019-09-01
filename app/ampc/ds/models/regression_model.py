@@ -2,6 +2,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import Lasso
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import Ridge
+from sklearn.metrics import r2_score
 
 
 class RegressionModel:
@@ -59,3 +60,7 @@ class RegressionModel:
         predicted = rfr.predict(X_test)
 
         return rfr, predicted
+
+    @staticmethod
+    def get_accuracy_score(y_test, predicted):
+        return r2_score(y_test, predicted)
