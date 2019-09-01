@@ -50,3 +50,8 @@ def save_picture(form_picture):
     i.save(picture_path)
 
     return picture_fn
+
+
+def remove_file(file_path):
+    if os.path.isfile(file_path):
+        os.remove(file_path)

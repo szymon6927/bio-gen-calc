@@ -21,6 +21,7 @@ from app.ampc.ds.processing.data_processing import load_data
 from app.ampc.models import AMPCData
 from app.customer_calculation.models import CustomerCalculation
 from app.database import db
+from app.helpers.file_helper import remove_file
 from app.helpers.file_helper import save_picture
 from app.userpanel.decorators import nocache
 from app.userpanel.decorators import superuser_required
@@ -394,7 +395,6 @@ def ampc_details_view(ampc_data_id):
     X_names = loaded_data.get('X_names')
 
     ModelForm.update_form(ModelForm, X_names.tolist())
-
     form = ModelForm(request.form)
 
     if form.validate_on_submit():
@@ -420,6 +420,7 @@ def ampc_delete_view(ampc_data_id):
 
     db.session.delete(ampc_data)
     db.session.commit()
+    remove_file(ampc_data.model_path())
 
     flash('You have successfully delete the model - {}.'.format(ampc_data.project_name), 'success')
 
