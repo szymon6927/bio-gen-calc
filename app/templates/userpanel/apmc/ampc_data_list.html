@@ -27,6 +27,9 @@
                 </a>
                 <div class="card-content">
                   <p class="mb-1">Model type: <strong>{{ ampc.model_type }}</strong></p>
+                  <p class="small mb-0">Normalization: <strong>{{ ampc.normalization }}</strong></p>
+                  <p class="small mb-0">Data set: <strong>{{ ampc.dataset}}</strong></p>
+                  <p class="small mb-0">Trained model: <strong>{{ ampc.trained_model}}</strong></p>
                   <p class="small">Created at: {{ ampc.created_at }}</p>
                 </div>
                 <a href="{{ url_for('userpanel.ampc_details_view', ampc_data_id=ampc.id) }}" class="btn btn-primary">
