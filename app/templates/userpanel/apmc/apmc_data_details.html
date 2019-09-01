@@ -4,6 +4,17 @@
   <h3>Make an prediction</h3>
   <hr>
 
+  <div class="model-overview">
+    <p class="font-weight-bold mb-1">Project name: {{ apmc_data.project_name }}</p>
+    <p class="mb-1">Model type: <strong>{{ apmc_data.model_type }}</strong></p>
+    <p class="small mb-0">Normalization: <strong>{{ apmc_data.normalization }}</strong></p>
+    <p class="small mb-0">Data set: <strong>{{ apmc_data.dataset }}</strong></p>
+    <p class="small mb-0">Trained model: <strong>{{ apmc_data.trained_model }}</strong></p>
+    <p class="small">Created at: {{ apmc_data.created_at }}</p>
+  </div>
+
+  <hr>
+
   <form class="edit-customer" action="{{ url_for('userpanel.apmc_details_view', apmc_data_id=apmc_data.id) }}"
         method="POST" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
