@@ -125,7 +125,7 @@ def register_blueprints(app):
     from app.userpanel.views import userpanel
     from app.customer_calculation.views import customer_calculation
     from app.privacy_policy.views import privacy_policy
-    from app.ampc.views import ampc
+    from app.apmc.views import ampc
 
     app.register_blueprint(home)
     app.register_blueprint(materials_and_methods)

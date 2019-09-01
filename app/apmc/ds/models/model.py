@@ -5,7 +5,7 @@ import joblib
 from flask import current_app
 from werkzeug.utils import secure_filename
 
-from app.ampc.config import AMPC_MODELS_UPLOAD_PATH
+from app.apmc.config import AMPC_MODELS_UPLOAD_PATH
 
 
 class Model:

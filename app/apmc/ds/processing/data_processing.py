@@ -3,8 +3,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-from app.ampc.ds.common.enums import DatasetExtensionChoices
-from app.ampc.ds.common.enums import DelimiterChoices
+from app.apmc.ds.common.enums import DatasetExtensionChoices
+from app.apmc.ds.common.enums import DelimiterChoices
 
 
 def load_data(dataset_path):

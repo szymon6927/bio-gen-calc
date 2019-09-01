@@ -7,9 +7,9 @@ from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
 from sklearn.model_selection import cross_validate
 
-from app.ampc.ds.common.enums import ModelTypeChoices
-from app.ampc.ds.repositories.classification_model_repository import ClassificationModelRepository
-from app.ampc.ds.repositories.regression_model_repository import RegressionModelRepository
+from app.apmc.ds.common.enums import ModelTypeChoices
+from app.apmc.ds.repositories.classification_model_repository import ClassificationModelRepository
+from app.apmc.ds.repositories.regression_model_repository import RegressionModelRepository
 
 
 class PreModelConstructor:

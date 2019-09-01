@@ -14,9 +14,9 @@
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           {% if current_user.is_authenticated %}
-            {% include 'ampc/partials/logged_in.html' %}
+            {% include 'apmc/partials/logged_in.html' %}
           {% else %}
-            {% include 'ampc/partials/not_logged_in.html' %}
+            {% include 'apmc/partials/not_logged_in.html' %}
           {% endif %}
         </div>
       </div>
@@ -28,7 +28,7 @@
 {% block scripts %}
   <script src="{{ url_for('static', filename='js/helpers/AppModule.js') }}?ver={{ css_js_ver }}"></script>
   <script
-    src="{{ url_for('static', filename='js/ampc/AMPCModule.js') }}?ver={{ css_js_ver }}"></script>
+    src="{{ url_for('static', filename='js/apmc/APMCModule.js') }}?ver={{ css_js_ver }}"></script>
   <script
-    src="{{ url_for('static', filename='js/ampc/AMPCEvents.js') }}?ver={{ css_js_ver }}"></script>
+    src="{{ url_for('static', filename='js/apmc/APMCEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}

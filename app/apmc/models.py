@@ -3,8 +3,8 @@ import os
 
 from flask import current_app
 
-from app.ampc.config import AMPC_MODELS_UPLOAD_PATH
-from app.ampc.config import AMPC_UPLOAD_PATH
+from app.apmc.config import AMPC_MODELS_UPLOAD_PATH
+from app.apmc.config import AMPC_UPLOAD_PATH
 from app.database import db
 
 

@@ -11,25 +11,25 @@ from flask import request
 from flask_login import current_user
 from werkzeug.utils import secure_filename
 
-from app.ampc.config import AMPC_UPLOAD_PATH
-from app.ampc.models import AMPCData
-from app.ampc.services import pre_train
-from app.ampc.services import train
+from app.apmc.config import AMPC_UPLOAD_PATH
+from app.apmc.models import AMPCData
+from app.apmc.services import pre_train
+from app.apmc.services import train
 from app.common.decorators import add_customer_activity
 from app.database import db
 from app.helpers.file_helper import allowed_file
 from app.userpanel.models import Page
 
-ampc = Blueprint('ampc', __name__)
+ampc = Blueprint('apmc', __name__)
 
 
-@ampc.route('/ampc')
+@ampc.route('/apmc')
 @add_customer_activity
 def ampc_page():
-    return render_template('ampc/index.html', title="AMPC")
+    return render_template('apmc/index.html', title="AMPC")
 
 
-@ampc.route('/ampc/pre-train', methods=['POST'])
+@ampc.route('/apmc/pre-train', methods=['POST'])
 def ampc_pre_train():
     if 'file' not in request.files:
         abort(Response('No file part', 400))
@@ -62,7 +62,7 @@ def ampc_pre_train():
     abort(Response('No file, or wrong file extension', 400))
 
 
-@ampc.route('/ampc/train', methods=['POST'])
+@ampc.route('/apmc/train', methods=['POST'])
 def ampc_train():
     data = request.get_json()
 

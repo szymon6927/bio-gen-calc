@@ -1,6 +1,6 @@
 "use strict";
 
-class AMPCModule extends AppModule {
+class APMCModule extends AppModule {
   constructor() {
     super();
     this.ampcDataID = null;
@@ -84,7 +84,7 @@ class AMPCModule extends AppModule {
 
   preTrain() {
     $('.cover').show();
-    const path = '/ampc/pre-train';
+    const path = '/apmc/pre-train';
     const render = new RenderHelper('.pre-train-results');
 
     const fileInput = document.getElementById('data-file');
@@ -155,7 +155,7 @@ class AMPCModule extends AppModule {
 
   train() {
     $('.cover').show();
-    const path = '/ampc/train';
+    const path = '/apmc/train';
     const dataJSON = this.buildTrainJSON();
     const render = new RenderHelper('.train-errors');
 

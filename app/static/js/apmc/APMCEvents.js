@@ -1,6 +1,6 @@
 "use strict";
 
-const ampc = new AMPCModule();
+const ampc = new APMCModule();
 const preTrainForm = document.querySelector('#ml-pre-train-form');
 const trainButton = document.querySelector('.train');
 

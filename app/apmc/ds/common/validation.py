@@ -1,6 +1,6 @@
 import numpy as np
 
-from app.ampc.ds.common.enums import ModelTypeChoices
+from app.apmc.ds.common.enums import ModelTypeChoices
 
 
 class Validator:

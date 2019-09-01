@@ -17,8 +17,8 @@ from sqlalchemy import or_
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
-from app.ampc.ds.processing.data_processing import load_data
-from app.ampc.models import AMPCData
+from app.apmc.ds.processing.data_processing import load_data
+from app.apmc.models import AMPCData
 from app.customer_calculation.models import CustomerCalculation
 from app.database import db
 from app.helpers.file_helper import remove_file

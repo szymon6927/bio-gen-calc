@@ -1,22 +1,22 @@
-from app.ampc.ds.models.regression_model import RegressionModel
-from app.ampc.ds.models.regression_model_optimizer import RegressionModelOptimizer
+from app.apmc.ds.models.classification_model import ClassificationModel
+from app.apmc.ds.models.classification_model_optimizer import ClassificationModelOptimizer
 
 
 class ModelName:
     """Class which contain key, name tuples"""
 
-    slr = ('slr', "Simple linear regression")
-    llr = ('llr', "Lasso linear regression")
-    rlr = ('rlr', "Ridge linear regression")
-    rfr = ('rfr', "Random forest regression")
+    rf = ('rnn', "Random forest classification")
+    knn = ('knn', "KNN classification")
+    lr = ('lr', "Logistic regression")
+    svmc = ('svmc', "Supported vector machines classification")
 
 
-class RegressionModelRepository:
+class ClassificationModelRepository:
     REPOSITORY = [
-        (*ModelName.slr, RegressionModel.linear_regression, None),
-        (*ModelName.llr, RegressionModel.lasso_regression, RegressionModelOptimizer.lss_regression_gs),
-        (*ModelName.rlr, RegressionModel.ridge_regression, RegressionModelOptimizer.rg_regression_gs),
-        (*ModelName.rfr, RegressionModel.random_forest_regression, RegressionModelOptimizer.rf_regression_gs),
+        (*ModelName.rf, ClassificationModel.rf_classification, ClassificationModelOptimizer.lr_classification_gs),
+        (*ModelName.knn, ClassificationModel.knn_classification, ClassificationModelOptimizer.knn_classification_gs),
+        (*ModelName.lr, ClassificationModel.lr_classification, ClassificationModelOptimizer.lr_classification_gs),
+        (*ModelName.svmc, ClassificationModel.svm_classification, ClassificationModelOptimizer.svm_classification_gs),
     ]
 
     def get_repo(self):

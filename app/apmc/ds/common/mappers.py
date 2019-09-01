@@ -1,4 +1,4 @@
-from app.ampc.ds.models.model import Model
+from app.apmc.ds.models.model import Model
 
 
 class ClassificationModelMapper:

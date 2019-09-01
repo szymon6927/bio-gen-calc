@@ -1,12 +1,12 @@
-from app.ampc.ds.common.enums import ModelTypeChoices
-from app.ampc.ds.common.validation import Validator
-from app.ampc.ds.models.model import Model
-from app.ampc.ds.models.pre_model_constructor import PreModelConstructor
-from app.ampc.ds.processing.data_processing import data_set_split
-from app.ampc.ds.processing.data_processing import load_data
-from app.ampc.ds.repositories.classification_model_repository import ClassificationModelRepository
-from app.ampc.ds.repositories.regression_model_repository import RegressionModelRepository
-from app.ampc.models import AMPCData
+from app.apmc.ds.common.enums import ModelTypeChoices
+from app.apmc.ds.common.validation import Validator
+from app.apmc.ds.models.model import Model
+from app.apmc.ds.models.pre_model_constructor import PreModelConstructor
+from app.apmc.ds.processing.data_processing import data_set_split
+from app.apmc.ds.processing.data_processing import load_data
+from app.apmc.ds.repositories.classification_model_repository import ClassificationModelRepository
+from app.apmc.ds.repositories.regression_model_repository import RegressionModelRepository
+from app.apmc.models import AMPCData
 from app.database import db
 
 
