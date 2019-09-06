@@ -46,3 +46,10 @@ class RegressionModelRepository:
 
             if wanted_model_key == model_key:
                 return optimize_function
+
+    def get_model_name(self, wanted_model_key):
+        for model_information in self.REPOSITORY:
+            model_key, model_name, _, _ = model_information
+
+            if wanted_model_key == model_key:
+                return model_name
