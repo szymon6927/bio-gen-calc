@@ -55,7 +55,10 @@ class RegressionModel:
         y_train = kwargs.get('y_train')
         X_test = kwargs.get('X_test')
 
-        rfr = RandomForestRegressor(random_state=random_state, n_estimators=n_estimators)
+        rfr = RandomForestRegressor(
+            random_state=random_state, n_estimators=n_estimators, max_depth=10, max_leaf_nodes=20
+        )
+
         rfr.fit(X_train, y_train)
         predicted = rfr.predict(X_test)
 
