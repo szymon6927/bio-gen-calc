@@ -18,6 +18,7 @@ class APMCData(db.Model):
     model_type = db.Column(db.String(120), nullable=False)
     normalization = db.Column(db.Boolean, default=False)
     trained_model = db.Column(db.String(40), nullable=True)
+    model_metrics = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now)
 
     def dataset_path(self):
