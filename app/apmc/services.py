@@ -1,3 +1,5 @@
+import json
+
 from app.apmc.ds.common.enums import ModelTypeChoices
 from app.apmc.ds.common.validation import Validator
 from app.apmc.ds.models.model import Model
@@ -32,7 +34,7 @@ def pre_train(apmc_data: APMCData) -> dict:
 
 
 def train(apmc_data_id, selected_model):
-    apmc_data = APMCData.query.get_or_404(apmc_data_id)
+    apmc_data: APMCData = APMCData.query.get_or_404(apmc_data_id)
 
     repo_factory = {
         ModelTypeChoices.classification: ClassificationModelRepository(),
@@ -48,19 +50,27 @@ def train(apmc_data_id, selected_model):
 
     X_train = split_data.get('X_train')
     y_train = split_data.get('y_train')
+    Y_true = split_data.get('y_test')
 
     model_function = repo.get_function(selected_model)
     optimizer = repo.get_optimizer(selected_model)
+    model_name = repo.get_model_name(selected_model)
 
     if optimizer:
         hyperparameters, accuracy_gs = optimizer(X_train, y_train)
-        model, _ = model_function(**hyperparameters, **split_data)
+        model, predicted = model_function(**hyperparameters, **split_data)
     else:
-        model, _ = model_function(**split_data)
+        model, predicted = model_function(**split_data)
+
+    pre_model_constructor = PreModelConstructor(model_type=apmc_data.model_type)
+    model_metrics = pre_model_constructor.primary_model_evaluation(
+        model, model_name, Y_true, predicted, X_train, y_train
+    )
 
     model_path = Model.export_model(apmc_data_id, selected_model, apmc_data.model_type, model)
 
     apmc_data.trained_model = model_path
+    apmc_data.model_metrics = json.dumps(model_metrics)
     db.session.add(apmc_data)
     db.session.commit()
 
