@@ -5,23 +5,39 @@
   <hr>
 
   <div class="model-overview">
-    <p class="font-weight-bold mb-1">Project name: {{ apmc_data.project_name }}</p>
-    <p class="mb-1">Model type: <strong>{{ apmc_data.model_type }}</strong></p>
-    <p class="small mb-0">Normalization: <strong>{{ apmc_data.normalization }}</strong></p>
-    <p class="small mb-0">Data set: <strong>{{ apmc_data.dataset }}</strong></p>
-    <p class="small mb-0">Trained model: <strong>{{ apmc_data.trained_model }}</strong></p>
-    <p class="small">Created at: {{ apmc_data.created_at }}</p>
+    <p class="font-weight-bold mb-1">Project name: {{ context.apmc_data.project_name }}</p>
+    <p class="mb-1">Model type: <strong>{{ context.apmc_data.model_type }}</strong></p>
+    <p>Normalization: <strong>{{ context.apmc_data.normalization }}</strong></p>
+    <p class="small mb-0">Data set: <strong>{{ context.apmc_data.dataset }}</strong></p>
+    <p class="small mb-0">Trained model: <strong>{{ context.apmc_data.trained_model }}</strong></p>
+    <p class="small">Created at: {{ context.apmc_data.created_at }}</p>
+    <hr>
+    <p class="font-weight-bold mb-1">Model metrics</p>
+    {% if context.model_metric.matrix_report %}
+      <div class="matrix_report text-center mb-4">
+        {{ context.model_metric.matrix_report|safe }}
+      </div>
+    {% endif %}
+
+    {% for name, value in context.model_metric.items() %}
+      {% if name != 'matrix_report' %}
+        <div>
+          <span class="mr-2">{{ name }}:</span>
+          <span>{{ value }}</span>
+        </div>
+      {% endif %}
+    {% endfor %}
   </div>
 
   <hr>
 
-  <form class="edit-customer" action="{{ url_for('userpanel.apmc_details_view', apmc_data_id=apmc_data.id) }}"
+  <form class="edit-customer" action="{{ url_for('userpanel.apmc_details_view', apmc_data_id=context.apmc_data.id) }}"
         method="POST" enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
+    {{ context.form.hidden_tag() }}
 
     <div class="row">
       <div class="col-md-12">
-        {% for field in form if field.widget.input_type != 'hidden' %}
+        {% for field in context.form if field.widget.input_type != 'hidden' %}
           <div class="form-group">
             {{ field.label }}
             {{ field(class_="form-control") }}
@@ -39,23 +55,33 @@
         <button type="submit" class="btn btn-block btn-primary">Predict</button>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-12 col-sm-12">
-        <hr>
         {% if predicted_data %}
+          <hr>
           <div class="col-md-6 offset-md-3 col-sm-12 col-12 text-center">
-            <div class="card mb-sm-5 mb-4">
+            <div class="card mb-sm-5 mb-4 mt-5">
               <div class="card-body">
                 <h4 class="card-title">Prediction is:</h4>
                 <div class="details">
+                  <hr>
+                  {% if extrapolation_risk_msg %}
+                    <p class="small"><strong>WARNING!</strong></p>
+                    {% for msg in extrapolation_risk_msg %}
+                      <p class="small text-left mb-0">{{ msg }}</p>
+                    {% endfor %}
+                  {% endif %}
+                  <hr>
                   {% for data in predicted_data %}
-                    <p>{{ data }}</p>
+                    <p class="font-weight-bold mb-0">{{ data }}</p>
                   {% endfor %}
                 </div>
               </div>
             </div>
           </div>
         {% endif %}
+
       </div>
     </div>
   </form>

@@ -1,5 +1,3 @@
-import joblib
-import numpy as np
 from flask import Blueprint
 from flask import flash
 from flask import redirect
@@ -17,7 +15,6 @@ from sqlalchemy import or_
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
-from app.apmc.ds.processing.data_processing import load_data
 from app.apmc.models import APMCData
 from app.customer_calculation.models import CustomerCalculation
 from app.database import db
@@ -34,6 +31,7 @@ from app.userpanel.forms import RegisterForm
 from app.userpanel.models import Customer
 from app.userpanel.models import CustomerActivity
 from app.userpanel.models import Page
+from app.userpanel.services import APMCUserPanelService
 
 userpanel = Blueprint('userpanel', __name__)
 
@@ -391,26 +389,27 @@ def apmc_list_view():
 def apmc_details_view(apmc_data_id):
     apmc_data = APMCData.query.get_or_404(apmc_data_id)
 
-    loaded_data = load_data(apmc_data.dataset_path())
-    X_names = loaded_data.get('X_names')
+    apmc_service = APMCUserPanelService(apmc_data)
 
-    ModelForm.update_form(ModelForm, X_names.tolist())
+    ModelForm.update_form(ModelForm, apmc_service.get_X_names())
     form = ModelForm(request.form)
+
+    context = {'form': form, 'apmc_data': apmc_data, 'model_metric': apmc_service.get_model_metric()}
 
     if form.validate_on_submit():
         input_values = [value for key, value in form.data.items() if key != 'csrf_token']
-        input_values = np.array(input_values).reshape(1, -1).astype(np.float64)
-
-        model = joblib.load(apmc_data.model_path())
-        predicted_data = model.predict(input_values)
+        apmc_service.set_user_input(input_values)
 
         flash(f'You have successfully predicted.', 'success')
 
         return render_template(
-            'userpanel/apmc/apmc_data_details.html', form=form, predicted_data=predicted_data, apmc_data=apmc_data
+            'userpanel/apmc/apmc_data_details.html',
+            context=context,
+            predicted_data=apmc_service.get_predicted_data(),
+            extrapolation_risk_msg=apmc_service.get_extrapolation_risk(),
         )
 
-    return render_template('userpanel/apmc/apmc_data_details.html', form=form, apmc_data=apmc_data)
+    return render_template('userpanel/apmc/apmc_data_details.html', context=context)
 
 
 @userpanel.route('/userpanel/models/delete/<int:apmc_data_id>')
