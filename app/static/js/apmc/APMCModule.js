@@ -24,7 +24,10 @@ class APMCModule extends AppModule {
         <div class="item font-weight-bold">Model name: ${item.model_name}</div>
         <div class="item font-weight-bold">Accuracy: ${item.accuracy}</div>
         <div class="item font-weight-bold">Cross validate score: ${item.cross_validate_score}</div>
-        <div class="table">${item.matrix_report}</div>
+        <div class="table">
+          <p class="font-weight-bold mb-0">Classification matrix report</p>
+          ${item.matrix_report}
+        </div>
       </div>
       <hr>`
     });
