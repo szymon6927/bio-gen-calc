@@ -52,7 +52,7 @@ class APMCUserPanelService:
         model = joblib.load(self.apmc_data.model_path())
         predicted_data = model.predict(self.user_input)
 
-        return predicted_data
+        return predicted_data.tolist()
 
     def get_model_metric(self):
         model_evaluation_metrics = json.loads(self.apmc_data.model_metrics)
