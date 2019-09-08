@@ -133,10 +133,7 @@ dmypy.json
 .pyre/
 
 # App
-app/helpers/temp
 .vscode/
 *.swp
-app/static/models
-app/static/uploads
 
 # End of https://www.gitignore.io/api/flask
