@@ -9,7 +9,8 @@ RUN apt-get install -y \
             python-dev \
             sqlite3 \
             wkhtmltopdf \
-            muscle
+            muscle \
+            graphviz
 
 COPY requirements /requirements
 RUN pip install -r /requirements/requirements.txt
