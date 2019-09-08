@@ -83,3 +83,24 @@ def extrapolation_risk(X_array, values_to_predict, X_names):
             )
 
     return warnings
+
+
+def prepare_data_for_report(dataset_path):
+    if dataset_path.endswith(DatasetExtensionChoices.csv):
+        data_set = pd.read_csv(dataset_path, delimiter=DelimiterChoices.comma)
+    else:
+        data_set = pd.read_excel(dataset_path)
+
+    col_names = list(data_set.columns)
+    col_number = len(col_names)
+
+    predictors_names = col_names[: (col_number - 1)]
+    classes = list(data_set[col_names[-1]].unique())
+
+    return {
+        'data': data_set,
+        'col_names': col_names,
+        'col_number': col_number,
+        'predictors_names': predictors_names,
+        'classes': classes,
+    }
