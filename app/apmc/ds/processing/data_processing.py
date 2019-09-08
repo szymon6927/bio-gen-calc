@@ -96,6 +96,7 @@ def prepare_data_for_report(dataset_path):
 
     predictors_names = col_names[: (col_number - 1)]
     classes = list(data_set[col_names[-1]].unique())
+    classes = [str(target) for target in classes]
 
     return {
         'data': data_set,
