@@ -70,14 +70,24 @@ def train(apmc_data_id, selected_model):
 
     model_path = Model.export_model(apmc_data_id, selected_model, apmc_data.model_type, model)
 
-    report_generator = ReportGenerator(apmc_data)
-    report_filename = report_generator.generate_report()
-
     apmc_data.trained_model = model_path
     apmc_data.model_metrics = json.dumps(model_metrics)
-    apmc_data.report = report_filename
 
     db.session.add(apmc_data)
     db.session.commit()
 
+    generate_report(apmc_data_id)
+
     return model_path
+
+
+def generate_report(apmc_data_id):
+    apmc_data: APMCData = APMCData.query.get_or_404(apmc_data_id)
+
+    report_generator = ReportGenerator(apmc_data)
+    report_filename = report_generator.generate_report()
+
+    apmc_data.report = report_filename
+
+    db.session.add(apmc_data)
+    db.session.commit()
