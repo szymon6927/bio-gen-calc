@@ -6,6 +6,7 @@ from app.apmc.ds.models.model import Model
 from app.apmc.ds.models.pre_model_constructor import PreModelConstructor
 from app.apmc.ds.processing.data_processing import data_set_split
 from app.apmc.ds.processing.data_processing import load_data
+from app.apmc.ds.report.report_generator import ReportGenerator
 from app.apmc.ds.repositories.classification_model_repository import ClassificationModelRepository
 from app.apmc.ds.repositories.regression_model_repository import RegressionModelRepository
 from app.apmc.models import APMCData
@@ -69,8 +70,13 @@ def train(apmc_data_id, selected_model):
 
     model_path = Model.export_model(apmc_data_id, selected_model, apmc_data.model_type, model)
 
+    report_generator = ReportGenerator(apmc_data)
+    report_filename = report_generator.generate_report()
+
     apmc_data.trained_model = model_path
     apmc_data.model_metrics = json.dumps(model_metrics)
+    apmc_data.report = report_filename
+
     db.session.add(apmc_data)
     db.session.commit()
 

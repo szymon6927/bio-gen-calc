@@ -1,32 +1,29 @@
 import base64
 import itertools
-import json
+import os
 from io import BytesIO
 
 import graphviz
 import joblib
 import pandas as pd
+import pdfkit
 import scipy.stats as stats
 import seaborn as sns
+from flask import current_app
 from flask import render_template
 from sklearn import tree
 
+from app.apmc.config import APMC_REPORTS_UPLOAD_PATH
+from app.apmc.ds.common.constants import RANDOM_FOREST_NAMES
 from app.apmc.ds.common.enums import ModelTypeChoices
 from app.apmc.ds.processing.data_processing import prepare_data_for_report
 from app.apmc.models import APMCData
 
 
 class ReportGenerator:
-    RANDOM_FOREST_NAMES = ["Random forest classification", "Random forest regression"]
-
     def __init__(self, apmc_data: APMCData):
         self.apmc_data = apmc_data
         self.prepared_data = prepare_data_for_report(self.apmc_data.dataset_path())
-
-    def _get_model_name(self):
-        model_metrics = json.loads(self.apmc_data.model_metrics)
-
-        return model_metrics.get('model_name')
 
     def _get_model(self):
         return joblib.load(self.apmc_data.model_path())
@@ -60,7 +57,7 @@ class ReportGenerator:
             model = self._get_model()
             predictors_names = self.prepared_data.get('predictors_names')
 
-            if self._get_model_name() in self.RANDOM_FOREST_NAMES:
+            if self.apmc_data.model_name in RANDOM_FOREST_NAMES:
                 coef = model.feature_importances_
             else:
                 coef = model.coef_
@@ -72,30 +69,27 @@ class ReportGenerator:
         return None
 
     def get_tree_graph(self):
-        if self._get_model_name() in self.RANDOM_FOREST_NAMES:
-            model = self._get_model()
-            predictors_names = self.prepared_data.get('predictors_names')
-            classes = self.prepared_data.get('classes')
+        model = self._get_model()
+        predictors_names = self.prepared_data.get('predictors_names')
+        classes = self.prepared_data.get('classes')
 
-            # get best tree from forest
-            one_tree = model.estimators_[5]  # temporary solution
+        # get best tree from forest
+        one_tree = model.estimators_[5]  # temporary solution
 
-            dot_data = tree.export_graphviz(
-                one_tree,
-                out_file=None,
-                feature_names=predictors_names,
-                class_names=classes,
-                filled=True,
-                rounded=True,
-                special_characters=True,
-            )
+        dot_data = tree.export_graphviz(
+            one_tree,
+            out_file=None,
+            feature_names=predictors_names,
+            class_names=classes,
+            filled=True,
+            rounded=True,
+            special_characters=True,
+        )
 
-            graph = graphviz.Source(dot_data, format='svg')
-            graph_svg = graph.pipe().decode('utf-8')
+        graph = graphviz.Source(dot_data, format='svg')
+        graph_svg = graph.pipe().decode('utf-8')
 
-            return graph_svg
-
-        return None
+        return graph_svg
 
     def _generate_relation_plot_classification(self):
         # Generate violin-plot y_var vs all
@@ -165,13 +159,20 @@ class ReportGenerator:
     def generate_report(self):
         data = {
             'apmc_data': self.apmc_data,
-            'model_name': self._get_model_name(),
             'basic_statistic': self.get_basic_statistic(),
             'relation_plots': self.generate_relation_plot(),
             'coefficients_table': self.get_coefficients_table(),
-            'tree_graph': self.get_tree_graph(),
         }
 
-        template = render_template('userpanel/apmc/statistical_report.html', context=data)
+        report = render_template('userpanel/apmc/apmc_statistical_report.html', context=data)
 
-        return template
+        report_filename = f"{self.apmc_data.id}_{self.apmc_data.model_type}_report.pdf"
+        report_path = os.path.join(current_app.root_path, APMC_REPORTS_UPLOAD_PATH, report_filename)
+        css = [
+            'app/static/css/vendors/bootstrap.min.css',
+            'app/static/css/dashboard.css',
+            'app/static/css/statistical-report-style.css',
+        ]
+        pdfkit.from_string(report, report_path, css=css)
+
+        return report_filename

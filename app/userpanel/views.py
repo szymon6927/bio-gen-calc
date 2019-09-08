@@ -1,8 +1,10 @@
 from flask import Blueprint
 from flask import flash
+from flask import make_response
 from flask import redirect
 from flask import render_template
 from flask import request
+from flask import send_from_directory
 from flask import url_for
 from flask_login import current_user
 from flask_login import login_required
@@ -15,6 +17,8 @@ from sqlalchemy import or_
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
+from app.apmc.config import APMC_REPORTS_UPLOAD_PATH
+from app.apmc.ds.report.report_generator import ReportGenerator
 from app.apmc.models import APMCData
 from app.customer_calculation.models import CustomerCalculation
 from app.database import db
@@ -363,25 +367,25 @@ def apmc_list_view():
     per_page = 5
 
     if sort_by == "desc":
-        apmc_data = (
+        apmc_data_list = (
             APMCData.query.filter_by(customer=current_user)
             .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
         )
     elif sort_by == "asc":
-        apmc_data = (
+        apmc_data_list = (
             APMCData.query.filter_by(customer=current_user)
             .order_by(asc(order_by))
             .paginate(page=page, per_page=per_page)
         )
     else:
-        apmc_data = (
+        apmc_data_list = (
             APMCData.query.filter_by(customer=current_user)
             .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
         )
 
-    return render_template('userpanel/apmc/apmc_data_list.html', apmc_data=apmc_data)
+    return render_template('userpanel/apmc/apmc_data_list.html', apmc_data_list=apmc_data_list)
 
 
 @userpanel.route('/userpanel/models/<int:apmc_data_id>', methods=['GET', 'POST'])
@@ -424,6 +428,29 @@ def apmc_delete_view(apmc_data_id):
     flash('You have successfully delete the model - {}.'.format(apmc_data.project_name), 'success')
 
     return redirect(url_for('userpanel.apmc_list_view'))
+
+
+@userpanel.route('/userpanel/models/report/<int:apmc_data_id>')
+@login_required
+def apmc_report_view(apmc_data_id):
+    apmc_data = APMCData.query.get_or_404(apmc_data_id)
+
+    return send_from_directory(APMC_REPORTS_UPLOAD_PATH, apmc_data.report)
+
+
+@userpanel.route('/userpanel/models/report/tree-graph/<int:apmc_data_id>')
+@login_required
+def apmc_report_tree_graph_view(apmc_data_id):
+    apmc_data = APMCData.query.get_or_404(apmc_data_id)
+
+    report_generator = ReportGenerator(apmc_data)
+    tree_graph = report_generator.get_tree_graph()
+
+    response = make_response(tree_graph)
+    response.headers['Content-Type'] = 'image/svg+xml'
+    response.headers['Content-Disposition'] = 'inline; filename=report-tree-graph.svg'
+
+    return response
 
 
 @userpanel.context_processor

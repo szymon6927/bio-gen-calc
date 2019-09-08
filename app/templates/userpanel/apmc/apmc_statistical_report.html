@@ -8,9 +8,9 @@
   <title>Gene Calc - statistical report</title>
   <meta name="author" content="Gene Calc - Szymon Miks, Jan Binkowski">
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/vendors/bootstrap.min.css') }}"/>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}"/>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/statistical-report-style.css') }}"/>
+{#  <link rel="stylesheet" href="{{ url_for('static', filename='css/vendors/bootstrap.min.css') }}"/>#}
+{#  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}"/>#}
+{#  <link rel="stylesheet" href="{{ url_for('static', filename='css/statistical-report-style.css') }}"/>#}
 </head>
 <body>
 
@@ -50,7 +50,7 @@
       <h2>Project info</h2>
       <p class="mb-0"><strong>Project name:</strong> {{ context.apmc_data.project_name }}</p>
       <p class="mb-0"><strong>Model type:</strong> {{ context.apmc_data.model_type }}</p>
-      <p class="mb-0"><strong>Model name:</strong> {{ context.model_name }}</p>
+      <p class="mb-0"><strong>Model name:</strong> {{ context.apmc_data.model_name }}</p>
       <p class="mb-0"><strong>Normalization:</strong> {{ context.apmc_data.normalization }}</p>
       <p class="mb-0"><strong>Created at:</strong> {{ context.apmc_data.created_at }}</p>
       <hr>
@@ -92,13 +92,6 @@
       {% if context.coefficients_table %}
         <h2>Coefficients table</h2>
         {{ context.coefficients_table|safe }}
-      {% endif %}
-    </div>
-
-    <div class="tree-graph">
-      {% if context.tree_graph %}
-        <h2>Tree graph</h2>
-        {{ context.tree_graph|safe }}
       {% endif %}
     </div>
   </div>

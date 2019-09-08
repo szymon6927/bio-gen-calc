@@ -15,25 +15,40 @@
 
   <div class="calculations-wrapper">
     <div class="row">
-      {% if apmc_data %}
-        {% for apmc in apmc_data.items %}
+      {% if apmc_data_list %}
+        {% for apmc in apmc_data_list.items %}
           <div class="col-md-12 col-sm-12">
             <div class="card mb-4">
               <div class="card-body">
                 <a href="{{ url_for('userpanel.apmc_details_view', apmc_data_id=apmc.id) }}">
                   <h5 class="card-title">
-                    {% if apmc.project_name %}Project name: {{ apmc.project_name }}{% else %}Model - {{ apmc.id }}{% endif %}
+                    {% if apmc.project_name %}Project name: {{ apmc.project_name }}{% else %}Model -
+                      {{ apmc.id }}{% endif %}
                   </h5>
                 </a>
                 <div class="card-content">
                   <p class="mb-1">Model type: <strong>{{ apmc.model_type }}</strong></p>
                   <p class="small mb-0">Normalization: <strong>{{ apmc.normalization }}</strong></p>
-                  <p class="small mb-0">Data set: <strong>{{ apmc.dataset}}</strong></p>
-                  <p class="small mb-0">Trained model: <strong>{{ apmc.trained_model}}</strong></p>
+                  <p class="small mb-0">Data set: <strong>{{ apmc.dataset }}</strong></p>
+                  <p class="small mb-0">Trained model: <strong>{{ apmc.trained_model }}</strong></p>
                   <p class="small">Created at: {{ apmc.created_at }}</p>
                 </div>
                 <a href="{{ url_for('userpanel.apmc_details_view', apmc_data_id=apmc.id) }}" class="btn btn-primary">
-                  Use</a>
+                  Use model</a>
+
+                {% if apmc.report %}
+                  <a href="{{ url_for('userpanel.apmc_report_view', apmc_data_id=apmc.id) }}"
+                     target="_blank"
+                     class="ml-3 btn btn-dark">
+                    Download statistical report</a>
+                {% endif %}
+
+                {% if apmc.has_tree_graph %}
+                  <a href="{{ url_for('userpanel.apmc_report_tree_graph_view', apmc_data_id=apmc.id) }}"
+                     target="_blank"
+                     class="ml-3 btn btn-info">
+                    Download tree graph</a>
+                {% endif %}
 
                 <a href="{{ url_for('userpanel.apmc_delete_view', apmc_data_id=apmc.id) }}"
                    class="btn btn-danger float-right delete-apmc-data">
@@ -53,7 +68,7 @@
                 <i class="fas fa-exclamation-circle"></i>
                 <span>Error! Nothing found, try again :(</span>
               </h5>
-              <a href="{{ url_for('userpanel.apmc_details_view') }}" class="btn btn-primary">
+              <a href="{{ url_for('userpanel.apmc_list_view') }}" class="btn btn-primary">
                 Show all models
               </a>
             </div>
