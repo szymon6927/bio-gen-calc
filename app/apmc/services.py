@@ -71,6 +71,7 @@ def train(apmc_data_id, selected_model):
     model_path = Model.export_model(apmc_data_id, selected_model, apmc_data.model_type, model)
 
     apmc_data.trained_model = model_path
+    apmc_data.training_completed = True
     apmc_data.model_metrics = json.dumps(model_metrics)
 
     db.session.add(apmc_data)

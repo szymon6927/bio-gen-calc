@@ -368,19 +368,19 @@ def apmc_list_view():
 
     if sort_by == "desc":
         apmc_data_list = (
-            APMCData.query.filter_by(customer=current_user)
+            APMCData.query.filter_by(customer=current_user, training_completed=True)
             .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
         )
     elif sort_by == "asc":
         apmc_data_list = (
-            APMCData.query.filter_by(customer=current_user)
+            APMCData.query.filter_by(customer=current_user, training_completed=True)
             .order_by(asc(order_by))
             .paginate(page=page, per_page=per_page)
         )
     else:
         apmc_data_list = (
-            APMCData.query.filter_by(customer=current_user)
+            APMCData.query.filter_by(customer=current_user, training_completed=True)
             .order_by(desc(order_by))
             .paginate(page=page, per_page=per_page)
         )

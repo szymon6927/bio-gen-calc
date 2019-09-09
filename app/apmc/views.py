@@ -50,6 +50,7 @@ def apmc_pre_train():
             dataset=filename,
             model_type=request.form.get('model_type'),
             normalization=request.form.get('normalization') == "true",
+            training_completed=False,
         )
 
         db.session.add(apmc_data)

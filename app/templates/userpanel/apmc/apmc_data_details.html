@@ -9,6 +9,7 @@
     <p class="mb-1">Model type: <strong>{{ context.apmc_data.model_type }}</strong></p>
     <p>Normalization: <strong>{{ context.apmc_data.normalization }}</strong></p>
     <p class="small mb-0">Data set: <strong>{{ context.apmc_data.dataset }}</strong></p>
+    <p class="small mb-0">Training completed: <strong>{{ context.apmc_data.training_completed }}</strong></p>
     <p class="small mb-0">Trained model: <strong>{{ context.apmc_data.trained_model }}</strong></p>
     <p class="small">Created at: {{ context.apmc_data.created_at }}</p>
     <hr>
@@ -71,8 +72,9 @@
                     {% for msg in extrapolation_risk_msg %}
                       <p class="small text-left mb-0">{{ msg }}</p>
                     {% endfor %}
+                    <hr>
                   {% endif %}
-                  <hr>
+
                   {% for data in predicted_data %}
                     <p class="font-weight-bold mb-0">{{ data }}</p>
                   {% endfor %}
