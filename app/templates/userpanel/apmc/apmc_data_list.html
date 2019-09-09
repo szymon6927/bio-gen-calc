@@ -37,12 +37,10 @@
                 <a href="{{ url_for('userpanel.apmc_details_view', apmc_data_id=apmc.id) }}" class="btn btn-primary">
                   Use model</a>
 
-                {% if apmc.report %}
-                  <a href="{{ url_for('userpanel.apmc_report_view', apmc_data_id=apmc.id) }}"
-                     target="_blank"
-                     class="ml-3 btn btn-dark">
-                    Download statistical report</a>
-                {% endif %}
+                <a href="{{ url_for('userpanel.apmc_report_view', apmc_data_id=apmc.id) }}"
+                   target="_blank"
+                   class="ml-3 btn btn-dark">
+                  Download statistical report</a>
 
                 {% if apmc.has_tree_graph %}
                   <a href="{{ url_for('userpanel.apmc_report_tree_graph_view', apmc_data_id=apmc.id) }}"

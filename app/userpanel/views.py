@@ -435,7 +435,18 @@ def apmc_delete_view(apmc_data_id):
 def apmc_report_view(apmc_data_id):
     apmc_data = APMCData.query.get_or_404(apmc_data_id)
 
-    return send_from_directory(APMC_REPORTS_UPLOAD_PATH, apmc_data.report)
+    if apmc_data.report:
+        return send_from_directory(APMC_REPORTS_UPLOAD_PATH, apmc_data.report)
+    else:
+        report_generator = ReportGenerator(apmc_data)
+        report_filename = report_generator.generate_report()
+
+        apmc_data.report = report_filename
+
+        db.session.add(apmc_data)
+        db.session.commit()
+
+        return send_from_directory(APMC_REPORTS_UPLOAD_PATH, apmc_data.report)
 
 
 @userpanel.route('/userpanel/models/report/tree-graph/<int:apmc_data_id>')
