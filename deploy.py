@@ -35,13 +35,13 @@ class Command:
     @property
     def copy_statistical_reports(self):
         return (
-            f"cp -r {self.APP_PATH}app/static/statistical_reports/* "
-            + f"{self.ROOT_PATH}bio-gen-calc/app/static/statistical_reports/ 2>/dev/null"
+            f"cp -r {self.APP_PATH}app/static/statistical_reports "
+            + f"{self.ROOT_PATH}bio-gen-calc/app/static/ 2>/dev/null"
         )
 
     @property
     def copy_models(self):
-        return f"cp -r {self.APP_PATH}app/static/models/* {self.ROOT_PATH}bio-gen-calc/app/static/models/ 2>/dev/null"
+        return f"cp -r {self.APP_PATH}app/static/models {self.ROOT_PATH}bio-gen-calc/app/static/ 2>/dev/null"
 
     @property
     def remove_current_files(self):
