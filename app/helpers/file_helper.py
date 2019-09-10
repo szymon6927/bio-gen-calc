@@ -34,7 +34,7 @@ def remove_temp_file(filename):
 
 
 def allowed_file(filename):
-    allowed_extension = set(['fasta'])
+    allowed_extension = set(['fasta', 'csv', 'xls'])
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extension
 
 
@@ -50,3 +50,11 @@ def save_picture(form_picture):
     i.save(picture_path)
 
     return picture_fn
+
+
+def remove_file(file_path):
+    if not file_path:
+        return
+
+    if os.path.isfile(file_path):
+        os.remove(file_path)

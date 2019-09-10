@@ -65,21 +65,21 @@ function initCKEDITOR(selector) {
 }
 
 function confirmPageDelete() {
-  return confirm("Are you sure to delete this page?");
+  return confirm("Are you sure to delete this?");
 }
 
 $(document).ready(function() {
   $('.hamburger').click(function() {
-    openMenu();  
+    openMenu();
   })
-  
+
   selectActiveMenuItem();
 
   $('#picture').change(function() {
     showInputFileName();
   })
 
-  $('.delete-page, .delete-customer').click(function (e) {
+  $('.delete-page, .delete-customer, .delete-apmc-data').click(function (e) {
     if (!confirmPageDelete()) {
       e.preventDefault();
     }

@@ -133,7 +133,6 @@ dmypy.json
 .pyre/
 
 # App
-app/helpers/temp
 .vscode/
 *.swp
 

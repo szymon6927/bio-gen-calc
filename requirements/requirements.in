@@ -19,3 +19,4 @@ pytest
 requests
 scikit-learn
 seaborn
+graphviz

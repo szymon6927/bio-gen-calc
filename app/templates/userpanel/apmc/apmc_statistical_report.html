@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="pdfkit-page-size" content="Legal"/>
+  <meta name="pdfkit-orientation" content="Portrait"/>
+  <title>Gene Calc - statistical report</title>
+  <meta name="author" content="Gene Calc - Szymon Miks, Jan Binkowski">
+
+{#  <link rel="stylesheet" href="{{ url_for('static', filename='css/vendors/bootstrap.min.css') }}"/>#}
+{#  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}"/>#}
+{#  <link rel="stylesheet" href="{{ url_for('static', filename='css/statistical-report-style.css') }}"/>#}
+</head>
+<body>
+
+<section class="header bg-dark shadow mb-4 p-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-sm-12 text-sm-left text-center">
+          <span class="text-left pr-1">
+            <i class="fas fa-dna text-white"></i>
+          </span>
+        <span class="text-left text-white small">
+            <a class="text-white" href="https://gene-calc.pl/">Gene Calc</a> - Statistical Report
+          </span>
+      </div>
+
+      <div class="col-md-6 col-sm-12 text-sm-right text-center">
+          <span class="text-white small mb-0">
+            <a class="text-white" href="mailto:miks.szymon@gmail.com">Szymon Miks</a> &
+            <a class="text-white" href="mailto:jan.binkowski96@gmail.com">Jan Bińkowski</a>
+          </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="statistical-report">
+  <div class="container-fluid">
+    <div class="general-info text-center mt-3">
+      <h1>Gene Calc - Statistical report</h1>
+      <p>Report was generated fully automatically, if you have any problem with understanding or reasoning,
+        please contact us via e-mail: <a href="mailto:contact@gene-calc.pl">contact@gene-calc.pl</a>
+      </p>
+      <hr>
+    </div>
+
+    <div class="model-info">
+      <h2>Project info</h2>
+      <p class="mb-0"><strong>Project name:</strong> {{ context.apmc_data.project_name }}</p>
+      <p class="mb-0"><strong>Model type:</strong> {{ context.apmc_data.model_type }}</p>
+      <p class="mb-0"><strong>Model name:</strong> {{ context.apmc_data.model_name }}</p>
+      <p class="mb-0"><strong>Normalization:</strong> {{ context.apmc_data.normalization }}</p>
+      <p class="mb-0"><strong>Created at:</strong> {{ context.apmc_data.created_at }}</p>
+      <hr>
+    </div>
+
+    <div class="basic-statistic">
+      {% if context.basic_statistic %}
+        <h2>Descriptive statistics</h2>
+        {{ context.basic_statistic|safe }}
+        <hr>
+      {% endif %}
+    </div>
+
+    <div class="relation-plots">
+      {% if context.relation_plots %}
+        <h2>Relation plots</h2>
+
+        {% if context.apmc_data.model_type == "classification" %}
+          <h4 class="text-center mb-2 mt-4">value vs predictors plots</h4>
+          {% for relation_plot in context.relation_plots[0] %}
+            <img class="plot img-fluid shadow m-4" src="data:image/png;base64,{{ relation_plot }}">
+          {% endfor %}
+
+          <h4 class="text-center mb-3 mt-4">predictors vs predictors plots</h4>
+          {% for relation_plot in context.relation_plots[1] %}
+            <img class="plot img-fluid shadow m-4" src="data:image/png;base64,{{ relation_plot }}">
+          {% endfor %}
+
+        {% else %}
+          {% for relation_plot in context.relation_plots %}
+            <img class="plot img-fluid shadow m-4" src="data:image/png;base64,{{ relation_plot }}">
+          {% endfor %}
+        {% endif %}
+
+      {% endif %}
+    </div>
+
+    <div class="coefficients-table">
+      {% if context.coefficients_table %}
+        <h2>Coefficients table</h2>
+        {{ context.coefficients_table|safe }}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer bg-dark shadow mt-5 p-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-sm-12 text-sm-left text-center">
+        <span class="text-left pr-1">
+          <i class="fas fa-dna text-white"></i>
+        </span>
+        <span class="text-left text-white small">
+          <a class="text-white" href="https://gene-calc.pl/">Gene Calc</a> - Copyright © 2019 All Rights Reserved
+        </span>
+      </div>
+
+      <div class="col-md-6 col-sm-12 text-sm-right text-center">
+        <span class="text-white small mb-0">
+          <a class="text-white" href="mailto:miks.szymon@gmail.com">Szymon Miks</a> &
+          <a class="text-white" href="mailto:jan.binkowski96@gmail.com">Jan Bińkowski</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

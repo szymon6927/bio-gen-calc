@@ -28,3 +28,4 @@ repos:
   rev: b57843b0b874df1d16eb0bef00b868792cb245c2
   hooks:
     - id: python-import-sorter
+      exclude: '(.*/migrations/.*.py|settings.py)'

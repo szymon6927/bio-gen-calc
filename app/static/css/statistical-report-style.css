@@ -1,0 +1,19 @@
+body {
+    background: #fafafa;
+}
+
+.tree-graph svg {
+    width: 100%;
+}
+
+table.dataframe {
+    width: 100%;
+}
+
+table.dataframe tr {
+    text-align: left !important;
+}
+
+.statistical-report h2 {
+    text-align: center;
+}
