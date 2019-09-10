@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+from sklearn.dummy import DummyClassifier
+from sklearn.dummy import DummyRegressor
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 from sklearn.metrics import mean_absolute_error
@@ -98,6 +100,28 @@ class PreModelConstructor:
             all_models_metrics.append(model_evaluation_metrics)
 
         return all_models_metrics, repo.get_user_choices()
+
+    def dummy_comparison(self, models_metrics, y_train, X_train):
+        """This method display warning for models which are less accurate than dummy equivalents"""
+        warnings = []
+
+        dummy_model_mapper = {
+            ModelTypeChoices.classification: DummyClassifier(random_state=101),
+            ModelTypeChoices.regression: DummyRegressor(),
+        }
+
+        dummy_model = dummy_model_mapper.get(self.model_type)
+
+        threshold = np.mean(cross_validate(dummy_model, X_train, y_train, cv=5)['test_score'])
+
+        for models_metric in models_metrics:
+            accuracy = models_metric.get('cross_validate_score')
+            model_name = models_metric.get('model_name')
+
+            if accuracy < threshold:
+                warnings.append(f"{model_name} in this step seems to be not acceptable to use")
+
+        return warnings
 
     @staticmethod
     def get_best_model(models_metrics):

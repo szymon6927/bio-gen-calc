@@ -16,13 +16,13 @@ class APMCData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'), nullable=False)
     project_name = db.Column(db.String(120), nullable=False)
-    dataset = db.Column(db.String(40), nullable=False)
+    dataset = db.Column(db.String(80), nullable=False)
     model_type = db.Column(db.String(120), nullable=False)
     normalization = db.Column(db.Boolean, default=False)
     trained_model = db.Column(db.String(40), nullable=True)
     training_completed = db.Column(db.Boolean, default=False)
     model_metrics = db.Column(db.Text, nullable=True)
-    report = db.Column(db.String(40), nullable=True)
+    report = db.Column(db.String(80), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now)
 
     def dataset_path(self):

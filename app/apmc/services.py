@@ -30,6 +30,9 @@ def pre_train(apmc_data: APMCData) -> dict:
         'model_metrics': model_metrics,
         'user_choices': user_choices,
         'best_model': PreModelConstructor.get_best_model(model_metrics),
+        'dummy_model_warnings': pre_model_creator.dummy_comparison(
+            model_metrics, y_train=split_data.get('y_train'), X_train=split_data.get('X_train')
+        ),
     }
 
 
