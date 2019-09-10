@@ -12,6 +12,7 @@ from flask_login import current_user
 from werkzeug.utils import secure_filename
 
 from app.apmc.config import APMC_DATASET_UPLOAD_PATH
+from app.apmc.exceptions import DatasetValidationError
 from app.apmc.models import APMCData
 from app.apmc.services import pre_train
 from app.apmc.services import train
@@ -56,9 +57,12 @@ def apmc_pre_train():
         db.session.add(apmc_data)
         db.session.commit()
 
-        result = pre_train(apmc_data)
-        result.update({'data_id': apmc_data.id})
-        return jsonify(result)
+        try:
+            result = pre_train(apmc_data)
+            result.update({'data_id': apmc_data.id})
+            return jsonify(result)
+        except DatasetValidationError as e:
+            abort(Response(str(e), 400))
 
     abort(Response('No file, or wrong file extension', 400))
 

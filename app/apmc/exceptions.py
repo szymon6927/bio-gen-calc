@@ -1,0 +1,2 @@
+class DatasetValidationError(Exception):
+    pass
