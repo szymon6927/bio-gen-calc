@@ -29,6 +29,21 @@ class Command:
         return f"cp {self.APP_PATH}passenger_wsgi.py {self.ROOT_PATH}bio-gen-calc"
 
     @property
+    def copy_uploads(self):
+        return f"cp -r {self.APP_PATH}app/static/uploads/* {self.ROOT_PATH}bio-gen-calc/app/static/uploads/ 2>/dev/null"
+
+    @property
+    def copy_statistical_reports(self):
+        return (
+            f"cp -r {self.APP_PATH}app/static/statistical_reports/* "
+            + f"{self.ROOT_PATH}bio-gen-calc/app/static/statistical_reports/ 2>/dev/null"
+        )
+
+    @property
+    def copy_models(self):
+        return f"cp -r {self.APP_PATH}app/static/models/* {self.ROOT_PATH}bio-gen-calc/app/static/models/ 2>/dev/null"
+
+    @property
     def remove_current_files(self):
         return f"rm -rf {self.APP_PATH}*"
 
@@ -184,13 +199,16 @@ class Deployer:
         workflow = {
             1: self.command.git_clone,
             2: self.command.copy_passenger_wsgi,
-            3: self.command.remove_current_files,
-            4: self.command.copy_files,
-            5: self.command.install_requirements,
-            6: self.command.remove_github_dir,
-            7: self.command.remove_python_cache,
-            8: self.command.upgrade_db,
-            9: self.command.restart_service,
+            3: self.command.copy_uploads,
+            4: self.command.copy_statistical_reports,
+            5: self.command.copy_models,
+            6: self.command.remove_current_files,
+            7: self.command.copy_files,
+            8: self.command.install_requirements,
+            9: self.command.remove_github_dir,
+            10: self.command.remove_python_cache,
+            11: self.command.upgrade_db,
+            12: self.command.restart_service,
         }
 
         for step, command in workflow.items():
