@@ -219,7 +219,7 @@ class Deployer:
                 print(f"❌ Something went from on step: {step} with command: {command}")
                 print("✅ Reverting deploy!")
                 self.revert_deploy(backup_name)
-                return False
+                sys.exit("❌ Error! Deployment failed !!!")
 
             print("------------------------------------------------------------------------")
 
