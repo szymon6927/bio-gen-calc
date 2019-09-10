@@ -72,6 +72,34 @@ class APMCModule extends AppModule {
     wrapper.html(template);
   }
 
+  renderDummyWarning(warningsList) {
+    if (warningsList.length === 0) {
+      return 0;
+    }
+
+    const dummyWarningsWraper = $('.dummy-model-warnings');
+    let dummyModelWarnings = '';
+
+    warningsList.forEach((item, index) => {
+      dummyModelWarnings += `
+        <p class="mb-0">- ${item}</p>
+      `
+    });
+
+    const template = `
+          <div class="card bg-light mb-5 shadow-lg">
+            <div class="card-header">
+              <span class="info-icon"><i class="fas fa-info-circle"></i></span>
+              <span class="mb-0">Warnings</span>
+            </div>
+            <div class="card-body">
+              ${dummyModelWarnings}
+            </div>
+          </div>`;
+
+    dummyWarningsWraper.html(template);
+  }
+
   renderModelChoices(modelChoices) {
     const selectWraper = $('.user-model-choice select');
     let choices = '';
@@ -125,6 +153,7 @@ class APMCModule extends AppModule {
         }
 
         this.renderBestModelRecommendation(result.best_model);
+        this.renderDummyWarning(result.dummy_model_warnings);
 
         $('.user-model-choice').show();
         this.renderModelChoices(result.user_choices);
