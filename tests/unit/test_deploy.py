@@ -101,6 +101,6 @@ def test_deployer_deploy_when_command_execution_failed(
     mock_revert_deploy.return_value = True
 
     deployer = Deployer()
-    result = deployer.deploy()
 
-    assert result is False
+    with pytest.raises(SystemExit, match=r".* Error! Deployment failed .*"):
+        deployer.deploy()
