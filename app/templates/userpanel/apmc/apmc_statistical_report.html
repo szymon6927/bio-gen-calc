@@ -64,17 +64,24 @@
       {% endif %}
     </div>
 
+    <div class="coefficients-table">
+      {% if context.coefficients_table %}
+        <h2>Coefficients table</h2>
+        {{ context.coefficients_table|safe }}
+      {% endif %}
+    </div>
+
     <div class="relation-plots">
       {% if context.relation_plots %}
         <h2>Relation plots</h2>
 
         {% if context.apmc_data.model_type == "classification" %}
-          <h4 class="text-center mb-2 mt-4">value vs predictors plots</h4>
+          <h4 class="text-center mb-2 mt-4">target values vs predictors - plots</h4>
           {% for relation_plot in context.relation_plots[0] %}
             <img class="plot img-fluid shadow m-4" src="data:image/png;base64,{{ relation_plot }}">
           {% endfor %}
 
-          <h4 class="text-center mb-3 mt-4">predictors vs predictors plots</h4>
+          <h4 class="text-center mb-3 mt-4">predictors vs predictors - plots</h4>
           {% for relation_plot in context.relation_plots[1] %}
             <img class="plot img-fluid shadow m-4" src="data:image/png;base64,{{ relation_plot }}">
           {% endfor %}
@@ -88,12 +95,6 @@
       {% endif %}
     </div>
 
-    <div class="coefficients-table">
-      {% if context.coefficients_table %}
-        <h2>Coefficients table</h2>
-        {{ context.coefficients_table|safe }}
-      {% endif %}
-    </div>
   </div>
 </section>
 
