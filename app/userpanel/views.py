@@ -254,7 +254,7 @@ def page_details_view(page_id):
         page.is_active = form.is_active.data
         page.slug = form.slug.data
         page.seo_title = form.seo_title.data
-        page.desc = form.seo_desc.data
+        page.seo_desc = form.seo_desc.data
         page.seo_keywords = form.seo_keywords.data
         page.text = form.text.data
         page.desc = form.desc.data
