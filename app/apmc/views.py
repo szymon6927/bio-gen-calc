@@ -30,6 +30,18 @@ def apmc_page():
     return render_template('apmc/index.html', title="APMC")
 
 
+@apmc.route('/apmc/how-to-use')
+@add_customer_activity
+def apmc_how_to_use_page():
+    return render_template('apmc/how_to_use.html', title="APMC - How to use")
+
+
+@apmc.route('/apmc/documentation')
+@add_customer_activity
+def apmc_documentation_page():
+    return render_template('apmc/documentation.html', title="APMC - Documentation")
+
+
 @apmc.route('/apmc/pre-train', methods=['POST'])
 def apmc_pre_train():
     if 'file' not in request.files:
