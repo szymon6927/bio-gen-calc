@@ -12,7 +12,7 @@ class RegressionModelOptimizer:
 
         parameters = {"n_estimators": [50, 500], "warm_start": ("True", "False")}
 
-        rf = RandomForestRegressor(random_state=101)
+        rf = RandomForestRegressor(random_state=101, max_depth=10, max_leaf_nodes=20)
         gs_rf = GridSearchCV(rf, parameters, cv=5, iid=False)
         gs_rf.fit(X_train, y_train)
 
