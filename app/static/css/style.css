@@ -699,6 +699,15 @@ table th[scope=row] {
     display: none;
 }
 
+.sub-nav {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sub-nav-link {
+    padding-left: 2rem;
+}
+
 @media (min-width: 1331px) and (max-width: 1400px) {
     .navbar-nav li {
         font-size: 15px;
