@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 from app.apmc.ds.common.enums import ModelTypeChoices
 from app.apmc.exceptions import DatasetValidationError
@@ -42,10 +43,12 @@ class Validator:
         """Method to find NaN"""
 
         if np.isnan(self.X_array).any():
-            raise DatasetValidationError("NaN in X_array data !")
+            raise DatasetValidationError("NaN in predictors data !")
+        
+        y_vector = pd.Series(self.y_vector)
 
-        if self.model_type == ModelTypeChoices.regression and np.isnan(self.y_vector).any():
-            raise DatasetValidationError("NaN in y_vector data !")
+        if pd.isnull(y_vector).any():
+            raise DatasetValidationError("NaN in target value data !")
 
     def _number_target_class(self):
         unique_items = set(self.y_vector.tolist())
@@ -61,21 +64,22 @@ class Validator:
             self.X_array.astype(float)
         except ValueError:
             raise DatasetValidationError(
-                "Data in X_array must be numerical, If data is categorical convert alphabetic "
+                "Predictors must be numerical, If data is categorical convert alphabetic "
                 "labels to corresponding numbers"
             )
 
         if self.model_type == ModelTypeChoices.regression:
             try:
                 self.y_vector.astype(float)
+
             except ValueError:
-                raise DatasetValidationError("Data in y_vector must be numerical")
+                raise DatasetValidationError("Target data must be numerical in case of regression models")
 
     def validate(self):
         self._shape_validation()
-        self._model_type_test()
+        self._data_quality()
         self._data_NaN()
         self._number_target_class()
-        self._data_quality()
+        self._model_type_test()
 
         return True
