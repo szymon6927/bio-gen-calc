@@ -53,20 +53,28 @@ class ReportGenerator:
 
     def get_coefficients_table(self):
         """method to get coefficients table based on model"""
-        if self.apmc_data.model_type == ModelTypeChoices.regression:
-            model = self._get_model()
-            predictors_names = self.prepared_data.get('predictors_names')
+        if (
+            self.apmc_data.model_type == ModelTypeChoices.classification
+            and self.apmc_data.model_name not in RANDOM_FOREST_NAMES
+        ):
+            return None
 
-            if self.apmc_data.model_name in RANDOM_FOREST_NAMES:
-                coef = model.feature_importances_
-            else:
-                coef = model.coef_
+        model = self._get_model()
+        predictors_names = self.prepared_data.get('predictors_names')
 
-            frame_coef = pd.DataFrame(coef, columns=["Coefficients"], index=predictors_names)
+        if self.apmc_data.model_name in RANDOM_FOREST_NAMES:
+            coef = model.feature_importances_
+        elif (
+            self.apmc_data.model_type == ModelTypeChoices.regression
+            and self.apmc_data.model_name not in RANDOM_FOREST_NAMES
+        ):
+            coef = model.coef_
+        else:
+            return None
 
-            return frame_coef.to_html()
+        frame_coef = pd.DataFrame(coef, columns=["Coefficients"], index=predictors_names)
 
-        return None
+        return frame_coef.to_html()
 
     def get_tree_graph(self):
         model = self._get_model()
