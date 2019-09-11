@@ -113,10 +113,8 @@ class ReportGenerator:
         for predictor in col_names:
             plot = sns.violinplot(data=data, x=quantitive_loc, y=predictor)
             fig = plot.get_figure()
-
             value_vs_predictors_plots.append(self._convert_to_base64(fig))
-
-            fig.clear()
+            fig.clf()
 
         # Generate plot all predictors vs all predictores
 
