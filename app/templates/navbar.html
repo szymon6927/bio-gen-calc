@@ -101,6 +101,21 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="drop-down">
           <a class="dropdown-item" href="{{ url_for('apmc.apmc_page') }}">Automatic predictive model constructor</a>
+
+          <ul class="sub-nav">
+            <li class="sub-nav-item">
+              <a class="sub-nav-link dropdown-item small" href="{{ url_for('apmc.apmc_how_to_use_page') }}">
+                <i class="fas fa-info-circle mr-1"></i>
+                <span>How to use</span>
+              </a>
+            </li>
+            <li class="sub-nav-item">
+              <a class="sub-nav-link dropdown-item small" href="{{ url_for('apmc.apmc_documentation_page') }}">
+                <i class="fas fa-book mr-1"></i>
+                <span>Documentation</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </li>
 
