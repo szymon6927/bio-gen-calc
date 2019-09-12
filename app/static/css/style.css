@@ -672,11 +672,38 @@ table th[scope=row] {
     color: #fff;
 }
 
+.side-info.fb {
+    top: 270px;
+    background: #007bff;
+}
+
+.side-info.fb:hover,
+.side-info.linkedin:hover {
+    background: #264f7f;
+    color: #fff;
+    text-decoration: none;
+}
+
+.side-info.linkedin {
+    top: 325px;
+    background: #007bff;
+}
+
 .side-info::before {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     content: "\f129";
     font-size: 21px;
+}
+
+.side-info.fb::before {
+    font-family: "Font Awesome 5 Brands";
+    content: "\f082";
+}
+
+.side-info.linkedin::before {
+    font-family: "Font Awesome 5 Brands";
+    content: "\f08c";
 }
 
 #userpanel-modal .modal-content {
