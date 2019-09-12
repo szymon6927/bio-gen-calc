@@ -10,6 +10,44 @@
 
     {% include 'utils/info_block.html' %}
 
+    <section class="apmc-info">
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-12">
+          <div class="card bg-light shadow">
+            <div class="card-header">
+              <span class="info-icon"><i class="fas fa-info-circle"></i></span>
+              <span class="card-title mb-0">How to use:</span>
+            </div>
+            <div class="card-body">
+              <p class="font-weight-bold">
+                Short description - step by step guideline</p>
+              <a href="{{ url_for('apmc.apmc_how_to_use_page') }}" class="btn btn-outline-secondary btn-block">
+                <i class="fas fa-rocket"></i>
+                <span>Read</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-12">
+          <div class="card bg-light shadow">
+            <div class="card-header">
+              <span class="info-icon"><i class="fas fa-book mr-1"></i></span>
+              <span class="card-title mb-0">Documentation:</span>
+            </div>
+            <div class="card-body">
+              <p class="font-weight-bold">Complete documentation about the entire module</p>
+              <a href="{{ url_for('apmc.apmc_documentation_page') }}" class="btn btn-outline-secondary btn-block">
+                <i class="fas fa-rocket"></i>
+                <span>Read</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
     <section class="apmc">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -28,7 +66,7 @@
 {% block scripts %}
   <script src="{{ url_for('static', filename='js/helpers/AppModule.js') }}?ver={{ css_js_ver }}"></script>
   <script
-    src="{{ url_for('static', filename='js/apmc/APMCModule.js') }}?ver={{ css_js_ver }}"></script>
+      src="{{ url_for('static', filename='js/apmc/APMCModule.js') }}?ver={{ css_js_ver }}"></script>
   <script
-    src="{{ url_for('static', filename='js/apmc/APMCEvents.js') }}?ver={{ css_js_ver }}"></script>
+      src="{{ url_for('static', filename='js/apmc/APMCEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}
