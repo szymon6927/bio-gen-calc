@@ -458,12 +458,12 @@ table th[scope=row] {
     font-size: 22px;
 }
 
-.card-body a {
+.module-desc .card-body a {
     color: #fff;
     /* font-weight: 400; */
 }
 
-.card-body a:hover {
+.module-desc .card-body a:hover {
     font-weight: 700;
     color: #fafafa;
 }
@@ -697,6 +697,15 @@ table th[scope=row] {
 .user-model-choice,
 .train-success{
     display: none;
+}
+
+.sub-nav {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sub-nav-link {
+    padding-left: 2rem;
 }
 
 @media (min-width: 1331px) and (max-width: 1400px) {
