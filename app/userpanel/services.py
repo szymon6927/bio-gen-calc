@@ -46,7 +46,7 @@ class APMCUserPanelService:
         return self.loaded_data.get('X_names').tolist()
 
     def get_extrapolation_risk(self):
-        return extrapolation_risk(self.split_data.get('X_train'), self.user_input, self.loaded_data.get('X_names'))
+        return extrapolation_risk(self.loaded_data.get('X_array'), self.user_input, self.loaded_data.get('X_names'))
 
     def get_predicted_data(self):
         model = joblib.load(self.apmc_data.model_path())
