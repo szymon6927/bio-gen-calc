@@ -68,6 +68,16 @@ function confirmPageDelete() {
   return confirm("Are you sure to delete this?");
 }
 
+function goToByScroll(className) {
+  if (!className.includes('.')) {
+    className = "." + className
+  }
+
+  $('html, body').animate({
+    scrollTop: $(className).offset().top - 80
+  }, 1200);
+}
+
 $(document).ready(function() {
   $('.hamburger').click(function() {
     openMenu();

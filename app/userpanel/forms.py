@@ -4,6 +4,7 @@ from flask_wtf.file import FileAllowed
 from flask_wtf.file import FileField
 from wtforms import BooleanField
 from wtforms import DateTimeField
+from wtforms import FloatField
 from wtforms import HiddenField
 from wtforms import PasswordField
 from wtforms import StringField
@@ -105,4 +106,4 @@ class ModelForm(FlaskForm):
                 delattr(form, instance_attribute)
 
         for key in data:
-            setattr(form, f"model_{key}", StringField(key, validators=[DataRequired()]))
+            setattr(form, f"model_{key}", FloatField(key))

@@ -72,6 +72,16 @@ VALUES (14, 'APMC', '/apmc', 'SEO desc',
         'seo keywords', '<p>APMC - text</p>',
         '<p>APMC - automatic predictive model constructor</p>', 'seo title', 1);
 
+INSERT INTO `pages` (`id`, `name`, `slug`, `seo_desc`, `seo_keywords`, `text`, `desc`, `seo_title`, `is_active`)
+VALUES (15, 'APMC How to use', '/apmc/how-to-use', 'SEO desc',
+        'seo keywords', '<p>APMC How to use - text</p>',
+        '<p>APMC how to use description</p>', 'seo title', 1);
+
+INSERT INTO `pages` (`id`, `name`, `slug`, `seo_desc`, `seo_keywords`, `text`, `desc`, `seo_title`, `is_active`)
+VALUES (16, 'APMC documentation', '/apmc/documentation', 'SEO desc',
+        'seo keywords', '<p>APMC documentation - text</p>',
+        '<p>APMC documentation description</p>', 'seo title', 1);
+
 INSERT INTO `customers` (`first_name`, `last_name`, `profile_pic`, `login`, `email`, `password`, `created_at`,
                          `is_superuser`)
 VALUES ('test', 'test', 'profile.svg', 'test123', 'test123@test.com',
