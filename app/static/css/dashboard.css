@@ -276,6 +276,10 @@
     font-size: 11px;
 }
 
+.matrix_report {
+    font-size: 14px;
+}
+
 @media (max-width: 1200px) {
     .sidebar {
         display: none;
