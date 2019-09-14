@@ -44,10 +44,12 @@ def data_set_split(X_array, y_vector, normalization=False):
 
         mean_array = scaler.mean_  # data used for scaling user input
         std_array = scaler.scale_
+    
     else:
         X = X_array
-        mean_array = None
-        std_array = None
+
+        mean_array = np.mean(X, axis=0)
+        std_array = np.std(X, axis=0)
 
     X_train, X_test, y_train, y_test = train_test_split(X, y_vector, test_size=0.30, random_state=101)
 
@@ -61,23 +63,23 @@ def data_set_split(X_array, y_vector, normalization=False):
     }
 
 
-def extrapolation_risk(X_array, values_to_predict, X_names):
+def extrapolation_risk(X_array, mean_list, std_list, values_to_predict, X_names):
     n_columns = X_array.shape[1]
 
     input_values = np.reshape(values_to_predict, (n_columns, 1))
 
-    std_list = np.std(X_array, axis=0)
-    mean_list = np.mean(X_array, axis=0)
-
     warnings = []
-
+    
     for counter, input_value in enumerate(input_values):
+        
         if input_value < (mean_list[counter] - (3 * (std_list[counter]))):
+            
             warnings.append(
                 f"Risk of extrapolation predictor [{X_names[counter]}] value is SMALLER than 3 std from mean!"
             )
 
         if input_value > (mean_list[counter] + (3 * (std_list[counter]))):
+            
             warnings.append(
                 f"Risk of extrapolation predictor [{X_names[counter]}] value is BIGGER than 3 std from mean!"
             )
