@@ -1,9 +1,9 @@
 import json
 from typing import List
 
-import joblib
 import numpy as np
 
+import joblib
 from app.apmc.ds.processing.data_processing import data_set_split
 from app.apmc.ds.processing.data_processing import extrapolation_risk
 from app.apmc.ds.processing.data_processing import load_data
@@ -46,7 +46,13 @@ class APMCUserPanelService:
         return self.loaded_data.get('X_names').tolist()
 
     def get_extrapolation_risk(self):
-        return extrapolation_risk(self.split_data.get('X_train'), self.user_input, self.loaded_data.get('X_names'))
+        return extrapolation_risk(
+            self.loaded_data.get('X_array'),
+            self.split_data.get("X_mean"),
+            self.split_data.get("X_std"),
+            self.user_input,
+            self.loaded_data.get('X_names'),
+        )
 
     def get_predicted_data(self):
         model = joblib.load(self.apmc_data.model_path())
