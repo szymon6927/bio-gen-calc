@@ -8,12 +8,6 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('userpanel.edit_profile_view') }}">
-          <i class="fas fa-user"></i>
-          <span>Profile</span>
-        </a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="{{ url_for('userpanel.calculations_list_view') }}">
           <i class="fas fa-calculator"></i>
           <span>Calculations</span>
@@ -25,6 +19,95 @@
           <span>Models</span>
         </a>
       </li>
+
+      <li class="nav-item">
+        <div class="nav-link border-top">
+          <i class="fas fa-wrench"></i>
+          <strong>Tools</strong>
+        </div>
+
+        <h6 class="sidebar-heading d-flex px-3 mt-2 mb-1 text-muted">
+          <span>Genetic Tools</span>
+        </h6>
+
+        <ul class="tools-submenu">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('hardy_weinberg.hardy_weinberg_page') }}" target="_blank">
+              <i class="fas fa-ellipsis-h"></i>
+              <span>Hardy-Weinberg</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('pic.pic_page') }}" target="_blank">
+              <i class="fas fa-ellipsis-h"></i>
+              <span>Pic & H</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('genetic_distance.genetic_distance_page') }}" target="_blank">
+              <i class="fas fa-ellipsis-h"></i>
+              <span>Genetic Distance</span>
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex px-3 mt-3 mb-1 text-muted">
+          <span>Statistic tools</span>
+        </h6>
+
+        <ul class="tools-submenu">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('chi_square.chi_square_page') }}" target="_blank">
+              <i class="fas fa-ellipsis-h"></i>
+              <span>Chi-Square</span>
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex px-3 mt-3 mb-1 text-muted">
+          <span>Sequences Analysis Tools</span>
+        </h6>
+
+        <ul class="tools-submenu">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('sequences_analysis_tools.dot_plot_page') }}" target="_blank">
+              <i class="fas fa-ellipsis-h"></i>
+              <span>Dot plot</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('sequences_analysis_tools.consensus_sequence_page') }}"
+               target="_blank">
+              <i class="fas fa-ellipsis-h"></i>
+              <span>Tool to obtain consensus sequence</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('sequences_analysis_tools.sequences_tools_page') }}" target="_blank">
+              <i class="fas fa-ellipsis-h"></i>
+              <span>Sequences Additional Tools</span>
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex px-3 mt-3 mb-1 text-muted">
+          <span>Machine Learning Tools</span>
+        </h6>
+
+        <ul class="tools-submenu">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('apmc.apmc_page') }}" target="_blank">
+              <i class="fas fa-ellipsis-h"></i>
+              <span>APMC</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
       {% if current_user.is_superuser %}
         <li class="nav-item">
           <div class="nav-link border-top">

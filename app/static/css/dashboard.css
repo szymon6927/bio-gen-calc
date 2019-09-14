@@ -261,6 +261,21 @@
     z-index: 999;
 }
 
+.tools-submenu {
+    list-style: none;
+    padding-left: 0;
+}
+
+.tools-submenu a {
+    font-size: 14px;
+    line-height: 18px;
+    padding: 0.35rem 1rem;
+}
+
+.tools-submenu i {
+    font-size: 11px;
+}
+
 @media (max-width: 1200px) {
     .sidebar {
         display: none;
