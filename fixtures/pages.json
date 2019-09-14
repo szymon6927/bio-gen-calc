@@ -102,5 +102,29 @@
     "slug": "/privacy-policy",
     "text": "Test content text",
     "desc": "Test content desc"
+  },
+  {
+    "id": 14,
+    "name": "APMC",
+    "is_active": 1,
+    "slug": "/apmc",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  },
+  {
+    "id": 15,
+    "name": "APMC How to use",
+    "is_active": 1,
+    "slug": "/apmc/how-to-use",
+    "text": "Test content text",
+    "desc": "Test content desc"
+  },
+  {
+    "id": 16,
+    "name": "APMC documentation",
+    "is_active": 1,
+    "slug": "/apmc/documentation",
+    "text": "Test content text",
+    "desc": "Test content desc"
   }
 ]
