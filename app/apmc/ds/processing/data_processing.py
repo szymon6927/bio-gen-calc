@@ -1,10 +1,10 @@
 import numpy as np
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 
+import pandas as pd
 from app.apmc.ds.common.enums import DatasetExtensionChoices
 from app.apmc.ds.common.enums import DelimiterChoices
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 
 def load_data(dataset_path):
@@ -33,8 +33,7 @@ def data_set_split(X_array, y_vector, normalization=False):
     User need to determine what are X variables and y in input data set
     bellow is just temporary.
     Temporary solution is that last column in data set is always y-variable
-    return dict:{"X_train": self.X_train, "X_test": self.X_test,
-    "y_train": self.y_train, "y_test": self.y_test}
+    return dict: with splitted data set, mean and standard deviation for predictors in data set
     """
 
     if normalization:
@@ -43,8 +42,8 @@ def data_set_split(X_array, y_vector, normalization=False):
         X = scaler.transform(X_array)
 
         mean_array = scaler.mean_  # data used for scaling user input
-        std_array = scaler.scale_
-    
+        std_array = scaler.scale_  #
+
     else:
         X = X_array
 
@@ -69,17 +68,15 @@ def extrapolation_risk(X_array, mean_list, std_list, values_to_predict, X_names)
     input_values = np.reshape(values_to_predict, (n_columns, 1))
 
     warnings = []
-    
+
     for counter, input_value in enumerate(input_values):
-        
+
         if input_value < (mean_list[counter] - (3 * (std_list[counter]))):
-            
             warnings.append(
                 f"Risk of extrapolation predictor [{X_names[counter]}] value is SMALLER than 3 std from mean!"
             )
 
         if input_value > (mean_list[counter] + (3 * (std_list[counter]))):
-            
             warnings.append(
                 f"Risk of extrapolation predictor [{X_names[counter]}] value is BIGGER than 3 std from mean!"
             )
