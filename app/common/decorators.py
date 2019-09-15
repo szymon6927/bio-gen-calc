@@ -17,7 +17,7 @@ def add_customer_activity(view):
             if not module_name:
                 raise ValueError(f"Can not find name for: {request.path}")
 
-            activity = CustomerActivity(customer=current_user, module_name=module_name, url=request.path)
+            activity = CustomerActivity(customer=current_user, module_name=module_name.name, url=request.path)
 
             db.session.add(activity)
             db.session.commit()
