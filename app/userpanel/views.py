@@ -1,4 +1,5 @@
 from flask import Blueprint
+from flask import abort
 from flask import flash
 from flask import make_response
 from flask import redirect
@@ -10,6 +11,7 @@ from flask_login import current_user
 from flask_login import login_required
 from flask_login import login_user
 from flask_login import logout_user
+from is_safe_url import is_safe_url
 from sqlalchemy import asc
 from sqlalchemy import desc
 from sqlalchemy import func
@@ -36,6 +38,7 @@ from app.userpanel.models import Customer
 from app.userpanel.models import CustomerActivity
 from app.userpanel.models import Page
 from app.userpanel.services import APMCUserPanelService
+from config import ALLOWED_HOSTS
 
 userpanel = Blueprint('userpanel', __name__)
 
@@ -50,9 +53,15 @@ def login_view():
         customer = Customer.query.filter(
             or_(Customer.login == form.login_or_email.data, Customer.email == form.login_or_email.data)
         ).first()
+
         if customer and check_password_hash(customer.password, form.password.data):
             login_user(customer, remember=form.remember.data)
-            return redirect(url_for('userpanel.dashboard_view'))
+
+            next = request.args.get('next')
+            if next and not is_safe_url(next, ALLOWED_HOSTS):
+                return abort(400)
+
+            return redirect(next or url_for('userpanel.dashboard_view'))
 
         flash("Invalid username or password", 'danger')
 
@@ -85,7 +94,11 @@ def register_view():
 
         login_user(new_customer)
 
-        return redirect(url_for('userpanel.dashboard_view'))
+        next = request.args.get('next')
+        if next and not is_safe_url(next, ALLOWED_HOSTS):
+            return abort(400)
+
+        return redirect(next or url_for('userpanel.dashboard_view'))
 
     return render_template('userpanel/customers/register.html', title="Register for an account", form=form)
 
