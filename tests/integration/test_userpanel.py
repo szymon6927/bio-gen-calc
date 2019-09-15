@@ -33,6 +33,37 @@ def test_post_login_with_login_ok(test_client):
     assert b'Dashboard' in response.data
 
 
+def test_post_login_with_next_param(test_client):
+    customer, plain_password = create_customer()
+
+    data = dict()
+    data['login_or_email'] = customer.login
+    data['password'] = plain_password
+
+    query_string = {'next': URL.APMC_GET}
+
+    response = test_client.post(URL.USERPANEL_LOGIN_POST, data=data, query_string=query_string, follow_redirects=True)
+    customers = Customer.query.all()
+
+    assert response.status_code == 200
+    assert len(customers) == 1
+    assert b'APMC' in response.data
+
+
+def test_post_login_with_not_valid_next_param(test_client):
+    customer, plain_password = create_customer()
+
+    data = dict()
+    data['login_or_email'] = customer.login
+    data['password'] = plain_password
+
+    query_string = {'next': "//evil.net/redirect/"}
+
+    response = test_client.post(URL.USERPANEL_LOGIN_POST, data=data, query_string=query_string, follow_redirects=True)
+
+    assert response.status_code == 400
+
+
 def test_post_login_with_email_ok(test_client):
     customer, plain_password = create_customer()
 
@@ -191,6 +222,45 @@ def test_post_register_with_email_which_already_exist(test_client):
 
     assert response.status_code == 200
     assert b'That email is taken. Please choose a different one.' in response.data
+
+
+def test_post_register_with_next_param(test_client):
+    data = dict()
+    data['first_name'] = "John"
+    data['last_name'] = "Done"
+    data['login'] = "john_done"
+    data['email'] = "john_done@mail.com"
+    data['password'] = "test123test123"
+    data['password_confirm'] = "test123test123"
+
+    query_string = {'next': URL.APMC_GET}
+
+    response = test_client.post(
+        URL.USERPANEL_REGISTER_POST, data=data, query_string=query_string, follow_redirects=True
+    )
+    customers = Customer.query.all()
+
+    assert response.status_code == 200
+    assert len(customers) == 1
+    assert b'APMC' in response.data
+
+
+def test_post_register_with_not_valid_next_param(test_client):
+    data = dict()
+    data['first_name'] = "John"
+    data['last_name'] = "Done"
+    data['login'] = "john_done"
+    data['email'] = "john_done@mail.com"
+    data['password'] = "test123test123"
+    data['password_confirm'] = "test123test123"
+
+    query_string = {'next': "//evil.net/redirect/"}
+
+    response = test_client.post(
+        URL.USERPANEL_REGISTER_POST, data=data, query_string=query_string, follow_redirects=True
+    )
+
+    assert response.status_code == 400
 
 
 def test_get_userpanel(test_client):
