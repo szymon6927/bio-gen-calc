@@ -19,11 +19,13 @@
     </div>
     <hr>
     <div class="mt-4">
-      <a class="btn btn-outline-secondary text-center mr-3" href="{{ url_for('userpanel.register_view') }}">
+      <a class="btn btn-outline-secondary text-center mr-3"
+         href="{{ url_for('userpanel.register_view', next=url_for('apmc.apmc_page')) }}">
         <i class="far fa-user"></i>
         <span>Create an account</span>
       </a>
-      <a class="btn btn-outline-secondary text-center" href="{{ url_for('userpanel.login_view') }}">
+      <a class="btn btn-outline-secondary text-center"
+         href="{{ url_for('userpanel.login_view', next=url_for('apmc.apmc_page')) }}">
         <i class="fas fa-sign-in-alt"></i>
         <span>Login</span>
       </a>
