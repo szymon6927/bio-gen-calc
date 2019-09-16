@@ -47,11 +47,12 @@ class APMCUserPanelService:
 
     def get_extrapolation_risk(self):
         return extrapolation_risk(
-            self.loaded_data.get('X_array'),
+            self.split_data.get("X_array"),
             self.split_data.get("X_mean"),
             self.split_data.get("X_std"),
             self.user_input,
             self.loaded_data.get('X_names'),
+            self.apmc_data.normalization,
         )
 
     def get_predicted_data(self):

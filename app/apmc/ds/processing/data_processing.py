@@ -53,6 +53,7 @@ def data_set_split(X_array, y_vector, normalization=False):
     X_train, X_test, y_train, y_test = train_test_split(X, y_vector, test_size=0.30, random_state=101)
 
     return {
+        'X_array': X,
         'X_train': X_train,
         'X_test': X_test,
         'y_train': y_train,
@@ -62,12 +63,18 @@ def data_set_split(X_array, y_vector, normalization=False):
     }
 
 
-def extrapolation_risk(X_array, mean_list, std_list, values_to_predict, X_names):
+def extrapolation_risk(X_array, mean_list, std_list, values_to_predict, X_names, normalization=False):
     n_columns = X_array.shape[1]
 
     input_values = np.reshape(values_to_predict, (n_columns, 1))
 
     warnings = []
+
+    if normalization:
+        mean_list = np.mean(X_array, axis=0)  # calculate std and mean on normalized data
+        std_list = np.ones((n_columns, 1))
+
+    # if data normalization is turend off std and mean getting from preprocessing
 
     for counter, input_value in enumerate(input_values):
 
