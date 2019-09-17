@@ -1,4 +1,4 @@
-from app.hardy_weinberg.ds.HardyWeinberCalculation import HardyWeinberCalculation
+from app.hardy_weinberg.ds.HardyWeinbergCalculation import HardyWeinbergCalculation
 from app.helpers.tests_helper import find_value_by_name
 
 
@@ -9,8 +9,8 @@ def test_hw_basic():
     data["rho"] = 2
     data["alfa"] = 0.05
 
-    hw = HardyWeinberCalculation(data)
-    results = hw.calcualte()
+    hw = HardyWeinbergCalculation(data)
+    results = hw.calculate()
 
     expected_results = [
         {'name': "expected number of homozygotes", 'value': 3.36},

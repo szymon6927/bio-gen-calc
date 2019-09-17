@@ -5,12 +5,12 @@ from scipy.stats import power_divergence
 from app.common.result_aggregator import add_result
 
 
-class HardyWeinberCalculation:
+class HardyWeinbergCalculation:
     def __init__(self, data):
         self.data = data
         self.results = []
 
-    def calcuate_expected_observed(self):
+    def calculate_expected_observed(self):
         ho = self.data["ho"]
         he = self.data["he"]
         rho = self.data["rho"]
@@ -28,8 +28,8 @@ class HardyWeinberCalculation:
 
         return ho, he, rho, e_ho, e_he, e_rho, p, q
 
-    def calcualte_yates_correction(self):
-        ho, he, rho, e_ho, e_he, e_rho, p, q = self.calcuate_expected_observed()
+    def calculate_yates_correction(self):
+        ho, he, rho, e_ho, e_he, e_rho, p, q = self.calculate_expected_observed()
 
         observed = np.asarray([ho, he, rho])
         expected = np.asarray([e_ho, e_he, e_rho])
@@ -38,9 +38,9 @@ class HardyWeinberCalculation:
 
         return power_divergence(observed, expected, ddof=observed.size - 1 - dof, axis=None, lambda_=None)
 
-    def calcualte(self):
+    def calculate(self):
         alfa = self.data["alfa"]
-        ho, he, rho, e_ho, e_he, e_rho, p, q = self.calcuate_expected_observed()
+        ho, he, rho, e_ho, e_he, e_rho, p, q = self.calculate_expected_observed()
         chi, pval = chisquare([ho, he, rho], f_exp=[e_ho, e_he, e_rho])
 
         add_result(self, 'expected number of homozygotes', round(e_ho, 2))
@@ -52,7 +52,7 @@ class HardyWeinberCalculation:
         add_result(self, 'Chi-square value', round(chi, 5))
 
         if ho < 5 or he < 5 or rho < 5:
-            chi_yates, pval_yates = self.calcualte_yates_correction()
+            chi_yates, pval_yates = self.calculate_yates_correction()
 
             add_result(self, 'Yate`s chi-square value', round(chi_yates, 5))
             add_result(self, 'Yate`s p-value', round(pval_yates, 5))
