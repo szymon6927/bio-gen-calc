@@ -9,6 +9,7 @@ from flask import jsonify
 from flask import render_template
 from flask import request
 from flask_login import current_user
+from flask_login import login_required
 from werkzeug.utils import secure_filename
 
 from app.apmc.config import APMC_DATASET_UPLOAD_PATH
@@ -43,6 +44,7 @@ def apmc_documentation_page():
 
 
 @apmc.route('/apmc/pre-train', methods=['POST'])
+@login_required
 def apmc_pre_train():
     if 'file' not in request.files:
         abort(Response('No file part', 400))
@@ -80,6 +82,7 @@ def apmc_pre_train():
 
 
 @apmc.route('/apmc/train', methods=['POST'])
+@login_required
 def apmc_train():
     data = request.get_json()
 
