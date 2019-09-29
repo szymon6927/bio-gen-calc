@@ -29,6 +29,8 @@ class URL:
     APMC_GET = "/apmc"
     APMC_HOW_TO_USE_GET = "/apmc/how-to-use"
     APMC_DOCUMENTATION_GET = "/apmc/documentation"
+    APMC_PRE_TRAIN_POST = "/apmc/pre-train"
+    APMC_TRAIN_POST = "/apmc/train"
     USERPANEL_LOGIN_GET = "/userpanel/login"
     USERPANEL_LOGIN_POST = "/userpanel/login"
     USERPANEL_LOGOUT_GET = "/userpanel/logout"

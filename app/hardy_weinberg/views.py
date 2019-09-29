@@ -7,7 +7,7 @@ from flask import request
 
 from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
-from app.hardy_weinberg.ds.HardyWeinberCalculation import HardyWeinberCalculation
+from app.hardy_weinberg.ds.HardyWeinbergCalculation import HardyWeinbergCalculation
 from app.helpers.db_helper import add_calculation
 from app.userpanel.models import Page
 
@@ -24,9 +24,9 @@ def hardy_weinberg_page():
 def get_data():
     try:
         data = request.get_json()
-        hw = HardyWeinberCalculation(data)
+        hw = HardyWeinbergCalculation(data)
 
-        result = hw.calcualte()
+        result = hw.calculate()
 
         add_calculation(
             module_name=ModuleName.HARDY_WEINBERG, user_data=data, result=result, ip_address=request.remote_addr

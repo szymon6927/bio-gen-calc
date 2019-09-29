@@ -91,3 +91,12 @@ def get_pages_fixture():
         data = json.load(page_fixture)
 
         return data
+
+
+def get_dataset_data(filename):
+    dataset_fixture_file = os.path.join(APP_DIR, 'fixtures', filename)
+
+    with open(dataset_fixture_file) as dataset_fixture:
+        data = dataset_fixture.read()
+
+        return data
