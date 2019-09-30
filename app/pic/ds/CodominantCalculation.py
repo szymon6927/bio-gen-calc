@@ -34,7 +34,7 @@ class Codominant:
         else:
             raise ValueError("Mixed type of input values or sum of alleles frequencies not equal to 0")
 
-    def calcuate_h(self):
+    def calculate_h(self):
         freq_sum = 0
         alleles_freq = self.get_alleles_freq()
         for i in range(self.data["count"]):
@@ -43,7 +43,7 @@ class Codominant:
         result = 1 - freq_sum
         return round(result, 4)
 
-    def calcuate_pic(self):
+    def calculate_pic(self):
         pic = 0
         alleles_freq = self.get_alleles_freq()
         alleles_list = [i for i in range(0, self.data["count"])]
@@ -58,6 +58,6 @@ class Codominant:
         return round(pic, 4)
 
     def calculate(self):
-        add_result(self, "H", self.calcuate_h())
-        add_result(self, "PIC", self.calcuate_pic())
+        add_result(self, "H", self.calculate_h())
+        add_result(self, "PIC", self.calculate_pic())
         return self.results
