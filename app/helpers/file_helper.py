@@ -19,10 +19,10 @@ def create_seq_file(content):
     if type(content) is bytes:
         content = content.decode()
 
-    tmpfile = open(filepath, "w+")
-    filename = tmpfile.name
-    tmpfile.write(content)
-    tmpfile.close()
+    tmp_file = open(filepath, "w+")
+    filename = tmp_file.name
+    tmp_file.write(content)
+    tmp_file.close()
 
     return filename
 
@@ -34,7 +34,7 @@ def remove_temp_file(filename):
 
 
 def allowed_file(filename):
-    allowed_extension = set(['fasta', 'csv', 'xls'])
+    allowed_extension = {'fasta', 'csv', 'xls'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extension
 
 
