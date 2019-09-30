@@ -42,5 +42,5 @@ class NameConverter:
     SHORTCUT_TO_MODULE_NAME['dof'] = "dof"
     SHORTCUT_TO_MODULE_NAME['p_standard'] = "Chi square p-value"
     SHORTCUT_TO_MODULE_NAME['p_yats'] = "Yate`s Chi square p-value"
-    SHORTCUT_TO_MODULE_NAME['corelation_yats'] = "Yate`s chi-square correlation"
-    SHORTCUT_TO_MODULE_NAME['corelation_standard'] = "Chi-square correlation"
+    SHORTCUT_TO_MODULE_NAME['correlation_yats'] = "Yate`s chi-square correlation"
+    SHORTCUT_TO_MODULE_NAME['correlation_standard'] = "Chi-square correlation"
