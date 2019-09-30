@@ -6,7 +6,7 @@ from app.pic.ds.DominantCalculation import Dominant
 def test_pic_dominant_basic():
     data = dict()
     data["amplified_marker"] = 2
-    data["absecnce_marker"] = 3
+    data["absence_marker"] = 3
 
     pic_dominant = Dominant(data)
     results = pic_dominant.calculate()

@@ -20,7 +20,7 @@ class NameConverter:
     KEY_TO_NAME['rho'] = "Rare homozygotes"
     KEY_TO_NAME['alfa'] = "Level of significance"
     KEY_TO_NAME['amplified_marker'] = "Number or frequency of amplified marker"
-    KEY_TO_NAME['absecnce_marker'] = "Number or frequency of absecnce marker"
+    KEY_TO_NAME['absence_marker'] = "Number or frequency of absecnce marker"
     KEY_TO_NAME['width'] = "Table width"
     KEY_TO_NAME['height'] = "Table heigh"
     KEY_TO_NAME['matrix'] = "Distance matrix"

@@ -12,7 +12,7 @@ class Dominant:
             fi = self.data["amplified_marker"]
         else:
             fi = int(self.data["amplified_marker"]) / (
-                int(self.data["amplified_marker"]) + int(self.data["absecnce_marker"])
+                int(self.data["amplified_marker"]) + int(self.data["absence_marker"])
             )
 
         pic = 1 - (fi ** 2 + ((1 - fi) ** 2))
