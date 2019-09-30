@@ -13,8 +13,8 @@ def test_dotplot_raw_seq_basic():
     results = dotplot.raw_sequence()
 
     expected_results = [
-        {'name': "Sequence xxx lenght", 'value': 70},
-        {'name': "Sequence yyy lenght", 'value': 70},
+        {'name': "Sequence xxx length", 'value': 70},
+        {'name': "Sequence yyy length", 'value': 70},
         {'name': "Coverage [%]", 'value': 100},
         {'name': "Average identity [%]", 'value': 61.4},
         {'name': "Fragmental identity [%]", 'value': 61.4},
@@ -44,8 +44,8 @@ def test_dotplot_genebank_basic():
     results = dotplot.genebank_seq()
 
     expected_results = [
-        {'name': "Seq id. Z78533.1 C.irapeanum 5.8S rRNA gen ... lenght [bp]", 'value': 740},
-        {'name': "Seq id. Z78532.1 C.californicum 5.8S rRNA  ... lenght [bp]", 'value': 753},
+        {'name': "Seq id. Z78533.1 C.irapeanum 5.8S rRNA gen ... length [bp]", 'value': 740},
+        {'name': "Seq id. Z78532.1 C.californicum 5.8S rRNA  ... length [bp]", 'value': 753},
         {'name': "Coverage [%]", 'value': 98.3},
         {'name': "Average identity [%]", 'value': 82.4},
         {'name': "Fragmental identity [%]", 'value': 83.1},
