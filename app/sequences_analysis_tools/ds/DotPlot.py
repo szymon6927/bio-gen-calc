@@ -36,21 +36,21 @@ class DotPlot:
 
         return string_alignment
 
-    def get_average_identifity(self, ident):
-        average_lenght = (len(self.data['seq-content-1']) + len(self.data['seq-content-2'])) / 2
-        average_identifity = (ident / average_lenght) * 100
+    def get_average_identity(self, ident):
+        average_length = (len(self.data['seq-content-1']) + len(self.data['seq-content-2'])) / 2
+        average_identity = (ident / average_length) * 100
 
-        return round(average_identifity, 1)
+        return round(average_identity, 1)
 
-    def get_frag_identifity(self, ident):
+    def get_frag_identity(self, ident):
         len_list = []
 
         len_list.append(len(self.data['seq-content-1']))
         len_list.append(len(self.data['seq-content-2']))
 
-        frag_identifity = (ident / min(len_list)) * 100
+        frag_identity = (ident / min(len_list)) * 100
 
-        return round(frag_identifity, 1)
+        return round(frag_identity, 1)
 
     def get_dot_plot_image(self):
         dict_one = {}
@@ -112,18 +112,18 @@ class DotPlot:
 
         alignment = self.get_alignments()
 
-        add_result(self, f'Sequence {seq_name_1} lenght', len(seq_content_1))
-        add_result(self, f'Sequence {seq_name_2} lenght', len(seq_content_2))
+        add_result(self, f'Sequence {seq_name_1} length', len(seq_content_1))
+        add_result(self, f'Sequence {seq_name_2} length', len(seq_content_2))
 
         ident = alignment.count("|")
 
         coverage = self.get_coverage()
-        average_identifity = self.get_average_identifity(ident)
-        frag_identifity = self.get_frag_identifity(ident)
+        average_identity = self.get_average_identity(ident)
+        frag_identity = self.get_frag_identity(ident)
 
         add_result(self, "Coverage [%]", coverage)
-        add_result(self, "Average identity [%]", average_identifity)
-        add_result(self, "Fragmental identity [%]", frag_identifity)
+        add_result(self, "Average identity [%]", average_identity)
+        add_result(self, "Fragmental identity [%]", frag_identity)
 
         return self.results
 
@@ -144,17 +144,17 @@ class DotPlot:
 
         alignment = self.get_alignments()
 
-        add_result(self, f'Seq id. {seq_name_1} ... lenght [bp]', len(self.data['seq-content-1']))
-        add_result(self, f'Seq id. {seq_name_2} ... lenght [bp]', len(self.data['seq-content-2']))
+        add_result(self, f'Seq id. {seq_name_1} ... length [bp]', len(self.data['seq-content-1']))
+        add_result(self, f'Seq id. {seq_name_2} ... length [bp]', len(self.data['seq-content-2']))
 
         ident = alignment.count("|")
 
         coverage = self.get_coverage()
-        average_identifity = self.get_average_identifity(ident)
-        frag_identifity = self.get_frag_identifity(ident)
+        average_identity = self.get_average_identity(ident)
+        frag_identity = self.get_frag_identity(ident)
 
         add_result(self, "Coverage [%]", coverage)
-        add_result(self, "Average identity [%]", average_identifity)
-        add_result(self, "Fragmental identity [%]", frag_identifity)
+        add_result(self, "Average identity [%]", average_identity)
+        add_result(self, "Fragmental identity [%]", frag_identity)
 
         return self.results

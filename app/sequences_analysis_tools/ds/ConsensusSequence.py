@@ -27,7 +27,7 @@ class ConsensusSequence:
         summary_align = AlignInfo.SummaryInfo(align)
         consensus = summary_align.gap_consensus(threshold=threshold, ambiguous='N')
 
-        add_result(self, "Consenus sequence", str(consensus))
+        add_result(self, "Consensus sequence", str(consensus))
         add_result(self, "Sequence length", len(consensus))
 
         remove_temp_file(filename)
@@ -37,8 +37,7 @@ class ConsensusSequence:
     def file_seq(self):
         filename = create_seq_file(self.data['sequences'])
 
-        if type(self.data.get('threshold')) is str:
-            threshold = float(self.data.get('threshold'))
+        threshold = float(self.data.get('threshold'))
 
         muscle = MuscleCommandline(input=filename)
         stdout, stderr = muscle()
