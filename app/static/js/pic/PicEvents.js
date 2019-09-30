@@ -25,17 +25,17 @@ $('.generate-codominant').click(function () {
     validator.nonNegative()
   }, 500);
 
-  $('.calcuate-codominant').show();
+  $('.calculate-codominant').show();
 
   goToByScroll('.inputs-wrapper');
 });
 
-$('.calcuate-codominant').click(function () {
+$('.calculate-codominant').click(function () {
   pic.sendCodominant();
   goToByScroll('.codominant-result');
 });
 
-$('.calcuate-dominant').click(function () {
+$('.calculate-dominant').click(function () {
   pic.sendDominant();
   goToByScroll('.dominant-result');
 });
@@ -52,9 +52,9 @@ $('.dominant-wrapper .save-calculation-form').submit(function(e) {
   pic.saveCalculation();
 });
 
-$(document).on('keypress', '.amplified-marker, .absecnce-marker', function (e) {
+$(document).on('keypress', '.amplified-marker, .absence-marker', function (e) {
   if (e.which == 13) {
-    $('.calcuate-dominant').trigger('click');
+    $('.calculate-dominant').trigger('click');
     return false;
   }
 });
@@ -69,10 +69,7 @@ $(document).on('keypress', '.alleles-number', function (e) {
 
 $(document).on('keypress', '.allele-input', function (e) {
   if (e.which == 13) {
-    $('.calcuate-codominant').trigger('click');
+    $('.calculate-codominant').trigger('click');
     return false;
   }
 });
-
-
-

@@ -117,7 +117,7 @@ class GeneticDistance extends AppModule {
     $(`.g-${key}.line-${alleleNumber}`).append(`<td>${alleleNumber}</td>`);
     let inputs = '';
     for (let i = 0; i < this.taxonNumber; i++) {
-      inputs += `<td><input type="number" min="0" max="1" step="0.01" class="form-control column-${i} 
+      inputs += `<td><input type="number" min="0" max="1" step="0.01" class="form-control column-${i}
       cell non-negative float01" name="cell"><div class="invalid-feedback">Value range 0.0 - 1.0</div></td>`;
     }
     $(`.g-${key}.line-${alleleNumber}`).append(inputs);
@@ -129,7 +129,7 @@ class GeneticDistance extends AppModule {
     this.drawTableScheme();
     this.drawTableHead();
     this.drawTableBody();
-    $('.calcuate-distance').show();
+    $('.calculate-distance').show();
   }
 
   buildJSON() {
@@ -180,7 +180,7 @@ class GeneticDistance extends AppModule {
       dataType: "json",
       cache: false,
       success: (res) => {
-        console.log("Succesfull");
+        console.log("Successful");
         $('.genetic-distance-results .error').hide();
         $('.genetic-distance-results, .save-calculations').show();
         $('.genetic-distance-results .success').show();
@@ -204,7 +204,7 @@ class GeneticDistance extends AppModule {
         $('.cover').hide();
         $('.genetic-distance-results .row.success').hide();
         $('.genetic-distance-results').show();
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
         render.errorBlock(request);
       }
     })

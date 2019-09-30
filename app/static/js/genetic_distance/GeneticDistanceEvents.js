@@ -26,7 +26,7 @@ $(document).on('click', '.generate-table', function () {
   geneticDistance.setTaxonNumber(taxonNumber);
   geneticDistance.setLocusNumber(locusNumber);
   geneticDistance.setLocusObject();
-  
+
   if (geneticDistance.validateLocusInputs()) {
     geneticDistance.generateTable();
     goToByScroll('.genetic-distance-table');
@@ -39,7 +39,7 @@ $(document).on('click', '.generate-table', function () {
   }
 });
 
-$('.calcuate-distance').click(function () {
+$('.calculate-distance').click(function () {
   if (validator.floatBetween01() && geneticDistance.validateColumnSum()) {
     geneticDistance.sendData();
     $('.cover').show();
@@ -77,11 +77,7 @@ $(document).on('keypress', '.number-of-alleles input', function (e) {
 
 $(document).on('keypress', '.table .form-control', function (e) {
   if (e.which == 13) {
-    $('.calcuate-distance').trigger('click');
+    $('.calculate-distance').trigger('click');
     return false;
   }
 });
-
-
-
-

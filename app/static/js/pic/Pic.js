@@ -70,14 +70,14 @@ class PicH extends AppModule {
     let data = {};
 
     let amplifiedMarker = $('#amplified-marker').val();
-    let absecnceMarker = $('#absecnce-marker').val();
+    let absenceMarker = $('#absence-marker').val();
 
-    if (amplifiedMarker && absecnceMarker) {
+    if (amplifiedMarker && absenceMarker) {
       data["amplified_marker"] = Number(amplifiedMarker);
-      data["absecnce_marker"] = Number(absecnceMarker);
+      data["absence_marker"] = Number(absenceMarker);
     }
     else {
-      showModal('Fill number of amplified marker or number of absecnce marker')
+      showModal('Fill number of amplified marker or number of absence marker')
       return false
     }
 
@@ -99,7 +99,7 @@ class PicH extends AppModule {
       data: dataJSON,
       dataType: "json",
       success: (result) => {
-        console.log("Successfull!");
+        console.log("Successful!");
 
         render.successBlock(result);
 
@@ -132,7 +132,7 @@ class PicH extends AppModule {
       data: dataJSON,
       dataType: "json",
       success: (result) => {
-        console.log("Successfull!");
+        console.log("Successful!");
 
         render.successBlock(result);
 
@@ -140,7 +140,7 @@ class PicH extends AppModule {
         this.extendObjectToSave({'customer_input': dataJSON})
       },
       error: function (request) {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
 
         render.errorBlock(request);
       }

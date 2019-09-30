@@ -28,7 +28,7 @@ class SequencesTools extends AppModule {
       data: dataJSON,
       dataType: "json",
       success: (result) => {
-        console.log("Succesfull", result);
+        console.log("Successful", result);
 
         render.successBlock(result);
 
@@ -39,7 +39,7 @@ class SequencesTools extends AppModule {
         goToByScroll('.sequences-tools-results');
       },
       error: (request) => {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
 
         render.errorBlock(request);
 

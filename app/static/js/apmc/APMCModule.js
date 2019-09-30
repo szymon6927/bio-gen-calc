@@ -140,7 +140,7 @@ class APMCModule extends AppModule {
       cache: false,
       processData: false,
       success: (result) => {
-        console.log("Succesfull");
+        console.log("Successful");
         console.log(result);
 
         this.setApmcDataID(result.data_id);
@@ -161,7 +161,7 @@ class APMCModule extends AppModule {
         $('.cover').hide();
       },
       error: (request) => {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
 
         console.log(request);
         render.errorBlock(request);
@@ -198,7 +198,7 @@ class APMCModule extends AppModule {
       data: dataJSON,
       dataType: "json",
       success: (result) => {
-        console.log("Successfull!");
+        console.log("Successful!");
         console.log(result);
         $('.cover').hide();
         this.setPredictHref();
@@ -206,7 +206,7 @@ class APMCModule extends AppModule {
         $('.train-success').show();
       },
       error: function (request) {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
 
         console.log(request);
         render.errorBlock(request);

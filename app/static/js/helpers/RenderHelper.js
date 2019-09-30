@@ -53,7 +53,7 @@ class RenderHelper {
     }
 
     let template = `<div class="alert alert-danger mt-4 mb-3" role="alert">
-      <div>Something goes wrong, Try again!</div>
+      <div>Something went wrong, Try again!</div>
       ${errMsg}
     </div>`;
 
@@ -62,7 +62,7 @@ class RenderHelper {
 
   successSaveCalculationBlock(result) {
     let template = `<div class="alert alert-success shadow" role="alert">${result.info}</div>`;
-    
+
     if ($(this.container).is(':hidden')) {
       $(this.container).show();
     }

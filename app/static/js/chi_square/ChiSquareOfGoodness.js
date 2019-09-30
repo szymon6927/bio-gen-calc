@@ -60,7 +60,7 @@ class ChiSquareOfGoodness extends AppModule {
     this.createTable();
     this.drawTableHead();
     this.drawTableBody();
-    $('.calcuate-goodness').show();
+    $('.calculate-goodness').show();
   }
 
   generateInput(col, type) {
@@ -117,7 +117,7 @@ class ChiSquareOfGoodness extends AppModule {
       data: dataJSON,
       dataType: "json",
       success: (result) => {
-        console.log("Succesfull");
+        console.log("Successful");
 
         render.successBlock(result);
 
@@ -125,7 +125,7 @@ class ChiSquareOfGoodness extends AppModule {
         this.extendObjectToSave({'customer_input': this.buildJSON()})
       },
       error: function (request) {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
 
         render.errorBlock(request);
       }

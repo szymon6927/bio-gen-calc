@@ -72,13 +72,13 @@ class AppModule {
       data: JSON.stringify(calculation),
       dataType: "json",
       success: (result) => {
-        console.log("Successfull!");
+        console.log("Successful!");
         render.successSaveCalculationBlock(result);
         $('.cover').hide();
         this.clearInputAndHideMessage();
       },
       error: function (request) {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
         render.errorBlock(request);
         $('.cover').hide();
       }

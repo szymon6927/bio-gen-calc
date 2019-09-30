@@ -1,16 +1,14 @@
 "use strict";
 
 const moduleSections = '.raw-sequences, .sequences-form-genebank';
-// const moduleResultsSection = '.dotplot-raw-seq-results, .genebank-seq-results';
 
 const dotPlot = new DotPlot();
 
 $('#type-of-data').change(function () {
   $(moduleSections).hide();
-  // $(moduleResultsSection).empty();
 
   let type = $(this).val();
-  
+
   $('.dot-plot select option').removeAttr('selected');
   $(`.dot-plot select option[value='${type}']`).attr("selected","selected");
 

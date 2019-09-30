@@ -75,7 +75,7 @@ class ConsensusSequence extends AppModule {
       data: dataJSON,
       dataType: "json",
       success: (result) => {
-        console.log("Succesfull", result);
+        console.log("Successful", result);
 
         render.successBlock(result);
 
@@ -85,7 +85,7 @@ class ConsensusSequence extends AppModule {
         $('.cover').hide();
       },
       error: function (request) {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
 
         render.errorBlock(request);
 
@@ -117,7 +117,7 @@ class ConsensusSequence extends AppModule {
       cache: false,
       processData: false,
       success: (result) => {
-        console.log("Succesfull");
+        console.log("Successful");
 
         $('.file-seq-results').html('<a id="download-link" download="consensus-sequence.fasta" style="display:none;"></a>');
 
@@ -139,7 +139,7 @@ class ConsensusSequence extends AppModule {
         $('.cover').hide();
       },
       error: function (request) {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
         render.errorBlock(request);
         $('.cover').hide();
       }
@@ -160,7 +160,7 @@ class ConsensusSequence extends AppModule {
       cache: false,
       processData: false,
       success: (result) => {
-        console.log("Succesfull");
+        console.log("Successful");
 
         $('.file-seq-genebank-results').html('<a id="download-link" download="consensus-sequence.fasta" style="display:none;"></a>');
 
@@ -178,7 +178,7 @@ class ConsensusSequence extends AppModule {
         $('.cover').hide();
       },
       error: function (request) {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
         render.errorBlock(request);
         $('.cover').hide();
       }

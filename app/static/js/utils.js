@@ -41,9 +41,9 @@ class Validation {
     $('.invalid-feedback').hide();
 
     inputs.forEach(function (element) {
-      let patern = /^(0(\.[0-9]+)?|1(.0)?)$/;
+      let pattern = /^(0(\.[0-9]+)?|1(.0)?)$/;
       let value = element.value;
-      if (!patern.test(value)) {
+      if (!pattern.test(value)) {
         valid = false;
         $(element).addClass('is-invalid');
         $(element).next().show();
@@ -163,7 +163,7 @@ function tableResizer() {
     let tableHeight = parseInt($(elem).height());
     let tableWidth = parseInt($(elem).width());
     let ratio = parseFloat(windowWidth / tableWidth).toFixed(4);
-  
+
     $(elem).css({'margin-bottom':'5px','transform-origin': 'left top 0px'});
 
     let tableRealHeight = $(elem)[0].getBoundingClientRect().height;
@@ -171,7 +171,7 @@ function tableResizer() {
 
     if (windowWidth <= tableWidth) {
       $(elem).css({ '-webkit-transform': `scale(${ratio})`, 'transform': `scale(${ratio})`, 'margin-bottom': `${margin}px` });
-    } 
+    }
     else {
       $(elem).css({ '-webkit-transform':'scale(1)', 'transform':'scale(1)' });
     }
