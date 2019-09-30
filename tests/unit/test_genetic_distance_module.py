@@ -33,7 +33,7 @@ def test_genetic_distance_basic():
     data["column_5"] = [0.8, 0.2]
 
     gen_distance = StandardDistance(data)
-    gen_distance.calcuate_distances()
+    gen_distance.calculate_distances()
     results = gen_distance.get_condensed_matrix()
 
     # expected condesned matrix

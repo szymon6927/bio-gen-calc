@@ -50,7 +50,7 @@ class GeometricDistance(GeneticDistance):
 
         return column_geo_avg
 
-    def calcuate_products_of_frequency(self):
+    def calculate_products_of_frequency(self):
         """
         :return: dict of gmean of alleles frequencies products between populations for each columns pairs
         """
@@ -75,10 +75,10 @@ class GeometricDistance(GeneticDistance):
 
         return dict_of_geomean_Jxy
 
-    def calcuate_distances(self):
+    def calculate_distances(self):
         pair_combination = self.get_pair_combination(self.column_range)
         geo_avg = self.calculate_geometric_avg()
-        dict_of_geomean_Jxy = self.calcuate_products_of_frequency()
+        dict_of_geomean_Jxy = self.calculate_products_of_frequency()
 
         for pair in pair_combination:
             key = f'{pair[0]}_{pair[1]}'

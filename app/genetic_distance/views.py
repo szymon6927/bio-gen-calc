@@ -35,7 +35,7 @@ def get_data():
         }
 
         gen_distance = distance_type[distance_choice]
-        gen_distance.calcuate_distances()
+        gen_distance.calculate_distances()
         gen_distance.build_matrix()
 
         add_calculation(
@@ -46,7 +46,7 @@ def get_data():
         )
 
         return jsonify(
-            {'data': {'dendro_base64': gen_distance.render_dendrogram(), 'matrix': gen_distance.redner_matrix()}}
+            {'data': {'dendro_base64': gen_distance.render_dendrogram(), 'matrix': gen_distance.render_matrix()}}
         )
     except TypeError as e:
         abort(Response(f'Please check type of input data. {str(e)}', 422))

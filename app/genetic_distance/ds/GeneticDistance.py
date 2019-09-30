@@ -92,7 +92,7 @@ class GeneticDistance:
 
         return dendro_method[distance]
 
-    def redner_matrix(self):
+    def render_matrix(self):
         """Returns a LaTeX bmatrix
 
         :a: numpy array
