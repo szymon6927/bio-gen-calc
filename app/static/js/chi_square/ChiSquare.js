@@ -192,14 +192,14 @@ class ChiSquare extends AppModule {
       data: dataJSON,
       dataType: "json",
       success: (result) => {
-        console.log("Succesfull");
+        console.log("Successful");
         render.successBlock(result);
 
         this.setResult(result);
         this.extendObjectToSave({'customer_input': dataJSON})
       },
       error: function (request) {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
 
         render.errorBlock(request);
       }

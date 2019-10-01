@@ -1,6 +1,6 @@
 "use strict";
 
-class HardyWeinber extends AppModule {
+class HardyWeinberg extends AppModule {
   constructor() {
     super();
     this.ho = 0;

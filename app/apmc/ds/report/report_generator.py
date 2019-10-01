@@ -104,14 +104,14 @@ class ReportGenerator:
         col_names = self.prepared_data.get('col_names')
         data = self.prepared_data.get('data')
 
-        quantitive_loc = col_names[-1]  # y_var
-        col_names.remove(quantitive_loc)
+        quantitative_loc = col_names[-1]  # y_var
+        col_names.remove(quantitative_loc)
 
         value_vs_predictors_plots = []
         predictors_vs_predictors_plots = []
 
         for predictor in col_names:
-            plot = sns.violinplot(data=data, x=quantitive_loc, y=predictor)
+            plot = sns.violinplot(data=data, x=quantitative_loc, y=predictor)
             fig = plot.get_figure()
             value_vs_predictors_plots.append(self._convert_to_base64(fig))
             fig.clf()

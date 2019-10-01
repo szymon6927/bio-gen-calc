@@ -101,7 +101,7 @@ class APMCModule extends AppModule {
   }
 
   renderModelChoices(modelChoices) {
-    const selectWraper = $('.user-model-choice select');
+    const selectWrapper = $('.user-model-choice select');
     let choices = '';
 
     modelChoices.forEach((item, index) => {
@@ -110,7 +110,7 @@ class APMCModule extends AppModule {
       `
     });
 
-    selectWraper.html(choices);
+    selectWrapper.html(choices);
   }
 
   preTrain() {

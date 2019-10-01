@@ -1,6 +1,6 @@
 "use strict";
 
-const hw = new HardyWeinber();
+const hw = new HardyWeinberg();
 
 $('.calculate-hw').click(function () {
   let ho = $('#ho').val();

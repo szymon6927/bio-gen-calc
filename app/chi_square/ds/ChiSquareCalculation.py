@@ -53,13 +53,13 @@ class ChiSquareCalculation:
         return chi2_standard, p_standard, dof, chi2_yats, p_yats, correlation_standard, correlation_yats
 
     def calculate(self):
-        chi2_standard, p_standard, dof, chi2_yats, p_yats, correlation_standard, corelation_yats = self.correlation()
+        chi2_standard, p_standard, dof, chi2_yats, p_yats, correlation_standard, correlation_yats = self.correlation()
         add_result(self, "dof", dof)
         add_result(self, "chi2_standard", round(chi2_standard, 5))
         add_result(self, "p_standard", round(p_standard, 5))
         add_result(self, "correlation_standard", round(correlation_standard, 5))
         add_result(self, "chi2_yats", round(chi2_yats, 5))
         add_result(self, "p_yats", round(p_yats, 5))
-        add_result(self, "correlation_yats", round(corelation_yats, 5))
+        add_result(self, "correlation_yats", round(correlation_yats, 5))
 
         return self.results
