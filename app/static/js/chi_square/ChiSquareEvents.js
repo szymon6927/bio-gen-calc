@@ -24,8 +24,8 @@ $('.generate-array').click((e) => {
   goToByScroll('.array-wrapper');
 });
 
-$('.calcuate-button').click(() => {
-  chiArray.calacute();
+$('.calculate-button').click(() => {
+  chiArray.calculate();
   chiArray.sendData();
   goToByScroll('.chi-result');
 });
@@ -48,7 +48,7 @@ $(document).on('keypress', '.array-width, .array-height', function (e) {
 
 $(document).on('keypress', '.chi-independence .table .form-control', function (e) {
   if (e.which == 13) {
-    chiSquareSection.find('.calcuate-button').trigger('click');
+    chiSquareSection.find('.calculate-button').trigger('click');
     return false;
   }
 });

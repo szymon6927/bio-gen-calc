@@ -86,7 +86,7 @@ class ChiSquare extends AppModule {
   }
 
   showCalcuateButton() {
-    $('.calcuate').show();
+    $('.calculate').show();
   }
 
   generateInput(row, col) {
@@ -105,7 +105,7 @@ class ChiSquare extends AppModule {
   showMessage(valid) {
     let message = '';
     if (valid) {
-      message = '<div class="alert alert-success" role="alert">Validation successfull!</div>';
+      message = '<div class="alert alert-success" role="alert">Validation successful!</div>';
     }
     else {
       message = '<div class="alert alert-danger" role="alert">Fill all of the inputs!</div>';
@@ -146,15 +146,15 @@ class ChiSquare extends AppModule {
     }
   }
 
-  calcuateUserInput() {
+  calculateUserInput() {
     let sumAll = this.sumAll('.cell:not(.summary-cell)');
     $('.general-result').val(sumAll);
   }
 
-  calacute() {
+  calculate() {
     this.validateInputs();
     this.calculateRowColSum();
-    this.calcuateUserInput();
+    this.calculateUserInput();
   }
 
   buildJSON() {
@@ -192,14 +192,14 @@ class ChiSquare extends AppModule {
       data: dataJSON,
       dataType: "json",
       success: (result) => {
-        console.log("Succesfull");
+        console.log("Successful");
         render.successBlock(result);
 
         this.setResult(result);
         this.extendObjectToSave({'customer_input': dataJSON})
       },
       error: function (request) {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
 
         render.errorBlock(request);
       }

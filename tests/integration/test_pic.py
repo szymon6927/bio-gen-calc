@@ -14,7 +14,7 @@ def test_get_pic_ok(test_client):
 def test_post_pic_dominant_ok(test_client):
     data = dict()
     data["amplified_marker"] = 2
-    data["absecnce_marker"] = 3
+    data["absence_marker"] = 3
 
     response = test_client.post(URL.PIC_DOMINANT_POST, data=json.dumps(data), content_type='application/json')
     calculation = Calculation.query.first()
@@ -26,7 +26,7 @@ def test_post_pic_dominant_ok(test_client):
 def test_post_pic_dominant_invalid_data(test_client):
     data = dict()
     data["amplified_marker"] = 2
-    data["absecnce_marker"] = "test"
+    data["absence_marker"] = "test"
 
     response = test_client.post(URL.PIC_DOMINANT_POST, data=json.dumps(data), content_type='application/json')
     calculations = Calculation.query.all()

@@ -32,36 +32,36 @@ class SequencesTools:
 
         for seq_name, seq in zip(self.seq_names, self.seq_contents):
             raw_seq = Seq(seq, IUPAC.unambiguous_dna)
-            transformated_seq = raw_seq.complement()
+            transformed_seq = raw_seq.complement()
 
-            add_result(self, seq_name, str(transformated_seq))
+            add_result(self, seq_name, str(transformed_seq))
 
     def reverse_and_complement_sequences(self):
         self.get_seq_names_and_contents()
 
         for seq_name, seq in zip(self.seq_names, self.seq_contents):
             raw_seq = Seq(seq, IUPAC.unambiguous_dna)
-            transformated_seq = raw_seq.reverse_complement()
+            transformed_seq = raw_seq.reverse_complement()
 
-            add_result(self, seq_name, str(transformated_seq))
+            add_result(self, seq_name, str(transformed_seq))
 
     def reverse_sequence(self):
         self.get_seq_names_and_contents()
 
         for seq_name, seq in zip(self.seq_names, self.seq_contents):
             raw_seq = Seq(seq, IUPAC.unambiguous_dna)
-            transformated_seq = str(raw_seq[::-1])
+            transformed_seq = str(raw_seq[::-1])
 
-            add_result(self, seq_name, transformated_seq)
+            add_result(self, seq_name, transformed_seq)
 
     def transcribed_sequence(self):
         self.get_seq_names_and_contents()
 
         for seq_name, seq in zip(self.seq_names, self.seq_contents):
             raw_seq = Seq(seq, IUPAC.unambiguous_dna)
-            transformated_seq = raw_seq.transcribe()
+            transformed_seq = raw_seq.transcribe()
 
-            add_result(self, seq_name, str(transformated_seq))
+            add_result(self, seq_name, str(transformed_seq))
 
     def translated_sequence(self):
         self.get_seq_names_and_contents()

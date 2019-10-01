@@ -20,7 +20,7 @@ $('.generate-array-goodness').click(() => {
   goToByScroll('.array-wrapper-goodness');
 });
 
-$('.calcuate-button-goodness').click(() => {
+$('.calculate-button-goodness').click(() => {
   chiArrayGoodness.sendData();
   goToByScroll('.chi-goodness-result');
 });
@@ -31,19 +31,19 @@ $('.chi-goodness .save-calculation-form').submit(function(e) {
   chiArrayGoodness.saveCalculation();
 });
 
-const chiSquareGoodenssSection = $('.chi-goodness');
+const chiSquareGoodnessSection = $('.chi-goodness');
 
 $(document).on('keypress', '.goodness-width', function (e) {
   if (e.which == 13) {
-    chiSquareGoodenssSection.find('.generate-array-goodness').trigger('click');
-    chiSquareGoodenssSection.find('.cell').first().focus();
+    chiSquareGoodnessSection.find('.generate-array-goodness').trigger('click');
+    chiSquareGoodnessSection.find('.cell').first().focus();
     return false;
   }
 });
 
 $(document).on('keypress', '.chi-goodness .table .form-control', function (e) {
   if (e.which == 13) {
-    chiSquareGoodenssSection.find('.calcuate-button-goodness').trigger('click');
+    chiSquareGoodnessSection.find('.calculate-button-goodness').trigger('click');
     return false;
   }
 });

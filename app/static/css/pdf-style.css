@@ -1,4 +1,10 @@
-.render-to-pdf, .btn-danger, .btn-primary, .messages, .alert, .btn-success, .save-calculation-form {
+.render-to-pdf,
+.btn-danger,
+.btn-primary,
+.messages, .alert,
+.btn-success,
+.save-calculation-form,
+.save-calculations {
     display: none !important;
 }
 

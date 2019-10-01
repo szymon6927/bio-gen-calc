@@ -36,7 +36,7 @@ class DotPlot extends AppModule {
       data: dataJSON,
       dataType: "json",
       success: (result) => {
-        console.log("Succesfull", result);
+        console.log("Successful", result);
         render.successBlock(result);
 
         const lastDivResult = $('.dotplot-raw-seq-results .result-score').last();
@@ -63,7 +63,7 @@ class DotPlot extends AppModule {
         goToByScroll('.dotplot-raw-seq-results')
       },
       error: (request) => {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
 
         render.errorBlock(request);
 
@@ -85,7 +85,7 @@ class DotPlot extends AppModule {
       data: dataJSON,
       dataType: "json",
       success: (result) => {
-        console.log("Succesfull", result);
+        console.log("Successful", result);
         render.successBlock(result);
 
         const lastDivResult = $('.genebank-seq-results .result-score').last();
@@ -112,7 +112,7 @@ class DotPlot extends AppModule {
         goToByScroll('.genebank-seq-results');
       },
       error: function (request) {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
         render.errorBlock(request);
         $('.cover').hide();
       }

@@ -36,11 +36,11 @@ function addToNewsletter() {
     data: JSON.stringify(data),
     dataType: "json",
     success: (result) => {
-      console.log("Successfull!", result);
+      console.log("Successful!", result);
       renderSuccessMessage(result.message);
     },
     error: (request) => {
-      console.log("Something goes wrong, try again!", request);
+      console.log("Something went wrong, try again!", request);
       renderErrorMessage(request.responseText);
     }
   });

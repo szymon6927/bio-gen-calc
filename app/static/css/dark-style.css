@@ -101,7 +101,7 @@ table th[scope=row] {
 }
 
 .chi-goodness .table .thead-light th:last-child {
-    background-color: #393839; 
+    background-color: #393839;
 }
 
 .form-control:disabled, .form-control[readonly] {

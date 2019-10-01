@@ -1,76 +1,111 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc>https://gene-calc.pl/</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
         <priority>1.00</priority>
     </url>
     <url>
-        <loc>https://gene-calc.pl/materials-and-methods</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
-        <priority>0.80</priority>
-    </url>
-    <url>
         <loc>https://gene-calc.pl/about</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://gene-calc.pl/hardy-weinber-page</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
+        <loc>https://gene-calc.pl/userpanel/login</loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://gene-calc.pl/materials-and-methods</loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>https://gene-calc.pl/hardy-weinberg-page</loc>
-        <lastmod>2019-08-04T20:56:22+00:00</lastmod>
-        <priority>0.80</priority>
-    </url>
-    <url>
-        <loc>https://gene-calc.pl/chi-square-page</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>https://gene-calc.pl/pic</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>https://gene-calc.pl/genetic-distance</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://gene-calc.pl/sequences-analysis-tools/dot-plot</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
+        <loc>https://gene-calc.pl/chi-square-page</loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://gene-calc.pl/sequences-analysis-tools/consensus-sequence</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
+        <loc>
+            https://gene-calc.pl/sequences-analysis-tools/dot-plot
+        </loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://gene-calc.pl/sequences-analysis-tools/sequences-tools</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
+        <loc>
+            https://gene-calc.pl/sequences-analysis-tools/consensus-sequence
+        </loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://gene-calc.pl/contact</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
+        <loc>
+            https://gene-calc.pl/sequences-analysis-tools/sequences-tools
+        </loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://gene-calc.pl/apmc</loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://gene-calc.pl/apmc/how-to-use</loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://gene-calc.pl/apmc/documentation</loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
         <loc>https://gene-calc.pl/donors</loc>
-        <lastmod>2018-10-16T20:56:22+00:00</lastmod>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
         <priority>0.80</priority>
     </url>
-
-
+    <url>
+        <loc>https://gene-calc.pl/contact</loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://gene-calc.pl/userpanel/register</loc>
+        <lastmod>2019-09-30T22:06:19+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>
+            https://gene-calc.pl/userpanel/register?next=%2Fapmc
+        </loc>
+        <lastmod>2019-09-30T22:06:19+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://gene-calc.pl/userpanel/login?next=%2Fapmc</loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
+    <url>
+        <loc>https://gene-calc.pl/privacy-policy</loc>
+        <lastmod>2019-09-30T21:06:20+00:00</lastmod>
+        <priority>0.64</priority>
+    </url>
 </urlset>

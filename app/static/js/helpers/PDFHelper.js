@@ -5,13 +5,13 @@ function renderPDF() {
 
   const container = document.querySelector('.wrapper');
   const inputs = container.querySelectorAll('input');
-  const textareas = container.querySelectorAll('textarea');
+  const textarea = container.querySelectorAll('textarea');
 
   inputs.forEach((elem) => {
     elem.setAttribute('value', elem.value);
   });
 
-  textareas.forEach((elem) => {
+  textarea.forEach((elem) => {
     elem.innerHTML = elem.value;
     elem.style.height = `${elem.scrollHeight}px`;
   })
@@ -33,7 +33,7 @@ function renderPDF() {
       $('.cover').hide();
     },
     error: function (request) {
-      console.log("Error druring render", request);
+      console.log("Error during render", request);
     }
   });
 }

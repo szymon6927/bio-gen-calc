@@ -40,7 +40,7 @@
               </div>
             </div>
             <div class="col-md-6 offset-md-3 col-sm-12 col-xs-12 mt-4">
-              <button type="submit" class="btn btn-block btn-danger calcuate-hw">Calculate!</button>
+              <button type="submit" class="btn btn-block btn-danger calculate-hw">Calculate!</button>
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@
 
 {% block scripts %}
   <script src="{{ url_for('static', filename='js/helpers/AppModule.js') }}?ver={{ css_js_ver }}"></script>
-  <script src="{{ url_for('static', filename='js/hardy_weinberg/HardyWeinber.js') }}?ver={{ css_js_ver }}"></script>
+  <script src="{{ url_for('static', filename='js/hardy_weinberg/HardyWeinberg.js') }}?ver={{ css_js_ver }}"></script>
   <script
-    src="{{ url_for('static', filename='js/hardy_weinberg/HardyWeinberEvents.js') }}?ver={{ css_js_ver }}"></script>
+    src="{{ url_for('static', filename='js/hardy_weinberg/HardyWeinbergEvents.js') }}?ver={{ css_js_ver }}"></script>
 {% endblock %}

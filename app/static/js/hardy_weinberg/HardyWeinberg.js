@@ -1,6 +1,6 @@
 "use strict";
 
-class HardyWeinber extends AppModule {
+class HardyWeinberg extends AppModule {
   constructor() {
     super();
     this.ho = 0;
@@ -62,14 +62,14 @@ class HardyWeinber extends AppModule {
       data: dataJSON,
       dataType: "json",
       success: (result) => {
-        console.log("Successfull!");
+        console.log("Successful!");
         render.successBlock(result);
 
         this.setResult(result);
         this.extendObjectToSave({'customer_input': dataJSON})
       },
       error: function (request) {
-        console.log("Something goes wrong, try again!", request);
+        console.log("Something went wrong, try again!", request);
         render.errorBlock(request);
       }
     })

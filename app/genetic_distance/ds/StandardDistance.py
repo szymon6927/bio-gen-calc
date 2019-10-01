@@ -16,7 +16,7 @@ class StandardDistance(GeneticDistance):
 
         return sum_of_square
 
-    def calcuate_x_y(self):
+    def calculate_x_y(self):
         sum_product = {}
         pair_combination = self.get_pair_combination(self.column_range)
         for pair in pair_combination:
@@ -27,11 +27,11 @@ class StandardDistance(GeneticDistance):
 
         return sum_product
 
-    def calcuate_distances(self):
+    def calculate_distances(self):
         pair_combination = self.get_pair_combination(self.column_range)
 
         sum_of_square = self.estimate_j()
-        sum_product = self.calcuate_x_y()
+        sum_product = self.calculate_x_y()
 
         for pair in pair_combination:
             key = f'{pair[0]}_{pair[1]}'

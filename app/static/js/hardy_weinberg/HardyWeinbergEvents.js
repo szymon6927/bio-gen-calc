@@ -1,8 +1,8 @@
 "use strict";
 
-const hw = new HardyWeinber();
+const hw = new HardyWeinberg();
 
-$('.calcuate-hw').click(function () {
+$('.calculate-hw').click(function () {
   let ho = $('#ho').val();
   let he = $('#he').val();
   let rho = $('#rho').val();
@@ -34,7 +34,7 @@ $('.calcuate-hw').click(function () {
 
 $('.form-control').keypress(function (e) {
   if (e.which == 13) {
-    $('.calcuate-hw').trigger('click');
+    $('.calculate-hw').trigger('click');
     return false;
   }
 });

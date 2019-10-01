@@ -30,11 +30,11 @@ table .general-result-wrapper {
     color: #fff;
 }
 
-.calcuate {
+.calculate {
     display: none;
 }
 
-.calcuate-goodness {
+.calculate-goodness {
     display: none;
 }
 
@@ -204,7 +204,7 @@ table th[scope=row] {
     width: 7rem;
 }
 
-.calcuate-distance {
+.calculate-distance {
     display: none;
 }
 
@@ -431,7 +431,7 @@ table th[scope=row] {
     font-size: 1.4rem;
 }
 
-.calcuate-codominant,
+.calculate-codominant,
 .generate-table {
     display: none;
 }
@@ -460,7 +460,6 @@ table th[scope=row] {
 
 .module-desc .card-body a {
     color: #fff;
-    /* font-weight: 400; */
 }
 
 .module-desc .card-body a:hover {
