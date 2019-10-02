@@ -280,6 +280,10 @@
     font-size: 14px;
 }
 
+.customers .table {
+    font-size: 14px;
+}
+
 @media (max-width: 1200px) {
     .sidebar {
         display: none;
