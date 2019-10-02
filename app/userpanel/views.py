@@ -251,7 +251,7 @@ def calculation_details_view(calculation_id):
 @login_required
 @superuser_required
 def pages_list_view():
-    pages = Page.query.all()
+    pages = Page.query.order_by(asc(Page.id)).all()
     return render_template('userpanel/pages/pages.html', pages=pages)
 
 
