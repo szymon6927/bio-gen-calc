@@ -327,7 +327,7 @@ def page_delete_view(page_id):
 @login_required
 @superuser_required
 def customers_list_view():
-    customers = Customer.query.all()
+    customers = Customer.query.order_by(Customer.id).all()
     return render_template('userpanel/customers/customers.html', customers=customers)
 
 
