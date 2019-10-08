@@ -34,6 +34,7 @@ from app.userpanel.forms import LoginForm
 from app.userpanel.forms import ModelForm
 from app.userpanel.forms import PageEditForm
 from app.userpanel.forms import RegisterForm
+from app.userpanel.models import Calculation
 from app.userpanel.models import Customer
 from app.userpanel.models import CustomerActivity
 from app.userpanel.models import Page
@@ -475,6 +476,15 @@ def apmc_report_tree_graph_view(apmc_data_id):
     response.headers['Content-Disposition'] = 'inline; filename=report-tree-graph.svg'
 
     return response
+
+
+@userpanel.route('/statistics/')
+@login_required
+@superuser_required
+def statistics_calculations_list_view():
+    calculations = Calculation.query.order_by(Calculation.created_at).all()
+
+    return render_template('userpanel/statistics/calculations.html', calculations=calculations)
 
 
 @userpanel.context_processor
