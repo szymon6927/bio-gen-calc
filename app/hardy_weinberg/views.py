@@ -8,6 +8,7 @@ from flask import request
 from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.hardy_weinberg.ds.HardyWeinbergCalculation import HardyWeinbergCalculation
+from app.hardy_weinberg.entities.hw_entity import HWEntity
 from app.helpers.db_helper import add_calculation
 from app.userpanel.models import Page
 
@@ -23,8 +24,10 @@ def hardy_weinberg_page():
 @hardy_weinberg.route('/hardy-weinberg/send-data', methods=['POST'])
 def get_data():
     try:
-        data = request.get_json()
-        hw = HardyWeinbergCalculation(data)
+        data: dict = request.get_json()
+
+        entity = HWEntity(data.get('he'), data.get('he'), data.get('rho'), data.get('alfa'))
+        hw = HardyWeinbergCalculation(entity)
 
         result = hw.calculate()
 
