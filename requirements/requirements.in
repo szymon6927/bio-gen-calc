@@ -21,3 +21,4 @@ scikit-learn
 seaborn
 graphviz
 is-safe-url
+mypy
