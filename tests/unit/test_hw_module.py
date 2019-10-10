@@ -1,13 +1,10 @@
 from app.hardy_weinberg.ds.HardyWeinbergCalculation import HardyWeinbergCalculation
+from app.hardy_weinberg.entities.hw_entity import HWEntity
 from app.helpers.tests_helper import find_value_by_name
 
 
 def test_hw_basic():
-    data = dict()
-    data["ho"] = 4
-    data["he"] = 3
-    data["rho"] = 2
-    data["alfa"] = 0.05
+    data = HWEntity(4, 3, 2, 0.05)
 
     hw = HardyWeinbergCalculation(data)
     results = hw.calculate()
