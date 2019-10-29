@@ -487,6 +487,15 @@ def statistics_calculations_list_view():
     return render_template('userpanel/statistics/calculations.html', calculations=calculations)
 
 
+@userpanel.route('/statistics/all-customers-calculations')
+@login_required
+@superuser_required
+def statistics_customers_calculations_list_view():
+    calculations = CustomerCalculation.query.order_by(CustomerCalculation.created_at).all()
+
+    return render_template('userpanel/statistics/customers_calculations.html', calculations=calculations)
+
+
 @userpanel.context_processor
 def inject():
     return {'module_desc': Page.query.filter_by(slug=request.path).first()}
