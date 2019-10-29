@@ -1,0 +1,48 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h3 class="mb-5">All customers calculations</h3>
+    </div>
+  </div>
+
+  <div class="customers-calculations">
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">Customer</th>
+        <th scope="col">Title</th>
+        <th scope="col">Module Name</th>
+        <th scope="col">Customer Input</th>
+        <th scope="col">Result</th>
+        <th scope="col">Created</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for calculation in calculations %}
+        <tr>
+          <td>
+            <a href="{{ url_for('userpanel.customer_details_view', customer_id=calculation.customer.id) }}">
+              {{ calculation.customer.email }}
+            </a>
+          </td>
+          <td>{{ calculation.title }}</td>
+          <td>{{ calculation.module_name }}</td>
+          <td><code>{{ calculation.customer_input|safe }}</code></td>
+          <td><code>{{ calculation.result|safe }}</code></td>
+          <td>{{ calculation.created_at }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+
+{% block userpanel_scripts %}
+  <script>
+    $(document).ready(function () {
+      $('.customers-calculations .table').DataTable();
+    });
+  </script>
+{% endblock %}

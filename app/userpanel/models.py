@@ -10,8 +10,8 @@ class Customer(UserMixin, db.Model):
     __tablename__ = 'customers'
 
     id = db.Column(db.Integer, primary_key=True)
-    calculations = db.relationship('CustomerCalculation', backref='customer', lazy='joined')
-    activity = db.relationship('CustomerActivity', backref='customer', lazy='joined')
+    calculations = db.relationship('CustomerCalculation', backref='customer', passive_deletes=True)
+    activity = db.relationship('CustomerActivity', backref='customer', passive_deletes=True)
     apmc_data = db.relationship('APMCData', backref='customer', lazy='joined')
     first_name = db.Column(db.String(120), nullable=True)
     last_name = db.Column(db.String(120), nullable=True)
@@ -34,7 +34,7 @@ def load_customer(obj_id):
 class CustomerActivity(db.Model):
     __tablename__ = 'customer_activity'
     id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'), nullable=False)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id', ondelete='CASCADE'), nullable=False)
     module_name = db.Column(db.String(120), nullable=True)
     url = db.Column(db.String(120))
 

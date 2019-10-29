@@ -1,35 +1,41 @@
 {% extends 'userpanel/base.html' %}
 
 {% block userpanel_body %}
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h3 class="mb-5">Customers</h3>
+    </div>
+  </div>
+
   <div class="customers">
-    <table class="table">
+    <table class="table table-striped table-bordered">
       <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Login</th>
         <th scope="col">Email</th>
         <th scope="col">Super user</th>
-        <th scope="col">#</th>
+        <th scope="col">Created</th>
+        <th scope="col">Actions</th>
       </tr>
       </thead>
       <tbody>
       {% for customer in customers %}
         <tr>
-          <th scope="row"></th>
           <td>{{ customer.first_name }}</td>
           <td>{{ customer.last_name }}</td>
           <td>{{ customer.login }}</td>
           <td>{{ customer.email }}</td>
           <td>{{ customer.is_superuser }}</td>
+          <td>{{ customer.created_at }}</td>
           <td>
             <a href="{{ url_for('userpanel.customer_details_view', customer_id=customer.id) }}" class="btn btn-primary">
-              Edit customer
+              Edit
             </a>
             <a href="{{ url_for('userpanel.customer_delete_view', customer_id=customer.id) }}"
                class="btn btn-danger delete-customer">
-              Delete customer
+              Delete
             </a>
           </td>
         </tr>
@@ -37,4 +43,12 @@
       </tbody>
     </table>
   </div>
+{% endblock %}
+
+{% block userpanel_scripts %}
+  <script>
+    $(document).ready( function () {
+      $('.customers .table').DataTable();
+    });
+  </script>
 {% endblock %}

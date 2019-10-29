@@ -24,6 +24,10 @@
     overflow-y: auto;
 }
 
+.sidebar-sticky .nav {
+    margin-bottom: 82px;
+}
+
 @supports ((position: -webkit-sticky) or (position: sticky)) {
     .sidebar-sticky {
         position: -webkit-sticky;
@@ -277,6 +281,10 @@
 }
 
 .matrix_report {
+    font-size: 14px;
+}
+
+.customers .table, .calculations .table {
     font-size: 14px;
 }
 

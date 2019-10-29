@@ -34,6 +34,7 @@ from app.userpanel.forms import LoginForm
 from app.userpanel.forms import ModelForm
 from app.userpanel.forms import PageEditForm
 from app.userpanel.forms import RegisterForm
+from app.userpanel.models import Calculation
 from app.userpanel.models import Customer
 from app.userpanel.models import CustomerActivity
 from app.userpanel.models import Page
@@ -251,7 +252,7 @@ def calculation_details_view(calculation_id):
 @login_required
 @superuser_required
 def pages_list_view():
-    pages = Page.query.all()
+    pages = Page.query.order_by(asc(Page.id)).all()
     return render_template('userpanel/pages/pages.html', pages=pages)
 
 
@@ -327,7 +328,7 @@ def page_delete_view(page_id):
 @login_required
 @superuser_required
 def customers_list_view():
-    customers = Customer.query.all()
+    customers = Customer.query.order_by(Customer.id).all()
     return render_template('userpanel/customers/customers.html', customers=customers)
 
 
@@ -475,6 +476,24 @@ def apmc_report_tree_graph_view(apmc_data_id):
     response.headers['Content-Disposition'] = 'inline; filename=report-tree-graph.svg'
 
     return response
+
+
+@userpanel.route('/statistics/all-calculations')
+@login_required
+@superuser_required
+def statistics_calculations_list_view():
+    calculations = Calculation.query.order_by(Calculation.created_at).all()
+
+    return render_template('userpanel/statistics/calculations.html', calculations=calculations)
+
+
+@userpanel.route('/statistics/all-customers-calculations')
+@login_required
+@superuser_required
+def statistics_customers_calculations_list_view():
+    calculations = CustomerCalculation.query.order_by(CustomerCalculation.created_at).all()
+
+    return render_template('userpanel/statistics/customers_calculations.html', calculations=calculations)
 
 
 @userpanel.context_processor

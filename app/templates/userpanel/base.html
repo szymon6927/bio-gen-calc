@@ -21,6 +21,8 @@
         integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
   <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,900" rel="stylesheet">
+{#  <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">#}
+  <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
   <link href="{{ url_for('static', filename='css/dashboard.css') }}?ver={{ css_js_ver }}" rel="stylesheet">
 </head>
@@ -36,7 +38,7 @@
       {% include 'userpanel/partials/menu_icon.html' %}
 
       {% include 'userpanel/partials/messages.html' %}
-      
+
       <div class="userpanel-container bg-light shadow mt-4">
         {% block userpanel_body %}{% endblock %}
       </div>
@@ -58,6 +60,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
 <script src="{{ url_for('static', filename='js/vendors/bootstrap.min.js') }}"></script>
 

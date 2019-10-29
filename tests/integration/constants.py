@@ -53,3 +53,5 @@ class URL:
     USERPANEL_CUSTOMERS_GET = "/userpanel/customers/"
     USERPANEL_CUSTOMER_DETAILS_GET = "/userpanel/customers/"
     USERPANEL_CUSTOMER_DETAILS_POST = "/userpanel/customers/"
+    USERPANEL_STATISTICS_ALL_CALCULATIONS = "/statistics/all-calculations"
+    USERPANEL_STATISTICS_ALL_CUSTOMERS_CALCULATIONS = "/statistics/all-customers-calculations"
