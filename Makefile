@@ -7,4 +7,10 @@ format:
 	black app --skip-string-normalization
 	isort --apply
 
+run-tests-docker:
+	docker-compose -f docker-compose.local.yml exec backend pytest -v
+
+run-tests-local:
+	pytest -v
+
 .PHONY: format update-deps
