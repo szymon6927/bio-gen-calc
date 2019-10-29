@@ -478,7 +478,7 @@ def apmc_report_tree_graph_view(apmc_data_id):
     return response
 
 
-@userpanel.route('/statistics/')
+@userpanel.route('/statistics/all-calculations')
 @login_required
 @superuser_required
 def statistics_calculations_list_view():
