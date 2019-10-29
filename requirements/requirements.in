@@ -14,7 +14,7 @@ numpy==1.16.4
 pandas
 scipy==1.2.2
 pdfkit
-Pillow==6.2.0
+Pillow==6.2.1
 pytest
 requests
 scikit-learn
