@@ -7,6 +7,7 @@ from app import APP_DIR
 from app.common.constants import ModuleName
 from app.customer_calculation.models import CustomerCalculation
 from app.database import db
+from app.userpanel.models import Calculation
 from app.userpanel.models import Customer
 from tests.integration.constants import URL
 
@@ -76,6 +77,27 @@ def create_calculations(logged_customer):
             module_name=fake_calculation.get('module_name'),
             customer_input=fake_calculation.get('customer_input'),
             result=fake_calculation.get('result'),
+        )
+
+        db.session.add(calculation)
+        db.session.commit()
+
+    return fake_calculations
+
+
+def create_anonymous_calculations():
+    fake_calculations = [
+        {'module_name': ModuleName.HARDY_WEINBERG, 'user_data': "{}", 'result': "{}", 'ip_address': "127.0.0.1"},
+        {'module_name': ModuleName.PIC_DOMINANT, 'user_data': "{}", 'result': "{}", 'ip_address': "127.0.0.1"},
+        {'module_name': ModuleName.PIC_CODOMINANT, 'user_data': "{}", 'result': "{}", 'ip_address': "127.0.0.1"},
+    ]
+
+    for fake_calculation in fake_calculations:
+        calculation = Calculation(
+            module_name=fake_calculation.get('module_name'),
+            user_data=fake_calculation.get('user_data'),
+            result=fake_calculation.get('result'),
+            ip_address=fake_calculation.get('ip_address'),
         )
 
         db.session.add(calculation)
