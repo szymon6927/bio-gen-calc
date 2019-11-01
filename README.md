@@ -249,6 +249,10 @@ When all tests passed and there is minimum one approve from a code review, then 
 After merge to master branch CircleCI run deployment.
 So after this, if everything goes correctly changes should be visible on production.
 
+## Monitoring:
+
+We are using [Sentry](https://sentry.io/) for monitoring app errors.
+
 ## Troubleshooting
 
 1. I have problem with `mysql-client` installation in virtualenv
