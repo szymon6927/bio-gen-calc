@@ -2,6 +2,11 @@
 
 [![CircleCI](https://circleci.com/gh/szymon6927/bio-gen-calc/tree/master.svg?style=svg)](https://circleci.com/gh/szymon6927/bio-gen-calc/tree/master)
 
+![](https://img.shields.io/badge/code%20style-black-black)
+![](https://img.shields.io/badge/code%20style-flake8-lightgrey)
+![](https://img.shields.io/badge/code%20style-isort-blue)
+![](https://img.shields.io/badge/tool-pre--commit-yellow)
+
 ![](https://img.shields.io/github/languages/count/szymon6927/bio-gen-calc)
 ![](https://img.shields.io/github/languages/top/szymon6927/bio-gen-calc)
 ![](https://img.shields.io/github/issues-pr/szymon6927/bio-gen-calc)
