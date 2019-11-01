@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 
 import pdfkit
+import sentry_sdk
 from flask import Flask
 from flask import Response
 from flask import abort
@@ -16,6 +17,7 @@ from flask_compress import Compress
 from flask_htmlmin import HTMLMIN
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 from app.database import db
 from config import app_config
@@ -44,6 +46,8 @@ def create_app(config_name):
 
     compress.init_app(app)
     htmlmin.init_app(app)
+
+    sentry_sdk.init(dsn=os.environ.get('SENTRY_DSN'), integrations=[FlaskIntegration()])
 
     @app.route('/robots.txt')
     @app.route('/sitemap.xml')
