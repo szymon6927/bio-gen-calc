@@ -2,6 +2,11 @@
 
 [![CircleCI](https://circleci.com/gh/szymon6927/bio-gen-calc/tree/master.svg?style=svg)](https://circleci.com/gh/szymon6927/bio-gen-calc/tree/master)
 
+![](https://img.shields.io/github/languages/count/szymon6927/bio-gen-calc)
+![](https://img.shields.io/github/languages/top/szymon6927/bio-gen-calc)
+![](https://img.shields.io/github/issues-pr/szymon6927/bio-gen-calc)
+![](https://img.shields.io/github/stars/szymon6927/bio-gen-calc?style=social)
+
 [Gene Calc - Website](https://gene-calc.pl/)
 
 The Gene-Calc is a constantly developed tool dedicated for calculations related to biological sciences, especially focused in field of genetics. Application offers couple of tools such as:
@@ -18,6 +23,8 @@ The Gene-Calc is a constantly developed tool dedicated for calculations related 
     - Dot plot
     - Tool to obtain consensus sequence
     - Additional tools
+- Machine Learning Tools
+    - APMC - Automatic Predictive Model Constructor
 
 
 ## Stack
@@ -207,6 +214,16 @@ $ make update-deps
 If you want to format code type:
 ```
 $ make format
+```
+
+If you want to setup the whole docker environment type:
+```
+$ make start-docker
+```
+
+If you want to stop all project docker containers type:
+```
+$ make stop-docker
 ```
 
 ## Git flow
