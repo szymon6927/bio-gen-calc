@@ -2,6 +2,16 @@
 
 [![CircleCI](https://circleci.com/gh/szymon6927/bio-gen-calc/tree/master.svg?style=svg)](https://circleci.com/gh/szymon6927/bio-gen-calc/tree/master)
 
+![](https://img.shields.io/badge/code%20style-black-black)
+![](https://img.shields.io/badge/code%20style-flake8-lightgrey)
+![](https://img.shields.io/badge/code%20style-isort-blue)
+![](https://img.shields.io/badge/tool-pre--commit-yellow)
+
+![](https://img.shields.io/github/languages/count/szymon6927/bio-gen-calc)
+![](https://img.shields.io/github/languages/top/szymon6927/bio-gen-calc)
+![](https://img.shields.io/github/issues-pr/szymon6927/bio-gen-calc)
+![](https://img.shields.io/github/stars/szymon6927/bio-gen-calc?style=social)
+
 [Gene Calc - Website](https://gene-calc.pl/)
 
 The Gene-Calc is a constantly developed tool dedicated for calculations related to biological sciences, especially focused in field of genetics. Application offers couple of tools such as:
@@ -18,6 +28,8 @@ The Gene-Calc is a constantly developed tool dedicated for calculations related 
     - Dot plot
     - Tool to obtain consensus sequence
     - Additional tools
+- Machine Learning Tools
+    - APMC - Automatic Predictive Model Constructor
 
 
 ## Stack
@@ -209,6 +221,16 @@ If you want to format code type:
 $ make format
 ```
 
+If you want to setup the whole docker environment type:
+```
+$ make start-docker
+```
+
+If you want to stop all project docker containers type:
+```
+$ make stop-docker
+```
+
 ## Git flow
 
 Create your feature branch from master.
@@ -231,6 +253,10 @@ On each time when Github PR is created the tests are run on CircleCI.
 When all tests passed and there is minimum one approve from a code review, then merge is possible.
 After merge to master branch CircleCI run deployment.
 So after this, if everything goes correctly changes should be visible on production.
+
+## Monitoring:
+
+We are using [Sentry](https://sentry.io/) for monitoring app errors.
 
 ## Troubleshooting
 

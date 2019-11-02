@@ -1,4 +1,4 @@
-{% if not config['DEBUG'] %}
+{% if not config['DEBUG'] and module_desc %}
   <!-- Google / Search Engine Tags -->
   <meta itemprop="name" content="{{ module_desc.seo_title }}">
   <meta itemprop="description" content="{{ module_desc.seo_desc }}">

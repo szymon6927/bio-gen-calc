@@ -13,4 +13,10 @@ run-tests-docker:
 run-tests-local:
 	pytest -v
 
+start-docker:
+	docker-compose -f docker-compose.local.yml up -d
+
+stop-docker:
+	docker-compose -f docker-compose.local.yml down
+
 .PHONY: format update-deps
