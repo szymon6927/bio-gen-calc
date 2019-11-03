@@ -227,3 +227,9 @@ class SlackNotification:
         res = self.client.send_message(msg)
 
         return res
+
+    def added_to_newsletter(self, email):
+        msg = f":bangbang: Someone with *e-mail: {email}* signed up to the newsletter :bangbang:"
+        res = self.client.send_message(msg)
+
+        return res
