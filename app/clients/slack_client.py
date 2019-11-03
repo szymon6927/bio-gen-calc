@@ -25,7 +25,10 @@ class SlackClient:
 
         response = requests.post(self.webhook_url, headers=headers, data=json.dumps(data))
 
-        return response
+        if response.ok:
+            return response.content
+
+        return None
 
 
 class SlackNotification:
