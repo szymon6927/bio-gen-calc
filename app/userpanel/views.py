@@ -22,6 +22,7 @@ from werkzeug.security import generate_password_hash
 from app.apmc.config import APMC_REPORTS_UPLOAD_PATH
 from app.apmc.ds.report.report_generator import ReportGenerator
 from app.apmc.models import APMCData
+from app.clients.slack_client import SlackNotification
 from app.customer_calculation.models import CustomerCalculation
 from app.database import db
 from app.helpers.file_helper import remove_file
@@ -41,6 +42,7 @@ from app.userpanel.models import Page
 from app.userpanel.services import APMCUserPanelService
 from config import ALLOWED_HOSTS
 
+slack_notification = SlackNotification()
 userpanel = Blueprint('userpanel', __name__)
 
 
@@ -419,6 +421,7 @@ def apmc_details_view(apmc_data_id):
         apmc_service.set_user_input(input_values)
 
         flash(f'You have successfully predicted.', 'success')
+        slack_notification.apmc_made_prediction(current_user, apmc_data)
 
         return render_template(
             'userpanel/apmc/apmc_data_details.html',
@@ -449,6 +452,8 @@ def apmc_delete_view(apmc_data_id):
 def apmc_report_view(apmc_data_id):
     apmc_data = APMCData.query.get_or_404(apmc_data_id)
 
+    slack_notification.apmc_report_downloaded(current_user, apmc_data)
+
     if apmc_data.report:
         return send_from_directory(APMC_REPORTS_UPLOAD_PATH, apmc_data.report)
     else:
@@ -467,6 +472,8 @@ def apmc_report_view(apmc_data_id):
 @login_required
 def apmc_report_tree_graph_view(apmc_data_id):
     apmc_data = APMCData.query.get_or_404(apmc_data_id)
+
+    slack_notification.apmc_tree_graph_downloaded(current_user, apmc_data)
 
     report_generator = ReportGenerator(apmc_data)
     tree_graph = report_generator.get_tree_graph()

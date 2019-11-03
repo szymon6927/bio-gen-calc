@@ -5,6 +5,7 @@ from flask import jsonify
 from flask import render_template
 from flask import request
 
+from app.clients.slack_client import SlackNotification
 from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.genetic_distance.ds.GeometricDistance import GeometricDistance
@@ -13,6 +14,7 @@ from app.genetic_distance.ds.TakezakiNeiDistance import TakezakiNeiDistance
 from app.helpers.db_helper import add_calculation
 from app.userpanel.models import Page
 
+slack_notification = SlackNotification()
 genetic_distance = Blueprint('genetic_distance', __name__)
 
 
@@ -44,6 +46,7 @@ def get_data():
             result=gen_distance.get_matrix().tolist(),
             ip_address=request.remote_addr,
         )
+        slack_notification.genetic_distance_calculation(data, gen_distance.get_matrix(), request.remote_addr)
 
         return jsonify(
             {'data': {'dendro_base64': gen_distance.render_dendrogram(), 'matrix': gen_distance.render_matrix()}}
