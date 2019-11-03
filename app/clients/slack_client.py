@@ -20,6 +20,9 @@ class SlackClient:
         self.webhook_url = os.environ.get('SLACK_WEBHOOK_URL')
 
     def send_message(self, msg):
+        if not self.webhook_url:
+            return None
+
         headers = {'Content-type': 'application/json'}
         data = {'text': msg}
 
