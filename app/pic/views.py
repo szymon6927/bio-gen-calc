@@ -5,6 +5,7 @@ from flask import jsonify
 from flask import render_template
 from flask import request
 
+from app.clients.slack_client import SlackNotification
 from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.helpers.db_helper import add_calculation
@@ -12,6 +13,7 @@ from app.pic.ds.CodominantCalculation import Codominant
 from app.pic.ds.DominantCalculation import Dominant
 from app.userpanel.models import Page
 
+slack_notification = SlackNotification()
 pic = Blueprint('pic', __name__)
 
 
@@ -31,6 +33,7 @@ def pic_codominant():
         add_calculation(
             module_name=ModuleName.PIC_CODOMINANT, user_data=data, result=result, ip_address=request.remote_addr
         )
+        slack_notification.pic_codominant_calculation(data, result, request.remote_addr)
 
         return jsonify({'data': result})
     except TypeError as e:
@@ -49,6 +52,7 @@ def pic_dominant():
         add_calculation(
             module_name=ModuleName.PIC_DOMINANT, user_data=data, result=result, ip_address=request.remote_addr
         )
+        slack_notification.pic_dominant_calculation(data, result, request.remote_addr)
 
         return jsonify({'data': result})
     except TypeError as e:

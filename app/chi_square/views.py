@@ -7,11 +7,13 @@ from flask import request
 
 from app.chi_square.ds.ChiSquareCalculation import ChiSquareCalculation
 from app.chi_square.ds.ChiSquareGoodness import ChiSquareGoodness
+from app.clients.slack_client import SlackNotification
 from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.helpers.db_helper import add_calculation
 from app.userpanel.models import Page
 
+slack_notification = SlackNotification()
 chi_square = Blueprint('chi_square', __name__)
 
 
@@ -32,6 +34,7 @@ def get_data():
         add_calculation(
             module_name=ModuleName.CHI_SQUARE, user_data=data, result=result, ip_address=request.remote_addr
         )
+        slack_notification.chi_square_calculation(data, result, request.remote_addr)
 
         return jsonify({'data': result})
     except TypeError as e:
@@ -51,6 +54,7 @@ def get_goodness_data():
         add_calculation(
             module_name=ModuleName.CHI_SQUARE_GOODNESS, user_data=data, result=result, ip_address=request.remote_addr
         )
+        slack_notification.chi_square_goodness_calculation(data, result, request.remote_addr)
 
         return jsonify({'data': result})
     except TypeError as e:

@@ -17,11 +17,13 @@ from app.apmc.exceptions import DatasetValidationError
 from app.apmc.models import APMCData
 from app.apmc.services import pre_train
 from app.apmc.services import train
+from app.clients.slack_client import SlackNotification
 from app.common.decorators import add_customer_activity
 from app.database import db
 from app.helpers.file_helper import allowed_file
 from app.userpanel.models import Page
 
+slack_notification = SlackNotification()
 apmc = Blueprint('apmc', __name__)
 
 
@@ -67,6 +69,14 @@ def apmc_pre_train():
             normalization=request.form.get('normalization') == "true",
             training_completed=False,
         )
+        slack_notification.apmc_pre_train_calculation(
+            current_user,
+            request.form.get('project_name'),
+            filename,
+            request.form.get('model_type'),
+            request.form.get('normalization'),
+            request.remote_addr,
+        )
 
         db.session.add(apmc_data)
         db.session.commit()
@@ -88,6 +98,8 @@ def apmc_train():
 
     apmc_data_id = data.get('data_id')
     user_choice = data.get('selected_model')
+
+    slack_notification.apmc_train_calculation(current_user, data, request.remote_addr)
 
     model_name = train(int(apmc_data_id), user_choice)
 

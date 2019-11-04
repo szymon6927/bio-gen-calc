@@ -9,6 +9,7 @@ from flask import render_template
 from flask import request
 from werkzeug.utils import secure_filename
 
+from app.clients.slack_client import SlackNotification
 from app.common.constants import ModuleName
 from app.common.decorators import add_customer_activity
 from app.helpers.db_helper import add_calculation
@@ -18,6 +19,7 @@ from app.sequences_analysis_tools.ds.DotPlot import DotPlot
 from app.sequences_analysis_tools.ds.SequencesTools import SequencesTools
 from app.userpanel.models import Page
 
+slack_notification = SlackNotification()
 sequences_analysis_tools = Blueprint('sequences_analysis_tools', __name__)
 
 
@@ -37,6 +39,7 @@ def dot_plot_raw_seq():
         add_calculation(
             module_name=ModuleName.DOT_PLOT_RAW_SEQ, user_data=data, result=result, ip_address=request.remote_addr
         )
+        slack_notification.dot_plot_raw_seq_calculation(data, result, request.remote_addr)
 
         return jsonify(
             {'data': result, 'dotplot_base64': dot_plot.get_dot_plot_image(), 'alignment': dot_plot.get_alignments()}
@@ -55,6 +58,7 @@ def dot_plot_genebank_ids():
         add_calculation(
             module_name=ModuleName.DOT_PLOT_GENEBANK_IDS, user_data=data, result=result, ip_address=request.remote_addr
         )
+        slack_notification.dot_plot_genebank_calculation(data, result, request.remote_addr)
 
         return jsonify(
             {'data': result, 'dotplot_base64': dot_plot.get_dot_plot_image(), 'alignment': dot_plot.get_alignments()}
@@ -82,6 +86,7 @@ def get_raw_seq_data():
             result=result,
             ip_address=request.remote_addr,
         )
+        slack_notification.consensus_sequence_raw_seq_calculation(data, result, request.remote_addr)
 
         return jsonify({'data': result})
     except Exception as e:
@@ -114,6 +119,7 @@ def get_seq_file_data():
             result=result,
             ip_address=request.remote_addr,
         )
+        slack_notification.consensus_sequence_file_seq_calculation(data, result, request.remote_addr)
 
         response = make_response(base64.b64encode(result.encode()))
         response.headers['Content-Type'] = 'text/plain'
@@ -136,6 +142,7 @@ def get_seq_genebank():
             result=result,
             ip_address=request.remote_addr,
         )
+        slack_notification.consensus_sequence_genebank_calculation(data, result, request.remote_addr)
 
         response = make_response(base64.b64encode(result.encode()))
         response.headers['Content-Type'] = 'text/plain'
@@ -161,6 +168,7 @@ def get_sequences_data():
         add_calculation(
             module_name=ModuleName.SEQUENCES_TOOLS, user_data=data, result=result, ip_address=request.remote_addr
         )
+        slack_notification.sequences_tool_calculation(data, result, request.remote_addr)
 
         return jsonify({'data': result})
     except Exception as e:

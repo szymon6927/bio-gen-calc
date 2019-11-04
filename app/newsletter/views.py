@@ -7,6 +7,9 @@ from flask import abort
 from flask import jsonify
 from flask import request
 
+from app.clients.slack_client import SlackNotification
+
+slack_notification = SlackNotification()
 newsletter = Blueprint('newsletter', __name__)
 
 
@@ -20,6 +23,8 @@ def add_to_newsletter():
 
     if not email:
         return abort(Response("Provide email address", 400))
+
+    slack_notification.added_to_newsletter(email)
 
     response, status_code = mailchimp_api_call(email)
 
