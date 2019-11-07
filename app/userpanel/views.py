@@ -342,6 +342,20 @@ def customer_details_view(customer_id):
     customer = Customer.query.get_or_404(customer_id)
     form = AdminCustomerEditForm(obj=customer)
 
+    activity = (
+        CustomerActivity.query.with_entities(
+            CustomerActivity.url, CustomerActivity.module_name, func.count(CustomerActivity.url).label('count')
+        )
+        .filter_by(customer=customer)
+        .group_by(CustomerActivity.url, CustomerActivity.module_name)
+        .all()
+    )
+
+    statistics = dict()
+    statistics['total_calculations'] = CustomerCalculation.query.filter_by(customer=customer).count()
+    statistics['total_visits'] = CustomerActivity.query.filter_by(customer=customer).count()
+    statistics['total_apmc'] = APMCData.query.filter_by(customer=customer).count()
+
     if form.validate_on_submit():
         customer.first_name = form.first_name.data
         customer.last_name = form.last_name.data
@@ -358,7 +372,13 @@ def customer_details_view(customer_id):
 
         return redirect(url_for('userpanel.customer_details_view', customer_id=customer.id))
 
-    return render_template('userpanel/customers/customer_details.html', form=form, customer=customer)
+    return render_template(
+        'userpanel/customers/customer_details.html',
+        form=form,
+        customer=customer,
+        activity=activity,
+        statistics=statistics,
+    )
 
 
 @userpanel.route('/userpanel/customers/delete/<int:customer_id>')

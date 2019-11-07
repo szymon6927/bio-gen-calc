@@ -93,4 +93,128 @@
       </div>
     </div>
   </form>
+
+
+  <h4 class="mt-5">User statistics</h4>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-4 col-sm-6">
+      <div class="card mb-4 shadow statistics">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="card-icon">
+              <i class="fas fa-eye"></i>
+            </div>
+            <div class="ml-3">
+              <div class="text-large">
+                <div class="mb-1 pb-1 title">Total visits: <strong>{{ statistics.total_visits }}</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-6">
+      <div class="card mb-4 shadow statistics">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="card-icon">
+              <i class="fas fa-signal"></i>
+            </div>
+            <div class="ml-3">
+              <div class="text-large">
+                <div class="mb-1 pb-1 title">Total calculations: <strong>{{ statistics.total_calculations }}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-6">
+      <div class="card mb-4 shadow statistics">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="card-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <div class="ml-3">
+              <div class="text-large">
+                <div class="mb-1 pb-1 title">Total APMC: <strong>{{ statistics.total_apmc }}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="card shadow mt-4">
+        <div class="card-header font-weght-bold"><strong>Activity</strong></div>
+        <div class="card-body">
+          <div class="chart-warpper">
+            <canvas class="chart"></canvas>
+            {% for item in activity %}
+              <input type="hidden" class="chart-item" data-name="{{ item.module_name }}" data-url="{{ item.url }}"
+                     value="{{ item.count }}"/>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block userpanel_scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+  <script>
+    const chartWrapper = $(".chart");
+
+    const chartData = {
+      'labels': [],
+      'values': []
+    };
+
+    const allItems = $('.chart-item');
+
+    allItems.each((index, elem) => {
+      chartData.labels.push($(elem).data('name'));
+      chartData.values.push($(elem).val());
+    });
+
+    const activityChart = new Chart(chartWrapper, {
+      type: 'line',
+      data: {
+        labels: chartData.labels,
+        datasets: [{
+          label: "Activity",
+          data: chartData.values,
+          lineTension: 0,
+          backgroundColor: 'transparent',
+          borderColor: '#007bff',
+          borderWidth: 4,
+          pointBackgroundColor: '#007bff'
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              stepSize: 10
+            }
+          }]
+        },
+        legend: {
+          display: true,
+        }
+      }
+    });
+  </script>
 {% endblock %}
