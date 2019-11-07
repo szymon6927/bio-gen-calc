@@ -14,7 +14,7 @@ class APMCData(db.Model):
     __tablename__ = 'apmc_data'
 
     id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'), nullable=False)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
     project_name = db.Column(db.String(120), nullable=False)
     dataset = db.Column(db.String(80), nullable=False)
     model_type = db.Column(db.String(120), nullable=False)

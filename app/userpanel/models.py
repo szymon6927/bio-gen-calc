@@ -34,7 +34,7 @@ def load_customer(obj_id):
 class CustomerActivity(db.Model):
     __tablename__ = 'customer_activity'
     id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id', ondelete='CASCADE'), nullable=False)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id', ondelete='CASCADE'))
     module_name = db.Column(db.String(120), nullable=True)
     url = db.Column(db.String(120))
 
