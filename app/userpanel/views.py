@@ -19,6 +19,7 @@ from sqlalchemy import or_
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
+from app.apmc.config import APMC_DATASET_UPLOAD_PATH
 from app.apmc.config import APMC_REPORTS_UPLOAD_PATH
 from app.apmc.ds.report.report_generator import ReportGenerator
 from app.apmc.models import APMCData
@@ -448,6 +449,9 @@ def apmc_delete_view(apmc_data_id):
 
     flash('You have successfully delete the model - {}.'.format(apmc_data.project_name), 'success')
 
+    if 'all-models' in request.headers.get('Referer'):
+        return redirect(url_for('userpanel.statistics_models_list_view'))
+
     return redirect(url_for('userpanel.apmc_list_view'))
 
 
@@ -470,6 +474,14 @@ def apmc_report_view(apmc_data_id):
         db.session.commit()
 
         return send_from_directory(APMC_REPORTS_UPLOAD_PATH, apmc_data.report)
+
+
+@userpanel.route('/userpanel/models/download-dataset/<int:apmc_data_id>')
+@login_required
+def apmc_download_dataset_view(apmc_data_id):
+    apmc_data = APMCData.query.get_or_404(apmc_data_id)
+
+    return send_from_directory(APMC_DATASET_UPLOAD_PATH, apmc_data.dataset)
 
 
 @userpanel.route('/userpanel/models/report/tree-graph/<int:apmc_data_id>')
@@ -505,6 +517,15 @@ def statistics_customers_calculations_list_view():
     calculations = CustomerCalculation.query.order_by(CustomerCalculation.created_at).all()
 
     return render_template('userpanel/statistics/customers_calculations.html', calculations=calculations)
+
+
+@userpanel.route('/statistics/all-models')
+@login_required
+@superuser_required
+def statistics_models_list_view():
+    apmc_data = APMCData.query.order_by(APMCData.created_at).all()
+
+    return render_template('userpanel/statistics/apmc_data_list.html', models=apmc_data)
 
 
 @userpanel.context_processor

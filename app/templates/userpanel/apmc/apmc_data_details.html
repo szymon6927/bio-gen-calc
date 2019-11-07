@@ -6,23 +6,25 @@
       <h3>Make an prediction</h3>
     </div>
 
-    <div class="col-md-8 col-sm-12 col-12 text-right">
-      <div class="float-right">
-        <button class="btn btn-outline-primary go-to-predict-form">Predict</button>
+    {% if context.apmc_data.training_completed %}
+      <div class="col-md-8 col-sm-12 col-12 text-right">
+        <div class="float-right">
+          <button class="btn btn-outline-primary go-to-predict-form">Predict</button>
 
-        <a href="{{ url_for('userpanel.apmc_report_view', apmc_data_id=context.apmc_data.id) }}"
-           target="_blank"
-           class="ml-3 btn btn-outline-dark">
-          Download statistical report</a>
-
-        {% if context.apmc_data.has_tree_graph %}
-          <a href="{{ url_for('userpanel.apmc_report_tree_graph_view', apmc_data_id=context.apmc_data.id) }}"
+          <a href="{{ url_for('userpanel.apmc_report_view', apmc_data_id=context.apmc_data.id) }}"
              target="_blank"
-             class="ml-3 btn btn-outline-info">
-            Download tree graph</a>
-        {% endif %}
+             class="ml-3 btn btn-outline-dark">
+            Download statistical report</a>
+
+          {% if context.apmc_data.has_tree_graph %}
+            <a href="{{ url_for('userpanel.apmc_report_tree_graph_view', apmc_data_id=context.apmc_data.id) }}"
+               target="_blank"
+               class="ml-3 btn btn-outline-info">
+              Download tree graph</a>
+          {% endif %}
+        </div>
       </div>
-    </div>
+    {% endif %}
   </div>
 
   <hr>
@@ -31,96 +33,116 @@
     <p class="font-weight-bold mb-1">Project name: {{ context.apmc_data.project_name }}</p>
     <p class="mb-1">Model type: <strong>{{ context.apmc_data.model_type }}</strong></p>
     <p>Normalization: <strong>{{ context.apmc_data.normalization }}</strong></p>
-    <p class="small mb-0">Data set: <strong>{{ context.apmc_data.dataset }}</strong></p>
+
+    <p class="small mb-0">
+      Data set:
+      <strong>
+        <a href="{{ url_for('userpanel.apmc_download_dataset_view', apmc_data_id=context.apmc_data.id) }}"
+           target="_blank">
+          {{ context.apmc_data.dataset }}
+        </a>
+      </strong>
+    </p>
+
     <p class="small mb-0">Training completed: <strong>{{ context.apmc_data.training_completed }}</strong></p>
     <p class="small mb-0">Trained model: <strong>{{ context.apmc_data.trained_model }}</strong></p>
-    <p class="small">Created at: {{ context.apmc_data.created_at }}</p>
-    <hr>
-    <p class="font-weight-bold mb-1">Model metrics</p>
-    {% if context.model_metric.matrix_report %}
-      <div class="matrix_report text-center mb-4">
-        {{ context.model_metric.matrix_report|safe }}
-      </div>
-    {% endif %}
 
-    {% for name, value in context.model_metric.items() %}
-      {% if name != 'matrix_report' %}
-        <div>
-          <span class="mr-2">{{ name }}:</span>
-          <span>{{ value }}</span>
+    <p class="small">Created at: {{ context.apmc_data.created_at }}</p>
+
+    <hr>
+
+    {% if context.model_metric %}
+      <p class="font-weight-bold mb-1">Model metrics</p>
+
+      {% if context.model_metric.matrix_report %}
+        <div class="matrix_report text-center mb-4">
+          {{ context.model_metric.matrix_report|safe }}
         </div>
       {% endif %}
-    {% endfor %}
-  </div>
 
-  <hr>
-
-  <div class="mb-3 text-center">
-    <h5>
-      <i class="fas fa-rocket"></i>
-      <span>Prediction form</span>
-    </h5>
-    <p>
-      <i class="fas fa-info-circle"></i>
-      <span>Fill the inputs and make a prediction based on your trained model</span>
-    </p>
-  </div>
-
-  <form class="prediction-form" action="{{ url_for('userpanel.apmc_details_view', apmc_data_id=context.apmc_data.id) }}"
-        method="POST" enctype="multipart/form-data">
-    {{ context.form.hidden_tag() }}
-
-    <div class="row">
-      {% for field in context.form if field.widget.input_type != 'hidden' %}
-        <div class="col-md-4 col-sm-6 col-12">
-          <div class="form-group">
-            {{ field.label }}
-            {{ field(class_="form-control") }}
-
-            {% if field.errors %}
-              {% for error in field.errors %}
-                <span class="text-danger">{{ error }}</span></br>
-              {% endfor %}
-            {% endif %}
+      {% for name, value in context.model_metric.items() %}
+        {% if name != 'matrix_report' %}
+          <div>
+            <span class="mr-2">{{ name }}:</span>
+            <span>{{ value }}</span>
           </div>
-        </div>
+        {% endif %}
       {% endfor %}
 
-      <div class="col-md-6 offset-md-3 col-sm-12">
-        <button type="submit" class="btn btn-block btn-primary mt-3">Make a prediction</button>
-      </div>
+    {% endif %}
+  </div>
+
+  {% if context.apmc_data.training_completed %}
+    <hr>
+
+    <div class="mb-3 text-center">
+      <h5>
+        <i class="fas fa-rocket"></i>
+        <span>Prediction form</span>
+      </h5>
+      <p>
+        <i class="fas fa-info-circle"></i>
+        <span>Fill the inputs and make a prediction based on your trained model</span>
+      </p>
     </div>
 
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        {% if predicted_data %}
-          <hr>
-          <div class="col-md-6 offset-md-3 col-sm-12 col-12 text-center prediction">
-            <div class="card mb-sm-5 mb-4 mt-5">
-              <div class="card-body">
-                <h4 class="card-title">Prediction is:</h4>
-                <div class="details">
-                  <hr>
-                  {% if extrapolation_risk_msg %}
-                    <p class="small"><strong>WARNING!</strong></p>
-                    {% for msg in extrapolation_risk_msg %}
-                      <p class="small text-left mb-0">{{ msg }}</p>
-                    {% endfor %}
-                    <hr>
-                  {% endif %}
+    <form class="prediction-form"
+          action="{{ url_for('userpanel.apmc_details_view', apmc_data_id=context.apmc_data.id) }}"
+          method="POST" enctype="multipart/form-data">
+      {{ context.form.hidden_tag() }}
 
-                  {% for data in predicted_data %}
-                    <p class="font-weight-bold mb-0">{{ data }}</p>
-                  {% endfor %}
+      <div class="row">
+        {% for field in context.form if field.widget.input_type != 'hidden' %}
+          <div class="col-md-4 col-sm-6 col-12">
+            <div class="form-group">
+              {{ field.label }}
+              {{ field(class_="form-control") }}
+
+              {% if field.errors %}
+                {% for error in field.errors %}
+                  <span class="text-danger">{{ error }}</span></br>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="col-md-6 offset-md-3 col-sm-12">
+          <button type="submit" class="btn btn-block btn-primary mt-3">Make a prediction</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          {% if predicted_data %}
+            <hr>
+            <div class="col-md-6 offset-md-3 col-sm-12 col-12 text-center prediction">
+              <div class="card mb-sm-5 mb-4 mt-5">
+                <div class="card-body">
+                  <h4 class="card-title">Prediction is:</h4>
+                  <div class="details">
+                    <hr>
+                    {% if extrapolation_risk_msg %}
+                      <p class="small"><strong>WARNING!</strong></p>
+                      {% for msg in extrapolation_risk_msg %}
+                        <p class="small text-left mb-0">{{ msg }}</p>
+                      {% endfor %}
+                      <hr>
+                    {% endif %}
+
+                    {% for data in predicted_data %}
+                      <p class="font-weight-bold mb-0">{{ data }}</p>
+                    {% endfor %}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        {% endif %}
+          {% endif %}
 
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  {% endif %}
 {% endblock %}
 
 
