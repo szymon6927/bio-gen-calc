@@ -48,7 +48,9 @@
 {% block userpanel_scripts %}
   <script>
     $(document).ready( function () {
-      $('.customers .table').DataTable();
+      $('.customers .table').DataTable({
+        "order": [[5, "desc"]]
+      });
     });
   </script>
 {% endblock %}

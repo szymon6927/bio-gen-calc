@@ -38,7 +38,7 @@
               Check
             </a>
             <a href="{{ url_for('userpanel.apmc_delete_view', apmc_data_id=model.id) }}"
-               class="btn btn-danger delete-customer">
+               class="btn btn-danger delete-apmc-data">
               Delete
             </a>
           </td>
@@ -52,7 +52,9 @@
 {% block userpanel_scripts %}
   <script>
     $(document).ready(function () {
-      $('.apmc-data .table').DataTable();
+      $('.apmc-data .table').DataTable({
+        "order": [[5, "desc"]]
+      });
     });
   </script>
 {% endblock %}
