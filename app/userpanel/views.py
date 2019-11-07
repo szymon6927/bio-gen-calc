@@ -365,6 +365,10 @@ def customer_details_view(customer_id):
 @superuser_required
 def customer_delete_view(customer_id):
     customer = Customer.query.get_or_404(customer_id)
+    customer_activity = CustomerActivity.query.filter_by(customer_id=customer_id).first()
+
+    if customer_activity:
+        db.session.delete(customer_activity)
 
     db.session.delete(customer)
     db.session.commit()
