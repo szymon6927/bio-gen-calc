@@ -641,3 +641,23 @@ def test_get_statistics_all_customers_calculations_with_normal_customer(test_cli
 
     assert response.status_code == 200
     assert b'You do not have access here!' in response.data
+
+
+def test_get_statistics_all_models(test_client):
+    customer, plain_password = create_superuser_customer()
+    login_customer(test_client, customer.login, plain_password)
+
+    response = test_client.get(URL.USERPANEL_STATISTICS_ALL_MODELS)
+
+    assert response.status_code == 200
+    assert b'All models' in response.data
+
+
+def test_get_statistics_all_models_with_normal_customer(test_client):
+    customer, plain_password = create_customer()
+    login_customer(test_client, customer.login, plain_password)
+
+    response = test_client.get(URL.USERPANEL_STATISTICS_ALL_MODELS)
+
+    assert response.status_code == 200
+    assert b'You do not have access here!' in response.data
