@@ -42,7 +42,9 @@
 {% block userpanel_scripts %}
   <script>
     $(document).ready(function () {
-      $('.customers-calculations .table').DataTable();
+      $('.customers-calculations .table').DataTable({
+        "order": [[5, "desc"]]
+      });
     });
   </script>
 {% endblock %}

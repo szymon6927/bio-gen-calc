@@ -1,9 +1,9 @@
 import json
 from typing import List
 
+import joblib
 import numpy as np
 
-import joblib
 from app.apmc.ds.processing.data_processing import data_set_split
 from app.apmc.ds.processing.data_processing import extrapolation_risk
 from app.apmc.ds.processing.data_processing import load_data
@@ -62,6 +62,9 @@ class APMCUserPanelService:
         return predicted_data.tolist()
 
     def get_model_metric(self):
+        if not self.apmc_data.model_metrics:
+            return None
+
         model_evaluation_metrics = json.loads(self.apmc_data.model_metrics)
 
         return model_evaluation_metrics

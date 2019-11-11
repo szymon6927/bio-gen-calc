@@ -55,3 +55,4 @@ class URL:
     USERPANEL_CUSTOMER_DETAILS_POST = "/userpanel/customers/"
     USERPANEL_STATISTICS_ALL_CALCULATIONS = "/statistics/all-calculations"
     USERPANEL_STATISTICS_ALL_CUSTOMERS_CALCULATIONS = "/statistics/all-customers-calculations"
+    USERPANEL_STATISTICS_ALL_MODELS = "/statistics/all-models"

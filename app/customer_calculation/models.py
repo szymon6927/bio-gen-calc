@@ -7,7 +7,7 @@ class CustomerCalculation(db.Model):
     __tablename__ = 'customer_calculations'
 
     id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id', ondelete='CASCADE'), nullable=False)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id', ondelete='CASCADE'))
     title = db.Column(db.String(150), nullable=True)
     module_name = db.Column(db.String(120), nullable=True)
     customer_input = db.Column(db.Text, nullable=True)

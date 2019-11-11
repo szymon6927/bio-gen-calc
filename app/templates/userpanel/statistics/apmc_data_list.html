@@ -1,0 +1,60 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h3 class="mb-5">All models</h3>
+    </div>
+  </div>
+
+  <div class="apmc-data">
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">Customer</th>
+        <th scope="col">Project name</th>
+        <th scope="col">Model Type</th>
+        <th scope="col">Normalization</th>
+        <th scope="col">Training Completed</th>
+        <th scope="col">Created</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for model in models %}
+        <tr>
+          <td>
+            <a href="{{ url_for('userpanel.customer_details_view', customer_id=model.customer.id) }}">
+              {{ model.customer.email }}
+            </a>
+          </td>
+          <td>{{ model.project_name }}</td>
+          <td>{{ model.model_type }}</td>
+          <td>{{ model.normalization }}</td>
+          <td>{{ model.training_completed }}</td>
+          <td>{{ model.created_at }}</td>
+          <td>
+            <a href="{{ url_for('userpanel.apmc_details_view', apmc_data_id=model.id) }}" class="btn btn-primary">
+              Check
+            </a>
+            <a href="{{ url_for('userpanel.apmc_delete_view', apmc_data_id=model.id) }}"
+               class="btn btn-danger delete-apmc-data">
+              Delete
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+
+{% block userpanel_scripts %}
+  <script>
+    $(document).ready(function () {
+      $('.apmc-data .table').DataTable({
+        "order": [[5, "desc"]]
+      });
+    });
+  </script>
+{% endblock %}

@@ -19,6 +19,7 @@ from sqlalchemy import or_
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 
+from app.apmc.config import APMC_DATASET_UPLOAD_PATH
 from app.apmc.config import APMC_REPORTS_UPLOAD_PATH
 from app.apmc.ds.report.report_generator import ReportGenerator
 from app.apmc.models import APMCData
@@ -341,6 +342,20 @@ def customer_details_view(customer_id):
     customer = Customer.query.get_or_404(customer_id)
     form = AdminCustomerEditForm(obj=customer)
 
+    activity = (
+        CustomerActivity.query.with_entities(
+            CustomerActivity.url, CustomerActivity.module_name, func.count(CustomerActivity.url).label('count')
+        )
+        .filter_by(customer=customer)
+        .group_by(CustomerActivity.url, CustomerActivity.module_name)
+        .all()
+    )
+
+    statistics = dict()
+    statistics['total_calculations'] = CustomerCalculation.query.filter_by(customer=customer).count()
+    statistics['total_visits'] = CustomerActivity.query.filter_by(customer=customer).count()
+    statistics['total_apmc'] = APMCData.query.filter_by(customer=customer).count()
+
     if form.validate_on_submit():
         customer.first_name = form.first_name.data
         customer.last_name = form.last_name.data
@@ -357,7 +372,13 @@ def customer_details_view(customer_id):
 
         return redirect(url_for('userpanel.customer_details_view', customer_id=customer.id))
 
-    return render_template('userpanel/customers/customer_details.html', form=form, customer=customer)
+    return render_template(
+        'userpanel/customers/customer_details.html',
+        form=form,
+        customer=customer,
+        activity=activity,
+        statistics=statistics,
+    )
 
 
 @userpanel.route('/userpanel/customers/delete/<int:customer_id>')
@@ -365,6 +386,10 @@ def customer_details_view(customer_id):
 @superuser_required
 def customer_delete_view(customer_id):
     customer = Customer.query.get_or_404(customer_id)
+    customer_activity = CustomerActivity.query.filter_by(customer_id=customer_id).first()
+
+    if customer_activity:
+        db.session.delete(customer_activity)
 
     db.session.delete(customer)
     db.session.commit()
@@ -444,6 +469,9 @@ def apmc_delete_view(apmc_data_id):
 
     flash('You have successfully delete the model - {}.'.format(apmc_data.project_name), 'success')
 
+    if 'all-models' in request.headers.get('Referer'):
+        return redirect(url_for('userpanel.statistics_models_list_view'))
+
     return redirect(url_for('userpanel.apmc_list_view'))
 
 
@@ -466,6 +494,14 @@ def apmc_report_view(apmc_data_id):
         db.session.commit()
 
         return send_from_directory(APMC_REPORTS_UPLOAD_PATH, apmc_data.report)
+
+
+@userpanel.route('/userpanel/models/download-dataset/<int:apmc_data_id>')
+@login_required
+def apmc_download_dataset_view(apmc_data_id):
+    apmc_data = APMCData.query.get_or_404(apmc_data_id)
+
+    return send_from_directory(APMC_DATASET_UPLOAD_PATH, apmc_data.dataset)
 
 
 @userpanel.route('/userpanel/models/report/tree-graph/<int:apmc_data_id>')
@@ -501,6 +537,15 @@ def statistics_customers_calculations_list_view():
     calculations = CustomerCalculation.query.order_by(CustomerCalculation.created_at).all()
 
     return render_template('userpanel/statistics/customers_calculations.html', calculations=calculations)
+
+
+@userpanel.route('/statistics/all-models')
+@login_required
+@superuser_required
+def statistics_models_list_view():
+    apmc_data = APMCData.query.order_by(APMCData.created_at).all()
+
+    return render_template('userpanel/statistics/apmc_data_list.html', models=apmc_data)
 
 
 @userpanel.context_processor
