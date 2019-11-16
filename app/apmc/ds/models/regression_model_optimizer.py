@@ -1,4 +1,5 @@
 from numpy import arange
+
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import Lasso
 from sklearn.linear_model import Ridge
@@ -10,7 +11,7 @@ class RegressionModelOptimizer:
     def rf_regression_gs(X_train, y_train):
         """Search grid for random foresr regression"""
 
-        parameters = {"n_estimators": [50, 500], "warm_start": ("True", "False")}
+        parameters = {"n_estimators": [50, 1000]}
 
         rf = RandomForestRegressor(random_state=101, max_depth=10, max_leaf_nodes=20)
         gs_rf = GridSearchCV(rf, parameters, cv=5, iid=False)
@@ -44,7 +45,7 @@ class RegressionModelOptimizer:
         a_range = list(arange(0.1, 1, 0.1))
         parameters = {"alpha": a_range}
 
-        rg = Ridge(solver="auto")
+        rg = Ridge(solver="cholesky")
         gs_rg = GridSearchCV(rg, parameters, cv=5, iid=False)
         gs_rg.fit(X_train, y_train)
 
