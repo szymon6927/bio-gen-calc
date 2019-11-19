@@ -1,4 +1,5 @@
 from numpy import arange
+
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
@@ -10,7 +11,7 @@ class ClassificationModelOptimizer:
     @staticmethod
     def rf_classification_gs(X_train, y_train):
         """Search grid for randof forest classification"""
-        parameters = {"n_estimators": [50, 500], "warm_start": ("True", "False")}
+        parameters = {"n_estimators": [50, 500]}
 
         rfc = RandomForestClassifier(random_state=101)
         gs_rfc = GridSearchCV(rfc, parameters, cv=5, iid=False)
@@ -52,9 +53,9 @@ class ClassificationModelOptimizer:
         """Search grid for logistic regression classification"""
 
         c_range = list(arange(0.1, 1, 0.1))
-        parameters = {"warm_start": ("True", "False"), "C": c_range}
+        parameters = {"C": c_range}
 
-        lr = LogisticRegression(multi_class="auto", solver="lbfgs", max_iter=5000)
+        lr = LogisticRegression(multi_class="auto", solver="newton-cg", max_iter=5000)
         gs_lr = GridSearchCV(lr, parameters, cv=5, iid=False)
         gs_lr.fit(X_train, y_train)
 

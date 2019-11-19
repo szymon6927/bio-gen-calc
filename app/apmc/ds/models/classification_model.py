@@ -7,13 +7,13 @@ from sklearn.svm import SVC
 
 class ClassificationModel:
     @staticmethod
-    def rf_classification(n_estimators=100, random_state=101, warm_start=False, **kwargs):
+    def rf_classification(n_estimators=100, random_state=101, **kwargs):
         """Random Forest Classifier"""
         X_train = kwargs.get('X_train')
         y_train = kwargs.get('y_train')
         X_test = kwargs.get('X_test')
 
-        rfc = RandomForestClassifier(n_estimators=n_estimators, warm_start=warm_start, random_state=random_state)
+        rfc = RandomForestClassifier(n_estimators=n_estimators, random_state=random_state)
         rfc.fit(X_train, y_train)
         predicted = rfc.predict(X_test)
 
@@ -50,13 +50,13 @@ class ClassificationModel:
         return knn, predicted
 
     @staticmethod
-    def lr_classification(max_iter=50000, C=1, solver="saga", warm_start=True, multi_class="auto", **kwargs):
+    def lr_classification(max_iter=50000, C=1, solver="newton-cg", multi_class="auto", **kwargs):
         """Logistic Regression Classifier"""
         X_train = kwargs.get('X_train')
         y_train = kwargs.get('y_train')
         X_test = kwargs.get('X_test')
 
-        lr = LogisticRegression(solver=solver, max_iter=max_iter, C=C, warm_start=warm_start, multi_class=multi_class)
+        lr = LogisticRegression(solver=solver, max_iter=max_iter, C=C, multi_class=multi_class)
 
         lr.fit(X_train, y_train)
         predicted = lr.predict(X_test)
