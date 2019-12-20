@@ -31,9 +31,10 @@ def contact_page():
         msg = Message(
             MESSAGE_TITLE,
             sender=(SENDER_NAME, environ.get('EMAIL', "contact@gene-calc.pl")),
-            recipients=[form.email.data],
+            recipients=[environ.get('EMAIL', "contact@gene-calc.pl")],
         )
-        msg.body = form.message.data
+        msg.body = f'{form.message.data} \n From: {form.name.data} \n E-mail: {form.email.data}'
+
         try:
             mail.send(msg)
             flash(f'Thanks <strong>{form.name.data}</strong> for your message.', 'success')
