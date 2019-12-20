@@ -13,6 +13,7 @@ from flask_mail import Message
 
 from app.common.decorators import add_customer_activity
 from app.contact.forms import ContactForm
+from app.contact.literals import ERROR_MESSAGE
 from app.contact.literals import MESSAGE_TITLE
 from app.contact.literals import SENDER_NAME
 from app.userpanel.models import Page
@@ -38,14 +39,14 @@ def contact_page():
         try:
             mail.send(msg)
             flash(f'Thanks <strong>{form.name.data}</strong> for your message.', 'success')
-        except smtplib.SMTPAuthenticationError as e:
-            flash(f'SMTPAuthenticationError, {e}', 'danger')
-        except smtplib.SMTPServerDisconnected as e:
-            flash(f'SMTPServerDisconnected, {e}', 'danger')
-        except smtplib.SMTPException as e:
-            flash(f'SMTPException, {e}', 'danger')
-        except OSError as e:
-            flash(f'OSError {e}', 'danger')
+        except smtplib.SMTPAuthenticationError:
+            flash(f'{ERROR_MESSAGE}', 'danger')
+        except smtplib.SMTPServerDisconnected:
+            flash(f'{ERROR_MESSAGE}', 'danger')
+        except smtplib.SMTPException:
+            flash(f'{ERROR_MESSAGE}', 'danger')
+        except OSError:
+            flash(f'{ERROR_MESSAGE}', 'danger')
 
         return redirect(url_for('contact.contact_page'))
 
