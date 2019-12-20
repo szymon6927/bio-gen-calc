@@ -33,7 +33,7 @@ def contact_page():
             sender=(SENDER_NAME, environ.get('EMAIL', "contact@gene-calc.pl")),
             recipients=[environ.get('EMAIL', "contact@gene-calc.pl")],
         )
-        msg.body = f'{form.message.data} \n From: {form.name.data} \n E-mail: {form.email.data}'
+        msg.body = f'From: {form.name.data} \nE-mail: {form.email.data} \nMessage: {form.message.data}'
 
         try:
             mail.send(msg)
