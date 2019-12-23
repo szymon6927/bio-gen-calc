@@ -1,0 +1,62 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h3 class="mb-3">Scrapped emails</h3>
+    </div>
+  </div>
+
+  <div class="emails">
+    <div class="col-md-12 text-right mb-4">
+      <a href="{{ url_for('userpanel.ncbi_email_add_view') }}" class="btn btn-success">Add new email</a>
+    </div>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">NCBI Publication ID</th>
+        <th scope="col">NCBI publication url</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Package</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for ncbi_email in ncbi_emails %}
+        <tr>
+          <td>{{ ncbi_email.id }}</td>
+          <td>{{ ncbi_email.publication_id }}</td>
+          <td>{{ ncbi_email.ncbi_publication_url }}</td>
+          <td>{{ ncbi_email.email }}</td>
+          <td>
+            <a href="{{ url_for('userpanel.ncbi_package_details_view', package_id=ncbi_email.ncbi_mail_packages.id) }}">
+              {{ ncbi_email.ncbi_mail_packages.name }}
+            </a>
+          </td>
+          <td>{{ ncbi_email.created_at }}</td>
+          <td>
+            <a href="{{ url_for('userpanel.ncbi_email_details_view', email_id=ncbi_email.id) }}"
+               class="btn btn-primary">Edit email</a>
+            <a href="{{ url_for('userpanel.ncbi_email_delete_view', email_id=ncbi_email.id) }}" class="btn btn-danger delete-mail">
+              Delete email
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+
+{% block userpanel_scripts %}
+  <script>
+    $(document).ready(function () {
+      $('.emails .table').DataTable({
+        "order": [[5, "desc"]]
+      });
+    });
+  </script>
+{% endblock %}

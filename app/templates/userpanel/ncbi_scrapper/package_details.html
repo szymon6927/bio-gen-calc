@@ -1,0 +1,104 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <h3>Edit package</h3>
+  <hr>
+
+  <div class="col-md-12 text-right mb-4">
+    <a href="{{ url_for('userpanel.ncbi_email_add_view') }}" class="btn btn-success">Add new email</a>
+    <a href="{{ url_for('userpanel.ncbi_packages_csv_export_view', package_id=ncbi_package.id) }}" class="btn btn-secondary">Export to CSV</a>
+  </div>
+
+  <form class="edit-package" action="{{ url_for('userpanel.ncbi_package_details_view', package_id=ncbi_package.id) }}"
+        method="POST"
+        enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.name.label }}
+          {{ form.name(class_="form-control") }}
+
+          {% if form.name.errors %}
+            {% for error in form.name.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.comment.label }}
+          {{ form.comment(class_="form-control") }}
+
+          {% if form.comment.errors %}
+            {% for error in form.comment.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-check mb-3">
+          {{ form.was_sent(class_="form-check-input") }}
+          {{ form.was_sent.label(class_="form-check-label") }}
+
+          {% if form.was_sent.errors %}
+            {% for error in form.was_sent.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="package-emails mt-4">
+      <h5>Package e-mails:</h5>
+      <hr>
+      <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">E-mail</th>
+          <th scope="col">NCBI publication url</th>
+          <th scope="col">Created at</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ncbi_mail in ncbi_mails %}
+          <tr>
+            <td>{{ ncbi_mail.email }}</td>
+            <td>{{ ncbi_mail.ncbi_publication_url }}</td>
+            <td>{{ ncbi_mail.created_at }}</td>
+            <td>
+              <a href="{{ url_for('userpanel.ncbi_email_details_view', email_id=ncbi_mail.id) }}"
+                 class="btn btn-primary">Edit mail</a>
+              <a href="{{ url_for('userpanel.ncbi_email_delete_view', email_id=ncbi_mail.id) }}" class="btn btn-danger delete-mail">
+                Delete mail
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-6 offset-md-3 col-sm-12">
+      <button type="submit" class="btn btn-block btn-primary">Save</button>
+    </div>
+  </form>
+{% endblock %}
+
+
+{% block userpanel_scripts %}
+  <script>
+    $(document).ready(function () {
+      $('.package-emails .table').DataTable({
+        "order": [[2, "desc"]]
+      });
+    });
+  </script>
+{% endblock %}

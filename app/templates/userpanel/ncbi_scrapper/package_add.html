@@ -1,0 +1,43 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <h3>Add new package</h3>
+  <hr>
+
+  <form class="add-page" action="{{ url_for('userpanel.ncbi_package_add_view') }}" method="POST"
+        enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.name.label }}
+          {{ form.name(class_="form-control") }}
+
+          {% if form.name.errors %}
+            {% for error in form.name.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.comment.label }}
+          {{ form.comment(class_="form-control") }}
+
+          {% if form.comment.errors %}
+            {% for error in form.comment.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 offset-md-3 col-sm-12">
+      <button type="submit" class="btn btn-block btn-primary">Save</button>
+    </div>
+  </form>
+{% endblock %}
