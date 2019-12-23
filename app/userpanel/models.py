@@ -68,3 +68,31 @@ class Calculation(db.Model):
 
     def __repr__(self):
         return "<Calculation: {} ({})>".format(self.module_name, self.created_at)
+
+
+class NCBIMailPackage(db.Model):
+    __tablename__ = 'ncbi_mail_packages'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150))
+    email = db.relationship('NCBIMail', backref='ncbi_mail_packages')
+    was_sent = db.Column(db.Boolean, default=False)
+    comment = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now)
+
+    def __repr__(self):
+        return f"<NCBIMailPackage: {self.name}>"
+
+
+class NCBIMail(db.Model):
+    __tablename__ = 'ncbi_mails'
+
+    id = db.Column(db.Integer, primary_key=True)
+    publication_id = db.Column(db.String(50))
+    ncbi_publication_url = db.Column(db.String(150))
+    email = db.Column(db.String(100), unique=True)
+    package_id = db.Column(db.Integer, db.ForeignKey('ncbi_mail_packages.id'))
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now)
+
+    def __repr__(self):
+        return f"<NCBIMail: {self.email}>"
