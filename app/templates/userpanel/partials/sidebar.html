@@ -109,8 +109,9 @@
       </li>
 
       {% if current_user.is_superuser %}
-        <li class="nav-item">
-          <div class="nav-link border-top pb-0">
+        <li class="nav-item shadow bg-dark mt-3 mb-2">
+          <div class="nav-link text-white">
+            <span class="mr-2"><i class="fas fa-unlock"></i></span>
             <strong>Super User Section</strong>
           </div>
         </li>
@@ -142,6 +143,21 @@
         <li class="nav-item">
           <a class="nav-link pb-0" href="{{ url_for('userpanel.statistics_models_list_view') }}">
             <span>All models</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link border-top pb-0">
+            <strong>NCBI mail scrapper</strong>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link pb-0" href="{{ url_for('userpanel.ncbi_packages_list_view') }}">
+            <span>NCBI packages</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link pb-0" href="{{ url_for('userpanel.ncbi_emails_list_view') }}">
+            <span>NCBI all emails</span>
           </a>
         </li>
       {% endif %}
