@@ -89,7 +89,7 @@ $(document).ready(function() {
     showInputFileName();
   })
 
-  $('.delete-page, .delete-customer, .delete-apmc-data, .delete-calculation').click(function (e) {
+  $('.delete-page, .delete-customer, .delete-apmc-data, .delete-calculation, .delete-package, .delete-mail').click(function (e) {
     if (!confirmPageDelete()) {
       e.preventDefault();
     }
