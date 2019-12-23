@@ -7,6 +7,7 @@ from wtforms import DateTimeField
 from wtforms import FloatField
 from wtforms import HiddenField
 from wtforms import PasswordField
+from wtforms import SelectField
 from wtforms import StringField
 from wtforms import TextAreaField
 from wtforms.fields.html5 import EmailField
@@ -17,6 +18,8 @@ from wtforms.validators import Length
 from wtforms.validators import ValidationError
 
 from app.userpanel.models import Customer
+from app.userpanel.models import NCBIMail
+from app.userpanel.models import NCBIMailPackage
 
 
 class LoginForm(FlaskForm):
@@ -107,3 +110,32 @@ class ModelForm(FlaskForm):
 
         for key in data:
             setattr(form, f"model_{key}", FloatField(key))
+
+
+class NCBIPackageForm(FlaskForm):
+    id = HiddenField()
+    name = StringField('Package name:', validators=[DataRequired()])
+    comment = TextAreaField('Package comment:')
+    was_sent = BooleanField('Was sent:')
+
+
+def get_mail_package_choices():
+    ncbi_packages = NCBIMailPackage.query.filter_by(was_sent=False).all()
+
+    return [(package.id, package.name) for package in ncbi_packages]
+
+
+class NCBIMailFrom(FlaskForm):
+    id = HiddenField()
+    email = EmailField('Email:', validators=[DataRequired(), Email()])
+    ncbi_publication_url = StringField('NCBI publication url:')
+    publication_id = StringField('NCBI publication id:')
+    mail_package = SelectField('Package:', coerce=int)
+
+    def validate_email(self, email):
+        email = NCBIMail.query.filter_by(email=email.data).first()
+
+        if email:
+            raise ValidationError(
+                f'This e-mail is already present in our db in the package: {email.ncbi_mail_packages.name}'
+            )
