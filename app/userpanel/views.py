@@ -1,3 +1,6 @@
+import csv
+import io
+
 from flask import Blueprint
 from flask import abort
 from flask import flash
@@ -34,11 +37,16 @@ from app.userpanel.forms import AdminCustomerEditForm
 from app.userpanel.forms import CustomerEditForm
 from app.userpanel.forms import LoginForm
 from app.userpanel.forms import ModelForm
+from app.userpanel.forms import NCBIMailFrom
+from app.userpanel.forms import NCBIPackageForm
 from app.userpanel.forms import PageEditForm
 from app.userpanel.forms import RegisterForm
+from app.userpanel.forms import get_mail_package_choices
 from app.userpanel.models import Calculation
 from app.userpanel.models import Customer
 from app.userpanel.models import CustomerActivity
+from app.userpanel.models import NCBIMail
+from app.userpanel.models import NCBIMailPackage
 from app.userpanel.models import Page
 from app.userpanel.services import APMCUserPanelService
 from config import ALLOWED_HOSTS
@@ -546,6 +554,170 @@ def statistics_models_list_view():
     apmc_data = APMCData.query.order_by(APMCData.created_at).all()
 
     return render_template('userpanel/statistics/apmc_data_list.html', models=apmc_data)
+
+
+@userpanel.route('/ncbi-scrapper/packages')
+@login_required
+@superuser_required
+def ncbi_packages_list_view():
+    ncbi_packages = NCBIMailPackage.query.order_by(NCBIMailPackage.created_at).all()
+
+    return render_template('userpanel/ncbi_scrapper/packages.html', ncbi_packages=ncbi_packages)
+
+
+@userpanel.route('/ncbi-scrapper/package/<int:package_id>', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def ncbi_package_details_view(package_id):
+    ncbi_package = NCBIMailPackage.query.get_or_404(package_id)
+    ncbi_mails = NCBIMail.query.filter_by(package_id=ncbi_package.id).all()
+
+    form = NCBIPackageForm(obj=ncbi_package)
+
+    if form.validate_on_submit():
+        ncbi_package.name = form.name.data
+        ncbi_package.was_sent = form.was_sent.data
+        ncbi_package.comment = form.comment.data
+
+        db.session.add(ncbi_package)
+        db.session.commit()
+
+        flash('You have successfully edited the package.', 'success')
+
+        return redirect(url_for('userpanel.ncbi_package_details_view', package_id=package_id))
+
+    return render_template(
+        'userpanel/ncbi_scrapper/package_details.html', ncbi_package=ncbi_package, ncbi_mails=ncbi_mails, form=form
+    )
+
+
+@userpanel.route('/ncbi-scrapper/package/delete/<int:package_id>')
+@login_required
+@superuser_required
+def ncbi_package_delete_view(package_id):
+    ncbi_package = NCBIMailPackage.query.get_or_404(package_id)
+
+    db.session.delete(ncbi_package)
+    db.session.commit()
+
+    flash('You have successfully delete the package - {}.'.format(ncbi_package.name), 'success')
+
+    return redirect(url_for('userpanel.ncbi_packages_list_view'))
+
+
+@userpanel.route('/ncbi-scrapper/packages/add', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def ncbi_package_add_view():
+    form = NCBIPackageForm()
+
+    if form.validate_on_submit():
+        ncbi_package = NCBIMailPackage()
+        ncbi_package.name = form.name.data
+        ncbi_package.comment = form.comment.data
+
+        db.session.add(ncbi_package)
+        db.session.commit()
+
+        flash('You have successfully added the package.', 'success')
+
+        return redirect(url_for('userpanel.ncbi_packages_list_view'))
+
+    return render_template('userpanel/ncbi_scrapper/package_add.html', form=form)
+
+
+@userpanel.route('/ncbi-scrapper/packages/export-to-csv/<int:package_id>')
+@login_required
+@superuser_required
+def ncbi_packages_csv_export_view(package_id):
+    ncbi_package = NCBIMailPackage.query.get_or_404(package_id)
+
+    dest = io.StringIO()
+    writer = csv.writer(dest)
+
+    csv_header = ["Email Address", "Created At"]
+    writer.writerow(csv_header)
+
+    for email_obj in ncbi_package.email:
+        writer.writerow([email_obj.email, email_obj.created_at])
+
+    csv_response = make_response(dest.getvalue())
+    csv_response.headers[
+        "Content-Disposition"
+    ] = f"attachment; filename=export-{ncbi_package.name.replace(' ', '_')}.csv"
+    csv_response.headers["Content-type"] = "text/csv"
+    return csv_response
+
+
+@userpanel.route('/ncbi-scrapper/email/<int:email_id>', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def ncbi_email_details_view(email_id):
+    ncbi_mail = NCBIMail.query.get_or_404(email_id)
+
+    form = NCBIMailFrom(obj=ncbi_mail)
+    form.mail_package.choices = get_mail_package_choices()
+
+    if form.validate_on_submit():
+        ncbi_mail.email = form.email.data
+        ncbi_mail.ncbi_publication_url = form.ncbi_publication_url.data
+        ncbi_mail.publication_id = form.publication_id.data
+        ncbi_mail.package_id = form.mail_package.data
+
+        db.session.commit()
+
+        flash('You have successfully edited the mail.', 'success')
+
+        return redirect(url_for('userpanel.ncbi_email_details_view', ncbi_mail=ncbi_mail, email_id=email_id))
+
+    return render_template('userpanel/ncbi_scrapper/mail_details.html', ncbi_mail=ncbi_mail, form=form)
+
+
+@userpanel.route('/ncbi-scrapper/email/delete/<int:email_id>')
+@login_required
+@superuser_required
+def ncbi_email_delete_view(email_id):
+    ncbi_email = NCBIMail.query.get_or_404(email_id)
+
+    db.session.delete(ncbi_email)
+    db.session.commit()
+
+    flash(f'You have successfully delete the email - {ncbi_email.email}.', 'success')
+
+    return redirect(url_for('userpanel.ncbi_package_details_view', package_id=ncbi_email.package_id))
+
+
+@userpanel.route('/ncbi-scrapper/emails')
+@login_required
+@superuser_required
+def ncbi_emails_list_view():
+    ncbi_emails = NCBIMail.query.order_by(NCBIMail.created_at).all()
+
+    return render_template('userpanel/ncbi_scrapper/mails.html', ncbi_emails=ncbi_emails)
+
+
+@userpanel.route('/ncbi-scrapper/email/add', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def ncbi_email_add_view():
+    form = NCBIMailFrom()
+    form.mail_package.choices = get_mail_package_choices()
+
+    if form.validate_on_submit():
+        ncbi_mail = NCBIMail()
+        ncbi_mail.email = form.email.data
+        ncbi_mail.ncbi_publication_url = form.ncbi_publication_url.data
+        ncbi_mail.publication_id = form.publication_id.data
+        ncbi_mail.package_id = int(form.mail_package.data)
+
+        db.session.add(ncbi_mail)
+        db.session.commit()
+
+        flash(f'You have successfully added the mail to the {form.mail_package.data} package.', 'success')
+
+        return redirect(url_for('userpanel.ncbi_package_details_view', package_id=ncbi_mail.package_id))
+
+    return render_template('userpanel/ncbi_scrapper/mail_add.html', form=form)
 
 
 @userpanel.context_processor
