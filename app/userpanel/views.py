@@ -31,6 +31,7 @@ from app.customer_calculation.models import CustomerCalculation
 from app.database import db
 from app.helpers.file_helper import remove_file
 from app.helpers.file_helper import save_picture
+from app.mail_scrapper.ncbi_scrapper import NCBIPubScrapper
 from app.userpanel.decorators import nocache
 from app.userpanel.decorators import superuser_required
 from app.userpanel.forms import AdminCustomerEditForm
@@ -39,6 +40,7 @@ from app.userpanel.forms import LoginForm
 from app.userpanel.forms import ModelForm
 from app.userpanel.forms import NCBIMailFrom
 from app.userpanel.forms import NCBIPackageForm
+from app.userpanel.forms import NCBIScrapperForm
 from app.userpanel.forms import PageEditForm
 from app.userpanel.forms import RegisterForm
 from app.userpanel.forms import get_mail_package_choices
@@ -718,6 +720,49 @@ def ncbi_email_add_view():
         return redirect(url_for('userpanel.ncbi_package_details_view', package_id=ncbi_mail.package_id))
 
     return render_template('userpanel/ncbi_scrapper/mail_add.html', form=form)
+
+
+@userpanel.route('/ncbi-scrapper/scrapper', methods=['GET', 'POST'])
+@login_required
+@superuser_required
+def ncbi_scrapper_run_view():
+    form = NCBIScrapperForm()
+    form.mail_package.choices = get_mail_package_choices()
+
+    if form.validate_on_submit():
+        scrapper = NCBIPubScrapper()
+        ncbi_objects = scrapper.run(0, form.publication_number.data)
+
+        objects_to_add = []
+
+        for ncbi_object in ncbi_objects:
+            ncbi_mail = NCBIMail(
+                publication_id=ncbi_object.publication_id,
+                ncbi_publication_url=ncbi_object.publication_url,
+                email=ncbi_object.email,
+                package_id=form.mail_package.data,
+            )
+
+            exist = NCBIMail.query.filter_by(email=ncbi_mail.email).first()
+
+            if not exist:
+                objects_to_add.append(ncbi_mail)
+                flash(f'Successfully added {ncbi_mail.email}', 'info')
+            else:
+                flash(f'E-mail {ncbi_mail.email} already exist in DB', 'danger')
+
+        if objects_to_add:
+            db.session.add_all(objects_to_add)
+            db.session.commit()
+
+            flash(
+                f'You have successfully scrapped {len(objects_to_add)} e-mails ',
+                f'form {form.publication_number.data} NCBI publications success',
+            )
+
+        return redirect(url_for('userpanel.ncbi_scrapper_run_view'))
+
+    return render_template('userpanel/ncbi_scrapper/scrapper.html', form=form)
 
 
 @userpanel.context_processor

@@ -1,7 +1,7 @@
 function openMenu() {
   const overlay = $('#overlay');
   const sidebar = $('.sidebar');
-  const hamburger = $('.hamburger')
+  const hamburger = $('.hamburger');
 
   overlay.toggleClass('active');
   sidebar.toggleClass('active');
@@ -78,21 +78,31 @@ function goToByScroll(className) {
   }, 1200);
 }
 
+function showLoader() {
+  const loaderWrapper = $('.cover');
+  loaderWrapper.show();
+}
+
+
 $(document).ready(function() {
   $('.hamburger').click(function() {
     openMenu();
-  })
+  });
 
   selectActiveMenuItem();
 
   $('#picture').change(function() {
     showInputFileName();
-  })
+  });
 
   $('.delete-page, .delete-customer, .delete-apmc-data, .delete-calculation, .delete-package, .delete-mail').click(function (e) {
     if (!confirmPageDelete()) {
       e.preventDefault();
     }
+  });
+
+  $('.run-scrapper').click(function () {
+    showLoader();
   })
 });
 

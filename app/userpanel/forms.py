@@ -6,6 +6,7 @@ from wtforms import BooleanField
 from wtforms import DateTimeField
 from wtforms import FloatField
 from wtforms import HiddenField
+from wtforms import IntegerField
 from wtforms import PasswordField
 from wtforms import SelectField
 from wtforms import StringField
@@ -139,3 +140,12 @@ class NCBIMailFrom(FlaskForm):
             raise ValidationError(
                 f'This e-mail is already present in our db in the package: {email.ncbi_mail_packages.name}'
             )
+
+
+class NCBIScrapperForm(FlaskForm):
+    publication_number = IntegerField('NCBI publication number:', validators=[DataRequired()])
+    mail_package = SelectField('Package:', coerce=int, validators=[DataRequired()])
+
+    def validate_publication_number(self, publication_number):
+        if publication_number.data > 5000:
+            raise ValidationError('Nuber of publication can not be higher than 5000')
