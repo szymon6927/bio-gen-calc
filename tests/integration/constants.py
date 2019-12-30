@@ -56,3 +56,13 @@ class URL:
     USERPANEL_STATISTICS_ALL_CALCULATIONS = "/statistics/all-calculations"
     USERPANEL_STATISTICS_ALL_CUSTOMERS_CALCULATIONS = "/statistics/all-customers-calculations"
     USERPANEL_STATISTICS_ALL_MODELS = "/statistics/all-models"
+    USERPANEL_RUN_SCRAPPER = "/ncbi-scrapper/scrapper"
+    USERPANEL_ALL_PACKAGES = "/ncbi-scrapper/packages"
+    USERPANEL_ADD_PACKAGE = "/ncbi-scrapper/packages/add"
+    USERPANEL_PACKAGE_DETAILS = "/ncbi-scrapper/package/"
+    USERPANEL_PACKAGE_CSV_EXPORT = "/ncbi-scrapper/packages/export-to-csv/"
+    USERPANEL_PACKAGE_DELETE = "/ncbi-scrapper/package/delete/"
+    USERPANEL_MAILS_ALL = '/ncbi-scrapper/emails'
+    USERPANEL_MAIL_ADD = '/ncbi-scrapper/email/add'
+    USERPANEL_MAIL_DETAILS = '/ncbi-scrapper/email/'
+    USERPANEL_MAIL_DELETE = '/ncbi-scrapper/email/delete/'
