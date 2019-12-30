@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "publication_id": "1111",
+    "ncbi_publication_url": "https://www.ncbi.nlm.nih.gov/pubmed/1111",
+    "email": "test1111@test.com",
+    "package_id": 1
+  },
+  {
+    "id": 2,
+    "publication_id": "1112",
+    "ncbi_publication_url": "https://www.ncbi.nlm.nih.gov/pubmed/1112",
+    "email": "test1112@test.com",
+    "package_id": 1
+  },
+  {
+    "id": 3,
+    "publication_id": "1113",
+    "ncbi_publication_url": "https://www.ncbi.nlm.nih.gov/pubmed/1113",
+    "email": "test1113@test.com",
+    "package_id": 2
+  },
+  {
+    "id": 4,
+    "publication_id": "1114",
+    "ncbi_publication_url": "https://www.ncbi.nlm.nih.gov/pubmed/1114",
+    "email": "test1114@test.com",
+    "package_id": 2
+  }
+]
