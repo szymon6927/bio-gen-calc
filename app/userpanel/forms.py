@@ -133,13 +133,17 @@ class NCBIMailFrom(FlaskForm):
     publication_id = StringField('NCBI publication id:')
     mail_package = SelectField('Package:', coerce=int)
 
-    def validate_email(self, email):
-        email = NCBIMail.query.filter_by(email=email.data).first()
+    def validate_email(self, input_email):
+        previous_email_obj = NCBIMail.query.filter_by(id=self.id.data).first()
+        previous_email_address = previous_email_obj.email if previous_email_obj else None
 
-        if email:
-            raise ValidationError(
-                f'This e-mail is already present in our db in the package: {email.ncbi_mail_packages.name}'
-            )
+        if previous_email_address != input_email.data:
+            email = NCBIMail.query.filter_by(email=input_email.data).first()
+
+            if email:
+                raise ValidationError(
+                    f'This e-mail is already present in our db in the package: {email.ncbi_mail_packages.name}'
+                )
 
 
 class NCBIScrapperForm(FlaskForm):
