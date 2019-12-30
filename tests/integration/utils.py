@@ -115,6 +115,15 @@ def get_pages_fixture():
         return data
 
 
+def get_fixture(fixture_name):
+    fixture_file = os.path.join(APP_DIR, 'fixtures', fixture_name)
+
+    with open(fixture_file) as page_fixture:
+        data = json.load(page_fixture)
+
+        return data
+
+
 def get_dataset_data(filename):
     dataset_fixture_file = os.path.join(APP_DIR, 'fixtures', filename)
 
