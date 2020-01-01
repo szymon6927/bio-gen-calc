@@ -4,7 +4,7 @@
   <h3>Add new package</h3>
   <hr>
 
-  <form class="add-page" action="{{ url_for('userpanel.ncbi_package_add_view') }}" method="POST"
+  <form class="add-package" action="{{ url_for('userpanel.ncbi_package_add_view') }}" method="POST"
         enctype="multipart/form-data">
     {{ form.hidden_tag() }}
 
