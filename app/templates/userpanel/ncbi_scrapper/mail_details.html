@@ -4,7 +4,7 @@
   <h3>Edit e-mail</h3>
   <hr>
 
-  <form class="add-page" action="{{ url_for('userpanel.ncbi_email_details_view', email_id=ncbi_mail.id) }}" method="POST"
+  <form class="add-mail" action="{{ url_for('userpanel.ncbi_email_details_view', email_id=ncbi_mail.id) }}" method="POST"
         enctype="multipart/form-data">
     {{ form.hidden_tag() }}
 
