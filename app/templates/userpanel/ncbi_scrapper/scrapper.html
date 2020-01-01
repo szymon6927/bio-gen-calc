@@ -1,0 +1,49 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <h3>Run scrapper</h3>
+  <hr>
+
+  <form class="add-page" action="{{ url_for('userpanel.ncbi_scrapper_run_view') }}" method="POST"
+        enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.publication_number.label }}
+          <div class="small mb-2">TIP!: In how many
+            <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=genetics">NCBI publication</a>
+            do you want to search emails address. If you provide eg. <b>20</b> then we will be looking in the first
+            20 publications from the above link. Max value is <b>5000</b>.
+          </div>
+          {{ form.publication_number(class_="form-control") }}
+
+          {% if form.publication_number.errors %}
+            {% for error in form.publication_number.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.mail_package.label }}
+          <div class="small mb-2">TIP!: Choose a package to which you want to add the emails.</div>
+          {{ form.mail_package(class_="form-control") }}
+
+          {% if form.mail_package.errors %}
+            {% for error in form.mail_package.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+
+    <div class="col-md-6 offset-md-3 col-sm-12">
+      <button type="submit" class="btn btn-block btn-primary run-scrapper">Run</button>
+    </div>
+  </form>
+{% endblock %}

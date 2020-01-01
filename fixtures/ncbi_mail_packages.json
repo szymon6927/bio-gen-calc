@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Test package 1",
+    "was_sent": 0,
+    "comment": "Test content text"
+  },
+  {
+    "id": 2,
+    "name": "Test package 2",
+    "was_sent": 0,
+    "comment": "Test content text"
+  }
+]

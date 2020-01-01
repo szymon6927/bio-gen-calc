@@ -1,0 +1,70 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <h3>Edit e-mail</h3>
+  <hr>
+
+  <form class="add-page" action="{{ url_for('userpanel.ncbi_email_details_view', email_id=ncbi_mail.id) }}" method="POST"
+        enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.email.label }}
+          {{ form.email(class_="form-control") }}
+
+          {% if form.email.errors %}
+            {% for error in form.email.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.ncbi_publication_url.label }}
+          {{ form.ncbi_publication_url(class_="form-control") }}
+
+          {% if form.ncbi_publication_url.errors %}
+            {% for error in form.ncbi_publication_url.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.publication_id.label }}
+          {{ form.publication_id(class_="form-control") }}
+
+          {% if form.publication_id.errors %}
+            {% for error in form.publication_id.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.mail_package.label }}
+          {{ form.mail_package(class_="form-control") }}
+
+          {% if form.mail_package.errors %}
+            {% for error in form.mail_package.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+
+    <div class="col-md-6 offset-md-3 col-sm-12">
+      <button type="submit" class="btn btn-block btn-primary">Save</button>
+    </div>
+  </form>
+{% endblock %}

@@ -1,31 +1,31 @@
 repos:
-- repo: https://github.com/ambv/black
-  rev: stable
-  hooks:
-    - id: black
-      language_version: python3.7
-- repo: git://github.com/pre-commit/pre-commit-hooks
-  rev: 'v1.2.3'
-  hooks:
-    - id: check-added-large-files
-    - id: check-docstring-first
-    - id: check-merge-conflict
-    - id: check-yaml
-    - id: check-json
-    - id: debug-statements
-      language_version: python3.7
-    - id: end-of-file-fixer
-    - id: flake8
-      args:
-        - --max-line=120
-      exclude: '(.*/migrations/.*.py|settings.py)'
-    - id: trailing-whitespace
-    - id: check-executables-have-shebangs
-    - id: mixed-line-ending
-      args:
-        - --fix=auto
-- repo: git://github.com/FalconSocial/pre-commit-python-sorter
-  rev: b57843b0b874df1d16eb0bef00b868792cb245c2
-  hooks:
-    - id: python-import-sorter
-      exclude: '(.*/migrations/.*.py|settings.py)'
+  - repo: https://github.com/ambv/black
+    rev: stable
+    hooks:
+      - id: black
+        language_version: python3.7
+  - repo: git://github.com/pre-commit/pre-commit-hooks
+    rev: 'v1.2.3'
+    hooks:
+      - id: check-added-large-files
+      - id: check-docstring-first
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+      - id: debug-statements
+        language_version: python3.7
+      - id: end-of-file-fixer
+      - id: flake8
+        args:
+          - --max-line=120
+        exclude: '(.*/migrations/.*.py|settings.py)'
+      - id: trailing-whitespace
+      - id: check-executables-have-shebangs
+      - id: mixed-line-ending
+        args:
+          - --fix=auto
+  - repo: git://github.com/FalconSocial/pre-commit-python-sorter
+    rev: b57843b0b874df1d16eb0bef00b868792cb245c2
+    hooks:
+      - id: python-import-sorter
+        exclude: '(.*/migrations/.*.py|settings.py)'
