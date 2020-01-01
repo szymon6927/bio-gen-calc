@@ -32,9 +32,13 @@
           <td>{{ ncbi_email.ncbi_publication_url }}</td>
           <td>{{ ncbi_email.email }}</td>
           <td>
-            <a href="{{ url_for('userpanel.ncbi_package_details_view', package_id=ncbi_email.ncbi_mail_packages.id) }}">
-              {{ ncbi_email.ncbi_mail_packages.name }}
-            </a>
+            {% if ncbi_email.ncbi_mail_packages %}
+              <a href="{{ url_for('userpanel.ncbi_package_details_view', package_id=ncbi_email.ncbi_mail_packages.id) }}">
+                {{ ncbi_email.ncbi_mail_packages.name }}
+              </a>
+            {% else %}
+              <p>No e-mail package</p>
+            {% endif %}
           </td>
           <td>{{ ncbi_email.created_at }}</td>
           <td>
