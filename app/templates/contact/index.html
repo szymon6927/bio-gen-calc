@@ -16,18 +16,26 @@
         <div class="col-md-6 col-sm-12 col-12">
           <form class="contact-form" action="{{ url_for('contact.contact_page') }}" method="POST">
             {{ form.hidden_tag() }}
+
             <div class="form-group">
               {{ form.name.label }}
               {{ form.name(class_="form-control", placeholder="your name") }}
             </div>
+
             <div class="form-group">
               {{ form.email.label }}
               {{ form.email(class_="form-control", placeholder="your e-mail") }}
             </div>
+
             <div class="form-group">
               {{ form.message.label }}
               {{ form.message(class_="form-control", rows=6, placeholder="your message") }}
             </div>
+
+            <div class="form-group">
+              {{ form.recaptcha }}
+            </div>
+
             <div class="form-group form-check">
               <input type="checkbox" class="form-check-input" id="private-policy" required>
               <label class="form-check-label" for="private-policy">

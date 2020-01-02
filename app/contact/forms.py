@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf import RecaptchaField
 from wtforms import StringField
 from wtforms import TextAreaField
 from wtforms.fields.html5 import EmailField
@@ -10,3 +11,4 @@ class ContactForm(FlaskForm):
     name = StringField('Name:', validators=[DataRequired()])
     email = EmailField('Email:', validators=[DataRequired(), Email()])
     message = TextAreaField('Message:', validators=[DataRequired()])
+    recaptcha = RecaptchaField()
