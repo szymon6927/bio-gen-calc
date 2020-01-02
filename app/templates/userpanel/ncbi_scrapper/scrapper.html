@@ -4,7 +4,7 @@
   <h3>Run scrapper</h3>
   <hr>
 
-  <form class="add-page" action="{{ url_for('userpanel.ncbi_scrapper_run_view') }}" method="POST"
+  <form class="scrapper" action="{{ url_for('userpanel.ncbi_scrapper_run_view') }}" method="POST"
         enctype="multipart/form-data">
     {{ form.hidden_tag() }}
 

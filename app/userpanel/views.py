@@ -660,6 +660,9 @@ def ncbi_email_details_view(email_id):
     form = NCBIMailFrom(obj=ncbi_mail)
     form.mail_package.choices = get_mail_package_choices()
 
+    if request.method == 'GET':
+        form.mail_package.data = ncbi_mail.package_id
+
     if form.validate_on_submit():
         ncbi_mail.email = form.email.data
         ncbi_mail.ncbi_publication_url = form.ncbi_publication_url.data
@@ -670,7 +673,7 @@ def ncbi_email_details_view(email_id):
 
         flash('You have successfully edited the mail.', 'success')
 
-        return redirect(url_for('userpanel.ncbi_email_details_view', ncbi_mail=ncbi_mail, email_id=email_id))
+        return redirect(url_for('userpanel.ncbi_email_details_view', email_id=email_id))
 
     return render_template('userpanel/ncbi_scrapper/mail_details.html', ncbi_mail=ncbi_mail, form=form)
 
@@ -715,7 +718,7 @@ def ncbi_email_add_view():
         db.session.add(ncbi_mail)
         db.session.commit()
 
-        flash(f'You have successfully added the mail to the {form.mail_package.data} package.', 'success')
+        flash(f'You have successfully added the mail to the package.', 'success')
 
         return redirect(url_for('userpanel.ncbi_package_details_view', package_id=ncbi_mail.package_id))
 
