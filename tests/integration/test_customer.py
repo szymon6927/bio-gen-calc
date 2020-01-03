@@ -5,7 +5,6 @@ from app.userpanel.models import Customer
 
 
 def test_valid_login_logout(test_client):
-    print("test_client: ", test_client)
     data = {"login_or_email": "test123@test.com", "password": "testing123"}
 
     customer = Customer(
@@ -18,9 +17,6 @@ def test_valid_login_logout(test_client):
     )
     db.session.add(customer)
     db.session.commit()
-
-    all_customers = Customer.query.all()
-    print("all_customers: ", all_customers)
 
     response = test_client.post('/userpanel/login', data=data, follow_redirects=True)
 
