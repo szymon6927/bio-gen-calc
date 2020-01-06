@@ -24,7 +24,7 @@ from app.userpanel.views import userpanel
 slack_notification = SlackNotification()
 
 
-@userpanel.route('/userpanel/models', methods=['GET'])
+@userpanel.route('/models', methods=['GET'])
 @login_required
 def apmc_list_view():
     order_by = request.args.get('order_by', "created_at")
@@ -54,7 +54,7 @@ def apmc_list_view():
     return render_template('userpanel/apmc/apmc_data_list.html', apmc_data_list=apmc_data_list)
 
 
-@userpanel.route('/userpanel/models/<int:apmc_data_id>', methods=['GET', 'POST'])
+@userpanel.route('/models/<int:apmc_data_id>', methods=['GET', 'POST'])
 @login_required
 def apmc_details_view(apmc_data_id):
     apmc_data = APMCData.query.get_or_404(apmc_data_id)
@@ -83,7 +83,7 @@ def apmc_details_view(apmc_data_id):
     return render_template('userpanel/apmc/apmc_data_details.html', context=context)
 
 
-@userpanel.route('/userpanel/models/delete/<int:apmc_data_id>')
+@userpanel.route('/models/delete/<int:apmc_data_id>')
 @login_required
 def apmc_delete_view(apmc_data_id):
     apmc_data = APMCData.query.get_or_404(apmc_data_id)
@@ -100,7 +100,7 @@ def apmc_delete_view(apmc_data_id):
     return redirect(url_for('userpanel.apmc_list_view'))
 
 
-@userpanel.route('/userpanel/models/report/<int:apmc_data_id>')
+@userpanel.route('/models/report/<int:apmc_data_id>')
 @login_required
 def apmc_report_view(apmc_data_id):
     apmc_data = APMCData.query.get_or_404(apmc_data_id)
@@ -121,7 +121,7 @@ def apmc_report_view(apmc_data_id):
         return send_from_directory(APMC_REPORTS_UPLOAD_PATH, apmc_data.report)
 
 
-@userpanel.route('/userpanel/models/download-dataset/<int:apmc_data_id>')
+@userpanel.route('/models/download-dataset/<int:apmc_data_id>')
 @login_required
 def apmc_download_dataset_view(apmc_data_id):
     apmc_data = APMCData.query.get_or_404(apmc_data_id)
@@ -129,7 +129,7 @@ def apmc_download_dataset_view(apmc_data_id):
     return send_from_directory(APMC_DATASET_UPLOAD_PATH, apmc_data.dataset)
 
 
-@userpanel.route('/userpanel/models/report/tree-graph/<int:apmc_data_id>')
+@userpanel.route('/models/report/tree-graph/<int:apmc_data_id>')
 @login_required
 def apmc_report_tree_graph_view(apmc_data_id):
     apmc_data = APMCData.query.get_or_404(apmc_data_id)

@@ -18,13 +18,13 @@ from app.userpanel.models import Page
 from app.userpanel.views import userpanel
 
 
-@userpanel.route('/userpanel/', methods=['GET'], strict_slashes=False)
+@userpanel.route('/', methods=['GET'], strict_slashes=False)
 @login_required
 def userpanel_view():
     return redirect(url_for('userpanel.dashboard_view'))
 
 
-@userpanel.route('/userpanel/dashboard', methods=['GET'])
+@userpanel.route('/dashboard', methods=['GET'])
 @login_required
 def dashboard_view():
     activity = (
@@ -44,7 +44,7 @@ def dashboard_view():
     )
 
 
-@userpanel.route('/userpanel/editprofile', methods=['GET', 'POST'])
+@userpanel.route('/editprofile', methods=['GET', 'POST'])
 @login_required
 def edit_profile_view():
     profile = Customer.query.get_or_404(current_user.id)

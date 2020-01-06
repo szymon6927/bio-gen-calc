@@ -12,7 +12,7 @@ from app.userpanel.models import Page
 from app.userpanel.views import userpanel
 
 
-@userpanel.route('/userpanel/pages')
+@userpanel.route('/pages')
 @login_required
 @superuser_required
 def pages_list_view():
@@ -20,7 +20,7 @@ def pages_list_view():
     return render_template('userpanel/pages/pages.html', pages=pages)
 
 
-@userpanel.route('/userpanel/pages/<int:page_id>', methods=['GET', 'POST'])
+@userpanel.route('/pages/<int:page_id>', methods=['GET', 'POST'])
 @login_required
 @superuser_required
 def page_details_view(page_id):
@@ -47,7 +47,7 @@ def page_details_view(page_id):
     return render_template('userpanel/pages/page_details.html', form=form, page=page)
 
 
-@userpanel.route('/userpanel/pages/add-page', methods=['GET', 'POST'])
+@userpanel.route('/pages/add-page', methods=['GET', 'POST'])
 @login_required
 @superuser_required
 def page_add_view():
@@ -74,7 +74,7 @@ def page_add_view():
     return render_template('userpanel/pages/page_add.html', form=form)
 
 
-@userpanel.route('/userpanel/pages/delete/<int:page_id>')
+@userpanel.route('/pages/delete/<int:page_id>')
 @login_required
 @superuser_required
 def page_delete_view(page_id):

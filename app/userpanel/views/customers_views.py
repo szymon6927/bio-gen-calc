@@ -15,7 +15,7 @@ from app.userpanel.models import CustomerActivity
 from app.userpanel.views import userpanel
 
 
-@userpanel.route('/userpanel/customers/')
+@userpanel.route('/customers/')
 @login_required
 @superuser_required
 def customers_list_view():
@@ -23,7 +23,7 @@ def customers_list_view():
     return render_template('userpanel/customers/customers.html', customers=customers)
 
 
-@userpanel.route('/userpanel/customers/<int:customer_id>', methods=['GET', 'POST'])
+@userpanel.route('/customers/<int:customer_id>', methods=['GET', 'POST'])
 @login_required
 @superuser_required
 def customer_details_view(customer_id):
@@ -69,7 +69,7 @@ def customer_details_view(customer_id):
     )
 
 
-@userpanel.route('/userpanel/customers/delete/<int:customer_id>')
+@userpanel.route('/customers/delete/<int:customer_id>')
 @login_required
 @superuser_required
 def customer_delete_view(customer_id):

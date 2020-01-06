@@ -22,7 +22,7 @@ from app.userpanel.views import userpanel
 from config import ALLOWED_HOSTS
 
 
-@userpanel.route('/userpanel/login', methods=['GET', 'POST'])
+@userpanel.route('/login', methods=['GET', 'POST'])
 def login_view():
     form = LoginForm(request.form)
     if current_user.is_authenticated:
@@ -47,14 +47,14 @@ def login_view():
     return render_template('userpanel/customers/login.html', title="Login to your account", form=form)
 
 
-@userpanel.route('/userpanel/logout')
+@userpanel.route('/logout')
 @login_required
 def logout_view():
     logout_user()
     return redirect(url_for('userpanel.login_view'))
 
 
-@userpanel.route('/userpanel/register', methods=['GET', 'POST'])
+@userpanel.route('/register', methods=['GET', 'POST'])
 @nocache
 def register_view():
     form = RegisterForm()

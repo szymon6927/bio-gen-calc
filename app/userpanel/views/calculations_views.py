@@ -13,7 +13,7 @@ from app.database import db
 from app.userpanel.views import userpanel
 
 
-@userpanel.route('/userpanel/calculations', methods=['GET'])
+@userpanel.route('/calculations', methods=['GET'])
 @login_required
 def calculations_list_view():
     query = request.args.get('query')
@@ -49,7 +49,7 @@ def calculations_list_view():
     return render_template('userpanel/calculations/calculations.html', calculations=calculations)
 
 
-@userpanel.route('/userpanel/calculations/search', methods=['GET'])
+@userpanel.route('/calculations/search', methods=['GET'])
 @login_required
 def calculations_search_view():
     query = request.args.get('query')
@@ -82,7 +82,7 @@ def calculations_search_view():
     return render_template('userpanel/calculations/calculations.html', calculations=calculations)
 
 
-@userpanel.route('/userpanel/calculations/delete/<int:calculation_id>')
+@userpanel.route('/calculations/delete/<int:calculation_id>')
 @login_required
 def calculation_delete_view(calculation_id):
     calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
@@ -94,7 +94,7 @@ def calculation_delete_view(calculation_id):
     return redirect(url_for('userpanel.calculations_list_view'))
 
 
-@userpanel.route('/userpanel/calculations/<int:calculation_id>')
+@userpanel.route('/calculations/<int:calculation_id>')
 @login_required
 def calculation_details_view(calculation_id):
     calculation = CustomerCalculation.query.filter_by(id=calculation_id).first()
