@@ -1,4 +1,5 @@
 from io import StringIO
+from os import environ
 
 from Bio import AlignIO
 from Bio import Entrez
@@ -51,7 +52,7 @@ class ConsensusSequence:
         return f'>consensus sequence {len(consensus)} bp\n' + str(consensus)
 
     def genebank_seq(self):
-        Entrez.email = "contact@gene-calc.pl"
+        Entrez.email = environ.get('EMAIL', "contact@gene-calc.pl")
 
         type_of_seq = self.data['sequence-type']
         lines = self.data['genebank-seq'].split('\n')
