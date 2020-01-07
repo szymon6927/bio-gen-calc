@@ -142,7 +142,7 @@ def register_blueprints(app):
     app.register_blueprint(contact)
     app.register_blueprint(donors)
     app.register_blueprint(newsletter)
-    app.register_blueprint(userpanel)
+    app.register_blueprint(userpanel, url_prefix="/userpanel")
     app.register_blueprint(customer_calculation)
     app.register_blueprint(privacy_policy)
     app.register_blueprint(apmc)

@@ -1,8 +1,13 @@
+from unittest.mock import patch
+
 from app.helpers.tests_helper import find_value_by_name
 from app.sequences_analysis_tools.ds.ConsensusSequence import ConsensusSequence
 
 
-def test_consensus_sequence_raw_seq_basic():
+@patch('app.sequences_analysis_tools.ds.ConsensusSequence.MuscleCommandline')
+def test_consensus_sequence_raw_seq_basic(muscle_command_line_mock, muscle_standard_seq_return_value):
+    muscle_command_line_mock.return_value.return_value = muscle_standard_seq_return_value
+
     data = dict()
     data[
         'sequences'

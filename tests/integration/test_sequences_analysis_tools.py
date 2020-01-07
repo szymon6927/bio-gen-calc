@@ -1,5 +1,6 @@
 import json
 from io import BytesIO
+from unittest.mock import patch
 
 from app.common.constants import ModuleName
 from app.userpanel.models import Calculation
@@ -52,7 +53,10 @@ def test_get_consensus_sequence_ok(test_client):
     assert b'Consensus Sequence' in response.data
 
 
-def test_post_consensus_sequence_raw_seq_ok(test_client):
+@patch('app.sequences_analysis_tools.ds.ConsensusSequence.MuscleCommandline')
+def test_post_consensus_sequence_raw_seq_ok(muscle_command_line_mock, test_client, muscle_standard_seq_return_value):
+    muscle_command_line_mock.return_value.return_value = muscle_standard_seq_return_value
+
     data = dict()
     data[
         'sequences'
@@ -69,7 +73,12 @@ def test_post_consensus_sequence_raw_seq_ok(test_client):
     assert ModuleName.CONSENSUS_SEQUENCE_RAW_SEQ in calculation.module_name
 
 
-def test_post_consensus_sequence_raw_seq_with_threshold_ok(test_client):
+@patch('app.sequences_analysis_tools.ds.ConsensusSequence.MuscleCommandline')
+def test_post_consensus_sequence_raw_seq_with_threshold_ok(
+    muscle_command_line_mock, test_client, muscle_standard_seq_return_value
+):
+    muscle_command_line_mock.return_value.return_value = muscle_standard_seq_return_value
+
     data = dict()
     data[
         'sequences'
@@ -87,7 +96,10 @@ def test_post_consensus_sequence_raw_seq_with_threshold_ok(test_client):
     assert ModuleName.CONSENSUS_SEQUENCE_RAW_SEQ in calculation.module_name
 
 
-def test_post_consensus_sequence_file_seq_ok(test_client):
+@patch('app.sequences_analysis_tools.ds.ConsensusSequence.MuscleCommandline')
+def test_post_consensus_sequence_file_seq_ok(muscle_command_line_mock, test_client, muscle_standard_seq_return_value):
+    muscle_command_line_mock.return_value.return_value = muscle_standard_seq_return_value
+
     data = dict()
     file_content = """>gi|2765658
         CGTAACAAGGTTTCCGTAGGTGAACCTGCGGAAGGATCATTGATGAGACCGTGGAATAAACGATCGAGTG
@@ -132,7 +144,12 @@ def test_post_consensus_sequence_file_seq_file_without_name(test_client):
     assert len(calculations) == 0
 
 
-def test_post_consensus_sequence_gene_bank_seq_protein_ok(test_client):
+@patch('app.sequences_analysis_tools.ds.ConsensusSequence.MuscleCommandline')
+def test_post_consensus_sequence_gene_bank_seq_protein_ok(
+    muscle_command_line_mock, test_client, muscle_gene_bank_protein_return_value
+):
+    muscle_command_line_mock.return_value.return_value = muscle_gene_bank_protein_return_value
+
     data = dict()
     data['sequence-type'] = "protein"
     data['genebank-seq'] = "ADZ48385.1\nABM89502.1"
@@ -164,7 +181,12 @@ def test_post_consensus_sequence_gene_bank_seq_protein_wrong_gene_bank_ids(test_
     assert len(calculations) == 0
 
 
-def test_post_consensus_sequence_gene_bank_seq_nucleotide_ok(test_client):
+@patch('app.sequences_analysis_tools.ds.ConsensusSequence.MuscleCommandline')
+def test_post_consensus_sequence_gene_bank_seq_nucleotide_ok(
+    muscle_command_line_mock, test_client, muscle_gene_bank_nucleotide_return_value
+):
+    muscle_command_line_mock.return_value.return_value = muscle_gene_bank_nucleotide_return_value
+
     data = dict()
     data['sequence-type'] = "nucleotide"
     data['genebank-seq'] = "2765658\n2765657"
