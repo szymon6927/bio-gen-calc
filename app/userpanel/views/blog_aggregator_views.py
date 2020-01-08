@@ -35,7 +35,6 @@ def feed_details_view(feed_id):
         feed.name = form.name.data
         feed.url = form.url.data
 
-        db.session.add(feed)
         db.session.commit()
 
         flash('You have successfully edited the feed.', 'success')

@@ -1,3 +1,5 @@
+import feedparser
+import requests
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
@@ -18,9 +20,11 @@ from wtforms.validators import EqualTo
 from wtforms.validators import Length
 from wtforms.validators import ValidationError
 
+from app.blog.models import Feed
 from app.userpanel.models import Customer
 from app.userpanel.models import NCBIMail
 from app.userpanel.models import NCBIMailPackage
+from app.userpanel.services.blog_aggregator_service import BlogAggregatorService
 
 
 class LoginForm(FlaskForm):
@@ -153,3 +157,35 @@ class NCBIScrapperForm(FlaskForm):
     def validate_publication_number(self, publication_number):
         if publication_number.data > 5000:
             raise ValidationError('Nuber of publication can not be higher than 5000')
+
+
+class FeedForm(FlaskForm):
+    name = StringField('Feed name:')
+    url = StringField('Feed url:')
+
+    def validate_url(self, feed_url_input):
+        feed_url = feed_url_input.data
+
+        feed_response = requests.get(feed_url)
+        if feed_response.status_code != 200:
+            raise ValidationError('Feed with this URL return status code different than 200')
+
+        previous_feed_obj = Feed.query.filter_by(url=self.url.data).first()
+        previous_feed_url = previous_feed_obj.url if previous_feed_obj else None
+        if previous_feed_url != feed_url:
+            if Feed.query.filter_by(url=feed_url).first():
+                raise ValidationError('Feed with this URL already exist')
+
+        is_valid, message = BlogAggregatorService.validate_feed(feed_url)
+
+        if not is_valid:
+            raise ValidationError(message)
+
+
+class ArticleForm(FlaskForm):
+    title = StringField('Title:')
+    link = StringField('Link:')
+    pub_date = DateTimeField('Pub Date:')
+    desc = TextAreaField('Desc:')
+    was_published = BooleanField('Was published:')
+    created_at = DateTimeField('Created at:')
