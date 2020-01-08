@@ -115,16 +115,19 @@
             <strong>Super User Section</strong>
           </div>
         </li>
+
         <li class="nav-item">
           <a class="nav-link pb-0" href="{{ url_for('userpanel.pages_list_view') }}">
             <span>Pages</span>
           </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link pb-0" href="{{ url_for('userpanel.customers_list_view') }}">
             <span>Customers</span>
           </a>
         </li>
+
         <li class="nav-item">
           <div class="nav-link border-top pb-0">
             <strong>Site statistics</strong>
@@ -145,6 +148,7 @@
             <span>All models</span>
           </a>
         </li>
+
         <li class="nav-item">
           <div class="nav-link border-top pb-0">
             <strong>NCBI mail scrapper</strong>
@@ -163,6 +167,22 @@
         <li class="nav-item">
           <a class="nav-link pb-0" href="{{ url_for('userpanel.ncbi_emails_list_view') }}">
             <span>NCBI all emails</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <div class="nav-link border-top pb-0">
+            <strong>Blog aggregator</strong>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link pb-0" href="{{ url_for('userpanel.feed_list_view') }}">
+            <span>Feed list</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link pb-0" href="{{ url_for('userpanel.articles_list_view') }}">
+            <span>Articles</span>
           </a>
         </li>
       {% endif %}

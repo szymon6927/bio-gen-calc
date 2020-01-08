@@ -1,0 +1,53 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h3 class="mb-3">Feed list</h3>
+    </div>
+  </div>
+
+  <div class="feeds">
+    <div class="col-md-12 text-right mb-4">
+      <a href="{{ url_for('userpanel.aggregator_run_view') }}" class="btn btn-danger mr-3">Run aggregator</a>
+      <a href="{{ url_for('userpanel.feed_add_view') }}" class="btn btn-success">Add new feed</a>
+    </div>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Url</th>
+        <th scope="col">Created at</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for feed in feeds %}
+        <tr>
+          <td>{{ feed.name }}</td>
+          <td>{{ feed.url }}</td>
+          <td>{{ feed.created_at }}</td>
+          <td>
+            <a href="{{ url_for('userpanel.feed_details_view', feed_id=feed.id) }}"
+               class="btn btn-primary">Edit feed</a>
+            <a href="{{ url_for('userpanel.feed_delete_view', feed_id=feed.id) }}" class="btn btn-danger delete-feed">
+              Delete feed
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+
+{% block userpanel_scripts %}
+  <script>
+    $(document).ready(function () {
+      $('.feeds .table').DataTable({
+        "order": [[2, "desc"]]
+      });
+    });
+  </script>
+{% endblock %}
