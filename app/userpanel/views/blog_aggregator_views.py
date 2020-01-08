@@ -1,6 +1,3 @@
-import datetime
-
-import feedparser
 from flask import flash
 from flask import redirect
 from flask import render_template
@@ -13,6 +10,7 @@ from app.database import db
 from app.userpanel.decorators import superuser_required
 from app.userpanel.forms import ArticleForm
 from app.userpanel.forms import FeedForm
+from app.userpanel.services.blog_aggregator_service import BlogAggregatorService
 from app.userpanel.views import userpanel
 
 
@@ -158,32 +156,6 @@ def article_add_view():
 @login_required
 @superuser_required
 def aggregator_run_view():
-    feed_list = Feed.query.all()
-    objects_to_add = []
-
-    for feed in feed_list:
-        response = feedparser.parse(feed.url)
-
-        for post in response.entries:
-            article = Article(
-                title=post.get('title'),
-                link=post.get('link'),
-                pub_date=datetime.datetime(*(post.published_parsed[0:6])),
-                desc=post.get('summary'),
-            )
-
-            exist = Article.query.filter_by(link=post.get('link')).first()
-
-            if not exist:
-                flash(f'Successfully added article - {article.title}', 'info')
-                objects_to_add.append(article)
-
-    db.session.add_all(objects_to_add)
-    db.session.commit()
-
-    if len(objects_to_add):
-        flash(f'You have successfully added {len(objects_to_add)} articles', 'success')
-    else:
-        flash(f'Blog aggregator successfully run but without any new articles', 'info')
+    BlogAggregatorService.aggregate()
 
     return redirect(url_for('userpanel.articles_list_view'))
