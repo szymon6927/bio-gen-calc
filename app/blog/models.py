@@ -4,7 +4,7 @@ from app.database import db
 
 
 class Feed(db.Model):
-    __tablename__ = 'feed'
+    __tablename__ = 'feeds'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(250))
@@ -13,7 +13,7 @@ class Feed(db.Model):
 
 
 class Article(db.Model):
-    __tablename__ = 'article'
+    __tablename__ = 'articles'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(250))
