@@ -1,0 +1,25 @@
+{% set blog_pages = articles.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+
+{% if blog_pages %}
+  <div class="col-md-12 col-sm-12">
+    <hr>
+    <nav aria-label="blog paginator">
+      <ul class="pagination">
+        {% for page_num in blog_pages %}
+          {% if page_num %}
+            <li class="page-item {% if articles.page == page_num %}active {% endif %}">
+            <a class="page-link"
+               href="{{ url_for('blog.blog_page', page=page_num) }}">
+              {{ page_num }}
+            </a>
+          </li>
+          {% else %}
+            <li class="page-item">
+              <a class="page-link" href="#">...</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+{% endif %}

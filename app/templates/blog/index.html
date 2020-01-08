@@ -5,14 +5,27 @@
 {% block seo_keywords %}{{ module_desc.seo_keywords }}{% endblock %}
 
 {% block body %}
-<div class="wrapper">
-  {% include 'utils/module_top_block.html' %}
+  <div class="wrapper">
+    {% include 'utils/module_top_block.html' %}
+    {% include 'utils/info_block.html' %}
 
-  <section class="blog">
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        Blog aggregator test
+    <section class="blog">
+      <div class="row">
+        {% for article in articles.items %}
+          <div class="col-md-6 col-sm-6 col-12 mb-4">
+            <div class="card article-item">
+              <div class="card-body">
+                <h5 class="card-title">{{ article.title }}</h5>
+                <p class="card-text">{{ article.desc|safe }}</p>
+                <a href="{{ article.link }}" target="_blank" class="btn btn-primary">Read more</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
       </div>
-  </section>
-</div>
+
+      {% include 'blog/partials/blog_paginator.html' %}
+    </section>
+  </div>
+
 {% endblock %}

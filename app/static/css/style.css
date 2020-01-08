@@ -734,6 +734,10 @@ table th[scope=row] {
     padding-left: 2rem;
 }
 
+.article-item img {
+    width: 100%;
+}
+
 @media (min-width: 1331px) and (max-width: 1400px) {
     .navbar-nav li {
         font-size: 15px;
