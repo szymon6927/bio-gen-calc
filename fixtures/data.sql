@@ -82,6 +82,11 @@ VALUES (16, 'APMC documentation', '/apmc/documentation', 'SEO desc',
         'seo keywords', '<p>APMC documentation - text</p>',
         '<p>APMC documentation description</p>', 'seo title', 1);
 
+INSERT INTO `pages` (`id`, `name`, `slug`, `seo_desc`, `seo_keywords`, `text`, `desc`, `seo_title`, `is_active`)
+VALUES (17, 'Blog', '/blog', 'test blog seo title',
+        'test blog seo keyword', '<p>test blog - text</p>',
+        '<p>test blog - description</p>', 'blog seo title', 1);
+
 INSERT INTO `customers` (`first_name`, `last_name`, `profile_pic`, `login`, `email`, `password`, `created_at`,
                          `is_superuser`)
 VALUES ('test', 'test', 'profile.svg', 'test123', 'test123@test.com',
