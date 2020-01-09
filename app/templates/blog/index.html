@@ -11,17 +11,19 @@
 
     <section class="blog">
       <div class="row">
-        {% for article in articles.items %}
-          <div class="col-md-6 col-sm-6 col-12 mb-4">
-            <div class="card article-item">
-              <div class="card-body">
-                <h5 class="card-title">{{ article.title }}</h5>
-                <p class="card-text">{{ article.desc|safe }}</p>
-                <a href="{{ article.link }}" target="_blank" class="btn btn-primary">Read more</a>
+        {% if articles %}
+          {% for article in articles.items %}
+            <div class="col-md-6 col-sm-6 col-12 mb-4">
+              <div class="card article-item">
+                <div class="card-body">
+                  <h5 class="card-title">{{ article.title }}</h5>
+                  <p class="card-text">{{ article.desc|safe }}</p>
+                  <a href="{{ article.link }}" target="_blank" class="btn btn-primary">Read more</a>
+                </div>
               </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        {% endif %}
       </div>
 
       {% include 'blog/partials/blog_paginator.html' %}

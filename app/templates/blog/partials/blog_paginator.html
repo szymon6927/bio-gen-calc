@@ -8,11 +8,11 @@
         {% for page_num in blog_pages %}
           {% if page_num %}
             <li class="page-item {% if articles.page == page_num %}active {% endif %}">
-            <a class="page-link"
-               href="{{ url_for('blog.blog_page', page=page_num) }}">
-              {{ page_num }}
-            </a>
-          </li>
+              <a class="page-link"
+                 href="{{ url_for('blog.blog_page', page=page_num) }}">
+                {{ page_num }}
+              </a>
+            </li>
           {% else %}
             <li class="page-item">
               <a class="page-link" href="#">...</a>
