@@ -53,7 +53,7 @@
       <div class="col-md-12">
         <div class="form-group">
           {{ form.desc.label }}
-          {{ form.desc(class_="form-control") }}
+          {{ form.desc(class_="form-control", rows="10") }}
 
           {% if form.desc.errors %}
             {% for error in form.desc.errors %}
@@ -81,4 +81,13 @@
       <button type="submit" class="btn btn-block btn-primary">Save</button>
     </div>
   </form>
+{% endblock %}
+
+
+{% block userpanel_scripts %}
+  <script>
+      $(document).ready(function () {
+          initCKEDITOR('#desc');
+      });
+  </script>
 {% endblock %}
