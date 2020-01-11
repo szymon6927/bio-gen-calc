@@ -11,6 +11,7 @@ from app.userpanel.decorators import superuser_required
 from app.userpanel.forms import ArticleForm
 from app.userpanel.forms import FeedForm
 from app.userpanel.services.blog_aggregator_service import BlogAggregatorService
+from app.userpanel.services.social_post_service import SocialPostService
 from app.userpanel.views import userpanel
 
 
@@ -158,3 +159,12 @@ def aggregator_run_view():
     BlogAggregatorService.aggregate()
 
     return redirect(url_for('userpanel.articles_list_view'))
+
+
+@userpanel.route('/blog-aggregator/generate-social-post', methods=['GET'])
+@login_required
+@superuser_required
+def generate_social_post():
+    social_post_service = SocialPostService()
+    social_post = social_post_service.generate_post()
+    return render_template('userpanel/blog_aggregator/press_social_post.html', social_post=social_post)
