@@ -1,4 +1,3 @@
-import feedparser
 import requests
 from flask_login import current_user
 from flask_wtf import FlaskForm
@@ -160,6 +159,7 @@ class NCBIScrapperForm(FlaskForm):
 
 
 class FeedForm(FlaskForm):
+    id = HiddenField()
     name = StringField('Feed name:')
     url = StringField('Feed url:')
 
@@ -170,7 +170,7 @@ class FeedForm(FlaskForm):
         if feed_response.status_code != 200:
             raise ValidationError('Feed with this URL return status code different than 200')
 
-        previous_feed_obj = Feed.query.filter_by(url=self.url.data).first()
+        previous_feed_obj = Feed.query.filter_by(id=self.id.data).first()
         previous_feed_url = previous_feed_obj.url if previous_feed_obj else None
         if previous_feed_url != feed_url:
             if Feed.query.filter_by(url=feed_url).first():
