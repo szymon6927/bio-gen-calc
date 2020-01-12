@@ -7,7 +7,7 @@ def test_get_contact(test_client):
     assert b'Contact Us' in response.data
 
 
-def test_post_contact_from_ok(test_client):
+def test_post_contact_form_ok(test_client):
     data = {'name': "John", 'email': "test@test.com", 'message': "test message"}
 
     response = test_client.post(URL.CONTACT_POST, data=data)
