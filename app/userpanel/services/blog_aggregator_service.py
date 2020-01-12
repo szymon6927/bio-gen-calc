@@ -21,7 +21,7 @@ class BlogAggregatorService:
         article = Article()
         article.title = entry.get('title')
         article.link = entry.get('link')
-        article.pub_date = BlogAggregatorService.parse_pub_date(entry.published_parsed)
+        article.pub_date = BlogAggregatorService.parse_pub_date(entry.get('published_parsed'))
         article.desc = entry.get('summary')
 
         return article

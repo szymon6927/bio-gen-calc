@@ -152,7 +152,7 @@ def article_add_view():
     return render_template('userpanel/blog_aggregator/article_add.html', form=form)
 
 
-@userpanel.route('/blog-aggregator/parse', methods=['GET', 'POST'])
+@userpanel.route('/blog-aggregator/parse', methods=['GET'])
 @login_required
 @superuser_required
 def aggregator_run_view():
