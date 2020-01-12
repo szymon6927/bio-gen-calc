@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Feed 1",
+    "url": "https://davetang.org/muse/feed/"
+  },
+  {
+    "id": 2,
+    "name": "Feed 2",
+    "url": "http://www.rna-seqblog.com/feed/"
+  }
+]
