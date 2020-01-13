@@ -1,0 +1,57 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h3 class="mb-3">Articles</h3>
+    </div>
+  </div>
+
+  <div class="articles">
+    <div class="col-md-12 text-right mb-4">
+      <a href="{{ url_for('userpanel.generate_social_post') }}" class="btn btn-info">Generate FB Post</a>
+      <a href="{{ url_for('userpanel.article_add_view') }}" class="btn btn-success">Add new article</a>
+    </div>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Link</th>
+        <th scope="col">Pub Date</th>
+        <th scope="col">Was Published</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for article in articles %}
+        <tr>
+          <td>{{ article.title }}</td>
+          <td>{{ article.link }}</td>
+          <td>{{ article.pub_date }}</td>
+          <td>{{ article.was_published }}</td>
+          <td>{{ article.created_at }}</td>
+          <td>
+            <a href="{{ url_for('userpanel.article_details_view', article_id=article.id) }}"
+               class="btn btn-primary">Edit article</a>
+            <a href="{{ url_for('userpanel.article_delete_view', article_id=article.id) }}" class="btn btn-danger delete-article">
+              Delete article
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+
+{% block userpanel_scripts %}
+  <script>
+    $(document).ready(function () {
+      $('.articles .table').DataTable({
+        "order": [[4, "desc"]]
+      });
+    });
+  </script>
+{% endblock %}

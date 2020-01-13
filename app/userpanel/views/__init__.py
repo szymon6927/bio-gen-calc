@@ -10,6 +10,7 @@ def import_userpanel_views():
     from app.userpanel.views import ncbi_scrapper_views
     from app.userpanel.views import pages_views
     from app.userpanel.views import statistics_views
+    from app.userpanel.views import blog_aggregator_views
 
 
 userpanel = Blueprint('userpanel', __name__)

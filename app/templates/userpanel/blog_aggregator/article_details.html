@@ -1,0 +1,93 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <h3>Edit article</h3>
+  <hr>
+
+  <form class="edit-article" action="{{ url_for('userpanel.article_details_view', article_id=article.id) }}"
+        method="POST"
+        enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.title.label }}
+          {{ form.title(class_="form-control") }}
+
+          {% if form.title.errors %}
+            {% for error in form.title.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.link.label }}
+          {{ form.link(class_="form-control") }}
+
+          {% if form.link.errors %}
+            {% for error in form.link.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.pub_date.label }}
+          {{ form.pub_date(class_="form-control") }}
+
+          {% if form.pub_date.errors %}
+            {% for error in form.pub_date.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.desc.label }}
+          {{ form.desc(class_="form-control", rows="10") }}
+
+          {% if form.desc.errors %}
+            {% for error in form.desc.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          {{ form.was_published.label }}
+          {{ form.was_published(class_="form-control") }}
+
+          {% if form.was_published.errors %}
+            {% for error in form.was_published.errors %}
+              <span class="text-danger">{{ error }}</span></br>
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 offset-md-3 col-sm-12">
+      <button type="submit" class="btn btn-block btn-primary">Save</button>
+    </div>
+  </form>
+{% endblock %}
+
+
+{% block userpanel_scripts %}
+  <script>
+      $(document).ready(function () {
+          initCKEDITOR('#desc');
+      });
+  </script>
+{% endblock %}

@@ -126,5 +126,13 @@
     "slug": "/apmc/documentation",
     "text": "Test content text",
     "desc": "Test content desc"
+  },
+  {
+    "id": 17,
+    "name": "Blog",
+    "is_active": 1,
+    "slug": "/blog",
+    "text": "Test content text",
+    "desc": "Test content desc"
   }
 ]

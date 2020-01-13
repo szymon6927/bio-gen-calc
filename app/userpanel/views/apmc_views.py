@@ -18,7 +18,7 @@ from app.clients.slack_client import SlackNotification
 from app.database import db
 from app.helpers.file_helper import remove_file
 from app.userpanel.forms import ModelForm
-from app.userpanel.services import APMCUserPanelService
+from app.userpanel.services.apmc_service import APMCUserPanelService
 from app.userpanel.views import userpanel
 
 slack_notification = SlackNotification()

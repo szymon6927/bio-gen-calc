@@ -1,0 +1,39 @@
+{% extends 'userpanel/base.html' %}
+
+{% block userpanel_body %}
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="text-danger mb-2">
+        <span class="font-weight-bold">Important!</span>
+        <span>Please do not refresh this page because it will trigger the generation of new social post !!!</span>
+      </div>
+      <div class="mb-3">
+        If you want to generate new social post back to the articles list view or click
+        <a href="{{ url_for('userpanel.articles_list_view') }}">here</a>
+      </div>
+      <h3>Generated social media post:</h3>
+      <div class="text-muted small">Copy the post below and paste it into Facebook or LinkedIn</div>
+      <hr>
+    </div>
+    {% if social_post %}
+      <div class="col-md-12 col-sm-12">
+        <div class="border p-3 bg-white">
+          <div>{{ social_post.header }}</div>
+          <br>
+          {% for link in social_post.links %}
+            <div>{{ link }}</div>
+          {% endfor %}
+          <br>
+          <div>---------</div>
+          <div>{{ social_post.footer }}</div>
+        </div>
+
+      </div>
+    {% else %}
+      <div class="col-md-12 col-sm-12">
+        <p>Social post can not be generated</p>
+        <a href="{{ url_for('userpanel.articles_list_view') }}" class="btn btn-success">Back to articles list</a>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

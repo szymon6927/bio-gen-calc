@@ -85,6 +85,9 @@ function showLoader() {
 
 
 $(document).ready(function() {
+  const deleteActionClassList = '.delete-page, .delete-customer, .delete-apmc-data, .delete-calculation,' +
+    ' .delete-package, .delete-mail, .delete-article, .delete-feed';
+
   $('.hamburger').click(function() {
     openMenu();
   });
@@ -95,7 +98,7 @@ $(document).ready(function() {
     showInputFileName();
   });
 
-  $('.delete-page, .delete-customer, .delete-apmc-data, .delete-calculation, .delete-package, .delete-mail').click(function (e) {
+  $(deleteActionClassList).click(function (e) {
     if (!confirmPageDelete()) {
       e.preventDefault();
     }

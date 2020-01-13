@@ -1,6 +1,8 @@
 import pytest
 
 from app import create_app
+from app.blog.models import Article
+from app.blog.models import Feed
 from app.database import db
 from app.userpanel.models import NCBIMail
 from app.userpanel.models import NCBIMailPackage
@@ -20,6 +22,8 @@ def app():
         load_pages()
         load_ncbi_packages()
         load_ncbi_mails()
+        load_blog_aggregator_feeds()
+        load_blog_aggregator_articles()
 
         yield app
 
@@ -157,5 +161,27 @@ def load_ncbi_mails():
         )
 
         db.session.add(ncbi_mail)
+
+    db.session.commit()
+
+
+def load_blog_aggregator_feeds():
+    feeds_fixture = get_fixture('blog_aggregator_feeds.json')
+
+    for feed_fixture in feeds_fixture:
+        feed = Feed(**feed_fixture)
+
+        db.session.add(feed)
+
+    db.session.commit()
+
+
+def load_blog_aggregator_articles():
+    articles_fixture = get_fixture('blog_aggregator_articles.json')
+
+    for article_fixture in articles_fixture:
+        article = Article(**article_fixture)
+
+        db.session.add(article)
 
     db.session.commit()

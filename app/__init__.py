@@ -130,6 +130,7 @@ def register_blueprints(app):
     from app.customer_calculation.views import customer_calculation
     from app.privacy_policy.views import privacy_policy
     from app.apmc.views import apmc
+    from app.blog.views import blog
 
     app.register_blueprint(home)
     app.register_blueprint(materials_and_methods)
@@ -146,6 +147,7 @@ def register_blueprints(app):
     app.register_blueprint(customer_calculation)
     app.register_blueprint(privacy_policy)
     app.register_blueprint(apmc)
+    app.register_blueprint(blog)
 
 
 def register_jinja_templte_filters(app):
