@@ -20,5 +20,3 @@ if USE_DOCKER == 1:
     SQLALCHEMY_DATABASE_URI = f'mysql://{MYSQL_USER}:{MYSQL_PASSWORD}@database/{MYSQL_DATABASE}'
 else:
     SQLALCHEMY_DATABASE_URI = f'mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
-
-# SQLALCHEMY_DATABASE_URI = 'mysql://m1259_admin_gene:576AaYaEL3Qqrc5H@mysql26.mydevil.net/m1259_gene_calc_test'
